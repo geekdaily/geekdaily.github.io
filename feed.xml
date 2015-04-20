@@ -2,13 +2,13 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
 <title type="text">geek!daily</title>
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
-<link rel="self" type="application/atom+xml" href="http://localhost:4000/feed.xml" />
-<link rel="alternate" type="text/html" href="http://localhost:4000" />
-<updated>2015-04-19T19:27:27-07:00</updated>
-<id>http://localhost:4000/</id>
+<link rel="self" type="application/atom+xml" href="http://blog.geekdaily.org/feed.xml" />
+<link rel="alternate" type="text/html" href="http://blog.geekdaily.org" />
+<updated>2015-04-19T19:57:59-07:00</updated>
+<id>http://blog.geekdaily.org/</id>
 <author>
   <name>Jim Meyer</name>
-  <uri>http://localhost:4000/</uri>
+  <uri>http://blog.geekdaily.org/</uri>
   <email>jim@geekdaily.org</email>
 </author>
 
@@ -17,13 +17,13 @@
 
 <entry>
   <title type="html"><![CDATA[Moving Your Blog To Jekyll: The Translation]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000/2015/04/moving-your-blog-to-jekyll-the-translation.html" />
-  <id>http://localhost:4000/2015/04/moving-your-blog-to-jekyll-the-translation</id>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2015/04/moving-your-blog-to-jekyll-the-translation.html" />
+  <id>http://blog.geekdaily.org/2015/04/moving-your-blog-to-jekyll-the-translation</id>
   <published>2015-04-19T00:00:00-07:00</published>
   <updated>2015-04-19T00:00:00-07:00</updated>
   <author>
     <name>Jim Meyer</name>
-    <uri>http://localhost:4000</uri>
+    <uri>http://blog.geekdaily.org</uri>
     <email>jim@geekdaily.org</email>
   </author>
   <content type="html">
@@ -50,7 +50,7 @@
 &lt;p&gt;So hopefully this is a good jumping-off point if you were looking to move from Typepad to Jekyll. I’ll either update this post or add another when/if I get back to the jekyll-importer project.&lt;/p&gt;
 
 
-    &lt;p&gt;&lt;a href=&quot;http://localhost:4000/2015/04/moving-your-blog-to-jekyll-the-translation.html&quot;&gt;Moving Your Blog To Jekyll: The Translation&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://localhost:4000&quot;&gt;geek!daily&lt;/a&gt; on April 19, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2015/04/moving-your-blog-to-jekyll-the-translation.html&quot;&gt;Moving Your Blog To Jekyll: The Translation&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on April 19, 2015.&lt;/p&gt;
   </content>
 </entry>
 
@@ -59,13 +59,13 @@
 
 <entry>
   <title type="html"><![CDATA[Goodbye, Typepad; Hello, Github Pages]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000/2015/04/goodbye-typepad-hello-github-pages.html" />
-  <id>http://localhost:4000/2015/04/goodbye-typepad-hello-github-pages</id>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2015/04/goodbye-typepad-hello-github-pages.html" />
+  <id>http://blog.geekdaily.org/2015/04/goodbye-typepad-hello-github-pages</id>
   <published>2015-04-18T00:00:00-07:00</published>
   <updated>2015-04-18T00:00:00-07:00</updated>
   <author>
     <name>Jim Meyer</name>
-    <uri>http://localhost:4000</uri>
+    <uri>http://blog.geekdaily.org</uri>
     <email>jim@geekdaily.org</email>
   </author>
   <content type="html">
@@ -77,7 +77,7 @@
 
 &lt;p&gt;No promises.&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;http://localhost:4000/2015/04/goodbye-typepad-hello-github-pages.html&quot;&gt;Goodbye, Typepad; Hello, Github Pages&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://localhost:4000&quot;&gt;geek!daily&lt;/a&gt; on April 18, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2015/04/goodbye-typepad-hello-github-pages.html&quot;&gt;Goodbye, Typepad; Hello, Github Pages&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on April 18, 2015.&lt;/p&gt;
   </content>
 </entry>
 
@@ -86,13 +86,13 @@
 
 <entry>
   <title type="html"><![CDATA[Setting Up A Minecraft Server For Kids, Part 1: Preparation]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000/2013/04/setting-up-a-minecraft-server-for-kids-part-1-preparation.html" />
-  <id>http://localhost:4000/2013/04/setting-up-a-minecraft-server-for-kids-part-1-preparation</id>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2013/04/setting-up-a-minecraft-server-for-kids-part-1-preparation.html" />
+  <id>http://blog.geekdaily.org/2013/04/setting-up-a-minecraft-server-for-kids-part-1-preparation</id>
   <published>2013-04-12T00:00:00-07:00</published>
   <updated>2013-04-12T00:00:00-07:00</updated>
   <author>
     <name>Jim Meyer</name>
-    <uri>http://localhost:4000</uri>
+    <uri>http://blog.geekdaily.org</uri>
     <email>jim@geekdaily.org</email>
   </author>
   <content type="html">
@@ -125,7 +125,7 @@
 &lt;p&gt;So that&#39;s it for prep. Now it&#39;s time to instantiate and install.&lt;/p&gt;
 
 
-    &lt;p&gt;&lt;a href=&quot;http://localhost:4000/2013/04/setting-up-a-minecraft-server-for-kids-part-1-preparation.html&quot;&gt;Setting Up A Minecraft Server For Kids, Part 1: Preparation&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://localhost:4000&quot;&gt;geek!daily&lt;/a&gt; on April 12, 2013.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2013/04/setting-up-a-minecraft-server-for-kids-part-1-preparation.html&quot;&gt;Setting Up A Minecraft Server For Kids, Part 1: Preparation&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on April 12, 2013.&lt;/p&gt;
   </content>
 </entry>
 
@@ -134,13 +134,13 @@
 
 <entry>
   <title type="html"><![CDATA[Bashing tcsh]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000/2012/03/bashing-tcsh.html" />
-  <id>http://localhost:4000/2012/03/bashing-tcsh</id>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2012/03/bashing-tcsh.html" />
+  <id>http://blog.geekdaily.org/2012/03/bashing-tcsh</id>
   <published>2012-03-26T00:00:00-07:00</published>
   <updated>2012-03-26T00:00:00-07:00</updated>
   <author>
     <name>Jim Meyer</name>
-    <uri>http://localhost:4000</uri>
+    <uri>http://blog.geekdaily.org</uri>
     <email>jim@geekdaily.org</email>
   </author>
   <content type="html">
@@ -149,7 +149,7 @@
 &lt;p&gt;Oh, and hi again.&lt;/p&gt;
 
 
-    &lt;p&gt;&lt;a href=&quot;http://localhost:4000/2012/03/bashing-tcsh.html&quot;&gt;Bashing tcsh&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://localhost:4000&quot;&gt;geek!daily&lt;/a&gt; on March 26, 2012.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2012/03/bashing-tcsh.html&quot;&gt;Bashing tcsh&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on March 26, 2012.&lt;/p&gt;
   </content>
 </entry>
 
@@ -158,13 +158,13 @@
 
 <entry>
   <title type="html"><![CDATA[Advanced YAML: Tricking Out Your database.yml]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000/2010/08/advanced-yaml-tricking-out-your-database-yml.html" />
-  <id>http://localhost:4000/2010/08/advanced-yaml-tricking-out-your-database-yml</id>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2010/08/advanced-yaml-tricking-out-your-database-yml.html" />
+  <id>http://blog.geekdaily.org/2010/08/advanced-yaml-tricking-out-your-database-yml</id>
   <published>2010-08-13T00:00:00-07:00</published>
   <updated>2010-08-13T00:00:00-07:00</updated>
   <author>
     <name>Jim Meyer</name>
-    <uri>http://localhost:4000</uri>
+    <uri>http://blog.geekdaily.org</uri>
     <email>jim@geekdaily.org</email>
   </author>
   <content type="html">
@@ -263,7 +263,7 @@ production:
 &lt;p&gt;Works a treat. Thanks, Doug, James, and Ben.&lt;/p&gt;
 
 
-    &lt;p&gt;&lt;a href=&quot;http://localhost:4000/2010/08/advanced-yaml-tricking-out-your-database-yml.html&quot;&gt;Advanced YAML: Tricking Out Your database.yml&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://localhost:4000&quot;&gt;geek!daily&lt;/a&gt; on August 13, 2010.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2010/08/advanced-yaml-tricking-out-your-database-yml.html&quot;&gt;Advanced YAML: Tricking Out Your database.yml&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on August 13, 2010.&lt;/p&gt;
   </content>
 </entry>
 
@@ -272,20 +272,20 @@ production:
 
 <entry>
   <title type="html"><![CDATA[Live Blog: Web Aggregation, What Works and What Doesn't]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000/2009/10/live-blog-web-aggregation-what-works-and-what-doesn-t.html" />
-  <id>http://localhost:4000/2009/10/live-blog-web-aggregation-what-works-and-what-doesn-t</id>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/10/live-blog-web-aggregation-what-works-and-what-doesn-t.html" />
+  <id>http://blog.geekdaily.org/2009/10/live-blog-web-aggregation-what-works-and-what-doesn-t</id>
   <published>2009-10-15T00:00:00-07:00</published>
   <updated>2009-10-15T00:00:00-07:00</updated>
   <author>
     <name>Jim Meyer</name>
-    <uri>http://localhost:4000</uri>
+    <uri>http://blog.geekdaily.org</uri>
     <email>jim@geekdaily.org</email>
   </author>
   <content type="html">
     &lt;p&gt;&lt;em&gt;[note: I originally scribbled this on paper thinking I could hand it off immediately, preventing the obligation of typing, posting, etc. Turns out I don&#39;t get off that lightly, so here&#39;s the spew in electrons.]&lt;/em&gt;&lt;/p&gt;&lt;p&gt;Scraping isn&#39;t a scalable model.&lt;/p&gt;There are biz issues around aggregating data: many businesses don&#39;t want you to get their data, though many are becoming more open.&lt;br /&gt;&lt;br /&gt;Doing aggregation right:&lt;br /&gt;* minimize latency&lt;br /&gt;* maximize engagement&lt;br /&gt;&lt;br /&gt;When latency is high, it causes confusion and takes you out of real-time&lt;br /&gt;&lt;br /&gt;Doing conditional gets can be somewhat useful.&lt;br /&gt;&lt;br /&gt;Plaxo had to shard their crawlers, which lands you in the shared state/sync problem of any stateful system you want to scale horizontally.&lt;br /&gt;&lt;br /&gt;Gnip integration has been good:&lt;br /&gt;* Offload the long-running processes&lt;br /&gt;* Gnip offers alerting or &amp;quot;fat ping&amp;quot; (ping includes update data)&lt;br /&gt;&lt;br /&gt;Plaxo likes using the alert to escalate the priority of the crawler which fetches the rich data related to the update. This approach allows you to use a consistent model for content ingestion vs. get info from fat ping, then augment later.&lt;br /&gt;&lt;br /&gt;Smarr: &amp;quot;Brad Fitzpatrick said, &#39;Make polling a special case of push.&#39;&amp;quot; &lt;span style=&quot;text-decoration: line-through;&quot;&gt;He attributed this to someone but I missed the attribution.&lt;/span&gt; &lt;br /&gt;&lt;br /&gt;(Don&#39;t try to keep up with Joseph Smarr on paper. He&#39;s thinks too many cogent thoughts too quickly to preserve legibility)&lt;br /&gt;&lt;br /&gt;Plaxo uses TripIt&#39;s RSS feed as alerting, grabs item ID, then uses their APIs to fetch rich data.&lt;br /&gt;&lt;br /&gt;There&#39;s a move to homogenize the info from sites, which may not be a good idea. It suppresses the distinctive look and feel/experience of the publishing site. Allowing for these differences means more labor spent on making one-off shims, which increases maintenance. Still, right choice in order to provide value to the user.&lt;br /&gt;&lt;br /&gt;Activity streams seek to provide more rich data in a somewhat normalized, extensible format.&lt;br /&gt;&lt;br /&gt;Many/most sites aren&#39;t yet perfectly architected for real-time&#39;s push, ping, etc.&lt;br /&gt;&lt;br /&gt;PubSubHubBub and Activity Streams are externally represented data shards&lt;br /&gt;&lt;br /&gt;Plaxo&#39;s Pulse started with known architecture issues (in order to ship) and hit the wall sooner than expected. Threw hardware/software optimizations at the problem to move the wall far enough to give time for rearchitecture, sharding, and working out how to propagate changes throughout the system properly.&lt;br /&gt;&lt;br /&gt;None of the NoSQL alternatives are quite ready for prime-time. Smarr: &amp;quot;It should be something that&#39;s just a primitive.&amp;quot;&lt;br /&gt;&lt;br /&gt;Conversation platforms are slightly different sorts of aggregation platforms. There are UI diffs (e.g. pause the stream when indicating interest). Handling the transition from slightly-latent/passive real-time to synchronous real-time/active not yet well-developed (think: when a comment inspires a conversation)&lt;br /&gt;&lt;br /&gt;90-99% of the value of the real-time web is realized in not-real-time [unreal-time? ;] This is a big deal for discovery. Twitter and FB make this harder by obscuring history.&lt;br /&gt;&lt;br /&gt;Ideal scalability/performance would be an index per user. This would be grossly inefficient due to the number of duplicate entries.&lt;br /&gt;&lt;br /&gt;No one has nailed reader-controlled aggregation (Show me Joe&#39;s tweets and blogs but not his photos) quite yet.&lt;br /&gt;&lt;br /&gt;Smarr: &amp;quot;If we&#39;re all kinda [sharing], we&#39;re all making each other smarter&amp;quot;&lt;br /&gt;&lt;br /&gt;The firehose of info is a hard model to scale to. Ben Metcalfe proposes the garden hose -- a firehose filtered at the source according to your interests, which helps aggregators by allowing them to request the superset of all filters from a given publisher.&lt;br /&gt;&lt;br /&gt;We really want to push contexts to the publishers and let them determine which content fits that context. Context shifts over time: Joe doesn&#39;t normally read my tweets (and why would he?) but when we&#39;re at a conference together, he&#39;s much more interested (thus the popularity of hashtags). This is a geographic and purpose-driven context (the conference) as well as Joe&#39;s context on me (Jim knows where the good bars are).&lt;br /&gt;&lt;br /&gt;Folks like Twitter are so overloaded with info that they might not recognize non-immediate contexts that are interesting to me.&lt;br /&gt;&lt;br /&gt;There&#39;s also the risk of exposing users to the amount of correlatable public data they have. Many don&#39;t want you to apply a transitive closure to identify them in all spaces even though doing so allows you to present a much more convenient UX around what they want you to aggregate.&lt;br /&gt;&lt;br /&gt;Someone likened the real-time aggregation problem to a bar conversation: you get snippets here and there and follow your own thread of interestingness.&lt;br /&gt;&lt;br /&gt;Three fundamental themes:&lt;br /&gt;* How to specify contexts to data provider/publisher&lt;br /&gt;* How to control access to private data (and carry ACLs with that data)&lt;br /&gt;* How to do all this efficiently&lt;br /&gt;&lt;br /&gt;Plaxo implemented polling-back-off (poll infrequently updated sources less frequently). Turns out this is a bad idea, as it introduces latency which makes it feel broken.&lt;br /&gt;&lt;br /&gt;There&#39;s also the issue of aggregating conversation about web objecs (like blog posts) and how not to divert the conversation from the publisher&#39;s site. However, sometimes you want a private discussion of a public object (cf. LinkedIn company groups discussing an article)&lt;br /&gt;&lt;br /&gt;Q: What&#39;s the state of open standards around this?&lt;br /&gt;A: PubSubHubBub and Activity Streams are very exciting. OAuth as access delegation. There&#39;s still a lot of ground to cover.
 
 
-    &lt;p&gt;&lt;a href=&quot;http://localhost:4000/2009/10/live-blog-web-aggregation-what-works-and-what-doesn-t.html&quot;&gt;Live Blog: Web Aggregation, What Works and What Doesn&#39;t&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://localhost:4000&quot;&gt;geek!daily&lt;/a&gt; on October 15, 2009.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/10/live-blog-web-aggregation-what-works-and-what-doesn-t.html&quot;&gt;Live Blog: Web Aggregation, What Works and What Doesn&#39;t&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on October 15, 2009.&lt;/p&gt;
   </content>
 </entry>
 
@@ -294,20 +294,20 @@ production:
 
 <entry>
   <title type="html"><![CDATA[Live Blog: Comet & Other Browser Stuff]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000/2009/10/live-blog-comet-other-browser-stuff.html" />
-  <id>http://localhost:4000/2009/10/live-blog-comet-other-browser-stuff</id>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/10/live-blog-comet-other-browser-stuff.html" />
+  <id>http://blog.geekdaily.org/2009/10/live-blog-comet-other-browser-stuff</id>
   <published>2009-10-15T00:00:00-07:00</published>
   <updated>2009-10-15T00:00:00-07:00</updated>
   <author>
     <name>Jim Meyer</name>
-    <uri>http://localhost:4000</uri>
+    <uri>http://blog.geekdaily.org</uri>
     <email>jim@geekdaily.org</email>
   </author>
   <content type="html">
     It&#39;s a big component of what we call &amp;quot;real-time&amp;quot;&lt;br /&gt;&lt;br /&gt;This is the kind of stuff that puts up a banner on a Twitter search (&amp;quot;# New Tweets Found&amp;quot;) and makes things feel real time. &lt;br /&gt;&lt;br /&gt;List of what&#39;s being done to move notifications from server to browser:&lt;br /&gt;* Ajax polling: Anybody using the JS set-timeout function, then refetch. Used by GMail, Campfire, et al&lt;br /&gt;* Long polling (typically Comet): Used by FriendFeed, keeps an http connection open as long as possible (keep alive), reopen when timed-out. Keep a local thread pool.&lt;br /&gt;* Flash sockets: Same as long polling, but from Flash. Don&#39;t have the same-origin policy. No limitaions on number of connections. Does gzipping.&lt;br /&gt;* Reverse HTTP: hosting a little webserver inside a JS connection. Long pushing?&lt;br /&gt;* Silverlight (&amp;quot;MS&#39;s version of Flash&amp;quot;)&lt;br /&gt;* HTML5 websockets: part of spec, doesn&#39;t exist and not implemented. Expected to be like flash sockets.&lt;br /&gt;&lt;br /&gt;(things discarded as too old/obscure/painful/absurd):&lt;br /&gt;* Java applets (David Weekly is about to get himself kicked ;)&lt;br /&gt;* Big ugly JS kludges (iframe tricks, etc)&lt;br /&gt;* What&#39;s that Opera thing ... unite? ubiquity? Unite. Every browser is a webserver. Sounds like reverse HTTP.&lt;br /&gt;* Using XMPP format, arbitrary JSON structure, Atom.&lt;br /&gt;&lt;br /&gt;Libraries:&lt;br /&gt;* Orbited (?) tunnels TCP thru HTTP, treats each end like a socket. JS front-end, Python backend. Often paired with Twisted. Specifically meant to be Comet.&lt;br /&gt;* stropheJS: javascript, can use flash sockets&lt;br /&gt;* Tornado: python&lt;br /&gt;* Cometd: Java, made by Dojo to work with dojo&lt;br /&gt;* Dojo: javascript, can use flash sockets&lt;br /&gt;* APE project (?)&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;What formats are people using to send data:&lt;br /&gt;* JSON&lt;br /&gt;* XMPP&lt;br /&gt;&lt;br /&gt;Apps and their libs/methodologies:&lt;br /&gt;* Meebo: ??&lt;br /&gt;* Google Wave/GTalk: GWT RPC, long-polling, their own JS&lt;br /&gt;* FB Chat: ??&lt;br /&gt;* FriendFeed: Tornado server with long-polling, their own JS&lt;br /&gt;* Superfeedr: uses BOSH, stropheJS. BOSH is kinda long polling, bidirectional (two cs open all time). Very similar to comet, more friendly than strict proxies&lt;br /&gt;* Collecta: uses BOSH&lt;br /&gt;* Twingly: orbited&lt;br /&gt;* PBWorks: long polling on network dashboard to see updates come in live; wrote their own libraries, also use stropheJS&lt;br /&gt;* StatusNet - identi.ca and ??, orbited and cometd (you can do either)&lt;br /&gt;&lt;br /&gt;Flex and Air apps? The most interesting stuff is what used to be called Flash Media Server (been renamed). They&#39;ve got their own P2P protocol. All sorts of funky stuff you can do. OpenSource version of FMS is Red Five.&lt;br /&gt;&lt;br /&gt;In what situations are these libraries breaking down?&lt;br /&gt;* Transparent/Opaque proxies that give repeats/dupes/hangs. Keep buffer on server and check for these. Sometimes have to close connection to flush thru proxies.&lt;br /&gt;* &amp;quot;Everyone focuses on the newest hottest event-based framework, but the hardest part is that HTTP wasn&#39;t designed for long-polling.&amp;quot;&lt;br /&gt;&lt;br /&gt;Have to hold open request/response pairs. Connection setup and teardown is expensive&lt;br /&gt;&lt;br /&gt;Guy at UK telecom has only ~3K IP connections available in London area. Comet is going to force an upgrade of their hardware, which will be expensive. Real world constraints will always present.&lt;br /&gt;&lt;br /&gt;Real-time at UI can be distracting at best, horribly annoying at worst. Charts work great, but text moving too quickly becomes hard. UX is challenging. Would be nice to add items while autoscrolling relative to the focussed item&lt;br /&gt;&lt;br /&gt;When you want to add a pause button to your site, that&#39;s FAIL. But the hover-over-conversation to pause semantic is pretty good.&lt;br /&gt;&lt;br /&gt;Go to jschat.com to see a bad resize.&lt;br /&gt;&lt;br /&gt;FB pioneered notifications really well in UX. You get a &amp;quot;toaster popup&amp;quot; that doesn&#39;t disturb your screen and it fades after a few moments plus a bar at the bottom to persist the aggregated notifications/count. Really nice.&lt;br /&gt;&lt;br /&gt;Growl is also mentioned as a good model. Is there interest in a notification aggregator with contexts in the browser? Meebo wants to go that way as a notification aggregator. Adobe wants to do this on your desktop. BrowserPlus also hits Growl. Prowl == Pushed Growl.&lt;br /&gt;&lt;br /&gt;If everyone started using XMPP, it would increase the message load (&amp;quot;three bazillion individual messages&amp;quot;). No one is bundling XMPP updates; no reason you couldn&#39;t. ActivityStreams could also serve. &lt;br /&gt;&lt;br /&gt;Why are people using Atom/JSON for this? They&#39;re so extensible, but when you extend them so far they&#39;re just as verbose as XML. &amp;quot;But we just don&#39;t like XML.&amp;quot;&lt;br /&gt;&lt;br /&gt;Would be nice if you could select things to pull out of the stream and hold onto.&lt;br /&gt;&lt;br /&gt;Seems to be consensus that chat belongs at the bottom of the browser, append at end. Everything with a permalink (blogs, tweets, etc) gets added to the top (?). Seems to be related to height issues.&lt;br /&gt;&lt;br /&gt;Infinite scroll vs. &amp;quot;More&amp;quot; button&lt;br /&gt;&lt;br /&gt;Titlebar flash (Gmail and GTalk)&lt;br /&gt;&lt;br /&gt;Some sites make a tiny flash widget to play a sound&lt;br /&gt;&lt;br /&gt;Haptic: twitter dmesg to cellphone buzz&lt;br /&gt;&lt;br /&gt;Notifications can become another form of info overload/noise&lt;br /&gt;&lt;br /&gt;(We flailed at making a 1D/2D chart to represent frequency and value ... FAIL)&lt;br /&gt;&lt;br /&gt;Phonetop apps are like desktop apps. Leah feels strongly that they&#39;re headed down-and-to-the-right and browser-ish apps are taking supremacy due to interoperability.&lt;br /&gt;&lt;br /&gt;Apple&#39;s surprise: phonetop apps took off. (?) vs. John Gruber: &amp;quot;The most used app on my iPhone is Safari.&amp;quot;&lt;br /&gt;&lt;p&gt;You can find the whiteboard pics in &lt;a href=&quot;http://flickr.com/photos/purp&quot;&gt;my Flickr stream&lt;/a&gt;.&lt;/p&gt;
 
 
-    &lt;p&gt;&lt;a href=&quot;http://localhost:4000/2009/10/live-blog-comet-other-browser-stuff.html&quot;&gt;Live Blog: Comet &amp; Other Browser Stuff&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://localhost:4000&quot;&gt;geek!daily&lt;/a&gt; on October 15, 2009.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/10/live-blog-comet-other-browser-stuff.html&quot;&gt;Live Blog: Comet &amp; Other Browser Stuff&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on October 15, 2009.&lt;/p&gt;
   </content>
 </entry>
 
@@ -316,13 +316,13 @@ production:
 
 <entry>
   <title type="html"><![CDATA[Stepping Into BDD with Cucumber and WebRAT: Structuring the Work]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000/2009/09/stepping-into-bdd-with-cucumber-and-webrat-structuring-the-work.html" />
-  <id>http://localhost:4000/2009/09/stepping-into-bdd-with-cucumber-and-webrat-structuring-the-work</id>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/09/stepping-into-bdd-with-cucumber-and-webrat-structuring-the-work.html" />
+  <id>http://blog.geekdaily.org/2009/09/stepping-into-bdd-with-cucumber-and-webrat-structuring-the-work</id>
   <published>2009-09-13T00:00:00-07:00</published>
   <updated>2009-09-13T00:00:00-07:00</updated>
   <author>
     <name>Jim Meyer</name>
-    <uri>http://localhost:4000</uri>
+    <uri>http://blog.geekdaily.org</uri>
     <email>jim@geekdaily.org</email>
   </author>
   <content type="html">
@@ -412,7 +412,7 @@ Members can see people, events on map
 &lt;p&gt;Okay, so now I&#39;m ready to generate the app and cucumber-ify it. I&#39;ll cover that in the next article.&lt;/p&gt;
 
 
-    &lt;p&gt;&lt;a href=&quot;http://localhost:4000/2009/09/stepping-into-bdd-with-cucumber-and-webrat-structuring-the-work.html&quot;&gt;Stepping Into BDD with Cucumber and WebRAT: Structuring the Work&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://localhost:4000&quot;&gt;geek!daily&lt;/a&gt; on September 13, 2009.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/09/stepping-into-bdd-with-cucumber-and-webrat-structuring-the-work.html&quot;&gt;Stepping Into BDD with Cucumber and WebRAT: Structuring the Work&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on September 13, 2009.&lt;/p&gt;
   </content>
 </entry>
 
@@ -421,13 +421,13 @@ Members can see people, events on map
 
 <entry>
   <title type="html"><![CDATA[Generate the regex for a TLD hostname from Perl]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000/2009/08/generate-the-regex-for-a-tld-hostname-from-perl.html" />
-  <id>http://localhost:4000/2009/08/generate-the-regex-for-a-tld-hostname-from-perl</id>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/08/generate-the-regex-for-a-tld-hostname-from-perl.html" />
+  <id>http://blog.geekdaily.org/2009/08/generate-the-regex-for-a-tld-hostname-from-perl</id>
   <published>2009-08-18T00:00:00-07:00</published>
   <updated>2009-08-18T00:00:00-07:00</updated>
   <author>
     <name>Jim Meyer</name>
-    <uri>http://localhost:4000</uri>
+    <uri>http://blog.geekdaily.org</uri>
     <email>jim@geekdaily.org</email>
   </author>
   <content type="html">
@@ -463,7 +463,7 @@ Several caveats:&lt;/p&gt;
 Maybe I&#39;ll extend it for completeness and/or rewrite it in Ruby someday. Until then, it&#39;ll always be &lt;tt&gt;~/bin/tld_regex&lt;/tt&gt; for me.&lt;/p&gt;
 
 
-    &lt;p&gt;&lt;a href=&quot;http://localhost:4000/2009/08/generate-the-regex-for-a-tld-hostname-from-perl.html&quot;&gt;Generate the regex for a TLD hostname from Perl&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://localhost:4000&quot;&gt;geek!daily&lt;/a&gt; on August 18, 2009.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/08/generate-the-regex-for-a-tld-hostname-from-perl.html&quot;&gt;Generate the regex for a TLD hostname from Perl&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on August 18, 2009.&lt;/p&gt;
   </content>
 </entry>
 
@@ -472,20 +472,20 @@ Maybe I&#39;ll extend it for completeness and/or rewrite it in Ruby someday. Unt
 
 <entry>
   <title type="html"><![CDATA[Gmail no longer beta? True dat.]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000/2009/07/gmail-no-longer-beta-true-dat-.html" />
-  <id>http://localhost:4000/2009/07/gmail-no-longer-beta-true-dat-</id>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/07/gmail-no-longer-beta-true-dat-.html" />
+  <id>http://blog.geekdaily.org/2009/07/gmail-no-longer-beta-true-dat-</id>
   <published>2009-07-07T00:00:00-07:00</published>
   <updated>2009-07-07T00:00:00-07:00</updated>
   <author>
     <name>Jim Meyer</name>
-    <uri>http://localhost:4000</uri>
+    <uri>http://blog.geekdaily.org</uri>
     <email>jim@geekdaily.org</email>
   </author>
   <content type="html">
     &lt;p&gt;I guess it&#39;s no longer &lt;a href=&quot;http://blog.geekdaily.org/2007/07/beta-is-the-web.html&quot;&gt;under construction&lt;/a&gt;, or so sayeth &lt;a href=&quot;http://gmailblog.blogspot.com/2009/07/gmail-leaves-beta-launches-back-to-beta.html&quot;&gt;the GMail blog&lt;/a&gt; which also shows those who can&#39;t live without that ubiquitous beta tag &lt;a href=&quot;http://mail.google.com/mail/?shva=1#settings/labs&quot;&gt;how to bring back their old friend&lt;/a&gt;:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;http://mail.google.com/mail/?shva=1#settings/labs&quot; onclick=&quot;window.open(this.href,&#39;_blank&#39;,&#39;scrollbars=no,resizable=yes,toolbar=no,directories=no,location=no,menubar=no,status=no,left=0,top=0&#39;); return false&quot; style=&quot;display: inline;&quot;&gt;&lt;img alt=&quot;Back2beta&quot; border=&quot;0&quot; class=&quot;at-xid-6a00d83452448969e2011570df13e4970c &quot; src=&quot;http://purp.typepad.com/.a/6a00d83452448969e2011570df13e4970c-pi&quot; style=&quot;width: 600px;&quot; title=&quot;Back2beta&quot; /&gt;&lt;/a&gt; &lt;/p&gt;
 
 
-    &lt;p&gt;&lt;a href=&quot;http://localhost:4000/2009/07/gmail-no-longer-beta-true-dat-.html&quot;&gt;Gmail no longer beta? True dat.&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://localhost:4000&quot;&gt;geek!daily&lt;/a&gt; on July 07, 2009.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/07/gmail-no-longer-beta-true-dat-.html&quot;&gt;Gmail no longer beta? True dat.&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on July 07, 2009.&lt;/p&gt;
   </content>
 </entry>
 
@@ -494,13 +494,13 @@ Maybe I&#39;ll extend it for completeness and/or rewrite it in Ruby someday. Unt
 
 <entry>
   <title type="html"><![CDATA[Michael Jackson's Obit via Wordle]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000/2009/06/michael-jackson-s-obit-via-wordle.html" />
-  <id>http://localhost:4000/2009/06/michael-jackson-s-obit-via-wordle</id>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/michael-jackson-s-obit-via-wordle.html" />
+  <id>http://blog.geekdaily.org/2009/06/michael-jackson-s-obit-via-wordle</id>
   <published>2009-06-25T00:00:00-07:00</published>
   <updated>2009-06-25T00:00:00-07:00</updated>
   <author>
     <name>Jim Meyer</name>
-    <uri>http://localhost:4000</uri>
+    <uri>http://blog.geekdaily.org</uri>
     <email>jim@geekdaily.org</email>
   </author>
   <content type="html">
@@ -509,7 +509,7 @@ Maybe I&#39;ll extend it for completeness and/or rewrite it in Ruby someday. Unt
 &lt;p&gt;&lt;a href=&quot;http://www.wordle.net/gallery/wrdl/970425/Michael_Jackson_Died&quot; title=&quot;Wordle: Michael Jackson Died&quot;&gt;&lt;img  alt=&quot;MJ Obit Wordle&quot; class=&quot;at-xid-6a00d83452448969e20115715bf294970b image-full &quot; src=&quot;http://purp.typepad.com/.a/6a00d83452448969e20115715bf294970b-800wi&quot; title=&quot;MJ Obit Wordle&quot; border=&quot;0&quot;&gt;&lt;/a&gt; &lt;/p&gt;
 
 
-    &lt;p&gt;&lt;a href=&quot;http://localhost:4000/2009/06/michael-jackson-s-obit-via-wordle.html&quot;&gt;Michael Jackson&#39;s Obit via Wordle&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://localhost:4000&quot;&gt;geek!daily&lt;/a&gt; on June 25, 2009.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/michael-jackson-s-obit-via-wordle.html&quot;&gt;Michael Jackson&#39;s Obit via Wordle&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 25, 2009.&lt;/p&gt;
   </content>
 </entry>
 
@@ -518,13 +518,13 @@ Maybe I&#39;ll extend it for completeness and/or rewrite it in Ruby someday. Unt
 
 <entry>
   <title type="html"><![CDATA[LiveBlog: The User and Business Impact of Server Delays, Additional Bytes, and HTTP Chunking in Web Search]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000/2009/06/liveblog-the-user-and-business-impact-of-server-delays-additional-bytes-and-http-chunking-in-web-search.html" />
-  <id>http://localhost:4000/2009/06/liveblog-the-user-and-business-impact-of-server-delays-additional-bytes-and-http-chunking-in-web-search</id>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-the-user-and-business-impact-of-server-delays-additional-bytes-and-http-chunking-in-web-search.html" />
+  <id>http://blog.geekdaily.org/2009/06/liveblog-the-user-and-business-impact-of-server-delays-additional-bytes-and-http-chunking-in-web-search</id>
   <published>2009-06-23T00:00:00-07:00</published>
   <updated>2009-06-23T00:00:00-07:00</updated>
   <author>
     <name>Jim Meyer</name>
-    <uri>http://localhost:4000</uri>
+    <uri>http://blog.geekdaily.org</uri>
     <email>jim@geekdaily.org</email>
   </author>
   <content type="html">
@@ -616,7 +616,7 @@ Progressive rendering experiment
 	&lt;p&gt;Experimentation platforms make all this research and hard numbers possible.&lt;/p&gt;
 
 
-    &lt;p&gt;&lt;a href=&quot;http://localhost:4000/2009/06/liveblog-the-user-and-business-impact-of-server-delays-additional-bytes-and-http-chunking-in-web-search.html&quot;&gt;LiveBlog: The User and Business Impact of Server Delays, Additional Bytes, and HTTP Chunking in Web Search&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://localhost:4000&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-the-user-and-business-impact-of-server-delays-additional-bytes-and-http-chunking-in-web-search.html&quot;&gt;LiveBlog: The User and Business Impact of Server Delays, Additional Bytes, and HTTP Chunking in Web Search&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
   </content>
 </entry>
 
@@ -625,13 +625,13 @@ Progressive rendering experiment
 
 <entry>
   <title type="html"><![CDATA[LiveBlog: Surviving the 2008 Elections at DailyKos.com]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000/2009/06/liveblog-surviving-the-2008-elections-at-dailykos-com.html" />
-  <id>http://localhost:4000/2009/06/liveblog-surviving-the-2008-elections-at-dailykos-com</id>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-surviving-the-2008-elections-at-dailykos-com.html" />
+  <id>http://blog.geekdaily.org/2009/06/liveblog-surviving-the-2008-elections-at-dailykos-com</id>
   <published>2009-06-23T00:00:00-07:00</published>
   <updated>2009-06-23T00:00:00-07:00</updated>
   <author>
     <name>Jim Meyer</name>
-    <uri>http://localhost:4000</uri>
+    <uri>http://blog.geekdaily.org</uri>
     <email>jim@geekdaily.org</email>
   </author>
   <content type="html">
@@ -692,7 +692,7 @@ Changes were in place by April 2008/Pennsylvania primary
 	&lt;/ul&gt;
 
 
-    &lt;p&gt;&lt;a href=&quot;http://localhost:4000/2009/06/liveblog-surviving-the-2008-elections-at-dailykos-com.html&quot;&gt;LiveBlog: Surviving the 2008 Elections at DailyKos.com&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://localhost:4000&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-surviving-the-2008-elections-at-dailykos-com.html&quot;&gt;LiveBlog: Surviving the 2008 Elections at DailyKos.com&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
   </content>
 </entry>
 
@@ -701,13 +701,13 @@ Changes were in place by April 2008/Pennsylvania primary
 
 <entry>
   <title type="html"><![CDATA[LiveBlog: Q&A with Twitter's John Adams]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000/2009/06/liveblog-q-a-with-twitter-s-john-adams.html" />
-  <id>http://localhost:4000/2009/06/liveblog-q-a-with-twitter-s-john-adams</id>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-q-a-with-twitter-s-john-adams.html" />
+  <id>http://blog.geekdaily.org/2009/06/liveblog-q-a-with-twitter-s-john-adams</id>
   <published>2009-06-23T00:00:00-07:00</published>
   <updated>2009-06-23T00:00:00-07:00</updated>
   <author>
     <name>Jim Meyer</name>
-    <uri>http://localhost:4000</uri>
+    <uri>http://blog.geekdaily.org</uri>
     <email>jim@geekdaily.org</email>
   </author>
   <content type="html">
@@ -732,7 +732,7 @@ Changes were in place by April 2008/Pennsylvania primary
 	&lt;p&gt;Q: Carry a real pager? &lt;/p&gt;&lt;p&gt;A: Some, mostly &lt;span class=&quot;caps&quot;&gt;SMS&lt;/span&gt;. There are escalations if you don’t answer. Always someone from Ops and Eng on the pager chain.&lt;/p&gt;
 
 
-    &lt;p&gt;&lt;a href=&quot;http://localhost:4000/2009/06/liveblog-q-a-with-twitter-s-john-adams.html&quot;&gt;LiveBlog: Q&amp;A with Twitter&#39;s John Adams&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://localhost:4000&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-q-a-with-twitter-s-john-adams.html&quot;&gt;LiveBlog: Q&amp;A with Twitter&#39;s John Adams&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
   </content>
 </entry>
 
@@ -741,13 +741,13 @@ Changes were in place by April 2008/Pennsylvania primary
 
 <entry>
   <title type="html"><![CDATA[LiveBlog: PageSpeed]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000/2009/06/liveblog-pagespeed.html" />
-  <id>http://localhost:4000/2009/06/liveblog-pagespeed</id>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-pagespeed.html" />
+  <id>http://blog.geekdaily.org/2009/06/liveblog-pagespeed</id>
   <published>2009-06-23T00:00:00-07:00</published>
   <updated>2009-06-23T00:00:00-07:00</updated>
   <author>
     <name>Jim Meyer</name>
-    <uri>http://localhost:4000</uri>
+    <uri>http://blog.geekdaily.org</uri>
     <email>jim@geekdaily.org</email>
   </author>
   <content type="html">
@@ -801,7 +801,7 @@ gmail waterfall is hugely vertical!&lt;/p&gt;
 
 
 
-    &lt;p&gt;&lt;a href=&quot;http://localhost:4000/2009/06/liveblog-pagespeed.html&quot;&gt;LiveBlog: PageSpeed&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://localhost:4000&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-pagespeed.html&quot;&gt;LiveBlog: PageSpeed&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
   </content>
 </entry>
 
@@ -810,13 +810,13 @@ gmail waterfall is hugely vertical!&lt;/p&gt;
 
 <entry>
   <title type="html"><![CDATA[LiveBlog: Next Web Challenges: It's Still All About UX]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000/2009/06/liveblog-next-web-challenges-it-s-still-all-about-ux.html" />
-  <id>http://localhost:4000/2009/06/liveblog-next-web-challenges-it-s-still-all-about-ux</id>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-next-web-challenges-it-s-still-all-about-ux.html" />
+  <id>http://blog.geekdaily.org/2009/06/liveblog-next-web-challenges-it-s-still-all-about-ux</id>
   <published>2009-06-23T00:00:00-07:00</published>
   <updated>2009-06-23T00:00:00-07:00</updated>
   <author>
     <name>Jim Meyer</name>
-    <uri>http://localhost:4000</uri>
+    <uri>http://blog.geekdaily.org</uri>
     <email>jim@geekdaily.org</email>
   </author>
   <content type="html">
@@ -846,7 +846,7 @@ Debuting Transaction Perpective 9.0 (TXP9)
 	&lt;p&gt;Script runs and collects UX and Network times. UX time is net time + client-side execution + rendering. Also shows augmented waterfall inclusive of client-side computation, etc.&lt;/p&gt;
 
 
-    &lt;p&gt;&lt;a href=&quot;http://localhost:4000/2009/06/liveblog-next-web-challenges-it-s-still-all-about-ux.html&quot;&gt;LiveBlog: Next Web Challenges: It&#39;s Still All About UX&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://localhost:4000&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-next-web-challenges-it-s-still-all-about-ux.html&quot;&gt;LiveBlog: Next Web Challenges: It&#39;s Still All About UX&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
   </content>
 </entry>
 
@@ -855,13 +855,13 @@ Debuting Transaction Perpective 9.0 (TXP9)
 
 <entry>
   <title type="html"><![CDATA[LiveBlog: Fixing Twitter]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000/2009/06/liveblog-fixing-twitter.html" />
-  <id>http://localhost:4000/2009/06/liveblog-fixing-twitter</id>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-fixing-twitter.html" />
+  <id>http://blog.geekdaily.org/2009/06/liveblog-fixing-twitter</id>
   <published>2009-06-23T00:00:00-07:00</published>
   <updated>2009-06-23T00:00:00-07:00</updated>
   <author>
     <name>Jim Meyer</name>
-    <uri>http://localhost:4000</uri>
+    <uri>http://blog.geekdaily.org</uri>
     <email>jim@geekdaily.org</email>
   </author>
   <content type="html">
@@ -1032,7 +1032,7 @@ DB replication
 
 
 
-    &lt;p&gt;&lt;a href=&quot;http://localhost:4000/2009/06/liveblog-fixing-twitter.html&quot;&gt;LiveBlog: Fixing Twitter&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://localhost:4000&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-fixing-twitter.html&quot;&gt;LiveBlog: Fixing Twitter&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
   </content>
 </entry>
 
@@ -1041,13 +1041,13 @@ DB replication
 
 <entry>
   <title type="html"><![CDATA[LiveBlog: After the Click]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000/2009/06/liveblog-after-the-click.html" />
-  <id>http://localhost:4000/2009/06/liveblog-after-the-click</id>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-after-the-click.html" />
+  <id>http://blog.geekdaily.org/2009/06/liveblog-after-the-click</id>
   <published>2009-06-23T00:00:00-07:00</published>
   <updated>2009-06-23T00:00:00-07:00</updated>
   <author>
     <name>Jim Meyer</name>
-    <uri>http://localhost:4000</uri>
+    <uri>http://blog.geekdaily.org</uri>
     <email>jim@geekdaily.org</email>
   </author>
   <content type="html">
@@ -1205,7 +1205,7 @@ Test with users
 	&lt;p&gt;Expects org to look different in a year&amp;#8212;evolution is the key.&lt;/p&gt;
 
 
-    &lt;p&gt;&lt;a href=&quot;http://localhost:4000/2009/06/liveblog-after-the-click.html&quot;&gt;LiveBlog: After the Click&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://localhost:4000&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-after-the-click.html&quot;&gt;LiveBlog: After the Click&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
   </content>
 </entry>
 
@@ -1214,13 +1214,13 @@ Test with users
 
 <entry>
   <title type="html"><![CDATA[LiveBlog: 2 Years Later, Loving and Hating the Cloud]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000/2009/06/liveblog-2-years-later-loving-and-hating-the-cloud.html" />
-  <id>http://localhost:4000/2009/06/liveblog-2-years-later-loving-and-hating-the-cloud</id>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-2-years-later-loving-and-hating-the-cloud.html" />
+  <id>http://blog.geekdaily.org/2009/06/liveblog-2-years-later-loving-and-hating-the-cloud</id>
   <published>2009-06-23T00:00:00-07:00</published>
   <updated>2009-06-23T00:00:00-07:00</updated>
   <author>
     <name>Jim Meyer</name>
-    <uri>http://localhost:4000</uri>
+    <uri>http://blog.geekdaily.org</uri>
     <email>jim@geekdaily.org</email>
   </author>
   <content type="html">
@@ -1286,7 +1286,7 @@ Be ready for fail
 
 
 
-    &lt;p&gt;&lt;a href=&quot;http://localhost:4000/2009/06/liveblog-2-years-later-loving-and-hating-the-cloud.html&quot;&gt;LiveBlog: 2 Years Later, Loving and Hating the Cloud&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://localhost:4000&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-2-years-later-loving-and-hating-the-cloud.html&quot;&gt;LiveBlog: 2 Years Later, Loving and Hating the Cloud&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
   </content>
 </entry>
 
@@ -1295,13 +1295,13 @@ Be ready for fail
 
 <entry>
   <title type="html"><![CDATA[LiveBlog: 10+ Deploys A Day: Dev and Ops at Flickr]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000/2009/06/liveblog-10-deploys-a-day-dev-and-ops-at-flickr.html" />
-  <id>http://localhost:4000/2009/06/liveblog-10-deploys-a-day-dev-and-ops-at-flickr</id>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-10-deploys-a-day-dev-and-ops-at-flickr.html" />
+  <id>http://blog.geekdaily.org/2009/06/liveblog-10-deploys-a-day-dev-and-ops-at-flickr</id>
   <published>2009-06-23T00:00:00-07:00</published>
   <updated>2009-06-23T00:00:00-07:00</updated>
   <author>
     <name>Jim Meyer</name>
-    <uri>http://localhost:4000</uri>
+    <uri>http://blog.geekdaily.org</uri>
     <email>jim@geekdaily.org</email>
   </author>
   <content type="html">
@@ -1482,7 +1482,7 @@ Talk about the impact of your code push
 	&lt;p&gt;Ops should provide constructive, continual feedback on how it’s going. Point out interesting things before they’re critical&lt;/p&gt;
 
 
-    &lt;p&gt;&lt;a href=&quot;http://localhost:4000/2009/06/liveblog-10-deploys-a-day-dev-and-ops-at-flickr.html&quot;&gt;LiveBlog: 10+ Deploys A Day: Dev and Ops at Flickr&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://localhost:4000&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-10-deploys-a-day-dev-and-ops-at-flickr.html&quot;&gt;LiveBlog: 10+ Deploys A Day: Dev and Ops at Flickr&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
   </content>
 </entry>
 
