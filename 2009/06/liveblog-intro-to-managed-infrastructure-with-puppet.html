@@ -1,0 +1,577 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>LiveBlog: Intro to Managed Infrastructure with Puppet &#8211; geek!daily</title>
+<meta name="description" content="I'm at Velocity 2009 and very happy to see Luke Kanies presenting around Puppet. If you're not familiar, Luke's a hard-core sysadmin type with the typical sysadmin bent for highly automated systems management solutions which require as little maintenance as possible. If you're looking at things like cfengine, cft, etc. then you should be looking at Puppet as well.
+
+Meanwhile, it's been a while since I've live-blogged a session, so let's see if my stream of consciousness technique still flows (or has stagnated):
+
+It's a workshop, not a talk; to follow along git clone git://github.com/reductivelabs/velocity_puppet_workshop_2009.git
+
+You'll also want the slideshow gem to see the slides (which are in the git repo): sudo gem install slideshow
+
+You also probably want to install puppet. You can get it from github, through MacPorts, but easiest is sudo gem install puppet
+
+Seek help: #puppet on freenode, puppet-users Google group
+
+The usual problems obtain: keep everything configured correctly all the time.
+
+Puppet provides a resource abstraction layer. Do you remember which command removes gems? Is it the same as the command to remove a package (via MacPorts, rpm, yum, et al)? Why work to remember all of those.
+
+ralsh (resource abstraction layer shell) gives you direct access to the abstraction layer
+
+ralsh package -- list all pacakges on your machine via any known package installer; responds in puppet code.
+
+(it chokes a bit if you have rpm installed via MacPorts and don't run it as root. sudo ralsh package is a good workaround. That's a bug in the rpm port; it should be able to query as non-root users.)
+
+ralsh user  -- provides you the info around that user
+
+ralsh user  ensure=present shell=/bin/tcsh home=/Users/ -- be sure the user exists. Runs idempotently. First run creates; second takes no action. Change args (shell, home) and it will change to agree. Change 'ensure=absent' and it's blown away.
+
+Luke now uses ralsh for interactive administration to avoid having to remember all the various details of which args for what command, etc.
+
+The language is mostly declarative and is very simple. No loops; only recently getting conditionals from &quot;this crazy French guy&quot;.
+
+Aliases allow you to think of things by alias/title rather than technical name:
+
+
+package { ssh: name =&gt; $operating systems ? {  debian =&gt; &quot;ssh&quot;,  openssh =&gt; &quot;openssh&quot;,  default =&gt; &quot;sshd&quot; },ensure =&gt; installed}
+
+... and now you can just talk about the &quot;ssh&quot; package, abstracting you from naming strangenesses. You'll never have a DB of all the strangenesses, so you can at least to insulate yourself.
+
+Executables: puppet, ralsh, puppetd, puppetmasterd, puppetca (there's more, but that's what we'll touch today)
+
+puppet executable allows you to fiddle and iterate via -e and --noop
+
+&gt;puppet -e 'file { &quot;/tmp/foo&quot; : ensure =&gt; present}'notice: //File[/tmp/foo]/ensure: created
+
+(note: puppet barfed for me here because ~/.puppet/var didn't exist; mkdir -p ~/.puppet/var fixed that up)
+
+&gt;puppet -e 'file { &quot;/tmp/foo&quot; : ensure =&gt; absent}'notice: //File[/tmp/foo]: Filebucketed to with sum d41d8cd98f00b204e9800998ecf8427enotice: //File[/tmp/foo]/ensure: removed
+
+I was curious about the filebucketed thing, so I looked:
+
+&gt; ls ~/.puppet/var/clientbucket/d/4/1/d/8/c/d/9/d41d8cd98f00b204e9800998ecf8427e/contents  paths
+
+
+Turns out contents is the file itself, paths is the path from which it was removed.
+
+With noop:
+
+&gt; puppet --noop -e 'file { &quot;/tmp/foo&quot; : ensure =&gt; present}'notice: //File[/tmp/foo]/ensure: is absent, should be present (noop)
+
+
+You should keep a single repo of your config/code (see http://github.com/albanpeignier/gepetto/) which you can treat as an application.
+
+A puppet &quot;module&quot; is related config and code (classes, plugins, etc) to handle a particular function -- &quot;Why do you have this?&quot;
+
+(jump into repo/modules)
+
+puppet --configprint modulepath -- what modules will be loaded? (also: confdir and vardir)
+
+&gt;puppet --modulepath $PWD/modules -e 'include foo'notice: //foo/File[/tmp/foo]/ensure: created
+
+
+Put your nodes into the site manifest: manifests/site.pp ... for simpler sites. As site gets more complex, there are ways to hook puppet to a DB.
+
+default node matches all unmatched nodes. You can also inherit:
+
+node my_host inherits default { notice &quot;I'm your host!&quot;}
+
+
+puppet makes it easier to capture the many little uninteresting twiddles you forget you did in the middle of the night; you also capture them as somehting you can execute to repeat them.
+
+puppet uses ssl certs for client and server to allow identity verification. Particularly, it uses self-signed certs
+
+Running puppetmasterd in dev:
+&gt;mkdir /tmp/server&gt;puppetmasterd --verbose --no-daemonize --modulepath $PWD/modules \  --confdir /tmp/server --vardir /tmp/server \  --manifest $PWD/manifests/site.pp --certdnsnames localhost
+
+
+... and it's all rock-and-roll from here.Luke (paraphrased): &quot;Puppet uses SSL just like your bank uses it -- so most SSL errors are not Puppet's fault. Be sure you know what you're doing before you twiddle your Puppet conf around SSL; most of the errors people report turn out to be their own attempted cleverness biting them.&quot;
+
+Now use puppetd to talk to puppetmasterd to get config, etc. without knowing about anything:
+
+&gt; puppetd --test --confdir /tmp/server --vardir /tmp/server \  --no-daemonize --server localhostinfo: Caching catalog at /tmp/server/state/localconfig.yamlnotice: Starting catalog runinfo: Creating state file /tmp/server/state/state.yamlnotice: Finished catalog run in 0.01 seconds
+
+It takes about 15 seconds for code changes in the repo to propagate through puppetmasterd.
+
+... and then it's a blur as he crammed the rest of the prezzo into the last 15 minutes, so I quit typing and just listened.
+
+">
+<meta name="keywords" content="">
+
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="LiveBlog: Intro to Managed Infrastructure with Puppet">
+<meta name="twitter:description" content="I'm at Velocity 2009 and very happy to see Luke Kanies presenting around Puppet. If you're not familiar, Luke's a hard-core sysadmin type with the typical sysadmin bent for highly automated systems management solutions which require as little maintenance as possible. If you're looking at things like cfengine, cft, etc. then you should be looking at Puppet as well.
+
+Meanwhile, it's been a while since I've live-blogged a session, so let's see if my stream of consciousness technique still flows (or has stagnated):
+
+It's a workshop, not a talk; to follow along git clone git://github.com/reductivelabs/velocity_puppet_workshop_2009.git
+
+You'll also want the slideshow gem to see the slides (which are in the git repo): sudo gem install slideshow
+
+You also probably want to install puppet. You can get it from github, through MacPorts, but easiest is sudo gem install puppet
+
+Seek help: #puppet on freenode, puppet-users Google group
+
+The usual problems obtain: keep everything configured correctly all the time.
+
+Puppet provides a resource abstraction layer. Do you remember which command removes gems? Is it the same as the command to remove a package (via MacPorts, rpm, yum, et al)? Why work to remember all of those.
+
+ralsh (resource abstraction layer shell) gives you direct access to the abstraction layer
+
+ralsh package -- list all pacakges on your machine via any known package installer; responds in puppet code.
+
+(it chokes a bit if you have rpm installed via MacPorts and don't run it as root. sudo ralsh package is a good workaround. That's a bug in the rpm port; it should be able to query as non-root users.)
+
+ralsh user  -- provides you the info around that user
+
+ralsh user  ensure=present shell=/bin/tcsh home=/Users/ -- be sure the user exists. Runs idempotently. First run creates; second takes no action. Change args (shell, home) and it will change to agree. Change 'ensure=absent' and it's blown away.
+
+Luke now uses ralsh for interactive administration to avoid having to remember all the various details of which args for what command, etc.
+
+The language is mostly declarative and is very simple. No loops; only recently getting conditionals from &quot;this crazy French guy&quot;.
+
+Aliases allow you to think of things by alias/title rather than technical name:
+
+
+package { ssh: name =&gt; $operating systems ? {  debian =&gt; &quot;ssh&quot;,  openssh =&gt; &quot;openssh&quot;,  default =&gt; &quot;sshd&quot; },ensure =&gt; installed}
+
+... and now you can just talk about the &quot;ssh&quot; package, abstracting you from naming strangenesses. You'll never have a DB of all the strangenesses, so you can at least to insulate yourself.
+
+Executables: puppet, ralsh, puppetd, puppetmasterd, puppetca (there's more, but that's what we'll touch today)
+
+puppet executable allows you to fiddle and iterate via -e and --noop
+
+&gt;puppet -e 'file { &quot;/tmp/foo&quot; : ensure =&gt; present}'notice: //File[/tmp/foo]/ensure: created
+
+(note: puppet barfed for me here because ~/.puppet/var didn't exist; mkdir -p ~/.puppet/var fixed that up)
+
+&gt;puppet -e 'file { &quot;/tmp/foo&quot; : ensure =&gt; absent}'notice: //File[/tmp/foo]: Filebucketed to with sum d41d8cd98f00b204e9800998ecf8427enotice: //File[/tmp/foo]/ensure: removed
+
+I was curious about the filebucketed thing, so I looked:
+
+&gt; ls ~/.puppet/var/clientbucket/d/4/1/d/8/c/d/9/d41d8cd98f00b204e9800998ecf8427e/contents  paths
+
+
+Turns out contents is the file itself, paths is the path from which it was removed.
+
+With noop:
+
+&gt; puppet --noop -e 'file { &quot;/tmp/foo&quot; : ensure =&gt; present}'notice: //File[/tmp/foo]/ensure: is absent, should be present (noop)
+
+
+You should keep a single repo of your config/code (see http://github.com/albanpeignier/gepetto/) which you can treat as an application.
+
+A puppet &quot;module&quot; is related config and code (classes, plugins, etc) to handle a particular function -- &quot;Why do you have this?&quot;
+
+(jump into repo/modules)
+
+puppet --configprint modulepath -- what modules will be loaded? (also: confdir and vardir)
+
+&gt;puppet --modulepath $PWD/modules -e 'include foo'notice: //foo/File[/tmp/foo]/ensure: created
+
+
+Put your nodes into the site manifest: manifests/site.pp ... for simpler sites. As site gets more complex, there are ways to hook puppet to a DB.
+
+default node matches all unmatched nodes. You can also inherit:
+
+node my_host inherits default { notice &quot;I'm your host!&quot;}
+
+
+puppet makes it easier to capture the many little uninteresting twiddles you forget you did in the middle of the night; you also capture them as somehting you can execute to repeat them.
+
+puppet uses ssl certs for client and server to allow identity verification. Particularly, it uses self-signed certs
+
+Running puppetmasterd in dev:
+&gt;mkdir /tmp/server&gt;puppetmasterd --verbose --no-daemonize --modulepath $PWD/modules \  --confdir /tmp/server --vardir /tmp/server \  --manifest $PWD/manifests/site.pp --certdnsnames localhost
+
+
+... and it's all rock-and-roll from here.Luke (paraphrased): &quot;Puppet uses SSL just like your bank uses it -- so most SSL errors are not Puppet's fault. Be sure you know what you're doing before you twiddle your Puppet conf around SSL; most of the errors people report turn out to be their own attempted cleverness biting them.&quot;
+
+Now use puppetd to talk to puppetmasterd to get config, etc. without knowing about anything:
+
+&gt; puppetd --test --confdir /tmp/server --vardir /tmp/server \  --no-daemonize --server localhostinfo: Caching catalog at /tmp/server/state/localconfig.yamlnotice: Starting catalog runinfo: Creating state file /tmp/server/state/state.yamlnotice: Finished catalog run in 0.01 seconds
+
+It takes about 15 seconds for code changes in the repo to propagate through puppetmasterd.
+
+... and then it's a blur as he crammed the rest of the prezzo into the last 15 minutes, so I quit typing and just listened.
+
+">
+<meta name="twitter:site" content="@purp">
+<meta name="twitter:creator" content="@purp">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://localhost:4000/images/site-logo.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LiveBlog: Intro to Managed Infrastructure with Puppet">
+<meta property="og:description" content="I'm at Velocity 2009 and very happy to see Luke Kanies presenting around Puppet. If you're not familiar, Luke's a hard-core sysadmin type with the typical sysadmin bent for highly automated systems management solutions which require as little maintenance as possible. If you're looking at things like cfengine, cft, etc. then you should be looking at Puppet as well.
+
+Meanwhile, it's been a while since I've live-blogged a session, so let's see if my stream of consciousness technique still flows (or has stagnated):
+
+It's a workshop, not a talk; to follow along git clone git://github.com/reductivelabs/velocity_puppet_workshop_2009.git
+
+You'll also want the slideshow gem to see the slides (which are in the git repo): sudo gem install slideshow
+
+You also probably want to install puppet. You can get it from github, through MacPorts, but easiest is sudo gem install puppet
+
+Seek help: #puppet on freenode, puppet-users Google group
+
+The usual problems obtain: keep everything configured correctly all the time.
+
+Puppet provides a resource abstraction layer. Do you remember which command removes gems? Is it the same as the command to remove a package (via MacPorts, rpm, yum, et al)? Why work to remember all of those.
+
+ralsh (resource abstraction layer shell) gives you direct access to the abstraction layer
+
+ralsh package -- list all pacakges on your machine via any known package installer; responds in puppet code.
+
+(it chokes a bit if you have rpm installed via MacPorts and don't run it as root. sudo ralsh package is a good workaround. That's a bug in the rpm port; it should be able to query as non-root users.)
+
+ralsh user  -- provides you the info around that user
+
+ralsh user  ensure=present shell=/bin/tcsh home=/Users/ -- be sure the user exists. Runs idempotently. First run creates; second takes no action. Change args (shell, home) and it will change to agree. Change 'ensure=absent' and it's blown away.
+
+Luke now uses ralsh for interactive administration to avoid having to remember all the various details of which args for what command, etc.
+
+The language is mostly declarative and is very simple. No loops; only recently getting conditionals from &quot;this crazy French guy&quot;.
+
+Aliases allow you to think of things by alias/title rather than technical name:
+
+
+package { ssh: name =&gt; $operating systems ? {  debian =&gt; &quot;ssh&quot;,  openssh =&gt; &quot;openssh&quot;,  default =&gt; &quot;sshd&quot; },ensure =&gt; installed}
+
+... and now you can just talk about the &quot;ssh&quot; package, abstracting you from naming strangenesses. You'll never have a DB of all the strangenesses, so you can at least to insulate yourself.
+
+Executables: puppet, ralsh, puppetd, puppetmasterd, puppetca (there's more, but that's what we'll touch today)
+
+puppet executable allows you to fiddle and iterate via -e and --noop
+
+&gt;puppet -e 'file { &quot;/tmp/foo&quot; : ensure =&gt; present}'notice: //File[/tmp/foo]/ensure: created
+
+(note: puppet barfed for me here because ~/.puppet/var didn't exist; mkdir -p ~/.puppet/var fixed that up)
+
+&gt;puppet -e 'file { &quot;/tmp/foo&quot; : ensure =&gt; absent}'notice: //File[/tmp/foo]: Filebucketed to with sum d41d8cd98f00b204e9800998ecf8427enotice: //File[/tmp/foo]/ensure: removed
+
+I was curious about the filebucketed thing, so I looked:
+
+&gt; ls ~/.puppet/var/clientbucket/d/4/1/d/8/c/d/9/d41d8cd98f00b204e9800998ecf8427e/contents  paths
+
+
+Turns out contents is the file itself, paths is the path from which it was removed.
+
+With noop:
+
+&gt; puppet --noop -e 'file { &quot;/tmp/foo&quot; : ensure =&gt; present}'notice: //File[/tmp/foo]/ensure: is absent, should be present (noop)
+
+
+You should keep a single repo of your config/code (see http://github.com/albanpeignier/gepetto/) which you can treat as an application.
+
+A puppet &quot;module&quot; is related config and code (classes, plugins, etc) to handle a particular function -- &quot;Why do you have this?&quot;
+
+(jump into repo/modules)
+
+puppet --configprint modulepath -- what modules will be loaded? (also: confdir and vardir)
+
+&gt;puppet --modulepath $PWD/modules -e 'include foo'notice: //foo/File[/tmp/foo]/ensure: created
+
+
+Put your nodes into the site manifest: manifests/site.pp ... for simpler sites. As site gets more complex, there are ways to hook puppet to a DB.
+
+default node matches all unmatched nodes. You can also inherit:
+
+node my_host inherits default { notice &quot;I'm your host!&quot;}
+
+
+puppet makes it easier to capture the many little uninteresting twiddles you forget you did in the middle of the night; you also capture them as somehting you can execute to repeat them.
+
+puppet uses ssl certs for client and server to allow identity verification. Particularly, it uses self-signed certs
+
+Running puppetmasterd in dev:
+&gt;mkdir /tmp/server&gt;puppetmasterd --verbose --no-daemonize --modulepath $PWD/modules \  --confdir /tmp/server --vardir /tmp/server \  --manifest $PWD/manifests/site.pp --certdnsnames localhost
+
+
+... and it's all rock-and-roll from here.Luke (paraphrased): &quot;Puppet uses SSL just like your bank uses it -- so most SSL errors are not Puppet's fault. Be sure you know what you're doing before you twiddle your Puppet conf around SSL; most of the errors people report turn out to be their own attempted cleverness biting them.&quot;
+
+Now use puppetd to talk to puppetmasterd to get config, etc. without knowing about anything:
+
+&gt; puppetd --test --confdir /tmp/server --vardir /tmp/server \  --no-daemonize --server localhostinfo: Caching catalog at /tmp/server/state/localconfig.yamlnotice: Starting catalog runinfo: Creating state file /tmp/server/state/state.yamlnotice: Finished catalog run in 0.01 seconds
+
+It takes about 15 seconds for code changes in the repo to propagate through puppetmasterd.
+
+... and then it's a blur as he crammed the rest of the prezzo into the last 15 minutes, so I quit typing and just listened.
+
+">
+<meta property="og:url" content="http://localhost:4000/2009/06/liveblog-intro-to-managed-infrastructure-with-puppet.html">
+<meta property="og:site_name" content="geek!daily">
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/2009/06/liveblog-intro-to-managed-infrastructure-with-puppet.html">
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="geek!daily Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+<!-- Webfonts -->
+<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="http://localhost:4000/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="http://localhost:4000/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://localhost:4000/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/" >Home</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/articles/" >Articles</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/projects/" >Projects</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/blog/" >Blog</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/about/" >About</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="http://localhost:4000/" class="site-logo" rel="home" title="geek!daily"><img src="http://localhost:4000/images/site-logo.png" width="200" height="200" alt="geek!daily logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="http://localhost:4000/">geek!daily</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">sporadic bursts of random thinking on life, leadership, and tech</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"></span>
+        
+          <h1 class="entry-title">LiveBlog: Intro to Managed Infrastructure with Puppet</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+        
+          <img src="http://localhost:4000/images/jim_meyer_headshot.jpg" class="bio-photo" alt="Jim Meyer bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Jim Meyer</span></span>
+        <span class="entry-date date published"><time datetime="2009-06-22T00:00:00-07:00"><i class="fa fa-calendar-o"></i> June 22, 2009</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>I'm at Velocity 2009 and very happy to see Luke Kanies presenting around Puppet. If you're not familiar, Luke's a hard-core sysadmin type with the typical sysadmin bent for highly automated systems management solutions which require as little maintenance as possible. If you're looking at things like cfengine, cft, etc. then you should be looking at Puppet as well.</p>
+
+<p>Meanwhile, it's been a while since I've live-blogged a session, so let's see if my stream of consciousness technique still flows (or has stagnated):</p>
+
+<p>It's a workshop, not a talk; to follow along <tt>git clone git://github.com/reductivelabs/velocity_puppet_workshop_2009.git</tt></p>
+
+<p>You'll also want the slideshow gem to see the slides (which are in the git repo): <tt>sudo gem install slideshow</tt></p>
+
+<p>You also probably want to install puppet. You can get it from github, through MacPorts, but easiest is <tt>sudo gem install puppet</tt></p>
+
+<p>Seek help: #puppet on freenode, puppet-users Google group</p>
+
+<p>The usual problems obtain: keep everything configured correctly all the time.</p>
+
+<p>Puppet provides a resource abstraction layer. Do you remember which command removes gems? Is it the same as the command to remove a package (via MacPorts, rpm, yum, et al)? Why work to remember all of those.</p>
+
+<p>ralsh (resource abstraction layer shell) gives you direct access to the abstraction layer</p>
+
+<p><tt>ralsh package</tt> -- list all pacakges on your machine via any known package installer; responds in puppet code.</p>
+
+<p>(it chokes a bit if you have rpm installed via MacPorts and don't run it as root. <tt>sudo ralsh package</tt> is a good workaround. That's a bug in the rpm port; it should be able to query as non-root users.)</p>
+
+<p><tt>ralsh user <span sername="sername" style="text-decoration: underline;"></span></tt> -- provides you the info around that user</p>
+
+<p><tt>ralsh user <span sername="sername" style="text-decoration: underline;"><p> ensure=present shell=/bin/tcsh home=/Users/</p><span sername="sername" style="text-decoration: underline;"></span></span></tt> -- be sure the user exists. Runs idempotently. First run creates; second takes no action. Change args (shell, home) and it will change to agree. Change 'ensure=absent' and it's blown away.</p>
+
+<p>Luke now uses ralsh for interactive administration to avoid having to remember all the various details of which args for what command, etc.</p>
+
+<p>The language is mostly declarative and is very simple. No loops; only recently getting conditionals from &quot;this crazy French guy&quot;.</p>
+
+<p>Aliases allow you to think of things by alias/title rather than technical name:</p>
+
+<p>
+</p><pre><code>package { ssh:<br /> name =&gt; $operating systems ? {<br />  debian =&gt; &quot;ssh&quot;,<br />  openssh =&gt; &quot;openssh&quot;,<br />  default =&gt; &quot;sshd&quot;<br /> },<br />ensure =&gt; installed<br />}</code></pre>
+
+<p>... and now you can just talk about the &quot;ssh&quot; package, abstracting you from naming strangenesses. You'll never have a DB of all the strangenesses, so you can at least to insulate yourself.</p>
+
+<p>Executables: <tt>puppet, ralsh, puppetd, puppetmasterd, puppetca</tt> (there's more, but that's what we'll touch today)</p>
+
+<p>puppet executable allows you to fiddle and iterate via <tt>-e</tt> and <tt>--noop</tt></p>
+
+<p></p><pre><code>&gt;puppet -e 'file { &quot;/tmp/foo&quot; : ensure =&gt; present}'<br />notice: //File[/tmp/foo]/ensure: created<br /></code></pre>
+
+<p>(note: puppet barfed for me here because ~/.puppet/var didn't exist; <tt>mkdir -p ~/.puppet/var</tt> fixed that up)</p>
+
+<p></p><pre><code>&gt;puppet -e 'file { &quot;/tmp/foo&quot; : ensure =&gt; absent}'<br />notice: //File[/tmp/foo]: Filebucketed to with sum d41d8cd98f00b204e9800998ecf8427e<br />notice: //File[/tmp/foo]/ensure: removed<br /></code></pre>
+
+<p>I was curious about the filebucketed thing, so I looked:</p>
+
+<p></p><pre><code>&gt; ls ~/.puppet/var/clientbucket/d/4/1/d/8/c/d/9/d41d8cd98f00b204e9800998ecf8427e/<br />contents  paths<br /></code></pre>
+
+
+<p>Turns out <tt>contents</tt> is the file itself, <tt>paths</tt> is the path from which it was removed.</p>
+
+<p>With noop:</p>
+
+<p></p><pre><code>&gt; puppet --noop -e 'file { &quot;/tmp/foo&quot; : ensure =&gt; present}'<br />notice: //File[/tmp/foo]/ensure: is absent, should be present (noop)<br /></code></pre>
+
+
+<p>You should keep a single repo of your config/code (see <tt>http://github.com/albanpeignier/gepetto/</tt>) which you can treat as an application.</p>
+
+<p>A puppet &quot;module&quot; is related config and code (classes, plugins, etc) to handle a particular function -- &quot;Why do you have this?&quot;</p>
+
+<p>(jump into repo/modules)</p>
+
+<p><tt>puppet --configprint modulepath</tt> -- what modules will be loaded? (also: confdir and vardir)</p>
+
+<p></p><pre><code>&gt;puppet --modulepath $PWD/modules -e 'include foo'<br />notice: //foo/File[/tmp/foo]/ensure: created<br /></code></pre>
+
+
+<p>Put your nodes into the site manifest: <tt>manifests/site.pp</tt> ... for simpler sites. As site gets more complex, there are ways to hook puppet to a DB.</p>
+
+<p><tt>default</tt> node matches all unmatched nodes. You can also inherit:</p>
+
+<p></p><pre><code><br />node my_host inherits default {<br /> notice &quot;I'm your host!&quot;<br />}<br /></code></pre>
+
+
+<p>puppet makes it easier to capture the many little uninteresting twiddles you forget you did in the middle of the night; you also capture them as somehting you can execute to repeat them.</p>
+
+<p>puppet uses ssl certs for client and server to allow identity verification. Particularly, it uses self-signed certs</p>
+
+<p>Running puppetmasterd in dev:
+</p><pre><code>&gt;mkdir /tmp/server<br />&gt;puppetmasterd --verbose --no-daemonize --modulepath $PWD/modules \<br />  --confdir /tmp/server --vardir /tmp/server \<br />  --manifest $PWD/manifests/site.pp --certdnsnames localhost<br /></code></pre>
+
+
+<p>... and it's all rock-and-roll from here.</p><p>Luke (paraphrased): &quot;Puppet uses SSL just like your bank uses it -- so most SSL errors are not Puppet's fault. Be sure you know what you're doing before you twiddle your Puppet conf around SSL; most of the errors people report turn out to be their own attempted cleverness biting them.&quot;</p>
+
+<p>Now use puppetd to talk to puppetmasterd to get config, etc. without knowing about anything:</p>
+
+<p></p><pre><code>&gt; puppetd --test --confdir /tmp/server --vardir /tmp/server \<br />  --no-daemonize --server localhost<br />info: Caching catalog at /tmp/server/state/localconfig.yaml<br />notice: Starting catalog run<br />info: Creating state file /tmp/server/state/state.yaml<br />notice: Finished catalog run in 0.01 seconds<br /></code></pre>
+
+<p>It takes about 15 seconds for code changes in the repo to propagate through puppetmasterd.</p>
+
+<p>... and then it's a blur as he crammed the rest of the prezzo into the last 15 minutes, so I quit typing and just listened.</p>
+
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="http://localhost:4000/2009/06/liveblog-hadoop-operations.html" class="btn" title="LiveBlog: Hadoop Operations">Previous</a>
+      
+      
+        <a href="http://localhost:4000/2009/06/liveblog-10-deploys-a-day-dev-and-ops-at-flickr.html" class="btn" title="LiveBlog: 10+ Deploys A Day: Dev and Ops at Flickr">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>&copy; 2015 Jim Meyer. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/so-simple/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	<a href="http://twitter.com/purp" title="Jim Meyer on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	<a href="http://linkedin.com/in/jimmeyer" title="Jim Meyer on LinkedIn" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a>
+	
+	<a href="http://instagram.com/purp" title="Jim Meyer on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	<a href="http://www.flickr.com/photos/purp" title="Jim Meyer on Flickr" target="_blank"><i class="fa fa-flickr fa-2x"></i></a>
+	<a href="http://github.com/purp" title="Jim Meyer on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	
+  <a href="http://localhost:4000/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'http://localhost:4000';
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://localhost:4000/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://localhost:4000/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

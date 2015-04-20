@@ -1,0 +1,264 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Textile, RedCloth, and MonkeyPatching &#8211; geek!daily</title>
+<meta name="description" content="Okay, I need to go through ~2700 articles, some large, some very large, and programmatically decide which of them use an interesting amount of Textile formatting. Don't ask why; it's not polite to stare at the unfortunate. Just smile and nod and think about how you'd puzzle this one out.
+
+">
+<meta name="keywords" content="">
+
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Textile, RedCloth, and MonkeyPatching">
+<meta name="twitter:description" content="Okay, I need to go through ~2700 articles, some large, some very large, and programmatically decide which of them use an interesting amount of Textile formatting. Don't ask why; it's not polite to stare at the unfortunate. Just smile and nod and think about how you'd puzzle this one out.
+
+">
+<meta name="twitter:site" content="@purp">
+<meta name="twitter:creator" content="@purp">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://localhost:4000/images/site-logo.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Textile, RedCloth, and MonkeyPatching">
+<meta property="og:description" content="Okay, I need to go through ~2700 articles, some large, some very large, and programmatically decide which of them use an interesting amount of Textile formatting. Don't ask why; it's not polite to stare at the unfortunate. Just smile and nod and think about how you'd puzzle this one out.
+
+">
+<meta property="og:url" content="http://localhost:4000/2007/12/textile-redcloth-and-monkeypatching.html">
+<meta property="og:site_name" content="geek!daily">
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/2007/12/textile-redcloth-and-monkeypatching.html">
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="geek!daily Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+<!-- Webfonts -->
+<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="http://localhost:4000/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="http://localhost:4000/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://localhost:4000/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/" >Home</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/articles/" >Articles</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/projects/" >Projects</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/blog/" >Blog</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/about/" >About</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="http://localhost:4000/" class="site-logo" rel="home" title="geek!daily"><img src="http://localhost:4000/images/site-logo.png" width="200" height="200" alt="geek!daily logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="http://localhost:4000/">geek!daily</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">sporadic bursts of random thinking on life, leadership, and tech</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"></span>
+        
+          <h1 class="entry-title">Textile, RedCloth, and MonkeyPatching</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+        
+          <img src="http://localhost:4000/images/jim_meyer_headshot.jpg" class="bio-photo" alt="Jim Meyer bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Jim Meyer</span></span>
+        <span class="entry-date date published"><time datetime="2007-12-19T00:00:00-08:00"><i class="fa fa-calendar-o"></i> December 19, 2007</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>Okay, I need to go through ~2700 articles, some large, some <em>very</em> large, and programmatically decide which of them use an interesting amount of <a href="http://textism.com/tools/textile/">Textile</a> formatting. Don't ask why; it's not polite to stare at the unfortunate. Just smile and nod and think about how you'd puzzle this one out.</p>
+
+<p>So I've got a bunch of content, some of which may be in Textile format; how can I tell without looking at every piece and making a judgement call? First, I decided to try comparing the text before and after <a href="http://code.whytheluckystiff.net/redcloth/">RedCloth</a> processing, but that didn't work since RedCloth does some whitespace cleanup (among other things) which mean that feeding it a string devoid of Textile markup doesn't guarantee you'll get the same string back. A small part of me is offended by this -- it breaks the principle of least astonishment -- but I'm enough of a situational ethicist to value the good in what it's doing for me and move on.</p>
+
+<p>I started poking around in RedCloth 3.0.4, found the bits which were perpetually going to alter some of my strings (for the better!) and discovered something wonderful -- you can pass an ordered list of rules into RedCloth#to_html, allowing you to tweak it just the way you like it. Do you like using -- gasp! -- long dashes? The :glyphs_textile rule converts them to an HTML entity (&amp;#8212; to be precise) along with a bunch of other conversions. And there are even handy shortcuts to specify all of the textile markup rules (:textile) and all of Markdown (:markdown). Yay! Flexibilty rewards to those who read the code closely!</p>
+
+<p>But why, then, if I do something like:</p>
+
+<pre><code>
+RedCloth.new('foo -- bar -- baz').to_html(:glyphs_textile, :textile)
+</code></pre>
+
+<p>Do I get this:</p>
+
+<p>foo <del>- bar -</del> baz</p>
+
+<p>It turns out that the glyph and inline rules are run in the same method, inline, which looks like this:</p>
+
+<pre><code>
+&nbsp; &nbsp; def inline( text ) 
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; [/^inline_/, /^glyphs_/].each do |meth_re|
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;@rules.each do |rule_name|
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; method( rule_name ).call( text ) if rule_name.to_s.match( meth_re )
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;end
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; end
+&nbsp; &nbsp; end
+</code></pre>
+
+
+<p>See the problem? Because inline comes first in the ordered list of regular expressions, all inline rules come straight to the head of the line. It should look more like this:</p>
+
+<pre><code>
+&nbsp; &nbsp; def inline( text ) 
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; @rules.each do |rule_name|
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;method( rule_name ).call( text ) if rule_name.to_s.match(/^(inline|glyphs)_/)
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; end
+&nbsp; &nbsp; end
+</code></pre>
+
+
+
+
+
+<p>... and that's exactly what I monkey-patched into my app.<br /><br />Meanwhile, judging from the <a href="http://textism.com/tools/textile/index.php">Textile demo</a>, Textile should handle my double-dash example above; this is also a bug in the Ruby implementation -- and all this time I blamed Textile ... sorry! I think <a href="http://code.whytheluckystiff.net/redcloth/ticket/26">I'll send in a patch</a> as penance.</p>
+
+<p><strong>Things I've Learned</strong></p>
+
+<ul><li>Making your code flexible is good for other developers.</li>
+
+<li>Being good to other developers means they might send you patches when they find problems.</li>
+
+<li>There's a hidden feature in Textile which allows you to disable Textile for a chunk of text: <tt>&lt;notextile&gt;-not struck-&lt;/notextile&gt; -or- ==-also not struck-==</tt></li>
+
+<li>Monkey-patching is a nice way to get something fixed in your app quickly.</li>
+
+<li>It's handy to be able to <a href="http://blog.geekdaily.org/2007/09/setting-constan.html">silence constant setting warnings</a> when you have to monkey-patch a constant.</li>
+
+<li>Even smart people make bugs (so what hope is there for me?)</li></ul>
+
+
+
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="http://localhost:4000/2007/12/how-quickly-we-forget.html" class="btn" title="How Quickly We Forget">Previous</a>
+      
+      
+        <a href="http://localhost:4000/2008/01/data-portability-in-a-nutshell-you-own-your-data.html" class="btn" title="Data Portability In A Nutshell: You Own Your Data">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>&copy; 2015 Jim Meyer. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/so-simple/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	<a href="http://twitter.com/purp" title="Jim Meyer on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	<a href="http://linkedin.com/in/jimmeyer" title="Jim Meyer on LinkedIn" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a>
+	
+	<a href="http://instagram.com/purp" title="Jim Meyer on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	<a href="http://www.flickr.com/photos/purp" title="Jim Meyer on Flickr" target="_blank"><i class="fa fa-flickr fa-2x"></i></a>
+	<a href="http://github.com/purp" title="Jim Meyer on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	
+  <a href="http://localhost:4000/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'http://localhost:4000';
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://localhost:4000/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://localhost:4000/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

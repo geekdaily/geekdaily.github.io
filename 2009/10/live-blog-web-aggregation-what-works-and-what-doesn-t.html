@@ -1,0 +1,205 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Live Blog: Web Aggregation, What Works and What Doesn't &#8211; geek!daily</title>
+<meta name="description" content="[note: I originally scribbled this on paper thinking I could hand it off immediately, preventing the obligation of typing, posting, etc. Turns out I don't get off that lightly, so here's the spew in electrons.]Scraping isn't a scalable model.There are biz issues around aggregating data: many businesses don't want you to get their data, though many are becoming more open.Doing aggregation right:* minimize latency* maximize engagementWhen latency is high, it causes confusion and takes you out of real-timeDoing conditional gets can be somewhat useful.Plaxo had to shard their crawlers, which lands you in the shared state/sync problem of any stateful system you want to scale horizontally.Gnip integration has been good:* Offload the long-running processes* Gnip offers alerting or &quot;fat ping&quot; (ping includes update data)Plaxo likes using the alert to escalate the priority of the crawler which fetches the rich data related to the update. This approach allows you to use a consistent model for content ingestion vs. get info from fat ping, then augment later.Smarr: &quot;Brad Fitzpatrick said, 'Make polling a special case of push.'&quot; He attributed this to someone but I missed the attribution. (Don't try to keep up with Joseph Smarr on paper. He's thinks too many cogent thoughts too quickly to preserve legibility)Plaxo uses TripIt's RSS feed as alerting, grabs item ID, then uses their APIs to fetch rich data.There's a move to homogenize the info from sites, which may not be a good idea. It suppresses the distinctive look and feel/experience of the publishing site. Allowing for these differences means more labor spent on making one-off shims, which increases maintenance. Still, right choice in order to provide value to the user.Activity streams seek to provide more rich data in a somewhat normalized, extensible format.Many/most sites aren't yet perfectly architected for real-time's push, ping, etc.PubSubHubBub and Activity Streams are externally represented data shardsPlaxo's Pulse started with known architecture issues (in order to ship) and hit the wall sooner than expected. Threw hardware/software optimizations at the problem to move the wall far enough to give time for rearchitecture, sharding, and working out how to propagate changes throughout the system properly.None of the NoSQL alternatives are quite ready for prime-time. Smarr: &quot;It should be something that's just a primitive.&quot;Conversation platforms are slightly different sorts of aggregation platforms. There are UI diffs (e.g. pause the stream when indicating interest). Handling the transition from slightly-latent/passive real-time to synchronous real-time/active not yet well-developed (think: when a comment inspires a conversation)90-99% of the value of the real-time web is realized in not-real-time [unreal-time? ;] This is a big deal for discovery. Twitter and FB make this harder by obscuring history.Ideal scalability/performance would be an index per user. This would be grossly inefficient due to the number of duplicate entries.No one has nailed reader-controlled aggregation (Show me Joe's tweets and blogs but not his photos) quite yet.Smarr: &quot;If we're all kinda [sharing], we're all making each other smarter&quot;The firehose of info is a hard model to scale to. Ben Metcalfe proposes the garden hose -- a firehose filtered at the source according to your interests, which helps aggregators by allowing them to request the superset of all filters from a given publisher.We really want to push contexts to the publishers and let them determine which content fits that context. Context shifts over time: Joe doesn't normally read my tweets (and why would he?) but when we're at a conference together, he's much more interested (thus the popularity of hashtags). This is a geographic and purpose-driven context (the conference) as well as Joe's context on me (Jim knows where the good bars are).Folks like Twitter are so overloaded with info that they might not recognize non-immediate contexts that are interesting to me.There's also the risk of exposing users to the amount of correlatable public data they have. Many don't want you to apply a transitive closure to identify them in all spaces even though doing so allows you to present a much more convenient UX around what they want you to aggregate.Someone likened the real-time aggregation problem to a bar conversation: you get snippets here and there and follow your own thread of interestingness.Three fundamental themes:* How to specify contexts to data provider/publisher* How to control access to private data (and carry ACLs with that data)* How to do all this efficientlyPlaxo implemented polling-back-off (poll infrequently updated sources less frequently). Turns out this is a bad idea, as it introduces latency which makes it feel broken.There's also the issue of aggregating conversation about web objecs (like blog posts) and how not to divert the conversation from the publisher's site. However, sometimes you want a private discussion of a public object (cf. LinkedIn company groups discussing an article)Q: What's the state of open standards around this?A: PubSubHubBub and Activity Streams are very exciting. OAuth as access delegation. There's still a lot of ground to cover.
+
+">
+<meta name="keywords" content="">
+
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Live Blog: Web Aggregation, What Works and What Doesn't">
+<meta name="twitter:description" content="[note: I originally scribbled this on paper thinking I could hand it off immediately, preventing the obligation of typing, posting, etc. Turns out I don't get off that lightly, so here's the spew in electrons.]Scraping isn't a scalable model.There are biz issues around aggregating data: many businesses don't want you to get their data, though many are becoming more open.Doing aggregation right:* minimize latency* maximize engagementWhen latency is high, it causes confusion and takes you out of real-timeDoing conditional gets can be somewhat useful.Plaxo had to shard their crawlers, which lands you in the shared state/sync problem of any stateful system you want to scale horizontally.Gnip integration has been good:* Offload the long-running processes* Gnip offers alerting or &quot;fat ping&quot; (ping includes update data)Plaxo likes using the alert to escalate the priority of the crawler which fetches the rich data related to the update. This approach allows you to use a consistent model for content ingestion vs. get info from fat ping, then augment later.Smarr: &quot;Brad Fitzpatrick said, 'Make polling a special case of push.'&quot; He attributed this to someone but I missed the attribution. (Don't try to keep up with Joseph Smarr on paper. He's thinks too many cogent thoughts too quickly to preserve legibility)Plaxo uses TripIt's RSS feed as alerting, grabs item ID, then uses their APIs to fetch rich data.There's a move to homogenize the info from sites, which may not be a good idea. It suppresses the distinctive look and feel/experience of the publishing site. Allowing for these differences means more labor spent on making one-off shims, which increases maintenance. Still, right choice in order to provide value to the user.Activity streams seek to provide more rich data in a somewhat normalized, extensible format.Many/most sites aren't yet perfectly architected for real-time's push, ping, etc.PubSubHubBub and Activity Streams are externally represented data shardsPlaxo's Pulse started with known architecture issues (in order to ship) and hit the wall sooner than expected. Threw hardware/software optimizations at the problem to move the wall far enough to give time for rearchitecture, sharding, and working out how to propagate changes throughout the system properly.None of the NoSQL alternatives are quite ready for prime-time. Smarr: &quot;It should be something that's just a primitive.&quot;Conversation platforms are slightly different sorts of aggregation platforms. There are UI diffs (e.g. pause the stream when indicating interest). Handling the transition from slightly-latent/passive real-time to synchronous real-time/active not yet well-developed (think: when a comment inspires a conversation)90-99% of the value of the real-time web is realized in not-real-time [unreal-time? ;] This is a big deal for discovery. Twitter and FB make this harder by obscuring history.Ideal scalability/performance would be an index per user. This would be grossly inefficient due to the number of duplicate entries.No one has nailed reader-controlled aggregation (Show me Joe's tweets and blogs but not his photos) quite yet.Smarr: &quot;If we're all kinda [sharing], we're all making each other smarter&quot;The firehose of info is a hard model to scale to. Ben Metcalfe proposes the garden hose -- a firehose filtered at the source according to your interests, which helps aggregators by allowing them to request the superset of all filters from a given publisher.We really want to push contexts to the publishers and let them determine which content fits that context. Context shifts over time: Joe doesn't normally read my tweets (and why would he?) but when we're at a conference together, he's much more interested (thus the popularity of hashtags). This is a geographic and purpose-driven context (the conference) as well as Joe's context on me (Jim knows where the good bars are).Folks like Twitter are so overloaded with info that they might not recognize non-immediate contexts that are interesting to me.There's also the risk of exposing users to the amount of correlatable public data they have. Many don't want you to apply a transitive closure to identify them in all spaces even though doing so allows you to present a much more convenient UX around what they want you to aggregate.Someone likened the real-time aggregation problem to a bar conversation: you get snippets here and there and follow your own thread of interestingness.Three fundamental themes:* How to specify contexts to data provider/publisher* How to control access to private data (and carry ACLs with that data)* How to do all this efficientlyPlaxo implemented polling-back-off (poll infrequently updated sources less frequently). Turns out this is a bad idea, as it introduces latency which makes it feel broken.There's also the issue of aggregating conversation about web objecs (like blog posts) and how not to divert the conversation from the publisher's site. However, sometimes you want a private discussion of a public object (cf. LinkedIn company groups discussing an article)Q: What's the state of open standards around this?A: PubSubHubBub and Activity Streams are very exciting. OAuth as access delegation. There's still a lot of ground to cover.
+
+">
+<meta name="twitter:site" content="@purp">
+<meta name="twitter:creator" content="@purp">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://localhost:4000/images/site-logo.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Live Blog: Web Aggregation, What Works and What Doesn't">
+<meta property="og:description" content="[note: I originally scribbled this on paper thinking I could hand it off immediately, preventing the obligation of typing, posting, etc. Turns out I don't get off that lightly, so here's the spew in electrons.]Scraping isn't a scalable model.There are biz issues around aggregating data: many businesses don't want you to get their data, though many are becoming more open.Doing aggregation right:* minimize latency* maximize engagementWhen latency is high, it causes confusion and takes you out of real-timeDoing conditional gets can be somewhat useful.Plaxo had to shard their crawlers, which lands you in the shared state/sync problem of any stateful system you want to scale horizontally.Gnip integration has been good:* Offload the long-running processes* Gnip offers alerting or &quot;fat ping&quot; (ping includes update data)Plaxo likes using the alert to escalate the priority of the crawler which fetches the rich data related to the update. This approach allows you to use a consistent model for content ingestion vs. get info from fat ping, then augment later.Smarr: &quot;Brad Fitzpatrick said, 'Make polling a special case of push.'&quot; He attributed this to someone but I missed the attribution. (Don't try to keep up with Joseph Smarr on paper. He's thinks too many cogent thoughts too quickly to preserve legibility)Plaxo uses TripIt's RSS feed as alerting, grabs item ID, then uses their APIs to fetch rich data.There's a move to homogenize the info from sites, which may not be a good idea. It suppresses the distinctive look and feel/experience of the publishing site. Allowing for these differences means more labor spent on making one-off shims, which increases maintenance. Still, right choice in order to provide value to the user.Activity streams seek to provide more rich data in a somewhat normalized, extensible format.Many/most sites aren't yet perfectly architected for real-time's push, ping, etc.PubSubHubBub and Activity Streams are externally represented data shardsPlaxo's Pulse started with known architecture issues (in order to ship) and hit the wall sooner than expected. Threw hardware/software optimizations at the problem to move the wall far enough to give time for rearchitecture, sharding, and working out how to propagate changes throughout the system properly.None of the NoSQL alternatives are quite ready for prime-time. Smarr: &quot;It should be something that's just a primitive.&quot;Conversation platforms are slightly different sorts of aggregation platforms. There are UI diffs (e.g. pause the stream when indicating interest). Handling the transition from slightly-latent/passive real-time to synchronous real-time/active not yet well-developed (think: when a comment inspires a conversation)90-99% of the value of the real-time web is realized in not-real-time [unreal-time? ;] This is a big deal for discovery. Twitter and FB make this harder by obscuring history.Ideal scalability/performance would be an index per user. This would be grossly inefficient due to the number of duplicate entries.No one has nailed reader-controlled aggregation (Show me Joe's tweets and blogs but not his photos) quite yet.Smarr: &quot;If we're all kinda [sharing], we're all making each other smarter&quot;The firehose of info is a hard model to scale to. Ben Metcalfe proposes the garden hose -- a firehose filtered at the source according to your interests, which helps aggregators by allowing them to request the superset of all filters from a given publisher.We really want to push contexts to the publishers and let them determine which content fits that context. Context shifts over time: Joe doesn't normally read my tweets (and why would he?) but when we're at a conference together, he's much more interested (thus the popularity of hashtags). This is a geographic and purpose-driven context (the conference) as well as Joe's context on me (Jim knows where the good bars are).Folks like Twitter are so overloaded with info that they might not recognize non-immediate contexts that are interesting to me.There's also the risk of exposing users to the amount of correlatable public data they have. Many don't want you to apply a transitive closure to identify them in all spaces even though doing so allows you to present a much more convenient UX around what they want you to aggregate.Someone likened the real-time aggregation problem to a bar conversation: you get snippets here and there and follow your own thread of interestingness.Three fundamental themes:* How to specify contexts to data provider/publisher* How to control access to private data (and carry ACLs with that data)* How to do all this efficientlyPlaxo implemented polling-back-off (poll infrequently updated sources less frequently). Turns out this is a bad idea, as it introduces latency which makes it feel broken.There's also the issue of aggregating conversation about web objecs (like blog posts) and how not to divert the conversation from the publisher's site. However, sometimes you want a private discussion of a public object (cf. LinkedIn company groups discussing an article)Q: What's the state of open standards around this?A: PubSubHubBub and Activity Streams are very exciting. OAuth as access delegation. There's still a lot of ground to cover.
+
+">
+<meta property="og:url" content="http://localhost:4000/2009/10/live-blog-web-aggregation-what-works-and-what-doesn-t.html">
+<meta property="og:site_name" content="geek!daily">
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/2009/10/live-blog-web-aggregation-what-works-and-what-doesn-t.html">
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="geek!daily Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+<!-- Webfonts -->
+<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="http://localhost:4000/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="http://localhost:4000/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://localhost:4000/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/" >Home</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/articles/" >Articles</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/projects/" >Projects</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/blog/" >Blog</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/about/" >About</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="http://localhost:4000/" class="site-logo" rel="home" title="geek!daily"><img src="http://localhost:4000/images/site-logo.png" width="200" height="200" alt="geek!daily logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="http://localhost:4000/">geek!daily</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">sporadic bursts of random thinking on life, leadership, and tech</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"></span>
+        
+          <h1 class="entry-title">Live Blog: Web Aggregation, What Works and What Doesn't</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+        
+          <img src="http://localhost:4000/images/jim_meyer_headshot.jpg" class="bio-photo" alt="Jim Meyer bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Jim Meyer</span></span>
+        <span class="entry-date date published"><time datetime="2009-10-15T00:00:00-07:00"><i class="fa fa-calendar-o"></i> October 15, 2009</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p><em>[note: I originally scribbled this on paper thinking I could hand it off immediately, preventing the obligation of typing, posting, etc. Turns out I don't get off that lightly, so here's the spew in electrons.]</em></p><p>Scraping isn't a scalable model.</p>There are biz issues around aggregating data: many businesses don't want you to get their data, though many are becoming more open.<br /><br />Doing aggregation right:<br />* minimize latency<br />* maximize engagement<br /><br />When latency is high, it causes confusion and takes you out of real-time<br /><br />Doing conditional gets can be somewhat useful.<br /><br />Plaxo had to shard their crawlers, which lands you in the shared state/sync problem of any stateful system you want to scale horizontally.<br /><br />Gnip integration has been good:<br />* Offload the long-running processes<br />* Gnip offers alerting or &quot;fat ping&quot; (ping includes update data)<br /><br />Plaxo likes using the alert to escalate the priority of the crawler which fetches the rich data related to the update. This approach allows you to use a consistent model for content ingestion vs. get info from fat ping, then augment later.<br /><br />Smarr: &quot;Brad Fitzpatrick said, 'Make polling a special case of push.'&quot; <span style="text-decoration: line-through;">He attributed this to someone but I missed the attribution.</span> <br /><br />(Don't try to keep up with Joseph Smarr on paper. He's thinks too many cogent thoughts too quickly to preserve legibility)<br /><br />Plaxo uses TripIt's RSS feed as alerting, grabs item ID, then uses their APIs to fetch rich data.<br /><br />There's a move to homogenize the info from sites, which may not be a good idea. It suppresses the distinctive look and feel/experience of the publishing site. Allowing for these differences means more labor spent on making one-off shims, which increases maintenance. Still, right choice in order to provide value to the user.<br /><br />Activity streams seek to provide more rich data in a somewhat normalized, extensible format.<br /><br />Many/most sites aren't yet perfectly architected for real-time's push, ping, etc.<br /><br />PubSubHubBub and Activity Streams are externally represented data shards<br /><br />Plaxo's Pulse started with known architecture issues (in order to ship) and hit the wall sooner than expected. Threw hardware/software optimizations at the problem to move the wall far enough to give time for rearchitecture, sharding, and working out how to propagate changes throughout the system properly.<br /><br />None of the NoSQL alternatives are quite ready for prime-time. Smarr: &quot;It should be something that's just a primitive.&quot;<br /><br />Conversation platforms are slightly different sorts of aggregation platforms. There are UI diffs (e.g. pause the stream when indicating interest). Handling the transition from slightly-latent/passive real-time to synchronous real-time/active not yet well-developed (think: when a comment inspires a conversation)<br /><br />90-99% of the value of the real-time web is realized in not-real-time [unreal-time? ;] This is a big deal for discovery. Twitter and FB make this harder by obscuring history.<br /><br />Ideal scalability/performance would be an index per user. This would be grossly inefficient due to the number of duplicate entries.<br /><br />No one has nailed reader-controlled aggregation (Show me Joe's tweets and blogs but not his photos) quite yet.<br /><br />Smarr: &quot;If we're all kinda [sharing], we're all making each other smarter&quot;<br /><br />The firehose of info is a hard model to scale to. Ben Metcalfe proposes the garden hose -- a firehose filtered at the source according to your interests, which helps aggregators by allowing them to request the superset of all filters from a given publisher.<br /><br />We really want to push contexts to the publishers and let them determine which content fits that context. Context shifts over time: Joe doesn't normally read my tweets (and why would he?) but when we're at a conference together, he's much more interested (thus the popularity of hashtags). This is a geographic and purpose-driven context (the conference) as well as Joe's context on me (Jim knows where the good bars are).<br /><br />Folks like Twitter are so overloaded with info that they might not recognize non-immediate contexts that are interesting to me.<br /><br />There's also the risk of exposing users to the amount of correlatable public data they have. Many don't want you to apply a transitive closure to identify them in all spaces even though doing so allows you to present a much more convenient UX around what they want you to aggregate.<br /><br />Someone likened the real-time aggregation problem to a bar conversation: you get snippets here and there and follow your own thread of interestingness.<br /><br />Three fundamental themes:<br />* How to specify contexts to data provider/publisher<br />* How to control access to private data (and carry ACLs with that data)<br />* How to do all this efficiently<br /><br />Plaxo implemented polling-back-off (poll infrequently updated sources less frequently). Turns out this is a bad idea, as it introduces latency which makes it feel broken.<br /><br />There's also the issue of aggregating conversation about web objecs (like blog posts) and how not to divert the conversation from the publisher's site. However, sometimes you want a private discussion of a public object (cf. LinkedIn company groups discussing an article)<br /><br />Q: What's the state of open standards around this?<br />A: PubSubHubBub and Activity Streams are very exciting. OAuth as access delegation. There's still a lot of ground to cover.
+
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="http://localhost:4000/2009/10/live-blog-comet-other-browser-stuff.html" class="btn" title="Live Blog: Comet & Other Browser Stuff">Previous</a>
+      
+      
+        <a href="http://localhost:4000/2010/08/advanced-yaml-tricking-out-your-database-yml.html" class="btn" title="Advanced YAML: Tricking Out Your database.yml">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>&copy; 2015 Jim Meyer. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/so-simple/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	<a href="http://twitter.com/purp" title="Jim Meyer on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	<a href="http://linkedin.com/in/jimmeyer" title="Jim Meyer on LinkedIn" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a>
+	
+	<a href="http://instagram.com/purp" title="Jim Meyer on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	<a href="http://www.flickr.com/photos/purp" title="Jim Meyer on Flickr" target="_blank"><i class="fa fa-flickr fa-2x"></i></a>
+	<a href="http://github.com/purp" title="Jim Meyer on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	
+  <a href="http://localhost:4000/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'http://localhost:4000';
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://localhost:4000/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://localhost:4000/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

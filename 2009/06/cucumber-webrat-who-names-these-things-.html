@@ -1,0 +1,205 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Cucumber, Webrat ... Who Names These Things? &#8211; geek!daily</title>
+<meta name="description" content="I'm tinkering a bit with Cucumber and Webrat for my day job and am very excited by some of the prospects for our QA group's automation efforts. Along the way I'm finding that I have to explain how all the moving parts relate to each other, so I made this diagram: Cucumber, based on RSpec, uses Webrat to drive Selenium. Seems to make it all make sense to the folks with the questions.(and thanks, brynary + all the webrat contributors, aslakhellesoy + all the cucumber contributors, and dchelimsky + all the rspec contributors, and the whole selenium crew ... this is very, very cool stuff).
+
+">
+<meta name="keywords" content="">
+
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Cucumber, Webrat ... Who Names These Things?">
+<meta name="twitter:description" content="I'm tinkering a bit with Cucumber and Webrat for my day job and am very excited by some of the prospects for our QA group's automation efforts. Along the way I'm finding that I have to explain how all the moving parts relate to each other, so I made this diagram: Cucumber, based on RSpec, uses Webrat to drive Selenium. Seems to make it all make sense to the folks with the questions.(and thanks, brynary + all the webrat contributors, aslakhellesoy + all the cucumber contributors, and dchelimsky + all the rspec contributors, and the whole selenium crew ... this is very, very cool stuff).
+
+">
+<meta name="twitter:site" content="@purp">
+<meta name="twitter:creator" content="@purp">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://localhost:4000/images/site-logo.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cucumber, Webrat ... Who Names These Things?">
+<meta property="og:description" content="I'm tinkering a bit with Cucumber and Webrat for my day job and am very excited by some of the prospects for our QA group's automation efforts. Along the way I'm finding that I have to explain how all the moving parts relate to each other, so I made this diagram: Cucumber, based on RSpec, uses Webrat to drive Selenium. Seems to make it all make sense to the folks with the questions.(and thanks, brynary + all the webrat contributors, aslakhellesoy + all the cucumber contributors, and dchelimsky + all the rspec contributors, and the whole selenium crew ... this is very, very cool stuff).
+
+">
+<meta property="og:url" content="http://localhost:4000/2009/06/cucumber-webrat-who-names-these-things-.html">
+<meta property="og:site_name" content="geek!daily">
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/2009/06/cucumber-webrat-who-names-these-things-.html">
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="geek!daily Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+<!-- Webfonts -->
+<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="http://localhost:4000/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="http://localhost:4000/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://localhost:4000/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/" >Home</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/articles/" >Articles</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/projects/" >Projects</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/blog/" >Blog</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/about/" >About</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="http://localhost:4000/" class="site-logo" rel="home" title="geek!daily"><img src="http://localhost:4000/images/site-logo.png" width="200" height="200" alt="geek!daily logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="http://localhost:4000/">geek!daily</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">sporadic bursts of random thinking on life, leadership, and tech</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"></span>
+        
+          <h1 class="entry-title">Cucumber, Webrat ... Who Names These Things?</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+        
+          <img src="http://localhost:4000/images/jim_meyer_headshot.jpg" class="bio-photo" alt="Jim Meyer bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Jim Meyer</span></span>
+        <span class="entry-date date published"><time datetime="2009-06-10T00:00:00-07:00"><i class="fa fa-calendar-o"></i> June 10, 2009</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>I'm tinkering a bit with <a href="http://github.com/aslakhellesoy/cucumber/tree/master">Cucumber</a> and <a href="http://wiki.github.com/brynary/webrat">Webrat</a> for <a href="http://www.linkedin.com/in/jimmeyer">my day job</a> and am very excited by some of the prospects for our QA group's automation efforts. Along the way I'm finding that I have to explain how all the moving parts relate to each other, so I made this diagram:</p><p><span style="text-decoration: underline;"><a href="http://purp.typepad.com/.a/6a00d83452448969e2011570f33d8c970b-pi" style="display: inline;"><img  alt="Cucumber Diagram" class="at-xid-6a00d83452448969e2011570f33d8c970b image-full " src="http://purp.typepad.com/.a/6a00d83452448969e2011570f33d8c970b-800wi" title="Cucumber Diagram" border="0"></a> </span></p><p>Cucumber, based on RSpec, uses Webrat to drive Selenium. Seems to make it all make sense to the folks with the questions.</p><p>(and thanks, <a href="http://github.com/brynary">brynary</a> + all the webrat contributors, <a href="http://github.com/aslakhellesoy">aslakhellesoy</a> + all the cucumber contributors, and <a href="http://github.com/dchelimsky">dchelimsky</a> + all the rspec contributors, and <a href="http://seleniumhq.org/">the whole selenium crew</a> ... this is very, very cool stuff).</p>
+
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="http://localhost:4000/2009/06/generating-with-ruby-off-rails.html" class="btn" title="Generating with Ruby OFF Rails">Previous</a>
+      
+      
+        <a href="http://localhost:4000/2009/06/got-the-can-t-activate-gem-exception-blues-gem-cleanup-.html" class="btn" title="Got the "can't activate" Gem::Exception Blues? gem cleanup!">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>&copy; 2015 Jim Meyer. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/so-simple/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	<a href="http://twitter.com/purp" title="Jim Meyer on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	<a href="http://linkedin.com/in/jimmeyer" title="Jim Meyer on LinkedIn" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a>
+	
+	<a href="http://instagram.com/purp" title="Jim Meyer on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	<a href="http://www.flickr.com/photos/purp" title="Jim Meyer on Flickr" target="_blank"><i class="fa fa-flickr fa-2x"></i></a>
+	<a href="http://github.com/purp" title="Jim Meyer on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	
+  <a href="http://localhost:4000/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'http://localhost:4000';
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://localhost:4000/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://localhost:4000/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

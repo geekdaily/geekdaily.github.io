@@ -1,0 +1,1641 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>LiveBlog: Hadoop Operations &#8211; geek!daily</title>
+<meta name="description" content="I'm at Velocity 2009, sitting in on the &quot;Hadoop Operations&quot; talk.Jeff Hammerbacher, Chief Scientist, Cloudera (email is first six of his last name at his company dot com). He has an ambitious agenda for this session and talks very fast, so sketchy notes and abbrevs for me. Pardon the crappy formatting.
+
+
+	slides are here.Built data team at FB. ~30 ppl when he left. Built Hive and Cassandra.
+
+
+Good resources:
+	
+	“Hadoop: The Definitive Guide” by Tom White (must have)
+		“Hadoop Cluster Management” slides by Marco Nicosia’s 2009 USENIX talk
+	
+
+
+	Hadoop: OSS for WSCs (warehouse-scale computers)
+
+
+	Typical cluster: 1U 2×4 core, 8GB RAM, 4×1TB SATA, 2×1 gE NIC; one switch per rack with 8 Gb intfc to backbone. Think 40-node-rack as unit.
+
+
+	HDFS: breaks files to 128MB, replicates blocks across nodes. W1RM design. checksumming, replication, compression included (tell you three times). Hooks in via Java, C, command line tools, FUSE, WebDAV, Thrift. Not usually mounted directly.
+
+
+	[how does it handle many small files? see HAR files below, see Common problems below, no statements about performance]
+
+
+	HDFS looks to diversly write blocks (across racks) using topology info.
+
+
+	MapReduce uses HDFS api to assign work to where the data is.
+
+
+	Avro: cross-language serialization for on-wire/RPC and persistence, includes versioning and security
+
+
+	HBase: Google’s BigTable lookalike on top of HDFS
+
+
+	Hive: SQL-like interface to structured data stored in HDFS. Replace DWH.
+
+
+	Pig: lang for dataflow programming.
+
+
+	Zookeeper: manage a distributed system
+
+
+	Good ways to dip your toes with Hadoop:
+
+
+Projects:
+	
+	Log or msg warehouse
+		DB archival store
+		ETL for DWH
+		Search team projects (autocomplete, did you mean, indexing)
+		Targeted web crawls (market research, etc)
+	
+
+
+Clusters:
+	
+	use retired DB servers
+		use unused desktops
+		use EC2
+	
+
+
+	[skipped a lot about how the project runs, apache voting, etc.]
+
+
+	Don’t run Hadoop across two data centers; one per and communicate at the app layer. [this sounds a lot like the rules for MPI et al ca. 1999-2000]
+
+
+	Make sure to use ECC RAM. High volume mem churn requires it.
+
+
+	Linux/CentOS “mildly preferred”
+
+
+	Mount local FS “noatime” for performance.
+
+
+	Recommend ext3 over xfs. Local FS performance improvements (e.g. xfs) don’t necessarily translate to global perf improvements (network bottlenecks consume it). Mentioned an xfs long-write problem.
+
+
+	JBOD over RAID0; slightly better performance and losing a disk doesn’t suck as much.
+
+
+	Java 6 update 14 or later (update 14 makes 64-bit pointers as cheap as 32-bit).
+
+
+	Installation: http://www.cloudera.com/hadoop
+
+
+	“In our distribution we put [things] where they ought to be.” Register with init.d, etc.
+
+
+	Configuration: http://my.cloudera.com/
+
+
+	You spec topology and whether JT/NN live on same machine, it spits out the rest. Hangs on to it for you, too.
+
+
+	Config modes
+
+
+Standalone mode:
+	
+	Everything in one JVM
+		Only one reducer, so you might not be able to find the bug
+	
+
+
+
+Pseudo-dist mode:
+	
+	All daemons on one box using socket IPC
+	
+
+
+
+Dist mode:
+	
+	For production
+	
+
+
+	Config files
+
+
+	
+	xml based
+		org.apache.hadoop.conf has Configuration class
+		Later resources overwrite earlier; “final” keyword prevents overwrite
+		common-site.xml, hdfs-site.xml, mapred-site.xml
+		Look in .template for examples
+	
+
+
+	Cloudera admins their soft-layer cluster with Puppet “with varying level of success”. He’s seen Chef, cfengine, bcfg2, and others.
+
+
+	Problems in config:
+
+
+	
+	“The problem is almost always DNS”—Todd Lipcon
+		Open the necessary ports (many) in firewall
+		Disting ssh keys (Cloudera uses expect)
+		directory permissions (writing logs)
+		Use all your disks!
+		Don’t try to use NFS for large clusters
+		JAVA_HOME set right (esp. on Macs)
+	
+
+
+	Nehalems ~2x performance improvement
+
+
+	HDFS NameNode (&quot;the master&quot;)
+
+
+	VERSION file specs layoutVersion (negative number, decrements for each new). You hope this doesn't change much; upgrade is painful
+
+
+	NN manages fs image (inode map, in mem) and edit log (journal, to disk).
+
+
+	Secondary NN (on different node) aka checkpoint node (v0.21): replays journal and tells primary to forget some history to prevent the edit log from becoming ridiculously large.
+
+
+	Backup node: write same data to NFS to recover if local node blows up
+
+
+	DataNode: round-robins blocks across all nodes.
+
+
+	
+	Heartbeats to the nodes
+		dfs.hosts[.exlcude] to allow/deny clients
+	
+
+
+	Client:
+
+
+	
+	Use Java libs or command line
+		libhdfs c library lacks features and has memory leaks (and FUSE interface uses it)
+		Client only contacts NN for metadata
+		Client keeps distance-ranked list of block locations for data reads
+		Client maintains write queues: data queue and ack queue (writes three times, can't forget request until all three are ack'd). 
+		First datanode in write takes responsibility for pass-down-the-line write requests rather than having client spray data at all 3/n data nodes expected to write.
+	
+
+
+	Can't seek and write, nor append. So you create new each time.
+
+
+	HDFS Operator Utilities
+
+
+Safe mode
+	
+	Loads image file, applies edit log, creates new (empty) edit log
+		Datanodes send blocklists to NN
+		NN uses this during startup, will only service metadata reads while in safe mode
+		Exits safe mode after 99.9% of blocks have reported in (configurable); only one replica of block must be known (can rereplicate)
+	
+
+
+
+FS Check (hadoop fsck)
+	
+	Just talks to NN to look at metadata
+		Looks for minimally rep'd, over/under rep'd blocks
+		Identify missing replicas and rereplicate, blocks with 0 replicas (corrupt files)
+		`hadoop fsck /path/to/file -files -blocks` to determine blocks for file
+		Run ~1 hr in production, store output
+	
+
+
+
+dfsadmin
+	
+	admin quotas
+		add/remove datanodes
+		ckpoint fs image
+		monitor/manage fs upgrade
+	
+
+
+
+DataBlockScanner
+	
+	cksum local blocks (with bandwidth throttling)
+		Runs ~3 weeks (configurable)
+	
+
+
+
+Balancer
+	
+	goes thru cluster, makes disk utilization scores per datanode
+		rebalances if nodes are more than +/- 10% (with throttling)
+	
+
+
+
+Archive Tool
+	
+	HAR file: like tar file, many entries in one HDFS namespace
+		Makes two index files and many part files (hopefully less than # of files you're har'g)
+		Index files are used for lookup into part files
+		Doesn't support compression and are W1RM.
+	
+
+
+
+distcp
+	
+	Move large amounts of data in parallel
+		Implemented as MapReduce with no reducers
+		Can move data between data centers with this; can also saturate the network pipe
+	
+
+
+
+Quotas
+	
+	apply to directories, not users or groups
+		namespace quotas constrain your use of the NN resources
+		diskspace quotas constrain your use of the datanodes' resources
+		No defaults (can't make new directories pick them up)
+	
+
+
+
+Users, Groups, Permissions
+	
+	Relatively new
+		Very UNIXy
+		Executable bit means nothing on file
+		Need write on dir to add/remove files
+		need exec on dir to access child dirs
+		identity of NN process superuser
+	
+
+
+
+Audit logs
+	
+	Not on by default, but useful for security
+	
+
+
+
+Topology
+	
+	Uses to compute distance measures for replication
+		Node, Rack, Core Switch
+		Some work to infer from IP
+	
+
+
+
+Web UIs
+	
+	There are many
+		NN @ port 50070: /metrics /logLevel /stacks
+		2NN @ port 50090
+		Datanode @ port 50075
+	
+
+
+	HFDS Proxy: http server access for non-HDFS clients
+
+
+	ThriftFS: thrift server for non-HDFS clients
+
+
+Trash:
+	
+	Helps recover from bad rm’s (indavertent rm -rf happened on FB cluster)
+	
+
+
+
+Common Problems
+	
+	Disk capacity: crank up reserved space, keep close eye on space, watch hadoop logfiles
+		Slow disks which aren’t yet dead: can’t see as fail, but you have to watch
+		NIC goes out of gig-E mode
+		ckpoint and backup data: keep an eye on 2NN node, watch NN edit log size
+		check NFS mount for shared NN data structure
+		Long writes (&gt; 1 hr) can see things get freaky; break them down
+		HDFS layoutVersion upgrades are scary
+		Many small files can consume namespace: keep an eye on consumption
+	
+
+
+	Turn on fairshare schedulers (Cloudera rus it out of the box)
+
+
+	Use distributed cache to send common libs to all nodes
+
+
+	JobControl: good way to express job depedencies
+
+
+	Run canary jobs (sort, dfs write) to test functional status
+
+
+	Upgrades are scary. This will be less true as it reaches 1.0
+
+
+	One admin can easily carry a medium (100-node) cluster. Most activity is around commission/decommission.
+
+
+	Try not to lose more than N nodes, where N is your replication factor. You could hit the jackpot on those being the only three replicas of some needed block.
+
+">
+<meta name="keywords" content="">
+
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="LiveBlog: Hadoop Operations">
+<meta name="twitter:description" content="I'm at Velocity 2009, sitting in on the &quot;Hadoop Operations&quot; talk.Jeff Hammerbacher, Chief Scientist, Cloudera (email is first six of his last name at his company dot com). He has an ambitious agenda for this session and talks very fast, so sketchy notes and abbrevs for me. Pardon the crappy formatting.
+
+
+	slides are here.Built data team at FB. ~30 ppl when he left. Built Hive and Cassandra.
+
+
+Good resources:
+	
+	“Hadoop: The Definitive Guide” by Tom White (must have)
+		“Hadoop Cluster Management” slides by Marco Nicosia’s 2009 USENIX talk
+	
+
+
+	Hadoop: OSS for WSCs (warehouse-scale computers)
+
+
+	Typical cluster: 1U 2×4 core, 8GB RAM, 4×1TB SATA, 2×1 gE NIC; one switch per rack with 8 Gb intfc to backbone. Think 40-node-rack as unit.
+
+
+	HDFS: breaks files to 128MB, replicates blocks across nodes. W1RM design. checksumming, replication, compression included (tell you three times). Hooks in via Java, C, command line tools, FUSE, WebDAV, Thrift. Not usually mounted directly.
+
+
+	[how does it handle many small files? see HAR files below, see Common problems below, no statements about performance]
+
+
+	HDFS looks to diversly write blocks (across racks) using topology info.
+
+
+	MapReduce uses HDFS api to assign work to where the data is.
+
+
+	Avro: cross-language serialization for on-wire/RPC and persistence, includes versioning and security
+
+
+	HBase: Google’s BigTable lookalike on top of HDFS
+
+
+	Hive: SQL-like interface to structured data stored in HDFS. Replace DWH.
+
+
+	Pig: lang for dataflow programming.
+
+
+	Zookeeper: manage a distributed system
+
+
+	Good ways to dip your toes with Hadoop:
+
+
+Projects:
+	
+	Log or msg warehouse
+		DB archival store
+		ETL for DWH
+		Search team projects (autocomplete, did you mean, indexing)
+		Targeted web crawls (market research, etc)
+	
+
+
+Clusters:
+	
+	use retired DB servers
+		use unused desktops
+		use EC2
+	
+
+
+	[skipped a lot about how the project runs, apache voting, etc.]
+
+
+	Don’t run Hadoop across two data centers; one per and communicate at the app layer. [this sounds a lot like the rules for MPI et al ca. 1999-2000]
+
+
+	Make sure to use ECC RAM. High volume mem churn requires it.
+
+
+	Linux/CentOS “mildly preferred”
+
+
+	Mount local FS “noatime” for performance.
+
+
+	Recommend ext3 over xfs. Local FS performance improvements (e.g. xfs) don’t necessarily translate to global perf improvements (network bottlenecks consume it). Mentioned an xfs long-write problem.
+
+
+	JBOD over RAID0; slightly better performance and losing a disk doesn’t suck as much.
+
+
+	Java 6 update 14 or later (update 14 makes 64-bit pointers as cheap as 32-bit).
+
+
+	Installation: http://www.cloudera.com/hadoop
+
+
+	“In our distribution we put [things] where they ought to be.” Register with init.d, etc.
+
+
+	Configuration: http://my.cloudera.com/
+
+
+	You spec topology and whether JT/NN live on same machine, it spits out the rest. Hangs on to it for you, too.
+
+
+	Config modes
+
+
+Standalone mode:
+	
+	Everything in one JVM
+		Only one reducer, so you might not be able to find the bug
+	
+
+
+
+Pseudo-dist mode:
+	
+	All daemons on one box using socket IPC
+	
+
+
+
+Dist mode:
+	
+	For production
+	
+
+
+	Config files
+
+
+	
+	xml based
+		org.apache.hadoop.conf has Configuration class
+		Later resources overwrite earlier; “final” keyword prevents overwrite
+		common-site.xml, hdfs-site.xml, mapred-site.xml
+		Look in .template for examples
+	
+
+
+	Cloudera admins their soft-layer cluster with Puppet “with varying level of success”. He’s seen Chef, cfengine, bcfg2, and others.
+
+
+	Problems in config:
+
+
+	
+	“The problem is almost always DNS”—Todd Lipcon
+		Open the necessary ports (many) in firewall
+		Disting ssh keys (Cloudera uses expect)
+		directory permissions (writing logs)
+		Use all your disks!
+		Don’t try to use NFS for large clusters
+		JAVA_HOME set right (esp. on Macs)
+	
+
+
+	Nehalems ~2x performance improvement
+
+
+	HDFS NameNode (&quot;the master&quot;)
+
+
+	VERSION file specs layoutVersion (negative number, decrements for each new). You hope this doesn't change much; upgrade is painful
+
+
+	NN manages fs image (inode map, in mem) and edit log (journal, to disk).
+
+
+	Secondary NN (on different node) aka checkpoint node (v0.21): replays journal and tells primary to forget some history to prevent the edit log from becoming ridiculously large.
+
+
+	Backup node: write same data to NFS to recover if local node blows up
+
+
+	DataNode: round-robins blocks across all nodes.
+
+
+	
+	Heartbeats to the nodes
+		dfs.hosts[.exlcude] to allow/deny clients
+	
+
+
+	Client:
+
+
+	
+	Use Java libs or command line
+		libhdfs c library lacks features and has memory leaks (and FUSE interface uses it)
+		Client only contacts NN for metadata
+		Client keeps distance-ranked list of block locations for data reads
+		Client maintains write queues: data queue and ack queue (writes three times, can't forget request until all three are ack'd). 
+		First datanode in write takes responsibility for pass-down-the-line write requests rather than having client spray data at all 3/n data nodes expected to write.
+	
+
+
+	Can't seek and write, nor append. So you create new each time.
+
+
+	HDFS Operator Utilities
+
+
+Safe mode
+	
+	Loads image file, applies edit log, creates new (empty) edit log
+		Datanodes send blocklists to NN
+		NN uses this during startup, will only service metadata reads while in safe mode
+		Exits safe mode after 99.9% of blocks have reported in (configurable); only one replica of block must be known (can rereplicate)
+	
+
+
+
+FS Check (hadoop fsck)
+	
+	Just talks to NN to look at metadata
+		Looks for minimally rep'd, over/under rep'd blocks
+		Identify missing replicas and rereplicate, blocks with 0 replicas (corrupt files)
+		`hadoop fsck /path/to/file -files -blocks` to determine blocks for file
+		Run ~1 hr in production, store output
+	
+
+
+
+dfsadmin
+	
+	admin quotas
+		add/remove datanodes
+		ckpoint fs image
+		monitor/manage fs upgrade
+	
+
+
+
+DataBlockScanner
+	
+	cksum local blocks (with bandwidth throttling)
+		Runs ~3 weeks (configurable)
+	
+
+
+
+Balancer
+	
+	goes thru cluster, makes disk utilization scores per datanode
+		rebalances if nodes are more than +/- 10% (with throttling)
+	
+
+
+
+Archive Tool
+	
+	HAR file: like tar file, many entries in one HDFS namespace
+		Makes two index files and many part files (hopefully less than # of files you're har'g)
+		Index files are used for lookup into part files
+		Doesn't support compression and are W1RM.
+	
+
+
+
+distcp
+	
+	Move large amounts of data in parallel
+		Implemented as MapReduce with no reducers
+		Can move data between data centers with this; can also saturate the network pipe
+	
+
+
+
+Quotas
+	
+	apply to directories, not users or groups
+		namespace quotas constrain your use of the NN resources
+		diskspace quotas constrain your use of the datanodes' resources
+		No defaults (can't make new directories pick them up)
+	
+
+
+
+Users, Groups, Permissions
+	
+	Relatively new
+		Very UNIXy
+		Executable bit means nothing on file
+		Need write on dir to add/remove files
+		need exec on dir to access child dirs
+		identity of NN process superuser
+	
+
+
+
+Audit logs
+	
+	Not on by default, but useful for security
+	
+
+
+
+Topology
+	
+	Uses to compute distance measures for replication
+		Node, Rack, Core Switch
+		Some work to infer from IP
+	
+
+
+
+Web UIs
+	
+	There are many
+		NN @ port 50070: /metrics /logLevel /stacks
+		2NN @ port 50090
+		Datanode @ port 50075
+	
+
+
+	HFDS Proxy: http server access for non-HDFS clients
+
+
+	ThriftFS: thrift server for non-HDFS clients
+
+
+Trash:
+	
+	Helps recover from bad rm’s (indavertent rm -rf happened on FB cluster)
+	
+
+
+
+Common Problems
+	
+	Disk capacity: crank up reserved space, keep close eye on space, watch hadoop logfiles
+		Slow disks which aren’t yet dead: can’t see as fail, but you have to watch
+		NIC goes out of gig-E mode
+		ckpoint and backup data: keep an eye on 2NN node, watch NN edit log size
+		check NFS mount for shared NN data structure
+		Long writes (&gt; 1 hr) can see things get freaky; break them down
+		HDFS layoutVersion upgrades are scary
+		Many small files can consume namespace: keep an eye on consumption
+	
+
+
+	Turn on fairshare schedulers (Cloudera rus it out of the box)
+
+
+	Use distributed cache to send common libs to all nodes
+
+
+	JobControl: good way to express job depedencies
+
+
+	Run canary jobs (sort, dfs write) to test functional status
+
+
+	Upgrades are scary. This will be less true as it reaches 1.0
+
+
+	One admin can easily carry a medium (100-node) cluster. Most activity is around commission/decommission.
+
+
+	Try not to lose more than N nodes, where N is your replication factor. You could hit the jackpot on those being the only three replicas of some needed block.
+
+">
+<meta name="twitter:site" content="@purp">
+<meta name="twitter:creator" content="@purp">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://localhost:4000/images/site-logo.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LiveBlog: Hadoop Operations">
+<meta property="og:description" content="I'm at Velocity 2009, sitting in on the &quot;Hadoop Operations&quot; talk.Jeff Hammerbacher, Chief Scientist, Cloudera (email is first six of his last name at his company dot com). He has an ambitious agenda for this session and talks very fast, so sketchy notes and abbrevs for me. Pardon the crappy formatting.
+
+
+	slides are here.Built data team at FB. ~30 ppl when he left. Built Hive and Cassandra.
+
+
+Good resources:
+	
+	“Hadoop: The Definitive Guide” by Tom White (must have)
+		“Hadoop Cluster Management” slides by Marco Nicosia’s 2009 USENIX talk
+	
+
+
+	Hadoop: OSS for WSCs (warehouse-scale computers)
+
+
+	Typical cluster: 1U 2×4 core, 8GB RAM, 4×1TB SATA, 2×1 gE NIC; one switch per rack with 8 Gb intfc to backbone. Think 40-node-rack as unit.
+
+
+	HDFS: breaks files to 128MB, replicates blocks across nodes. W1RM design. checksumming, replication, compression included (tell you three times). Hooks in via Java, C, command line tools, FUSE, WebDAV, Thrift. Not usually mounted directly.
+
+
+	[how does it handle many small files? see HAR files below, see Common problems below, no statements about performance]
+
+
+	HDFS looks to diversly write blocks (across racks) using topology info.
+
+
+	MapReduce uses HDFS api to assign work to where the data is.
+
+
+	Avro: cross-language serialization for on-wire/RPC and persistence, includes versioning and security
+
+
+	HBase: Google’s BigTable lookalike on top of HDFS
+
+
+	Hive: SQL-like interface to structured data stored in HDFS. Replace DWH.
+
+
+	Pig: lang for dataflow programming.
+
+
+	Zookeeper: manage a distributed system
+
+
+	Good ways to dip your toes with Hadoop:
+
+
+Projects:
+	
+	Log or msg warehouse
+		DB archival store
+		ETL for DWH
+		Search team projects (autocomplete, did you mean, indexing)
+		Targeted web crawls (market research, etc)
+	
+
+
+Clusters:
+	
+	use retired DB servers
+		use unused desktops
+		use EC2
+	
+
+
+	[skipped a lot about how the project runs, apache voting, etc.]
+
+
+	Don’t run Hadoop across two data centers; one per and communicate at the app layer. [this sounds a lot like the rules for MPI et al ca. 1999-2000]
+
+
+	Make sure to use ECC RAM. High volume mem churn requires it.
+
+
+	Linux/CentOS “mildly preferred”
+
+
+	Mount local FS “noatime” for performance.
+
+
+	Recommend ext3 over xfs. Local FS performance improvements (e.g. xfs) don’t necessarily translate to global perf improvements (network bottlenecks consume it). Mentioned an xfs long-write problem.
+
+
+	JBOD over RAID0; slightly better performance and losing a disk doesn’t suck as much.
+
+
+	Java 6 update 14 or later (update 14 makes 64-bit pointers as cheap as 32-bit).
+
+
+	Installation: http://www.cloudera.com/hadoop
+
+
+	“In our distribution we put [things] where they ought to be.” Register with init.d, etc.
+
+
+	Configuration: http://my.cloudera.com/
+
+
+	You spec topology and whether JT/NN live on same machine, it spits out the rest. Hangs on to it for you, too.
+
+
+	Config modes
+
+
+Standalone mode:
+	
+	Everything in one JVM
+		Only one reducer, so you might not be able to find the bug
+	
+
+
+
+Pseudo-dist mode:
+	
+	All daemons on one box using socket IPC
+	
+
+
+
+Dist mode:
+	
+	For production
+	
+
+
+	Config files
+
+
+	
+	xml based
+		org.apache.hadoop.conf has Configuration class
+		Later resources overwrite earlier; “final” keyword prevents overwrite
+		common-site.xml, hdfs-site.xml, mapred-site.xml
+		Look in .template for examples
+	
+
+
+	Cloudera admins their soft-layer cluster with Puppet “with varying level of success”. He’s seen Chef, cfengine, bcfg2, and others.
+
+
+	Problems in config:
+
+
+	
+	“The problem is almost always DNS”—Todd Lipcon
+		Open the necessary ports (many) in firewall
+		Disting ssh keys (Cloudera uses expect)
+		directory permissions (writing logs)
+		Use all your disks!
+		Don’t try to use NFS for large clusters
+		JAVA_HOME set right (esp. on Macs)
+	
+
+
+	Nehalems ~2x performance improvement
+
+
+	HDFS NameNode (&quot;the master&quot;)
+
+
+	VERSION file specs layoutVersion (negative number, decrements for each new). You hope this doesn't change much; upgrade is painful
+
+
+	NN manages fs image (inode map, in mem) and edit log (journal, to disk).
+
+
+	Secondary NN (on different node) aka checkpoint node (v0.21): replays journal and tells primary to forget some history to prevent the edit log from becoming ridiculously large.
+
+
+	Backup node: write same data to NFS to recover if local node blows up
+
+
+	DataNode: round-robins blocks across all nodes.
+
+
+	
+	Heartbeats to the nodes
+		dfs.hosts[.exlcude] to allow/deny clients
+	
+
+
+	Client:
+
+
+	
+	Use Java libs or command line
+		libhdfs c library lacks features and has memory leaks (and FUSE interface uses it)
+		Client only contacts NN for metadata
+		Client keeps distance-ranked list of block locations for data reads
+		Client maintains write queues: data queue and ack queue (writes three times, can't forget request until all three are ack'd). 
+		First datanode in write takes responsibility for pass-down-the-line write requests rather than having client spray data at all 3/n data nodes expected to write.
+	
+
+
+	Can't seek and write, nor append. So you create new each time.
+
+
+	HDFS Operator Utilities
+
+
+Safe mode
+	
+	Loads image file, applies edit log, creates new (empty) edit log
+		Datanodes send blocklists to NN
+		NN uses this during startup, will only service metadata reads while in safe mode
+		Exits safe mode after 99.9% of blocks have reported in (configurable); only one replica of block must be known (can rereplicate)
+	
+
+
+
+FS Check (hadoop fsck)
+	
+	Just talks to NN to look at metadata
+		Looks for minimally rep'd, over/under rep'd blocks
+		Identify missing replicas and rereplicate, blocks with 0 replicas (corrupt files)
+		`hadoop fsck /path/to/file -files -blocks` to determine blocks for file
+		Run ~1 hr in production, store output
+	
+
+
+
+dfsadmin
+	
+	admin quotas
+		add/remove datanodes
+		ckpoint fs image
+		monitor/manage fs upgrade
+	
+
+
+
+DataBlockScanner
+	
+	cksum local blocks (with bandwidth throttling)
+		Runs ~3 weeks (configurable)
+	
+
+
+
+Balancer
+	
+	goes thru cluster, makes disk utilization scores per datanode
+		rebalances if nodes are more than +/- 10% (with throttling)
+	
+
+
+
+Archive Tool
+	
+	HAR file: like tar file, many entries in one HDFS namespace
+		Makes two index files and many part files (hopefully less than # of files you're har'g)
+		Index files are used for lookup into part files
+		Doesn't support compression and are W1RM.
+	
+
+
+
+distcp
+	
+	Move large amounts of data in parallel
+		Implemented as MapReduce with no reducers
+		Can move data between data centers with this; can also saturate the network pipe
+	
+
+
+
+Quotas
+	
+	apply to directories, not users or groups
+		namespace quotas constrain your use of the NN resources
+		diskspace quotas constrain your use of the datanodes' resources
+		No defaults (can't make new directories pick them up)
+	
+
+
+
+Users, Groups, Permissions
+	
+	Relatively new
+		Very UNIXy
+		Executable bit means nothing on file
+		Need write on dir to add/remove files
+		need exec on dir to access child dirs
+		identity of NN process superuser
+	
+
+
+
+Audit logs
+	
+	Not on by default, but useful for security
+	
+
+
+
+Topology
+	
+	Uses to compute distance measures for replication
+		Node, Rack, Core Switch
+		Some work to infer from IP
+	
+
+
+
+Web UIs
+	
+	There are many
+		NN @ port 50070: /metrics /logLevel /stacks
+		2NN @ port 50090
+		Datanode @ port 50075
+	
+
+
+	HFDS Proxy: http server access for non-HDFS clients
+
+
+	ThriftFS: thrift server for non-HDFS clients
+
+
+Trash:
+	
+	Helps recover from bad rm’s (indavertent rm -rf happened on FB cluster)
+	
+
+
+
+Common Problems
+	
+	Disk capacity: crank up reserved space, keep close eye on space, watch hadoop logfiles
+		Slow disks which aren’t yet dead: can’t see as fail, but you have to watch
+		NIC goes out of gig-E mode
+		ckpoint and backup data: keep an eye on 2NN node, watch NN edit log size
+		check NFS mount for shared NN data structure
+		Long writes (&gt; 1 hr) can see things get freaky; break them down
+		HDFS layoutVersion upgrades are scary
+		Many small files can consume namespace: keep an eye on consumption
+	
+
+
+	Turn on fairshare schedulers (Cloudera rus it out of the box)
+
+
+	Use distributed cache to send common libs to all nodes
+
+
+	JobControl: good way to express job depedencies
+
+
+	Run canary jobs (sort, dfs write) to test functional status
+
+
+	Upgrades are scary. This will be less true as it reaches 1.0
+
+
+	One admin can easily carry a medium (100-node) cluster. Most activity is around commission/decommission.
+
+
+	Try not to lose more than N nodes, where N is your replication factor. You could hit the jackpot on those being the only three replicas of some needed block.
+
+">
+<meta property="og:url" content="http://localhost:4000/2009/06/liveblog-hadoop-operations.html">
+<meta property="og:site_name" content="geek!daily">
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/2009/06/liveblog-hadoop-operations.html">
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="geek!daily Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+<!-- Webfonts -->
+<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="http://localhost:4000/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="http://localhost:4000/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://localhost:4000/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/" >Home</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/articles/" >Articles</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/projects/" >Projects</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/blog/" >Blog</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/about/" >About</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="http://localhost:4000/" class="site-logo" rel="home" title="geek!daily"><img src="http://localhost:4000/images/site-logo.png" width="200" height="200" alt="geek!daily logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="http://localhost:4000/">geek!daily</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">sporadic bursts of random thinking on life, leadership, and tech</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"></span>
+        
+          <h1 class="entry-title">LiveBlog: Hadoop Operations</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+        
+          <img src="http://localhost:4000/images/jim_meyer_headshot.jpg" class="bio-photo" alt="Jim Meyer bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Jim Meyer</span></span>
+        <span class="entry-date date published"><time datetime="2009-06-22T00:00:00-07:00"><i class="fa fa-calendar-o"></i> June 22, 2009</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>I'm at Velocity 2009, sitting in on the &quot;Hadoop Operations&quot; talk.</p><p>Jeff Hammerbacher, Chief Scientist, Cloudera (email is first six of his last name at his company dot com). He has an ambitious agenda for this session and talks very fast, so sketchy notes and abbrevs for me. Pardon the crappy formatting.</p>
+
+
+	<p>slides are <a href="http://www.slideshare.net/jhammerb/20090622-velocity">here</a>.</p><p>Built data team at FB. ~30 ppl when he left. Built Hive and Cassandra.</p><p>
+
+
+Good resources:
+	</p><ul>
+	<li>“Hadoop: The Definitive Guide” by Tom White (must have)</li>
+		<li>“Hadoop Cluster Management” slides by Marco Nicosia’s 2009 <span class="caps">USENIX</span> talk</li>
+	</ul>
+
+
+	<p>Hadoop: <span class="caps">OSS</span> for WSCs (warehouse-scale computers)</p>
+
+
+	<p>Typical cluster: 1U 2×4 core, 8GB <span class="caps">RAM</span>, 4×1TB <span class="caps">SATA</span>, 2×1 gE <span class="caps">NIC</span>; one switch per rack with 8 Gb intfc to backbone. Think 40-node-rack as unit.</p>
+
+
+	<p><span class="caps">HDFS</span>: breaks files to 128MB, replicates blocks across nodes. <span class="caps">W1RM</span> design. checksumming, replication, compression included (tell you three times). Hooks in via Java, C, command line tools, <span class="caps">FUSE</span>, WebDAV, Thrift. Not usually mounted directly.</p>
+
+
+	<p>[how does it handle many small files? see <span class="caps">HAR</span> files below, see Common problems below, no statements about performance]</p>
+
+
+	<p><span class="caps">HDFS</span> looks to diversly write blocks (across racks) using topology info.</p>
+
+
+	<p>MapReduce uses <span class="caps">HDFS</span> api to assign work to where the data is.</p>
+
+
+	<p>Avro: cross-language serialization for on-wire/RPC and persistence, includes versioning and security</p>
+
+
+	<p>HBase: Google’s BigTable lookalike on top of <span class="caps">HDFS</span></p>
+
+
+	<p>Hive: <span class="caps">SQL</span>-like interface to structured data stored in <span class="caps">HDFS</span>. Replace <span class="caps">DWH</span>.</p>
+
+
+	<p>Pig: lang for dataflow programming.</p>
+
+
+	<p>Zookeeper: manage a distributed system</p>
+
+
+	<h3>Good ways to dip your toes with Hadoop:</h3>
+
+
+<p><em>Projects:</em>
+	</p><ul>
+	<li>Log or msg warehouse</li>
+		<li>DB archival store</li>
+		<li><span class="caps">ETL</span> for <span class="caps">DWH</span></li>
+		<li>Search team projects (autocomplete, did you mean, indexing)</li>
+		<li>Targeted web crawls (market research, etc)</li>
+	</ul>
+
+
+<p><em>Clusters:</em>
+	</p><ul>
+	<li>use retired DB servers</li>
+		<li>use unused desktops</li>
+		<li>use <span class="caps">EC2</span></li>
+	</ul>
+
+
+	<p>[skipped a lot about how the project runs, apache voting, etc.]</p>
+
+
+	<p>Don’t run Hadoop across two data centers; one per and communicate at the app layer. [this sounds a lot like the rules for <span class="caps">MPI</span> et al ca. 1999-2000]</p>
+
+
+	<p>Make sure to use <span class="caps">ECC RAM</span>. High volume mem churn requires it.</p>
+
+
+	<p>Linux/CentOS “mildly preferred”</p>
+
+
+	<p>Mount local FS “noatime” for performance.</p>
+
+
+	<p>Recommend ext3 over xfs. Local FS performance improvements (e.g. xfs) don’t necessarily translate to global perf improvements (network bottlenecks consume it). Mentioned an xfs long-write problem.</p>
+
+
+	<p><span class="caps">JBOD</span> over <span class="caps">RAID0</span>; slightly better performance and losing a disk doesn’t suck as much.</p>
+
+
+	<p>Java 6 update 14 or later (update 14 makes 64-bit pointers as cheap as 32-bit).</p>
+
+
+	<h3>Installation: http://www.cloudera.com/hadoop</h3>
+
+
+	<p>“In our distribution we put [things] where they ought to be.” Register with init.d, etc.</p>
+
+
+	<h3>Configuration: http://my.cloudera.com/</h3>
+
+
+	<p>You spec topology and whether JT/NN live on same machine, it spits out the rest. Hangs on to it for you, too.</p>
+
+
+	<h4>Config modes</h4><p>
+
+
+Standalone mode:
+	</p><ul>
+	<li>Everything in one <span class="caps">JVM</span></li>
+		<li>Only one reducer, so you might not be able to find the bug</li>
+	</ul>
+<p>
+
+
+Pseudo-dist mode:
+	</p><ul>
+	<li>All daemons on one box using socket <span class="caps">IPC</span></li>
+	</ul>
+<p>
+
+
+Dist mode:
+	</p><ul>
+	<li>For production</li>
+	</ul>
+
+
+	<h4>Config files</h4>
+
+
+	<ul>
+	<li>xml based</li>
+		<li>org.apache.hadoop.conf has Configuration class</li>
+		<li>Later resources overwrite earlier; “final” keyword prevents overwrite</li>
+		<li>common-site.xml, hdfs-site.xml, mapred-site.xml</li>
+		<li>Look in .template for examples</li>
+	</ul>
+
+
+	<p>Cloudera admins their soft-layer cluster with Puppet “with varying level of success”. He’s seen Chef, cfengine, bcfg2, and others.</p>
+
+
+	<h4>Problems in config:</h4>
+
+
+	<ul>
+	<li>“The problem is almost always <span class="caps">DNS</span>”—Todd Lipcon</li>
+		<li>Open the necessary ports (many) in firewall</li>
+		<li>Disting ssh keys (Cloudera uses expect)</li>
+		<li>directory permissions (writing logs)</li>
+		<li>Use all your disks!</li>
+		<li>Don’t try to use <span class="caps">NFS</span> for large clusters</li>
+		<li><span class="caps">JAVA</span>_HOME set right (esp. on Macs)</li>
+	</ul>
+
+
+	<p>Nehalems ~2x performance improvement</p>
+
+
+	<h3>HDFS NameNode (&quot;the master&quot;)</h3>
+
+
+	<p>VERSION file specs layoutVersion (negative number, decrements for each new). You hope this doesn't change much; upgrade is painful</p>
+
+
+	<p>NN manages fs image (inode map, in mem) and edit log (journal, to disk).</p>
+
+
+	<p>Secondary NN (on different node) aka checkpoint node (v0.21): replays journal and tells primary to forget some history to prevent the edit log from becoming ridiculously large.</p>
+
+
+	<p>Backup node: write same data to NFS to recover if local node blows up</p>
+
+
+	<h3>DataNode: round-robins blocks across all nodes.</h3>
+
+
+	<ul>
+	<li>Heartbeats to the nodes</li>
+		<li>dfs.hosts[.exlcude] to allow/deny clients</li>
+	</ul>
+
+
+	<h3>Client:</h3>
+
+
+	<ul>
+	<li>Use Java libs or command line</li>
+		<li>libhdfs c library lacks features and has memory leaks (and FUSE interface uses it)</li>
+		<li>Client only contacts NN for metadata</li>
+		<li>Client keeps distance-ranked list of block locations for data reads</li>
+		<li>Client maintains write queues: data queue and ack queue (writes three times, can't forget request until all three are ack'd). </li>
+		<li>First datanode in write takes responsibility for pass-down-the-line write requests rather than having client spray data at all 3/n data nodes expected to write.</li>
+	</ul>
+
+
+	<p>Can't seek and write, nor append. So you create new each time.</p>
+
+
+	<h3>HDFS Operator Utilities</h3><p>
+
+
+Safe mode
+	</p><ul>
+	<li>Loads image file, applies edit log, creates new (empty) edit log</li>
+		<li>Datanodes send blocklists to NN</li>
+		<li>NN uses this during startup, will only service metadata reads while in safe mode</li>
+		<li>Exits safe mode after 99.9% of blocks have reported in (configurable); only one replica of block must be known (can rereplicate)</li>
+	</ul>
+<p>
+
+
+FS Check (hadoop fsck)
+	</p><ul>
+	<li>Just talks to NN to look at metadata</li>
+		<li>Looks for minimally rep'd, over/under rep'd blocks</li>
+		<li>Identify missing replicas and rereplicate, blocks with 0 replicas (corrupt files)</li>
+		<li>`hadoop fsck /path/to/file -files -blocks` to determine blocks for file</li>
+		<li>Run ~1 hr in production, store output</li>
+	</ul>
+<p>
+
+
+dfsadmin
+	</p><ul>
+	<li>admin quotas</li>
+		<li>add/remove datanodes</li>
+		<li>ckpoint fs image</li>
+		<li>monitor/manage fs upgrade</li>
+	</ul>
+<p>
+
+
+DataBlockScanner
+	</p><ul>
+	<li>cksum local blocks (with bandwidth throttling)</li>
+		<li>Runs ~3 weeks (configurable)</li>
+	</ul>
+<p>
+
+
+Balancer
+	</p><ul>
+	<li>goes thru cluster, makes disk utilization scores per datanode</li>
+		<li>rebalances if nodes are more than +/- 10% (with throttling)</li>
+	</ul>
+<p>
+
+
+Archive Tool
+	</p><ul>
+	<li>HAR file: like tar file, many entries in one HDFS namespace</li>
+		<li>Makes two index files and many part files (hopefully less than # of files you're har'g)</li>
+		<li>Index files are used for lookup into part files</li>
+		<li>Doesn't support compression and are W1RM.</li>
+	</ul>
+<p>
+
+
+distcp
+	</p><ul>
+	<li>Move large amounts of data in parallel</li>
+		<li>Implemented as MapReduce with no reducers</li>
+		<li>Can move data between data centers with this; can also saturate the network pipe</li>
+	</ul>
+<p>
+
+
+Quotas
+	</p><ul>
+	<li>apply to directories, not users or groups</li>
+		<li>namespace quotas constrain your use of the NN resources</li>
+		<li>diskspace quotas constrain your use of the datanodes' resources</li>
+		<li>No defaults (can't make new directories pick them up)</li>
+	</ul>
+<p>
+
+
+Users, Groups, Permissions
+	</p><ul>
+	<li>Relatively new</li>
+		<li>Very UNIXy</li>
+		<li>Executable bit means nothing on file</li>
+		<li>Need write on dir to add/remove files</li>
+		<li>need exec on dir to access child dirs</li>
+		<li>identity of NN process superuser</li>
+	</ul>
+<p>
+
+
+Audit logs
+	</p><ul>
+	<li>Not on by default, but useful for security</li>
+	</ul>
+<p>
+
+
+Topology
+	</p><ul>
+	<li>Uses to compute distance measures for replication</li>
+		<li>Node, Rack, Core Switch</li>
+		<li>Some work to infer from IP</li>
+	</ul>
+<p>
+
+
+Web UIs
+	</p><ul>
+	<li>There are many</li>
+		<li>NN @ port 50070: /metrics /logLevel /stacks</li>
+		<li>2NN @ port 50090</li>
+		<li>Datanode @ port 50075</li>
+	</ul>
+
+
+	<p><span class="caps">HFDS</span> Proxy: http server access for non-HDFS clients</p>
+
+
+	<p>ThriftFS: thrift server for non-HDFS clients</p><p>
+
+
+Trash:
+	</p><ul>
+	<li>Helps recover from bad rm’s (indavertent rm -rf happened on FB cluster)</li>
+	</ul>
+<p>
+
+
+Common Problems
+	</p><ul>
+	<li>Disk capacity: crank up reserved space, keep close eye on space, watch hadoop logfiles</li>
+		<li>Slow disks which aren’t yet dead: can’t see as fail, but you have to watch</li>
+		<li><span class="caps">NIC</span> goes out of gig-E mode</li>
+		<li>ckpoint and backup data: keep an eye on 2NN node, watch NN edit log size</li>
+		<li>check <span class="caps">NFS</span> mount for shared NN data structure</li>
+		<li>Long writes (&gt; 1 hr) can see things get freaky; break them down</li>
+		<li><span class="caps">HDFS</span> layoutVersion upgrades are scary</li>
+		<li>Many small files can consume namespace: keep an eye on consumption</li>
+	</ul>
+
+
+	<p>Turn on fairshare schedulers (Cloudera rus it out of the box)</p>
+
+
+	<p>Use distributed cache to send common libs to all nodes</p>
+
+
+	<p>JobControl: good way to express job depedencies</p>
+
+
+	<p>Run canary jobs (sort, dfs write) to test functional status</p>
+
+
+	<p>Upgrades are scary. This will be less true as it reaches 1.0</p>
+
+
+	<p>One admin can easily carry a medium (100-node) cluster. Most activity is around commission/decommission.</p>
+
+
+	<p>Try not to lose more than N nodes, where N is your replication factor. You could hit the jackpot on those being the only three replicas of some needed block.</p>
+
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="http://localhost:4000/2009/06/liveblog-death-of-a-web-server.html" class="btn" title="LiveBlog: Death of a Web Server">Previous</a>
+      
+      
+        <a href="http://localhost:4000/2009/06/liveblog-intro-to-managed-infrastructure-with-puppet.html" class="btn" title="LiveBlog: Intro to Managed Infrastructure with Puppet">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>&copy; 2015 Jim Meyer. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/so-simple/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	<a href="http://twitter.com/purp" title="Jim Meyer on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	<a href="http://linkedin.com/in/jimmeyer" title="Jim Meyer on LinkedIn" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a>
+	
+	<a href="http://instagram.com/purp" title="Jim Meyer on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	<a href="http://www.flickr.com/photos/purp" title="Jim Meyer on Flickr" target="_blank"><i class="fa fa-flickr fa-2x"></i></a>
+	<a href="http://github.com/purp" title="Jim Meyer on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	
+  <a href="http://localhost:4000/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'http://localhost:4000';
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://localhost:4000/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://localhost:4000/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

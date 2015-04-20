@@ -1,0 +1,545 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>LiveBlog: The User and Business Impact of Server Delays, Additional Bytes, and HTTP Chunking in Web Search &#8211; geek!daily</title>
+<meta name="description" content="Eric Schurman (Microsoft/bing), Jake Brutlag (Google)
+
+
+Experiments
+	
+	Server delays (MS and Google)
+		Page weight variance
+		Progressive rendering
+	
+
+
+
+They have platforms for experimentation which allow fractional experiments
+	
+	Divide users into small buckets
+		use good methodology (control group, experimental group(s))
+		Way better than usability tests
+	
+
+
+
+Server Delays
+	
+	Goal [missed all of this due to an IM. Lesson learned]
+	
+
+
+
+Results
+	
+	No statistically significant change @ ~50ms delay
+		Observable and fairly linear impact on delays 200/500/1000/2000ms.
+		Time to first click took ~2x delay—theory: user has opportunity to get distracted
+	
+
+
+
+Google Search Delay Experiment
+	
+	Varied type of delay, magnitude, and duration (number of weeks) per user group
+		Pre-header delay: pause server processing upon receipt of req
+		Post-header delay: pause after sending on header, but before sending results
+		Post-ads delay: (ads are structurally first in page, can render before search result) put ads in separate http chunk, delay between ads and search results
+	
+
+
+
+Results:
+	
+	Measure average daily searches per user
+		50ms pre-header delays show no significant impact 
+		100ms pre-head, 200ms post-heads, 400ms post-head, 200ms post-ads (and others) showed linear progression in decreased avg daily searches
+		Also saw increase in internally monitored “abandonment rate” 
+		Active users are more sensitive
+		drop-off continued to trend down linearly beyond 4 weeks; effect becomes more pronounced over time, and additive—200ms and 400ms groups diverge more strongly
+		Stopped injecting delays at week 7; recovery was significant immediately, but not fully realized at week 12—there was still a drop in activity for these groups
+	
+
+
+
+Page weight experiments
+	
+	injected incompressible comments into various places of page
+		varied size of comments from 5% of page to 500% (most of larger loads were below the fold)
+		small payloads weren’t worrisome (tho stat’ly significant)
+		perf suffered slightly, but was US only experiment; global exp planned, will likely show significantly larger drop in perf
+		Click metrics were hurt more than query metrics
+	
+
+
+
+Progressive rendering experiment
+	
+	Goal: determine impace sending visual header before results
+		Build page in phases, send using HTTP 1.1 chunked transfer encoding
+		Results: Large improvement due to parallelization. Time to first click was ~9% faster, more likely to refine query, more clicks, more likely to page thru results
+	
+
+
+	HCI may state that 100-200ms isn’t perceptible; it still has effect.
+
+
+	Getting something to your user quickly is more important than when they receive their last byte
+
+
+	Experimentation platforms make all this research and hard numbers possible.
+
+">
+<meta name="keywords" content="">
+
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="LiveBlog: The User and Business Impact of Server Delays, Additional Bytes, and HTTP Chunking in Web Search">
+<meta name="twitter:description" content="Eric Schurman (Microsoft/bing), Jake Brutlag (Google)
+
+
+Experiments
+	
+	Server delays (MS and Google)
+		Page weight variance
+		Progressive rendering
+	
+
+
+
+They have platforms for experimentation which allow fractional experiments
+	
+	Divide users into small buckets
+		use good methodology (control group, experimental group(s))
+		Way better than usability tests
+	
+
+
+
+Server Delays
+	
+	Goal [missed all of this due to an IM. Lesson learned]
+	
+
+
+
+Results
+	
+	No statistically significant change @ ~50ms delay
+		Observable and fairly linear impact on delays 200/500/1000/2000ms.
+		Time to first click took ~2x delay—theory: user has opportunity to get distracted
+	
+
+
+
+Google Search Delay Experiment
+	
+	Varied type of delay, magnitude, and duration (number of weeks) per user group
+		Pre-header delay: pause server processing upon receipt of req
+		Post-header delay: pause after sending on header, but before sending results
+		Post-ads delay: (ads are structurally first in page, can render before search result) put ads in separate http chunk, delay between ads and search results
+	
+
+
+
+Results:
+	
+	Measure average daily searches per user
+		50ms pre-header delays show no significant impact 
+		100ms pre-head, 200ms post-heads, 400ms post-head, 200ms post-ads (and others) showed linear progression in decreased avg daily searches
+		Also saw increase in internally monitored “abandonment rate” 
+		Active users are more sensitive
+		drop-off continued to trend down linearly beyond 4 weeks; effect becomes more pronounced over time, and additive—200ms and 400ms groups diverge more strongly
+		Stopped injecting delays at week 7; recovery was significant immediately, but not fully realized at week 12—there was still a drop in activity for these groups
+	
+
+
+
+Page weight experiments
+	
+	injected incompressible comments into various places of page
+		varied size of comments from 5% of page to 500% (most of larger loads were below the fold)
+		small payloads weren’t worrisome (tho stat’ly significant)
+		perf suffered slightly, but was US only experiment; global exp planned, will likely show significantly larger drop in perf
+		Click metrics were hurt more than query metrics
+	
+
+
+
+Progressive rendering experiment
+	
+	Goal: determine impace sending visual header before results
+		Build page in phases, send using HTTP 1.1 chunked transfer encoding
+		Results: Large improvement due to parallelization. Time to first click was ~9% faster, more likely to refine query, more clicks, more likely to page thru results
+	
+
+
+	HCI may state that 100-200ms isn’t perceptible; it still has effect.
+
+
+	Getting something to your user quickly is more important than when they receive their last byte
+
+
+	Experimentation platforms make all this research and hard numbers possible.
+
+">
+<meta name="twitter:site" content="@purp">
+<meta name="twitter:creator" content="@purp">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://localhost:4000/images/site-logo.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LiveBlog: The User and Business Impact of Server Delays, Additional Bytes, and HTTP Chunking in Web Search">
+<meta property="og:description" content="Eric Schurman (Microsoft/bing), Jake Brutlag (Google)
+
+
+Experiments
+	
+	Server delays (MS and Google)
+		Page weight variance
+		Progressive rendering
+	
+
+
+
+They have platforms for experimentation which allow fractional experiments
+	
+	Divide users into small buckets
+		use good methodology (control group, experimental group(s))
+		Way better than usability tests
+	
+
+
+
+Server Delays
+	
+	Goal [missed all of this due to an IM. Lesson learned]
+	
+
+
+
+Results
+	
+	No statistically significant change @ ~50ms delay
+		Observable and fairly linear impact on delays 200/500/1000/2000ms.
+		Time to first click took ~2x delay—theory: user has opportunity to get distracted
+	
+
+
+
+Google Search Delay Experiment
+	
+	Varied type of delay, magnitude, and duration (number of weeks) per user group
+		Pre-header delay: pause server processing upon receipt of req
+		Post-header delay: pause after sending on header, but before sending results
+		Post-ads delay: (ads are structurally first in page, can render before search result) put ads in separate http chunk, delay between ads and search results
+	
+
+
+
+Results:
+	
+	Measure average daily searches per user
+		50ms pre-header delays show no significant impact 
+		100ms pre-head, 200ms post-heads, 400ms post-head, 200ms post-ads (and others) showed linear progression in decreased avg daily searches
+		Also saw increase in internally monitored “abandonment rate” 
+		Active users are more sensitive
+		drop-off continued to trend down linearly beyond 4 weeks; effect becomes more pronounced over time, and additive—200ms and 400ms groups diverge more strongly
+		Stopped injecting delays at week 7; recovery was significant immediately, but not fully realized at week 12—there was still a drop in activity for these groups
+	
+
+
+
+Page weight experiments
+	
+	injected incompressible comments into various places of page
+		varied size of comments from 5% of page to 500% (most of larger loads were below the fold)
+		small payloads weren’t worrisome (tho stat’ly significant)
+		perf suffered slightly, but was US only experiment; global exp planned, will likely show significantly larger drop in perf
+		Click metrics were hurt more than query metrics
+	
+
+
+
+Progressive rendering experiment
+	
+	Goal: determine impace sending visual header before results
+		Build page in phases, send using HTTP 1.1 chunked transfer encoding
+		Results: Large improvement due to parallelization. Time to first click was ~9% faster, more likely to refine query, more clicks, more likely to page thru results
+	
+
+
+	HCI may state that 100-200ms isn’t perceptible; it still has effect.
+
+
+	Getting something to your user quickly is more important than when they receive their last byte
+
+
+	Experimentation platforms make all this research and hard numbers possible.
+
+">
+<meta property="og:url" content="http://localhost:4000/2009/06/liveblog-the-user-and-business-impact-of-server-delays-additional-bytes-and-http-chunking-in-web-search.html">
+<meta property="og:site_name" content="geek!daily">
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/2009/06/liveblog-the-user-and-business-impact-of-server-delays-additional-bytes-and-http-chunking-in-web-search.html">
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="geek!daily Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+<!-- Webfonts -->
+<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="http://localhost:4000/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="http://localhost:4000/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://localhost:4000/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/" >Home</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/articles/" >Articles</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/projects/" >Projects</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/blog/" >Blog</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/about/" >About</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="http://localhost:4000/" class="site-logo" rel="home" title="geek!daily"><img src="http://localhost:4000/images/site-logo.png" width="200" height="200" alt="geek!daily logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="http://localhost:4000/">geek!daily</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">sporadic bursts of random thinking on life, leadership, and tech</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"></span>
+        
+          <h1 class="entry-title">LiveBlog: The User and Business Impact of Server Delays, Additional Bytes, and HTTP Chunking in Web Search</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+        
+          <img src="http://localhost:4000/images/jim_meyer_headshot.jpg" class="bio-photo" alt="Jim Meyer bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Jim Meyer</span></span>
+        <span class="entry-date date published"><time datetime="2009-06-23T00:00:00-07:00"><i class="fa fa-calendar-o"></i> June 23, 2009</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>Eric Schurman (Microsoft/bing), Jake Brutlag (Google)</p><p>
+
+
+Experiments
+	</p><ul>
+	<li>Server delays (MS and Google)</li>
+		<li>Page weight variance</li>
+		<li>Progressive rendering</li>
+	</ul>
+<p>
+
+
+They have platforms for experimentation which allow fractional experiments
+	</p><ul>
+	<li>Divide users into small buckets</li>
+		<li>use good methodology (control group, experimental group(s))</li>
+		<li>Way better than usability tests</li>
+	</ul>
+<p>
+
+
+Server Delays
+	</p><ul>
+	<li>Goal [missed all of this due to an IM. Lesson learned]</li>
+	</ul>
+<p>
+
+
+Results
+	</p><ul>
+	<li>No statistically significant change @ ~50ms delay</li>
+		<li>Observable and fairly linear impact on delays 200/500/1000/2000ms.</li>
+		<li>Time to first click took ~2x delay—theory: user has opportunity to get distracted</li>
+	</ul>
+<p>
+
+
+Google Search Delay Experiment
+	</p><ul>
+	<li>Varied type of delay, magnitude, and duration (number of weeks) per user group</li>
+		<li>Pre-header delay: pause server processing upon receipt of req</li>
+		<li>Post-header delay: pause after sending on header, but before sending results</li>
+		<li>Post-ads delay: (ads are structurally first in page, can render before search result) put ads in separate http chunk, delay between ads and search results</li>
+	</ul>
+<p>
+
+
+Results:
+	</p><ul>
+	<li>Measure average daily searches per user</li>
+		<li>50ms pre-header delays show no significant impact </li>
+		<li>100ms pre-head, 200ms post-heads, 400ms post-head, 200ms post-ads (and others) showed linear progression in decreased avg daily searches</li>
+		<li>Also saw increase in internally monitored “abandonment rate” </li>
+		<li>Active users are more sensitive</li>
+		<li>drop-off continued to trend down linearly beyond 4 weeks; effect becomes more pronounced over time, and additive—200ms and 400ms groups diverge more strongly</li>
+		<li>Stopped injecting delays at week 7; recovery was significant immediately, but not fully realized at week 12—there was still a drop in activity for these groups</li>
+	</ul>
+<p>
+
+
+Page weight experiments
+	</p><ul>
+	<li>injected incompressible comments into various places of page</li>
+		<li>varied size of comments from 5% of page to 500% (most of larger loads were below the fold)</li>
+		<li>small payloads weren’t worrisome (tho stat’ly significant)</li>
+		<li>perf suffered slightly, but was US only experiment; global exp planned, will likely show significantly larger drop in perf</li>
+		<li>Click metrics were hurt more than query metrics</li>
+	</ul>
+<p>
+
+
+Progressive rendering experiment
+	</p><ul>
+	<li>Goal: determine impace sending visual header before results</li>
+		<li>Build page in phases, send using <span class="caps">HTTP 1</span>.1 chunked transfer encoding</li>
+		<li>Results: Large improvement due to parallelization. Time to first click was ~9% faster, more likely to refine query, more clicks, more likely to page thru results</li>
+	</ul>
+
+
+	<p><span class="caps">HCI</span> may state that 100-200ms isn’t perceptible; it still has effect.</p>
+
+
+	<p>Getting something to your user quickly is more important than when they receive their last byte</p>
+
+
+	<p>Experimentation platforms make all this research and hard numbers possible.</p>
+
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="http://localhost:4000/2009/06/liveblog-surviving-the-2008-elections-at-dailykos-com.html" class="btn" title="LiveBlog: Surviving the 2008 Elections at DailyKos.com">Previous</a>
+      
+      
+        <a href="http://localhost:4000/2009/06/michael-jackson-s-obit-via-wordle.html" class="btn" title="Michael Jackson's Obit via Wordle">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>&copy; 2015 Jim Meyer. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/so-simple/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	<a href="http://twitter.com/purp" title="Jim Meyer on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	<a href="http://linkedin.com/in/jimmeyer" title="Jim Meyer on LinkedIn" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a>
+	
+	<a href="http://instagram.com/purp" title="Jim Meyer on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	<a href="http://www.flickr.com/photos/purp" title="Jim Meyer on Flickr" target="_blank"><i class="fa fa-flickr fa-2x"></i></a>
+	<a href="http://github.com/purp" title="Jim Meyer on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	
+  <a href="http://localhost:4000/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'http://localhost:4000';
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://localhost:4000/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://localhost:4000/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

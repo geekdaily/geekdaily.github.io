@@ -1,0 +1,858 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>LiveBlog: Fixing Twitter &#8211; geek!daily</title>
+<meta name="description" content="John Adams, Twitter Ops
+
+
+Ops
+	
+	Small team
+		SW perf
+		availability is their primary focus
+	
+
+
+All on managed services with NTT
+	
+	No clouds&#8212;too high latency
+		NTT runs the NOC
+		Frees them to deal with real thinking compsci probs
+	
+
+
+	752% growth in 2008, trend happens ~11/2008 and keeps climbing
+
+
+	Growth  Pain  Fear of what&#8217;s gonna happen
+
+
+Mantra: 
+	
+	Find the weekest point (metrics + logging + analysis)
+		Take corrective action (process)
+		Repeat
+	
+
+
+Find weak points
+	
+	Collect metrics and graphs (individual metrics are irrelevant)
+		Logs
+		SCIENCE!
+		Instrument everything! More info is better
+	
+
+
+Monitoring
+	
+	Keep critical metrics as close to realtime as possible
+		Using RRD, Ganglia + gMetrics, MRTG
+		Mostly on 10s interval, some 5s, some 60s
+		Everyone in company has access to dashboard
+		&#8220;Criticals&#8221; view
+		Use google analytics for failwhale and other err pages
+	
+
+
+Analyze
+	
+	Turn data into info
+		Are things better/worse post-deploy
+		Create env of capacity planning, not firefighting&#8212;no more cowboys in the wild west
+	
+
+
+Deploys
+	
+	Ganglia shows final deploy info for twitter, summize, and search
+	
+
+
+Whale-watcher
+	
+	simple script with massive win
+		503 is a whale, 500 is a robot
+		Whales per second exceeds whale threshold then &#8220;There&#8217;s whales!&#8221; 
+		Darkmode: selectively disable portions of site with automatic notification to product and eng teams to let them know
+	
+
+
+Config Mgmt
+	
+	You need an automated cfg mgmt system NOW. Else you won&#8217;t scale
+		It intros complexity, with multiple admins, unknown interactions
+		Peer review solves most of this; they use reviewboard with svn precommit hook requiring &#8220;reviewed by&#8221; note in comment and postcommit hook sends note about what changed to people
+	
+
+
+High communication
+	
+	They use chat (campfire) with docs, graphs, logs, etc.
+		skitch into campfire is a frequent working methodology
+	
+
+
+Subsystems
+	
+	Many limiting factors in request pipeline
+		Oversubscribe mongrel 2:1 vs. cores
+		Attack plan per ssytem (e.g. bandwidth? bottleneck: network, vector: http latency, solution: servers+; timeline? db, update delay, better algo; search? db, delays, dbs+ and code; etc.)
+	
+
+
+CPUs:
+	
+	switched to Xeon +30% gain
+		replace 2x and 4x core with 8x core +40%
+	
+
+
+Rails:
+	
+	Stop blaming rails
+		Analysis: caching/cache invalidation, AR makes bad queries, queue latency, memcache/page corruption, rep lag
+		Not so much about Rails
+	
+
+
+Disk is the new Tape
+	
+	Social networks is very O(n^y) oriented
+		Disk is too slow
+		Need lots of RAM
+	
+
+
+	Lots of caching is possible. Moving libmemcached to native C gem was bigtime helpful.
+
+
+	Nick&#8217;s CacheMoney AR plugin: readthru/writethru caching with memcached!
+
+
+Caching everything not smart, either
+	
+	Cache evictions
+		Cold cache after host failure/new host spinup
+		Cache smarter: get rid of cache busting behaviors, varnish with failover, etc.
+	
+
+
+RDBMS vs message queues
+	
+	Not everything needs ACID
+		message queues help
+		Most MQs suck at high load
+		They wrote Kestrel for this; looks like memcache
+		Starling was earlier version
+	
+
+
+Asynch == Good
+	
+	They lean on mongrel heavily (they know it well)
+		Keep external service requests out of the pipeline via daemons which process message queues
+		Size worker daemons appropriately, have them kill themselves off rather than long-run
+	
+
+
+DB replication
+	
+	Multiple functional read/write masters
+		never read from the master&#8212;slows it down too much
+		watch your slow queries
+		use mkill to kill long-running queries before they kill you.
+	
+
+
+	Put up a status blog on some other service&#8212;transparency stops armchair engineering
+
+">
+<meta name="keywords" content="">
+
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="LiveBlog: Fixing Twitter">
+<meta name="twitter:description" content="John Adams, Twitter Ops
+
+
+Ops
+	
+	Small team
+		SW perf
+		availability is their primary focus
+	
+
+
+All on managed services with NTT
+	
+	No clouds&#8212;too high latency
+		NTT runs the NOC
+		Frees them to deal with real thinking compsci probs
+	
+
+
+	752% growth in 2008, trend happens ~11/2008 and keeps climbing
+
+
+	Growth  Pain  Fear of what&#8217;s gonna happen
+
+
+Mantra: 
+	
+	Find the weekest point (metrics + logging + analysis)
+		Take corrective action (process)
+		Repeat
+	
+
+
+Find weak points
+	
+	Collect metrics and graphs (individual metrics are irrelevant)
+		Logs
+		SCIENCE!
+		Instrument everything! More info is better
+	
+
+
+Monitoring
+	
+	Keep critical metrics as close to realtime as possible
+		Using RRD, Ganglia + gMetrics, MRTG
+		Mostly on 10s interval, some 5s, some 60s
+		Everyone in company has access to dashboard
+		&#8220;Criticals&#8221; view
+		Use google analytics for failwhale and other err pages
+	
+
+
+Analyze
+	
+	Turn data into info
+		Are things better/worse post-deploy
+		Create env of capacity planning, not firefighting&#8212;no more cowboys in the wild west
+	
+
+
+Deploys
+	
+	Ganglia shows final deploy info for twitter, summize, and search
+	
+
+
+Whale-watcher
+	
+	simple script with massive win
+		503 is a whale, 500 is a robot
+		Whales per second exceeds whale threshold then &#8220;There&#8217;s whales!&#8221; 
+		Darkmode: selectively disable portions of site with automatic notification to product and eng teams to let them know
+	
+
+
+Config Mgmt
+	
+	You need an automated cfg mgmt system NOW. Else you won&#8217;t scale
+		It intros complexity, with multiple admins, unknown interactions
+		Peer review solves most of this; they use reviewboard with svn precommit hook requiring &#8220;reviewed by&#8221; note in comment and postcommit hook sends note about what changed to people
+	
+
+
+High communication
+	
+	They use chat (campfire) with docs, graphs, logs, etc.
+		skitch into campfire is a frequent working methodology
+	
+
+
+Subsystems
+	
+	Many limiting factors in request pipeline
+		Oversubscribe mongrel 2:1 vs. cores
+		Attack plan per ssytem (e.g. bandwidth? bottleneck: network, vector: http latency, solution: servers+; timeline? db, update delay, better algo; search? db, delays, dbs+ and code; etc.)
+	
+
+
+CPUs:
+	
+	switched to Xeon +30% gain
+		replace 2x and 4x core with 8x core +40%
+	
+
+
+Rails:
+	
+	Stop blaming rails
+		Analysis: caching/cache invalidation, AR makes bad queries, queue latency, memcache/page corruption, rep lag
+		Not so much about Rails
+	
+
+
+Disk is the new Tape
+	
+	Social networks is very O(n^y) oriented
+		Disk is too slow
+		Need lots of RAM
+	
+
+
+	Lots of caching is possible. Moving libmemcached to native C gem was bigtime helpful.
+
+
+	Nick&#8217;s CacheMoney AR plugin: readthru/writethru caching with memcached!
+
+
+Caching everything not smart, either
+	
+	Cache evictions
+		Cold cache after host failure/new host spinup
+		Cache smarter: get rid of cache busting behaviors, varnish with failover, etc.
+	
+
+
+RDBMS vs message queues
+	
+	Not everything needs ACID
+		message queues help
+		Most MQs suck at high load
+		They wrote Kestrel for this; looks like memcache
+		Starling was earlier version
+	
+
+
+Asynch == Good
+	
+	They lean on mongrel heavily (they know it well)
+		Keep external service requests out of the pipeline via daemons which process message queues
+		Size worker daemons appropriately, have them kill themselves off rather than long-run
+	
+
+
+DB replication
+	
+	Multiple functional read/write masters
+		never read from the master&#8212;slows it down too much
+		watch your slow queries
+		use mkill to kill long-running queries before they kill you.
+	
+
+
+	Put up a status blog on some other service&#8212;transparency stops armchair engineering
+
+">
+<meta name="twitter:site" content="@purp">
+<meta name="twitter:creator" content="@purp">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://localhost:4000/images/site-logo.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LiveBlog: Fixing Twitter">
+<meta property="og:description" content="John Adams, Twitter Ops
+
+
+Ops
+	
+	Small team
+		SW perf
+		availability is their primary focus
+	
+
+
+All on managed services with NTT
+	
+	No clouds&#8212;too high latency
+		NTT runs the NOC
+		Frees them to deal with real thinking compsci probs
+	
+
+
+	752% growth in 2008, trend happens ~11/2008 and keeps climbing
+
+
+	Growth  Pain  Fear of what&#8217;s gonna happen
+
+
+Mantra: 
+	
+	Find the weekest point (metrics + logging + analysis)
+		Take corrective action (process)
+		Repeat
+	
+
+
+Find weak points
+	
+	Collect metrics and graphs (individual metrics are irrelevant)
+		Logs
+		SCIENCE!
+		Instrument everything! More info is better
+	
+
+
+Monitoring
+	
+	Keep critical metrics as close to realtime as possible
+		Using RRD, Ganglia + gMetrics, MRTG
+		Mostly on 10s interval, some 5s, some 60s
+		Everyone in company has access to dashboard
+		&#8220;Criticals&#8221; view
+		Use google analytics for failwhale and other err pages
+	
+
+
+Analyze
+	
+	Turn data into info
+		Are things better/worse post-deploy
+		Create env of capacity planning, not firefighting&#8212;no more cowboys in the wild west
+	
+
+
+Deploys
+	
+	Ganglia shows final deploy info for twitter, summize, and search
+	
+
+
+Whale-watcher
+	
+	simple script with massive win
+		503 is a whale, 500 is a robot
+		Whales per second exceeds whale threshold then &#8220;There&#8217;s whales!&#8221; 
+		Darkmode: selectively disable portions of site with automatic notification to product and eng teams to let them know
+	
+
+
+Config Mgmt
+	
+	You need an automated cfg mgmt system NOW. Else you won&#8217;t scale
+		It intros complexity, with multiple admins, unknown interactions
+		Peer review solves most of this; they use reviewboard with svn precommit hook requiring &#8220;reviewed by&#8221; note in comment and postcommit hook sends note about what changed to people
+	
+
+
+High communication
+	
+	They use chat (campfire) with docs, graphs, logs, etc.
+		skitch into campfire is a frequent working methodology
+	
+
+
+Subsystems
+	
+	Many limiting factors in request pipeline
+		Oversubscribe mongrel 2:1 vs. cores
+		Attack plan per ssytem (e.g. bandwidth? bottleneck: network, vector: http latency, solution: servers+; timeline? db, update delay, better algo; search? db, delays, dbs+ and code; etc.)
+	
+
+
+CPUs:
+	
+	switched to Xeon +30% gain
+		replace 2x and 4x core with 8x core +40%
+	
+
+
+Rails:
+	
+	Stop blaming rails
+		Analysis: caching/cache invalidation, AR makes bad queries, queue latency, memcache/page corruption, rep lag
+		Not so much about Rails
+	
+
+
+Disk is the new Tape
+	
+	Social networks is very O(n^y) oriented
+		Disk is too slow
+		Need lots of RAM
+	
+
+
+	Lots of caching is possible. Moving libmemcached to native C gem was bigtime helpful.
+
+
+	Nick&#8217;s CacheMoney AR plugin: readthru/writethru caching with memcached!
+
+
+Caching everything not smart, either
+	
+	Cache evictions
+		Cold cache after host failure/new host spinup
+		Cache smarter: get rid of cache busting behaviors, varnish with failover, etc.
+	
+
+
+RDBMS vs message queues
+	
+	Not everything needs ACID
+		message queues help
+		Most MQs suck at high load
+		They wrote Kestrel for this; looks like memcache
+		Starling was earlier version
+	
+
+
+Asynch == Good
+	
+	They lean on mongrel heavily (they know it well)
+		Keep external service requests out of the pipeline via daemons which process message queues
+		Size worker daemons appropriately, have them kill themselves off rather than long-run
+	
+
+
+DB replication
+	
+	Multiple functional read/write masters
+		never read from the master&#8212;slows it down too much
+		watch your slow queries
+		use mkill to kill long-running queries before they kill you.
+	
+
+
+	Put up a status blog on some other service&#8212;transparency stops armchair engineering
+
+">
+<meta property="og:url" content="http://localhost:4000/2009/06/liveblog-fixing-twitter.html">
+<meta property="og:site_name" content="geek!daily">
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/2009/06/liveblog-fixing-twitter.html">
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="geek!daily Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+<!-- Webfonts -->
+<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="http://localhost:4000/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="http://localhost:4000/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://localhost:4000/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/" >Home</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/articles/" >Articles</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/projects/" >Projects</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/blog/" >Blog</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/about/" >About</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="http://localhost:4000/" class="site-logo" rel="home" title="geek!daily"><img src="http://localhost:4000/images/site-logo.png" width="200" height="200" alt="geek!daily logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="http://localhost:4000/">geek!daily</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">sporadic bursts of random thinking on life, leadership, and tech</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"></span>
+        
+          <h1 class="entry-title">LiveBlog: Fixing Twitter</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+        
+          <img src="http://localhost:4000/images/jim_meyer_headshot.jpg" class="bio-photo" alt="Jim Meyer bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Jim Meyer</span></span>
+        <span class="entry-date date published"><time datetime="2009-06-23T00:00:00-07:00"><i class="fa fa-calendar-o"></i> June 23, 2009</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        John Adams, Twitter Ops</p>
+
+
+Ops
+	<ul>
+	<li>Small team</li>
+		<li>SW perf</li>
+		<li>availability is their primary focus</li>
+	</ul>
+
+
+All on managed services with <span class="caps">NTT</span>
+	<ul>
+	<li>No clouds&#8212;too high latency</li>
+		<li><span class="caps">NTT</span> runs the <span class="caps">NOC</span></li>
+		<li>Frees them to deal with real thinking compsci probs</li>
+	</ul>
+
+
+	<p>752% growth in 2008, trend happens ~11/2008 and keeps climbing</p>
+
+
+	<p>Growth  Pain  Fear of what&#8217;s gonna happen</p>
+
+
+Mantra: 
+	<ul>
+	<li>Find the weekest point (metrics + logging + analysis)</li>
+		<li>Take corrective action (process)</li>
+		<li>Repeat</li>
+	</ul>
+
+
+Find weak points
+	<ul>
+	<li>Collect metrics and graphs (individual metrics are irrelevant)</li>
+		<li>Logs</li>
+		<li><span class="caps">SCIENCE</span>!</li>
+		<li>Instrument everything! More info is better</li>
+	</ul>
+
+
+Monitoring
+	<ul>
+	<li>Keep critical metrics as close to realtime as possible</li>
+		<li>Using <span class="caps">RRD</span>, Ganglia + gMetrics, <span class="caps">MRTG</span></li>
+		<li>Mostly on 10s interval, some 5s, some 60s</li>
+		<li>Everyone in company has access to dashboard</li>
+		<li>&#8220;Criticals&#8221; view</li>
+		<li>Use google analytics for failwhale and other err pages</li>
+	</ul>
+
+
+Analyze
+	<ul>
+	<li>Turn data into info</li>
+		<li>Are things better/worse post-deploy</li>
+		<li>Create env of capacity planning, not firefighting&#8212;no more cowboys in the wild west</li>
+	</ul>
+
+
+Deploys
+	<ul>
+	<li>Ganglia shows final deploy info for twitter, summize, and search</li>
+	</ul>
+
+
+Whale-watcher
+	<ul>
+	<li>simple script with massive win</li>
+		<li>503 is a whale, 500 is a robot</li>
+		<li>Whales per second exceeds whale threshold then &#8220;There&#8217;s whales!&#8221; </li>
+		<li>Darkmode: selectively disable portions of site with automatic notification to product and eng teams to let them know</li>
+	</ul>
+
+
+Config Mgmt
+	<ul>
+	<li>You need an automated cfg mgmt system <span class="caps">NOW</span>. Else you won&#8217;t scale</li>
+		<li>It intros complexity, with multiple admins, unknown interactions</li>
+		<li>Peer review solves most of this; they use reviewboard with svn precommit hook requiring &#8220;reviewed by&#8221; note in comment and postcommit hook sends note about what changed to people</li>
+	</ul>
+
+
+High communication
+	<ul>
+	<li>They use chat (campfire) with docs, graphs, logs, etc.</li>
+		<li>skitch into campfire is a frequent working methodology</li>
+	</ul>
+
+
+Subsystems
+	<ul>
+	<li>Many limiting factors in request pipeline</li>
+		<li>Oversubscribe mongrel 2:1 vs. cores</li>
+		<li>Attack plan per ssytem (e.g. bandwidth? bottleneck: network, vector: http latency, solution: servers+<ins>; timeline? db, update delay, better algo; search? db, delays, dbs</ins>+ and code; etc.)</li>
+	</ul>
+
+
+CPUs:
+	<ul>
+	<li>switched to Xeon +30% gain</li>
+		<li>replace 2x and 4x core with 8x core +40%</li>
+	</ul>
+
+
+Rails:
+	<ul>
+	<li>Stop blaming rails</li>
+		<li>Analysis: caching/cache invalidation, AR makes bad queries, queue latency, memcache/page corruption, rep lag</li>
+		<li>Not so much about Rails</li>
+	</ul>
+
+
+Disk is the new Tape
+	<ul>
+	<li>Social networks is very O(n^y) oriented</li>
+		<li>Disk is too slow</li>
+		<li>Need lots of <span class="caps">RAM</span></li>
+	</ul>
+
+
+	<p>Lots of caching is possible. Moving libmemcached to native C gem was bigtime helpful.</p>
+
+
+	<p>Nick&#8217;s CacheMoney AR plugin: readthru/writethru caching with memcached!</p>
+
+
+Caching everything not smart, either
+	<ul>
+	<li>Cache evictions</li>
+		<li>Cold cache after host failure/new host spinup</li>
+		<li>Cache smarter: get rid of cache busting behaviors, varnish with failover, etc.</li>
+	</ul>
+
+
+<span class="caps">RDBMS</span> vs message queues
+	<ul>
+	<li>Not everything needs <span class="caps">ACID</span></li>
+		<li>message queues help</li>
+		<li>Most MQs suck at high load</li>
+		<li>They wrote Kestrel for this; looks like memcache</li>
+		<li>Starling was earlier version</li>
+	</ul>
+
+
+Asynch == Good
+	<ul>
+	<li>They lean on mongrel heavily (they know it well)</li>
+		<li>Keep external service requests out of the pipeline via daemons which process message queues</li>
+		<li>Size worker daemons appropriately, have them kill themselves off rather than long-run</li>
+	</ul>
+
+
+DB replication
+	<ul>
+	<li>Multiple functional read/write masters</li>
+		<li>never read from the master&#8212;slows it down too much</li>
+		<li>watch your slow queries</li>
+		<li>use mkill to kill long-running queries before they kill you.</li>
+	</ul>
+
+
+	<p>Put up a status blog on some other service&#8212;transparency stops armchair engineering</p>
+
+
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="http://localhost:4000/2009/06/liveblog-after-the-click.html" class="btn" title="LiveBlog: After the Click">Previous</a>
+      
+      
+        <a href="http://localhost:4000/2009/06/liveblog-next-web-challenges-it-s-still-all-about-ux.html" class="btn" title="LiveBlog: Next Web Challenges: It's Still All About UX">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>&copy; 2015 Jim Meyer. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/so-simple/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	<a href="http://twitter.com/purp" title="Jim Meyer on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	<a href="http://linkedin.com/in/jimmeyer" title="Jim Meyer on LinkedIn" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a>
+	
+	<a href="http://instagram.com/purp" title="Jim Meyer on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	<a href="http://www.flickr.com/photos/purp" title="Jim Meyer on Flickr" target="_blank"><i class="fa fa-flickr fa-2x"></i></a>
+	<a href="http://github.com/purp" title="Jim Meyer on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	
+  <a href="http://localhost:4000/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'http://localhost:4000';
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://localhost:4000/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://localhost:4000/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>
