@@ -140,239 +140,118 @@
 
 </span></a></article></li>
  
-  <li><article><a href="http://blog.geekdaily.org/2013/04/setting-up-a-minecraft-server-for-kids-part-1-preparation.html">Setting Up A Minecraft Server For Kids, Part 1: Preparation <span class="entry-date"><time datetime="2013-04-12T00:00:00-07:00">April 12, 2013</time></span> <span class="excerpt">In which Jim figures out just how to go about this.</span></a></article></li>
- 
-  <li><article><a href="http://blog.geekdaily.org/2012/03/bashing-tcsh.html">Bashing tcsh <span class="entry-date"><time datetime="2012-03-26T00:00:00-07:00">March 26, 2012</time></span> <span class="excerpt"><p>After 15 years of non-stop tcsh action, I've finally made the jump to bash. It was painful and I miss all my lovely variable expansion (^X $), wildcard expansion (^X*) and term completion (ESC-/), but there are so many tools like <a href="https://github.com/sstephenson/rbenv" target="_self">rbenv</a> that expect that you're using bash with no tcsh-friendly alternatives.</p>
-<p>On the upside, I've got functions now. I guess that's something.</p>
-<p>Oh, and hi again.</p>
+  <li><article><a href="http://blog.geekdaily.org/2013/04/setting-up-a-minecraft-server-for-kids-part-1-preparation.html">Setting Up A Minecraft Server For Kids, Part 1: Preparation <span class="entry-date"><time datetime="2013-04-12T09:00:00-07:00">April 12, 2013</time></span> <span class="excerpt"><p>I’ve got a little more time on my hands than usual at the moment, so I decided to set up a <a href="https://minecraft.net/">Minecraft</a> server for my son and his friends. I figured it would force me to play around with cloud APIs, some linux configuration that I haven’t done for a long while, and other various bits of geekery that would just make me happy.</p>
 
 </span></a></article></li>
  
-  <li><article><a href="http://blog.geekdaily.org/2010/08/advanced-yaml-tricking-out-your-database-yml.html">Advanced YAML: Tricking Out Your database.yml <span class="entry-date"><time datetime="2010-08-13T00:00:00-07:00">August 13, 2010</time></span> <span class="excerpt"><p>I've been <a href="http://en.wikipedia.org/wiki/Cargo_cult_programming">cultishly</a> carrying this snippet around for years:</p>
-
-<pre><code>login: &amp;login
- adapter: mysql
- host: localhost
- username: myuser
- password: mypass
- encoding: utf8
-</code></pre>
-
-<p>For a couple of reasons around running DB migrations in differently configured environments, I wanted to factor this into bits common to all environments and bits particular to the config on the local machine. I came up with something like:</p>
-
-<pre><code># Provide default local block
-local: &amp;local
- socket: /var/run/mysqld/mysqld.sock
- 
-common: &amp;common
- adapter: mysql
- encoding: utf8
- reconnect: false
- pool: 5
- username: myuser
- password: mypass
- &lt;&lt;: *local
-
-development:
- database: myproj_test
- &lt;&lt;: *common
-</code></pre>
-
-<p></p>
-
-<p>This works swimmingly, but I was tired of ritually mimicking and extending the original snippet without actually understanding it. I decided to dig deeper into what was actually going on and found, unsurprisingly, that I stand on the shoulders of giants like <a href="http://blog.lathi.net/">Doug Alcorn</a>, <a href="http://blog.duncandavidson.com/">James Duncan Davidson</a>, and <a href="http://blog.bleything.net/">Ben Bleything</a>. To render proper credit, <a href="hhttp://blog.bleything.net/2006/6/27/dry-out-your-database-yml">Ben's post from June 2006</a> builds on a missing post from James's blog, both of which were preceded by<a href="http://blog.lathi.net/articles/2006/03/02/config-database-yml-goodness-for-teams"> Doug's observations in March 2006</a>, and all of which draw on tricks originally found in the <a href="http://github.com/fdv/typo/blob/master/config/database.yml.example">Typo database config</a>.&#0160;None of them seems to have detailed what's going on with the &amp;login/*login construct, so I thought I'd dive into that a bit for posterity.</p>
-
-<p><a href="http://www.yaml.org/">YAML</a> is nothing more than a human-readable way to serialize basic data structures like lists and associative arrays (aka hashes), which makes it ideal to represent the configuration values needed by Rails. It turns out that YAML provides anchors (&amp;), references (*), and associative array merges (&lt;&lt;), all of which allow you to include by reference either by assignment or by merging a referenced array into another array.&#0160;</p><p>Here's an example of each:</p>
-
-<pre><code># Generate a reference
-mammal: &amp;mammal_ref
- warm_blooded: true
- lays_eggs: false
-
-# Define via reference assignment
-beaver: *mammal_ref
-
-# Define including a hash merge
-otter:
- cute: true
- &lt;&lt;: *mammal_ref
-
-# Define including a hash merge, overriding a value in the reference
-platypus:
- &lt;&lt;: *mammal_ref
- lays_eggs: true
-</code></pre>
-
-<p>I found that the <a href="http://en.wikipedia.org/wiki/YAML">Wikipedia entry on YAML</a> was a good, quick overview; the <a href="http://www.yaml.org/spec/1.2/spec.html">official YAML spec</a> has all that and more, but it's not a quick read.&#0160;Meanwhile, both Doug and Ben observed that bringing ERB into the mix let's you seriously customize things. I took a bit from both of them; here's my database.yml now:</p>
-
-<pre><code># Provide default local block
-local: &amp;local
- username: myuser
- password: mypass
-&lt;% if File.exist? &quot;/opt/local/var/run/mysql5/mysqld.sock&quot; %&gt;
- socket: /opt/local/var/run/mysql5/mysqld.sock
-&lt;% elsif File.exist? &quot;/var/run/mysqld/mysqld.sock&quot; %&gt;
- socket: /var/run/mysqld/mysqld.sock
-&lt;% elsif File.exist? &quot;/tmp/mysql.sock&quot; %&gt;
- socket: /tmp/mysql.sock
-&lt;% end %&gt;
- 
-# Allow for local DB configuration
-&lt;%= File.read(File.join(File.dirname(__FILE__), 'dblocal.yml')) if File.exist?(File.join(File.dirname(__FILE__), 'dblocal.yml')) %&gt;
-
-common: &amp;common
- adapter: mysql
- encoding: utf8
- reconnect: false
- pool: 5
- &lt;&lt;: *local
-
-development:
- database: myproj_development
- &lt;&lt;: *common
-
-test:
- database: myproj_test
- &lt;&lt;: *common
-
-production:
- database: myproj_production
- &lt;&lt;: *common
-</code></pre>
-
-<p>Works a treat. Thanks, Doug, James, and Ben.</p>
+  <li><article><a href="http://blog.geekdaily.org/2012/03/bashing-tcsh.html">Bashing tcsh <span class="entry-date"><time datetime="2012-03-26T22:45:04-07:00">March 26, 2012</time></span> <span class="excerpt"><p>After 15 years of non-stop tcsh action, I’ve finally made the jump to bash. It was painful and I miss all my lovely variable expansion (^X $), wildcard expansion (^X*) and term completion (ESC-/), but there are so many tools like <a href="https://github.com/sstephenson/rbenv">rbenv</a> that expect that you’re using bash with no tcsh-friendly alternatives.</p>
 
 </span></a></article></li>
  
-  <li><article><a href="http://blog.geekdaily.org/2009/10/live-blog-web-aggregation-what-works-and-what-doesn-t.html">Live Blog: Web Aggregation, What Works and What Doesn't <span class="entry-date"><time datetime="2009-10-15T00:00:00-07:00">October 15, 2009</time></span> <span class="excerpt"><p><em>[note: I originally scribbled this on paper thinking I could hand it off immediately, preventing the obligation of typing, posting, etc. Turns out I don't get off that lightly, so here's the spew in electrons.]</em></p><p>Scraping isn't a scalable model.</p>There are biz issues around aggregating data: many businesses don't want you to get their data, though many are becoming more open.<br /><br />Doing aggregation right:<br />* minimize latency<br />* maximize engagement<br /><br />When latency is high, it causes confusion and takes you out of real-time<br /><br />Doing conditional gets can be somewhat useful.<br /><br />Plaxo had to shard their crawlers, which lands you in the shared state/sync problem of any stateful system you want to scale horizontally.<br /><br />Gnip integration has been good:<br />* Offload the long-running processes<br />* Gnip offers alerting or &quot;fat ping&quot; (ping includes update data)<br /><br />Plaxo likes using the alert to escalate the priority of the crawler which fetches the rich data related to the update. This approach allows you to use a consistent model for content ingestion vs. get info from fat ping, then augment later.<br /><br />Smarr: &quot;Brad Fitzpatrick said, 'Make polling a special case of push.'&quot; <span style="text-decoration: line-through;">He attributed this to someone but I missed the attribution.</span> <br /><br />(Don't try to keep up with Joseph Smarr on paper. He's thinks too many cogent thoughts too quickly to preserve legibility)<br /><br />Plaxo uses TripIt's RSS feed as alerting, grabs item ID, then uses their APIs to fetch rich data.<br /><br />There's a move to homogenize the info from sites, which may not be a good idea. It suppresses the distinctive look and feel/experience of the publishing site. Allowing for these differences means more labor spent on making one-off shims, which increases maintenance. Still, right choice in order to provide value to the user.<br /><br />Activity streams seek to provide more rich data in a somewhat normalized, extensible format.<br /><br />Many/most sites aren't yet perfectly architected for real-time's push, ping, etc.<br /><br />PubSubHubBub and Activity Streams are externally represented data shards<br /><br />Plaxo's Pulse started with known architecture issues (in order to ship) and hit the wall sooner than expected. Threw hardware/software optimizations at the problem to move the wall far enough to give time for rearchitecture, sharding, and working out how to propagate changes throughout the system properly.<br /><br />None of the NoSQL alternatives are quite ready for prime-time. Smarr: &quot;It should be something that's just a primitive.&quot;<br /><br />Conversation platforms are slightly different sorts of aggregation platforms. There are UI diffs (e.g. pause the stream when indicating interest). Handling the transition from slightly-latent/passive real-time to synchronous real-time/active not yet well-developed (think: when a comment inspires a conversation)<br /><br />90-99% of the value of the real-time web is realized in not-real-time [unreal-time? ;] This is a big deal for discovery. Twitter and FB make this harder by obscuring history.<br /><br />Ideal scalability/performance would be an index per user. This would be grossly inefficient due to the number of duplicate entries.<br /><br />No one has nailed reader-controlled aggregation (Show me Joe's tweets and blogs but not his photos) quite yet.<br /><br />Smarr: &quot;If we're all kinda [sharing], we're all making each other smarter&quot;<br /><br />The firehose of info is a hard model to scale to. Ben Metcalfe proposes the garden hose -- a firehose filtered at the source according to your interests, which helps aggregators by allowing them to request the superset of all filters from a given publisher.<br /><br />We really want to push contexts to the publishers and let them determine which content fits that context. Context shifts over time: Joe doesn't normally read my tweets (and why would he?) but when we're at a conference together, he's much more interested (thus the popularity of hashtags). This is a geographic and purpose-driven context (the conference) as well as Joe's context on me (Jim knows where the good bars are).<br /><br />Folks like Twitter are so overloaded with info that they might not recognize non-immediate contexts that are interesting to me.<br /><br />There's also the risk of exposing users to the amount of correlatable public data they have. Many don't want you to apply a transitive closure to identify them in all spaces even though doing so allows you to present a much more convenient UX around what they want you to aggregate.<br /><br />Someone likened the real-time aggregation problem to a bar conversation: you get snippets here and there and follow your own thread of interestingness.<br /><br />Three fundamental themes:<br />* How to specify contexts to data provider/publisher<br />* How to control access to private data (and carry ACLs with that data)<br />* How to do all this efficiently<br /><br />Plaxo implemented polling-back-off (poll infrequently updated sources less frequently). Turns out this is a bad idea, as it introduces latency which makes it feel broken.<br /><br />There's also the issue of aggregating conversation about web objecs (like blog posts) and how not to divert the conversation from the publisher's site. However, sometimes you want a private discussion of a public object (cf. LinkedIn company groups discussing an article)<br /><br />Q: What's the state of open standards around this?<br />A: PubSubHubBub and Activity Streams are very exciting. OAuth as access delegation. There's still a lot of ground to cover.
+  <li><article><a href="http://blog.geekdaily.org/2010/08/advanced-yaml-tricking-out-your-databaseyml.html">Advanced YAML: Tricking Out Your database.yml <span class="entry-date"><time datetime="2010-08-13T16:03:33-07:00">August 13, 2010</time></span> <span class="excerpt"><p>I’ve been <a href="http://en.wikipedia.org/wiki/Cargo_cult_programming">cultishly</a> carrying this snippet around for years:</p>
 
 </span></a></article></li>
  
-  <li><article><a href="http://blog.geekdaily.org/2009/10/live-blog-comet-other-browser-stuff.html">Live Blog: Comet & Other Browser Stuff <span class="entry-date"><time datetime="2009-10-15T00:00:00-07:00">October 15, 2009</time></span> <span class="excerpt">It's a big component of what we call &quot;real-time&quot;<br /><br />This is the kind of stuff that puts up a banner on a Twitter search (&quot;# New Tweets Found&quot;) and makes things feel real time. <br /><br />List of what's being done to move notifications from server to browser:<br />* Ajax polling: Anybody using the JS set-timeout function, then refetch. Used by GMail, Campfire, et al<br />* Long polling (typically Comet): Used by FriendFeed, keeps an http connection open as long as possible (keep alive), reopen when timed-out. Keep a local thread pool.<br />* Flash sockets: Same as long polling, but from Flash. Don't have the same-origin policy. No limitaions on number of connections. Does gzipping.<br />* Reverse HTTP: hosting a little webserver inside a JS connection. Long pushing?<br />* Silverlight (&quot;MS's version of Flash&quot;)<br />* HTML5 websockets: part of spec, doesn't exist and not implemented. Expected to be like flash sockets.<br /><br />(things discarded as too old/obscure/painful/absurd):<br />* Java applets (David Weekly is about to get himself kicked ;)<br />* Big ugly JS kludges (iframe tricks, etc)<br />* What's that Opera thing ... unite? ubiquity? Unite. Every browser is a webserver. Sounds like reverse HTTP.<br />* Using XMPP format, arbitrary JSON structure, Atom.<br /><br />Libraries:<br />* Orbited (?) tunnels TCP thru HTTP, treats each end like a socket. JS front-end, Python backend. Often paired with Twisted. Specifically meant to be Comet.<br />* stropheJS: javascript, can use flash sockets<br />* Tornado: python<br />* Cometd: Java, made by Dojo to work with dojo<br />* Dojo: javascript, can use flash sockets<br />* APE project (?)<br /><br /><br />What formats are people using to send data:<br />* JSON<br />* XMPP<br /><br />Apps and their libs/methodologies:<br />* Meebo: ??<br />* Google Wave/GTalk: GWT RPC, long-polling, their own JS<br />* FB Chat: ??<br />* FriendFeed: Tornado server with long-polling, their own JS<br />* Superfeedr: uses BOSH, stropheJS. BOSH is kinda long polling, bidirectional (two cs open all time). Very similar to comet, more friendly than strict proxies<br />* Collecta: uses BOSH<br />* Twingly: orbited<br />* PBWorks: long polling on network dashboard to see updates come in live; wrote their own libraries, also use stropheJS<br />* StatusNet - identi.ca and ??, orbited and cometd (you can do either)<br /><br />Flex and Air apps? The most interesting stuff is what used to be called Flash Media Server (been renamed). They've got their own P2P protocol. All sorts of funky stuff you can do. OpenSource version of FMS is Red Five.<br /><br />In what situations are these libraries breaking down?<br />* Transparent/Opaque proxies that give repeats/dupes/hangs. Keep buffer on server and check for these. Sometimes have to close connection to flush thru proxies.<br />* &quot;Everyone focuses on the newest hottest event-based framework, but the hardest part is that HTTP wasn't designed for long-polling.&quot;<br /><br />Have to hold open request/response pairs. Connection setup and teardown is expensive<br /><br />Guy at UK telecom has only ~3K IP connections available in London area. Comet is going to force an upgrade of their hardware, which will be expensive. Real world constraints will always present.<br /><br />Real-time at UI can be distracting at best, horribly annoying at worst. Charts work great, but text moving too quickly becomes hard. UX is challenging. Would be nice to add items while autoscrolling relative to the focussed item<br /><br />When you want to add a pause button to your site, that's FAIL. But the hover-over-conversation to pause semantic is pretty good.<br /><br />Go to jschat.com to see a bad resize.<br /><br />FB pioneered notifications really well in UX. You get a &quot;toaster popup&quot; that doesn't disturb your screen and it fades after a few moments plus a bar at the bottom to persist the aggregated notifications/count. Really nice.<br /><br />Growl is also mentioned as a good model. Is there interest in a notification aggregator with contexts in the browser? Meebo wants to go that way as a notification aggregator. Adobe wants to do this on your desktop. BrowserPlus also hits Growl. Prowl == Pushed Growl.<br /><br />If everyone started using XMPP, it would increase the message load (&quot;three bazillion individual messages&quot;). No one is bundling XMPP updates; no reason you couldn't. ActivityStreams could also serve. <br /><br />Why are people using Atom/JSON for this? They're so extensible, but when you extend them so far they're just as verbose as XML. &quot;But we just don't like XML.&quot;<br /><br />Would be nice if you could select things to pull out of the stream and hold onto.<br /><br />Seems to be consensus that chat belongs at the bottom of the browser, append at end. Everything with a permalink (blogs, tweets, etc) gets added to the top (?). Seems to be related to height issues.<br /><br />Infinite scroll vs. &quot;More&quot; button<br /><br />Titlebar flash (Gmail and GTalk)<br /><br />Some sites make a tiny flash widget to play a sound<br /><br />Haptic: twitter dmesg to cellphone buzz<br /><br />Notifications can become another form of info overload/noise<br /><br />(We flailed at making a 1D/2D chart to represent frequency and value ... FAIL)<br /><br />Phonetop apps are like desktop apps. Leah feels strongly that they're headed down-and-to-the-right and browser-ish apps are taking supremacy due to interoperability.<br /><br />Apple's surprise: phonetop apps took off. (?) vs. John Gruber: &quot;The most used app on my iPhone is Safari.&quot;<br /><p>You can find the whiteboard pics in <a href="http://flickr.com/photos/purp">my Flickr stream</a>.</p>
+  <li><article><a href="http://blog.geekdaily.org/2009/10/live-blog-comet-other-browser-stuff.html">Live Blog: Comet & Other Browser Stuff <span class="entry-date"><time datetime="2009-10-15T13:27:25-07:00">October 15, 2009</time></span> <span class="excerpt"><p>It’s a big component of what we call “real-time”</p>
+
+<p>This is the kind of stuff that puts up a banner on a Twitter search (“# New Tweets Found”) and makes things feel real time.</p>
+
+<p>List of what’s being done to move notifications from server to browser:<br />
+* Ajax polling: Anybody using the JS set-timeout function, then refetch. Used by GMail, Campfire, et al<br />
+* Long polling (typically Comet): Used by FriendFeed, keeps an http connection open as long as possible (keep alive), reopen when timed-out. Keep a local thread pool.<br />
+* Flash sockets: Same as long polling, but from Flash. Don’t have the same-origin policy. No limitaions on number of connections. Does gzipping.<br />
+* Reverse HTTP: hosting a little webserver inside a JS connection. Long pushing?<br />
+* Silverlight (“MS’s version of Flash”)<br />
+* HTML5 websockets: part of spec, doesn’t exist and not implemented. Expected to be like flash sockets.</p>
+
+<p>(things discarded as too old/obscure/painful/absurd):<br />
+* Java applets (David Weekly is about to get himself kicked ;)<br />
+* Big ugly JS kludges (iframe tricks, etc)<br />
+* What’s that Opera thing … unite? ubiquity? Unite. Every browser is a webserver. Sounds like reverse HTTP.<br />
+* Using XMPP format, arbitrary JSON structure, Atom.</p>
+
+<p>Libraries:<br />
+* Orbited (?) tunnels TCP thru HTTP, treats each end like a socket. JS front-end, Python backend. Often paired with Twisted. Specifically meant to be Comet.<br />
+* stropheJS: javascript, can use flash sockets<br />
+* Tornado: python<br />
+* Cometd: Java, made by Dojo to work with dojo<br />
+* Dojo: javascript, can use flash sockets<br />
+* APE project (?)</p>
+
+<p>What formats are people using to send data:<br />
+* JSON<br />
+* XMPP</p>
+
+<p>Apps and their libs/methodologies:<br />
+* Meebo: ??<br />
+* Google Wave/GTalk: GWT RPC, long-polling, their own JS<br />
+* FB Chat: ??<br />
+* FriendFeed: Tornado server with long-polling, their own JS<br />
+* Superfeedr: uses BOSH, stropheJS. BOSH is kinda long polling, bidirectional (two cs open all time). Very similar to comet, more friendly than strict proxies<br />
+* Collecta: uses BOSH<br />
+* Twingly: orbited<br />
+* PBWorks: long polling on network dashboard to see updates come in live; wrote their own libraries, also use stropheJS<br />
+* StatusNet - identi.ca and ??, orbited and cometd (you can do either)</p>
+
+<p>Flex and Air apps? The most interesting stuff is what used to be called Flash Media Server (been renamed). They’ve got their own P2P protocol. All sorts of funky stuff you can do. OpenSource version of FMS is Red Five.</p>
+
+<p>In what situations are these libraries breaking down?<br />
+* Transparent/Opaque proxies that give repeats/dupes/hangs. Keep buffer on server and check for these. Sometimes have to close connection to flush thru proxies.<br />
+* “Everyone focuses on the newest hottest event-based framework, but the hardest part is that HTTP wasn’t designed for long-polling.”</p>
+
+<p>Have to hold open request/response pairs. Connection setup and teardown is expensive</p>
+
+<p>Guy at UK telecom has only ~3K IP connections available in London area. Comet is going to force an upgrade of their hardware, which will be expensive. Real world constraints will always present.</p>
+
+<p>Real-time at UI can be distracting at best, horribly annoying at worst. Charts work great, but text moving too quickly becomes hard. UX is challenging. Would be nice to add items while autoscrolling relative to the focussed item</p>
+
+<p>When you want to add a pause button to your site, that’s FAIL. But the hover-over-conversation to pause semantic is pretty good.</p>
+
+<p>Go to jschat.com to see a bad resize.</p>
+
+<p>FB pioneered notifications really well in UX. You get a “toaster popup” that doesn’t disturb your screen and it fades after a few moments plus a bar at the bottom to persist the aggregated notifications/count. Really nice.</p>
+
+<p>Growl is also mentioned as a good model. Is there interest in a notification aggregator with contexts in the browser? Meebo wants to go that way as a notification aggregator. Adobe wants to do this on your desktop. BrowserPlus also hits Growl. Prowl == Pushed Growl.</p>
+
+<p>If everyone started using XMPP, it would increase the message load (“three bazillion individual messages”). No one is bundling XMPP updates; no reason you couldn’t. ActivityStreams could also serve.</p>
+
+<p>Why are people using Atom/JSON for this? They’re so extensible, but when you extend them so far they’re just as verbose as XML. “But we just don’t like XML.”</p>
+
+<p>Would be nice if you could select things to pull out of the stream and hold onto.</p>
+
+<p>Seems to be consensus that chat belongs at the bottom of the browser, append at end. Everything with a permalink (blogs, tweets, etc) gets added to the top (?). Seems to be related to height issues.</p>
+
+<p>Infinite scroll vs. “More” button</p>
+
+<p>Titlebar flash (Gmail and GTalk)</p>
+
+<p>Some sites make a tiny flash widget to play a sound</p>
+
+<p>Haptic: twitter dmesg to cellphone buzz</p>
+
+<p>Notifications can become another form of info overload/noise</p>
+
+<p>(We flailed at making a 1D/2D chart to represent frequency and value … FAIL)</p>
+
+<p>Phonetop apps are like desktop apps. Leah feels strongly that they’re headed down-and-to-the-right and browser-ish apps are taking supremacy due to interoperability.</p>
+
+<p>Apple’s surprise: phonetop apps took off. (?) vs. John Gruber: “The most used app on my iPhone is Safari.”</p>
 
 </span></a></article></li>
  
-  <li><article><a href="http://blog.geekdaily.org/2009/09/stepping-into-bdd-with-cucumber-and-webrat-structuring-the-work.html">Stepping Into BDD with Cucumber and WebRAT: Structuring the Work <span class="entry-date"><time datetime="2009-09-13T00:00:00-07:00">September 13, 2009</time></span> <span class="excerpt"><p><em>This is the first of a series on my adventures in going BDD with Cucumber and WebRAT with a greenfield project. Watch for the next article coming soon.</em></p>
-
-<p>I'm working on a tiny project for the dads club at my son's school and using the opportunity to plunge fully into BDD with Cucumber. I've been tinkering with it a bit here and there, but this time I'm committing to fully specifying my acceptance criteria before I start writing specs for my implementation. I have to admit it feels a bit onerous right now, but I can see the value coming so I'm sticking to it.</p>
-
-<p>My usual working methodology is:</p>
-
-<ol>
-<li>Write a quick set of use cases</li>
-<li>Infer features from the use cases</li>
-<li>Divide the features into logical delivery phases</li>
-<li>Start spec'ing the implementation</li>
-<li>Code to the specs</li>
-<li>Profit!</li>
-</ol>
-<p>... so really I'm just adding a "Specify features using Cucumber" step between 3 and 4. Sounds small (but it's not).</p>
-
-<p>The use cases for this project are pretty easy:</p>
-
-<pre class="brush: plain; light: true;">
-Use Cases:
-
-NON-MEMBERS:
-* Join
-
-MEMBERS:
-* See news postings
-* See calendar events
-* Subscribe to a calendar feed
-* Read and send email to the group
-* Maintain a member profile (email, phone, location, kid info, etc.)
-* Browse and search a member directory (by grade, class, proximity/map, etc.)
-
-PREZ FOR LIFE:
-* Write news postings
-* Post new events
-* Send news/reminders to various publishers (group mailing list, school newsletter editor, etc.)
-</pre>
-
-<p>(Yeah, we have a President For Life. He's awesome.)</p>
-
-<p>Time to break these into features. I try to scope each delivery to be a useful increase in features and something I can delivery quickly (I don't get much geek time these days ;). Some of this is old hat (it's mostly just a CMS), but some of it calls for me to learn about things I've never played with (Google Maps APIs and Geolocation, for example). Additionally, it was important to get something up fast last week so the main URL could be included in some printed materials for back to school week.</p>
-
-<p>Here's the feature rough divided into phases:</p>
-
-<pre class="brush: plain; light: true;">
-Phase 0: Site
-Non-Members can see front page
-
-Phase 1: Members
-Non-Members can join
-Members can sign in with email and password or OpenID
-PFL can manage news items
-PFL can manage events
-PFL can manage pages
-PFL can suspend accounts of non-PFLs
-Members can view news and events
-News snippets and event titles show on top page
-
-Phase 2: Admins
-Members can be made admin by PFL
-Admins can manage news items
-Admins can manage events
-Admins can manage pages
-
-Phase 3: Feeds and Mailings
-Members can subscribe to news and events feeds
-PFL can set reminders to be sent by email
-Members can recover passwords by email
-
-Phase 4: Profiles
-Members can add email, phone, address, availability, notes, profile pic
-Members can add kids: name, age, picture, teacher
-Members can mark info private, admin-only, or open
-
-Phase 5: Directory
-Members can browse directory info
-
-Phase 6: Maps
-Members can see people, events on map
-</pre>
-
-<p>Phase 0 was "get something up fast;" we made it a simple redirect to the existing Google group. Phase 1 is the biggest chunk of features, but they're very straightforward. Each phase after that introduces enough new functionality to be interesting for the members, but in small enough chunks that I should be able to knock 'em out in a weekend, plus-or-minus.</p>
-
-<p>Okay, so now I'm ready to generate the app and cucumber-ify it. I'll cover that in the next article.</p>
+  <li><article><a href="http://blog.geekdaily.org/2009/10/live-blog-web-aggregation-what-works-and-what-doesnt.html">Live Blog: Web Aggregation, What Works and What Doesn't <span class="entry-date"><time datetime="2009-10-15T12:17:59-07:00">October 15, 2009</time></span> <span class="excerpt"><p><em>[note: I originally scribbled this on paper thinking I could hand it off immediately, preventing the obligation of typing, posting, etc. Turns out I don’t get off that lightly, so here’s the spew in electrons.]</em></p>
 
 </span></a></article></li>
  
-  <li><article><a href="http://blog.geekdaily.org/2009/08/generate-the-regex-for-a-tld-hostname-from-perl.html">Generate the regex for a TLD hostname from Perl <span class="entry-date"><time datetime="2009-08-18T00:00:00-07:00">August 18, 2009</time></span> <span class="excerpt"><p>This was a quick, fun exercise to remind me that I can still write Perl. It fetches the list of TLDs from IANA, does a quick bit of munging, then renders a regex which should match any valid FQDN:</p>
-
-<pre class="brush: perl">
-#!/usr/bin/env perl
-use strict;
-use warnings;
-
-use LWP::Simple;
-
-my $fqdn_regex;
-
-if (my $content = get('http://data.iana.org/TLD/tlds-alpha-by-domain.txt')) {
-  $fqdn_regex = '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:';
-  $fqdn_regex .= join('|', grep (!/^(#|xn)/i, (split /\n/, lc($content))));
-  $fqdn_regex .= ')';
-}
-
-my $regex = $fqdn_regex . '(?:\s|\/|$)';
-print "$regex\n";
-</pre><p>
-
-Several caveats:</p>
-
-<ul>
-<li>It doesn't match IPv4 dotted quad nor IPv6 ::-notation</li>
-<li>It intentionally ignores Internationalized Domain Name in Applications (IDNA) domains</li>
-<li>It borrows from my favorite reference for this, <a href="http://www.regular-expressions.info/email.html">regular-expressions.info's page on email address regexes</a>.</li>
-</ul>
-<p>
-Maybe I'll extend it for completeness and/or rewrite it in Ruby someday. Until then, it'll always be <tt>~/bin/tld_regex</tt> for me.</p>
+  <li><article><a href="http://blog.geekdaily.org/2009/09/stepping-into-bdd-with-cucumber-and-webrat-structuring-the-work.html">Stepping Into BDD with Cucumber and WebRAT: Structuring the Work <span class="entry-date"><time datetime="2009-09-13T14:45:32-07:00">September 13, 2009</time></span> <span class="excerpt"><p><em>This is the first of a series on my adventures in going BDD with Cucumber and WebRAT with a greenfield project. Watch for the next article coming soon.</em></p>
 
 </span></a></article></li>
  
-  <li><article><a href="http://blog.geekdaily.org/2009/07/gmail-no-longer-beta-true-dat-.html">Gmail no longer beta? True dat. <span class="entry-date"><time datetime="2009-07-07T00:00:00-07:00">July 07, 2009</time></span> <span class="excerpt"><p>I guess it's no longer <a href="http://blog.geekdaily.org/2007/07/beta-is-the-web.html">under construction</a>, or so sayeth <a href="http://gmailblog.blogspot.com/2009/07/gmail-leaves-beta-launches-back-to-beta.html">the GMail blog</a> which also shows those who can't live without that ubiquitous beta tag <a href="http://mail.google.com/mail/?shva=1#settings/labs">how to bring back their old friend</a>:</p><p><a href="http://mail.google.com/mail/?shva=1#settings/labs" onclick="window.open(this.href,'_blank','scrollbars=no,resizable=yes,toolbar=no,directories=no,location=no,menubar=no,status=no,left=0,top=0'); return false" style="display: inline;"><img alt="Back2beta" border="0" class="at-xid-6a00d83452448969e2011570df13e4970c " src="http://purp.typepad.com/.a/6a00d83452448969e2011570df13e4970c-pi" style="width: 600px;" title="Back2beta" /></a> </p>
+  <li><article><a href="http://blog.geekdaily.org/2009/08/generate-the-regex-for-a-tld-hostname-from-perl.html">Generate the regex for a TLD hostname from Perl <span class="entry-date"><time datetime="2009-08-18T19:05:19-07:00">August 18, 2009</time></span> <span class="excerpt"><p>This was a quick, fun exercise to remind me that I can still write Perl. It fetches the list of TLDs from IANA, does a quick bit of munging, then renders a regex which should match any valid FQDN:</p>
+
+</span></a></article></li>
+ 
+  <li><article><a href="http://blog.geekdaily.org/2009/07/gmail-no-longer-beta-true-dat.html">Gmail no longer beta? True dat. <span class="entry-date"><time datetime="2009-07-07T10:12:31-07:00">July 07, 2009</time></span> <span class="excerpt"><p>I guess it’s no longer <a href="http://blog.geekdaily.org/2007/07/beta-is-the-web.html">under construction</a>, or so sayeth <a href="http://gmailblog.blogspot.com/2009/07/gmail-leaves-beta-launches-back-to-beta.html">the GMail blog</a> which also shows those who can’t live without that ubiquitous beta tag <a href="http://mail.google.com/mail/?shva=1#settings/labs">how to bring back their old friend</a>:</p>
 
 </span></a></article></li>
 
@@ -411,6 +290,22 @@ Maybe I'll extend it for completeness and/or rewrite it in Ruby someday. Until t
 <script>window.jQuery || document.write('<script src="http://blog.geekdaily.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 <script src="http://blog.geekdaily.org/assets/js/scripts.min.js"></script>
 
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-225723-36']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
 
 
 

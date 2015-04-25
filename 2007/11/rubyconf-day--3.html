@@ -1,0 +1,319 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>RubyConf, Day 2: Maximizing Productivity &#8211; geek!daily</title>
+<meta name="description" content="Don’t reinvent it if it doesn’t exist; extend what exists.
+
+">
+<meta name="keywords" content="">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="RubyConf, Day 2: Maximizing Productivity">
+<meta name="twitter:description" content="Don’t reinvent it if it doesn’t exist; extend what exists.
+
+">
+<meta name="twitter:site" content="@purp">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.geekdaily.org/images/site-logo.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RubyConf, Day 2: Maximizing Productivity">
+<meta property="og:description" content="Don’t reinvent it if it doesn’t exist; extend what exists.
+
+">
+<meta property="og:url" content="http://blog.geekdaily.org/2007/11/rubyconf-day--3.html">
+<meta property="og:site_name" content="geek!daily">
+
+
+
+
+
+<link rel="canonical" href="http://blog.geekdaily.org/2007/11/rubyconf-day--3.html">
+<link href="http://blog.geekdaily.org/feed.xml" type="application/atom+xml" rel="alternate" title="geek!daily Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://blog.geekdaily.org/assets/css/main.css">
+<!-- Webfonts -->
+<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="http://blog.geekdaily.org/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="http://blog.geekdaily.org/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://blog.geekdaily.org/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://blog.geekdaily.org/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://blog.geekdaily.org/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://blog.geekdaily.org/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://blog.geekdaily.org/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://blog.geekdaily.org/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://blog.geekdaily.org/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/" >Home</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/articles/" >Articles</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/projects/" >Projects</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/blog/" >Blog</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/about/" >About</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="http://blog.geekdaily.org/" class="site-logo" rel="home" title="geek!daily"><img src="http://blog.geekdaily.org/images/site-logo.png" width="200" height="200" alt="geek!daily logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="http://blog.geekdaily.org/">geek!daily</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">sporadic bursts of random thinking on life, leadership, and tech</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"></span>
+        
+          <h1 class="entry-title">RubyConf, Day 2: Maximizing Productivity</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+          
+        
+          <img src="http://blog.geekdaily.org/images/" class="bio-photo" alt=" bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn"></span></span>
+        <span class="entry-date date published"><time datetime="2007-11-03T12:51:59-07:00"><i class="fa fa-calendar-o"></i> November 03, 2007</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>Don’t reinvent it if it doesn’t exist; extend what exists.</p>
+
+<p>Don’t be a coding superhero – you don’t need the latest, greatest</p>
+
+<p>Be selfish: fix your own problems first, and don’t even feel like you need to release (but do share that you did something like that somewhere that others might notice)</p>
+
+<p>KISS and YAGNI. Don’t distract yourself.</p>
+
+<p>YAGNITAGAFI: …they aint’ gonna ask for it. Invest in your own features, don’t make guesses about what they’ll want. They’ll tell you. They may even write it themselves.</p>
+
+<p>Test: tell your future self (and others) what you know is necessary and what you think might break.</p>
+
+<p>Autotest to keep yourself from forgetting to test related things.</p>
+
+<p>Keep everything in sight: Eric likes to be able to see his four shells: code, test, autotest, terminal) in quadrants of the screen. Keeps the edge of chat window handy. Uses <a href="http://www.sshkeychain.org/">SSH Keychain</a> and SpiritedAway to keep essential bits on the menubar/tab accessible.</p>
+
+<p>Use Heckle.</p>
+
+<p>Automate everything: setup, migrations, common tasks. Automating setup is good self-defense against support requests.</p>
+
+<p>Know (and love) your editor. [me: it’s your primary tool, of course].</p>
+
+<p>Pair programming [me: Eric pairs with zenspider; I’ve heard them called “peas and carrots” ;]</p>
+
+<p>Ping-pong pairing: write a test, other person fixes and writes next test.</p>
+
+<p>Polish your docs just before release (but rdoc along the way). README == quick start guide, synopsis and feature overview, links to bug tracker and rdoc. [I’d add contact info for developer]</p>
+
+<p>Set up a bugtracking with no anonymous submissions. Don’t keep it in your email or a mailing list. It opens up the debugging and fixing to the community of users.</p>
+
+<p>Have a review partner beat on your code just before release. Local ruby user’s group is a good source. =]</p>
+
+<p>Releasing with Hoe: packaging uploads emails and blogs all taken care of. This makes it possible to release lightly and often. Small changesets. Less complexity, easier to pin down introduction of problems.</p>
+
+<p>Go have a life! =]</p>
+
+<p>Maintenance</p>
+
+<p>Bug trackers allow collaboration and reduce the load on you. Except when they don’t and instead send it to your email (or mailing lists, or blogs, or somewhere). Find them and move them into the bug tracker.</p>
+
+<p>Version your tools meaningfully and consistently. (e.g. v1.2.3 == major minor bugs)</p>
+
+<p>Don’t fear breaking your code into the natural components when it grows too big to be easily dealt with. Find the natural divisions (and dependencies) and pull it apart.</p>
+
+<p>Inspiration</p>
+
+<p>“I don’t owe you” … “right now”. You released it to the world so you agreed to help them, but it’s okay not to drop everything. Be okay with criticism; the critic might dig in and fix it themselves.</p>
+
+<p>Go to a HackNight/HackFest. Talk to people. Help them with their projects; they’ll help you with yours. Go to the pre-/post- dinner/drinks where your laptop isn’t out so you’ll think and talk.</p>
+
+<p>Look to other domains for interesting ideas. autotest was inspired by Smalltalk.</p>
+
+<p>Answer your own annoyances – automate or change your workflow. IMAPCleanse was written to read ruby-talk and flag messages that are interesting, and delete aging, unread messages.</p>
+
+<p>Q: What bugtracker do you recommend?<br />
+A: Eric tends to use RubyForge, doesn’t have a favorite.</p>
+
+<p>Q: IMAPCleanse for …?<br />
+A: ruby-talk, primarily. Very hard in that volume to keep track of a thread. Then use smart folders to highlight types of messages. [me: would be interesting to see email divided by tabs/sets like for a given mailing list or interest like “New Threads”, “Old Threads I Replied To”, “Old Threads I Didn’t Reply To”]</p>
+
+<p>Q; How much time do you spend communicating with the community? Do you close out the world occasionally?<br />
+A: Think week-to-week, not day-to-day.</p>
+
+<p>Q: How do you pair program?<br />
+A: Ryan and Eric ping-pong at one screen, one keyboard. Turns into a contest to write the perfect failure test to force the other to spend maximum time coding the fix. “Coding Gang Bang” … give a person a big window on the projector and all they can do is type what they’re told. [me: yike! I don’t wanna be the typist!]</p>
+
+<p>Q: How much time do you spend on open source projects?<br />
+A: Sometimes a lot, sometimes a little. Depends on interest. Used to do a lot more but then hit burnout. Balance is very important. Smaller, simpler changes.</p>
+
+<p>Q: What happened to Robot Coop?<br />
+A: I left and worked for LimeWire for a while, left in August to decompress (worked on RubyGems) and now working on a top secret project.</p>
+
+<p>Q: You work closely with Ruby Core and have been thinking about productivity … what do you think needs tweaking?<br />
+A: Hard to say. The biggest problem is language barrier. ruby-dev’s titles are usually in english, so you can know what they’re talking about but not what they’re saying. ;]<br />
+A: (from bug manager on RubyForge project): Would love to see unification on one bug tracker.</p>
+
+<p>Q: You talked about the importance of bugtrackers. The impression is that Ruby Core wants to have bugs/patches submitted to the mailing list, not a tracker.<br />
+A: (Matz) It’s easier for me […] because I’m mail based.</p>
+
+<p>Q: Do you have a method size limit?<br />
+A: Yes! Roughly one window high (~26 lines). [me: shades of what Drew’s been</p>
+
+<p>Q: Do you lmit how long your rdoc is?<br />
+A: If it’s that long, the code should likely be refactored as it’s too complicated and needs that much explanation.</p>
+
+<p>Q; What if you want to document mindset or why you chose a particular implementation?<br />
+A; I make it a short note at the end of the line(s) where the implementation choice was made.</p>
+
+<p>Q: What methods do you use to increase coding speed?<br />
+A: I type on QWERTY (Ryan: “No, you don’t!”) Oh yeah, what am I saying, I type Dvorak (audience: Yay for pair programming!). Don’t change your keycaps or you won’t learn to touchtype. Autotest shaves a lot of time, ~2-10s per test run.</p>
+
+<p>Q: Using autotest, do you just not save interim (e.g. broken) code?<br />
+A: No, autotest has trained me not to. Instead, I write small pieces. Small test. Small method. Saves every 30 seconds or so.</p>
+
+<p>Q: How do you make it easier to pick up what you working on some time ago (a day or more)?<br />
+A; I break the work into chunks of a day or less, or spend a day in exploration.</p>
+
+<p>Q: How do you go about becoming a better coder?<br />
+A: Pair programming. Test-first. Seeing what other people do and challenging their beliefs. Keep learning.</p>
+
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="http://blog.geekdaily.org/2007/11/rubyconf-day-2-.html" class="btn" title="RubyConf, Day 2: Essential Incompleteness in Program Modeling">Previous</a>
+      
+      
+        <a href="http://blog.geekdaily.org/2007/11/its-official-im.html" class="btn" title="It's Official: I'm a Rails Contributor">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>&copy; 2015 Jim Meyer. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/so-simple/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	<a href="http://twitter.com/purp" title="Jim Meyer on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	<a href="http://linkedin.com/in/jimmeyer" title="Jim Meyer on LinkedIn" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a>
+	
+	<a href="http://instagram.com/purp" title="Jim Meyer on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	<a href="http://www.flickr.com/photos/purp" title="Jim Meyer on Flickr" target="_blank"><i class="fa fa-flickr fa-2x"></i></a>
+	<a href="http://github.com/purp" title="Jim Meyer on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	
+  <a href="http://blog.geekdaily.org/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'http://blog.geekdaily.org';
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://blog.geekdaily.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://blog.geekdaily.org/assets/js/scripts.min.js"></script>
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-225723-36']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+</body>
+</html>

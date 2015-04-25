@@ -1,0 +1,227 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Meshing an Airport Extreme and a Linksys WRT54G &#8211; geek!daily</title>
+<meta name="description" content="I’ve spent the day working on home tech projects; we’re paring down, getting rid of excess tech accumulation. Part of that is to eliminate one Airport Extreme by meshing the other one with a new Linksys WRT54G we’d bought a few weeks ago. According to this post at rgbdream.com, we should be able to just mesh them, no muss, no fuss. No dice, either. I spent hours sniffing networks and trying to understand why, but it just didn’t work out.
+
+">
+<meta name="keywords" content="">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Meshing an Airport Extreme and a Linksys WRT54G">
+<meta name="twitter:description" content="I’ve spent the day working on home tech projects; we’re paring down, getting rid of excess tech accumulation. Part of that is to eliminate one Airport Extreme by meshing the other one with a new Linksys WRT54G we’d bought a few weeks ago. According to this post at rgbdream.com, we should be able to just mesh them, no muss, no fuss. No dice, either. I spent hours sniffing networks and trying to understand why, but it just didn’t work out.
+
+">
+<meta name="twitter:site" content="@purp">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.geekdaily.org/images/site-logo.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Meshing an Airport Extreme and a Linksys WRT54G">
+<meta property="og:description" content="I’ve spent the day working on home tech projects; we’re paring down, getting rid of excess tech accumulation. Part of that is to eliminate one Airport Extreme by meshing the other one with a new Linksys WRT54G we’d bought a few weeks ago. According to this post at rgbdream.com, we should be able to just mesh them, no muss, no fuss. No dice, either. I spent hours sniffing networks and trying to understand why, but it just didn’t work out.
+
+">
+<meta property="og:url" content="http://blog.geekdaily.org/2006/03/meshing_an_airp.html">
+<meta property="og:site_name" content="geek!daily">
+
+
+
+
+
+<link rel="canonical" href="http://blog.geekdaily.org/2006/03/meshing_an_airp.html">
+<link href="http://blog.geekdaily.org/feed.xml" type="application/atom+xml" rel="alternate" title="geek!daily Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://blog.geekdaily.org/assets/css/main.css">
+<!-- Webfonts -->
+<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="http://blog.geekdaily.org/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="http://blog.geekdaily.org/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://blog.geekdaily.org/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://blog.geekdaily.org/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://blog.geekdaily.org/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://blog.geekdaily.org/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://blog.geekdaily.org/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://blog.geekdaily.org/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://blog.geekdaily.org/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/" >Home</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/articles/" >Articles</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/projects/" >Projects</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/blog/" >Blog</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/about/" >About</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="http://blog.geekdaily.org/" class="site-logo" rel="home" title="geek!daily"><img src="http://blog.geekdaily.org/images/site-logo.png" width="200" height="200" alt="geek!daily logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="http://blog.geekdaily.org/">geek!daily</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">sporadic bursts of random thinking on life, leadership, and tech</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"></span>
+        
+          <h1 class="entry-title">Meshing an Airport Extreme and a Linksys WRT54G</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+          
+        
+          <img src="http://blog.geekdaily.org/images/" class="bio-photo" alt=" bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn"></span></span>
+        <span class="entry-date date published"><time datetime="2006-03-25T23:19:45-08:00"><i class="fa fa-calendar-o"></i> March 25, 2006</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>I’ve spent the day working on home tech projects; we’re paring down, getting rid of excess tech accumulation. Part of that is to eliminate one Airport Extreme by meshing the other one with a new Linksys WRT54G we’d bought a few weeks ago. According to <a href="http://rgbdream.com/?p=44">this post at rgbdream.com</a>, we should be able to just mesh them, no muss, no fuss. No dice, either. I spent hours sniffing networks and trying to understand why, but it just didn’t work out.</p>
+
+<p>Then I found out about <a href="http://dd-wrt.org/">dd-wrt.org</a> and their firmware for the WRT54G; they’re based on <a href="http://openwrt.org/">openwrt.org</a>’s work and are <a href="http://www.google.com/search?q=%2Bwrt54g+%2Bfirmware&amp;start=0&amp;ie=utf-8&amp;oe=utf-8&amp;client=firefox-a&amp;rls=org.mozilla:en-US:official">one of many implementations</a>. (I chose to avoid sveasoft’s implementation as there seem to be <a href="http://openwrt.org/?p=27">questions about their adherence to the GPL</a>. Icky.) Bummer, though – the new WRT54G is v5, which is no longer an embedded Linux device. This makes it an inhospitable environment for the various open source firmware projects.</p>
+
+<p>The old WRT54G is v1 — yay! — and is now reflashed according to <a href="http://www.testmy.net/forum/t-12222">the advice of Swimmer on testmy.net</a> and, with very little problem, there’s now just one wireless net in the house (yes, there were two before – WRT and the Extremes ;p). It’s amazing what the dd-wrt firmware enables. I can ssh into the router now. I can set up a hotspot, complete with http redirect to a login page (and easy ChillSpot setup, whatever that is). I can set up fixed MAC address to IP associations for DHCP, which means that I can actually have decent internal DNS without needing a separate DHCP and DNS server. Most of all, it’s nice streaming <a href="http://www.wiseup.org/twang/">Twang-Twang-Shock-A-Boom</a> through iTunes to the stereo knowing there’s far less hardware in the mix.</p>
+
+<p>Anyone need an extra Airport Extreme? I’ll trade for a pre-v5 WRT54G …</p>
+
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="http://blog.geekdaily.org/2006/03/linkstationwiki.html" class="btn" title="LinkStations: NAS for the Hacking">Previous</a>
+      
+      
+        <a href="http://blog.geekdaily.org/2006/03/ajaxy_homepages.html" class="btn" title="Ajaxy Homepages">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>&copy; 2015 Jim Meyer. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/so-simple/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	<a href="http://twitter.com/purp" title="Jim Meyer on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	<a href="http://linkedin.com/in/jimmeyer" title="Jim Meyer on LinkedIn" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a>
+	
+	<a href="http://instagram.com/purp" title="Jim Meyer on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	<a href="http://www.flickr.com/photos/purp" title="Jim Meyer on Flickr" target="_blank"><i class="fa fa-flickr fa-2x"></i></a>
+	<a href="http://github.com/purp" title="Jim Meyer on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	
+  <a href="http://blog.geekdaily.org/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'http://blog.geekdaily.org';
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://blog.geekdaily.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://blog.geekdaily.org/assets/js/scripts.min.js"></script>
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-225723-36']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+</body>
+</html>

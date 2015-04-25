@@ -1,0 +1,242 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>RailsRumble: Post Mortem Ruminations &#8211; geek!daily</title>
+<meta name="description" content="I’ve been reflecting on the RailsRumble and our less-than-successful entry and thought I’d share some observations while they’re fresh.
+
+">
+<meta name="keywords" content="">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="RailsRumble: Post Mortem Ruminations">
+<meta name="twitter:description" content="I’ve been reflecting on the RailsRumble and our less-than-successful entry and thought I’d share some observations while they’re fresh.
+
+">
+<meta name="twitter:site" content="@purp">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.geekdaily.org/images/site-logo.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RailsRumble: Post Mortem Ruminations">
+<meta property="og:description" content="I’ve been reflecting on the RailsRumble and our less-than-successful entry and thought I’d share some observations while they’re fresh.
+
+">
+<meta property="og:url" content="http://blog.geekdaily.org/2007/09/railsrumble-pos.html">
+<meta property="og:site_name" content="geek!daily">
+
+
+
+
+
+<link rel="canonical" href="http://blog.geekdaily.org/2007/09/railsrumble-pos.html">
+<link href="http://blog.geekdaily.org/feed.xml" type="application/atom+xml" rel="alternate" title="geek!daily Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://blog.geekdaily.org/assets/css/main.css">
+<!-- Webfonts -->
+<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="http://blog.geekdaily.org/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="http://blog.geekdaily.org/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://blog.geekdaily.org/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://blog.geekdaily.org/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://blog.geekdaily.org/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://blog.geekdaily.org/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://blog.geekdaily.org/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://blog.geekdaily.org/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://blog.geekdaily.org/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/" >Home</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/articles/" >Articles</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/projects/" >Projects</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/blog/" >Blog</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/about/" >About</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="http://blog.geekdaily.org/" class="site-logo" rel="home" title="geek!daily"><img src="http://blog.geekdaily.org/images/site-logo.png" width="200" height="200" alt="geek!daily logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="http://blog.geekdaily.org/">geek!daily</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">sporadic bursts of random thinking on life, leadership, and tech</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"></span>
+        
+          <h1 class="entry-title">RailsRumble: Post Mortem Ruminations</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+          
+        
+          <img src="http://blog.geekdaily.org/images/" class="bio-photo" alt=" bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn"></span></span>
+        <span class="entry-date date published"><time datetime="2007-09-11T01:01:00-07:00"><i class="fa fa-calendar-o"></i> September 11, 2007</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>I’ve been reflecting on the <a href="http://railsrumble.com">RailsRumble</a> and our <a href="http://artlog.railsrumble.com/">less-than-successful entry</a> and thought I’d share some observations while they’re fresh.</p>
+
+<iframe width="300" scrolling="no" height="300" frameborder="0" src="http://maps.google.com/maps?f=q&amp;hl=en&amp;geocode=&amp;q=Orange,+CA+to+Alameda,+CA&amp;sll=37.0625,-95.677068&amp;sspn=40.732051,62.753906&amp;ie=UTF8&amp;om=1&amp;s=AARTsJoAPG4Jr9fq9rlwTcGQs4HdfP_IRg&amp;ll=35.782171,-120.036621&amp;spn=5.346634,6.591797&amp;z=6&amp;output=embed" marginwidth="0" marginheight="0"> </iframe>
+<p><small><strong>Jen’s Long Drive</strong></small></p>
+
+<p>First, let me frame this up for you. <a href="http://blackphoebe.com/msjen/">Jenifer Hanen</a> and I jumped into this at the last minute (we were team #140, registered roughly 12 hours before registration closed) in the midst of busy lives and on the basis of a recently-formed friendship but no prior collaborative experience or sense of each others depth, breadth, or style. We live about 400 miles apart, so there aren’t any opportunities for casual communication. I have a wonderful wife and the two best kids on the planet who were very indulgent of what was later termed “my two-day playdate,” (which nearly made me shoot tea out my nose =) but can’t ever be put on full ignore.</p>
+
+<p>We went in with a low-pressure, let’s-have-fun-while-trying-to-make-something attitude. We knew that busy schedules before and during as well as the vagaries of busy lives could mean any number of interruptions and possibly just end the contest early for us.</p>
+
+<p><strong>I got to know Jen better.</strong> New collaborations are hard; as much as you may think you’ll just get together and throw down, you’ll invest a lot of (fun!) time telling stories, swapping philosophies, and getting a sense of what the other one means when they say something like, “don’t sweat that other stuff.” <em>What’s the other stuff and why am I not sweating it? Should I have been sweating it earlier?</em> We could have conquered this by getting together sooner, but we were both swamped right up to contest start time and beyond.</p>
+
+<p><strong>I learned more abut CSS and Javascript in a weekend</strong> than at the last three conferences I’ve attended. Hanging out with practitioners of an art is, for me, the best way to learn. But then, I like people and conversations.</p>
+
+<p><strong>I have a much deeper (and clearer) understanding of Capistrano.</strong> I like the namespaces in Cap 2.0; I also like the big pile of implicit tasks you get.</p>
+
+<p><strong>You never think you’re over-complicating things, even when you are.</strong> I was. Ironically, it’s one of the things I most watch for (and kill quick) when managing software teams … and I got a very intimate view of the other side of the coin. Probably the single biggest lesson I learned; I’ll blog about it more later.</p>
+
+<p><strong>Constraints are good.</strong> The usual cliches, from Parkinson’s Law to “art is never finished, just abandoned” to “what gets measured gets managed,” are near and dear to my heart. In retrospect, I wish we’d mapped out the time and attached loose deadlines to stages.</p>
+
+<p><strong>It takes a village.</strong> There were many of you who helped with advice and well wishes before during and after. Thank you for that.</p>
+
+<p>I also learned a bunch of stuff that I’d already know if I read <a href="http://pragmaticprogrammer.com/titles/rails/index.html">Agile Web Development with Rails</a> from end to end. I’m going to make time to skim it once through and try to take notes rather than dive in and play with new bits. I’ll post some of the bits here.</p>
+
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="http://blog.geekdaily.org/2007/09/economics-fishi.html" class="btn" title="Economics & Fishing">Previous</a>
+      
+      
+        <a href="http://blog.geekdaily.org/2007/09/cdbabycom-goes-.html" class="btn" title="CDBaby.com goes back to PHP">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>&copy; 2015 Jim Meyer. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/so-simple/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	<a href="http://twitter.com/purp" title="Jim Meyer on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	<a href="http://linkedin.com/in/jimmeyer" title="Jim Meyer on LinkedIn" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a>
+	
+	<a href="http://instagram.com/purp" title="Jim Meyer on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	<a href="http://www.flickr.com/photos/purp" title="Jim Meyer on Flickr" target="_blank"><i class="fa fa-flickr fa-2x"></i></a>
+	<a href="http://github.com/purp" title="Jim Meyer on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	
+  <a href="http://blog.geekdaily.org/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'http://blog.geekdaily.org';
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://blog.geekdaily.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://blog.geekdaily.org/assets/js/scripts.min.js"></script>
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-225723-36']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+</body>
+</html>

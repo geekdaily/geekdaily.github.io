@@ -1,0 +1,273 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>RubyConf, Day 2: Essential Incompleteness in Program Modeling &#8211; geek!daily</title>
+<meta name="description" content="Ahhhh … sleep makes all better. I came late today, caught the Rubinius part of the plenary and so didn’t have any comfortable way to live blog it … so I didn’t.
+
+Walking our way to Godel’s incompleteness, in a hand-wavy sort of way.
+
+">
+<meta name="keywords" content="">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="RubyConf, Day 2: Essential Incompleteness in Program Modeling">
+<meta name="twitter:description" content="Ahhhh … sleep makes all better. I came late today, caught the Rubinius part of the plenary and so didn’t have any comfortable way to live blog it … so I didn’t.
+
+Walking our way to Godel’s incompleteness, in a hand-wavy sort of way.
+
+">
+<meta name="twitter:site" content="@purp">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.geekdaily.org/images/site-logo.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RubyConf, Day 2: Essential Incompleteness in Program Modeling">
+<meta property="og:description" content="Ahhhh … sleep makes all better. I came late today, caught the Rubinius part of the plenary and so didn’t have any comfortable way to live blog it … so I didn’t.
+
+Walking our way to Godel’s incompleteness, in a hand-wavy sort of way.
+
+">
+<meta property="og:url" content="http://blog.geekdaily.org/2007/11/rubyconf-day-2-.html">
+<meta property="og:site_name" content="geek!daily">
+
+
+
+
+
+<link rel="canonical" href="http://blog.geekdaily.org/2007/11/rubyconf-day-2-.html">
+<link href="http://blog.geekdaily.org/feed.xml" type="application/atom+xml" rel="alternate" title="geek!daily Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://blog.geekdaily.org/assets/css/main.css">
+<!-- Webfonts -->
+<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="http://blog.geekdaily.org/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="http://blog.geekdaily.org/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://blog.geekdaily.org/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://blog.geekdaily.org/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://blog.geekdaily.org/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://blog.geekdaily.org/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://blog.geekdaily.org/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://blog.geekdaily.org/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://blog.geekdaily.org/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/" >Home</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/articles/" >Articles</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/projects/" >Projects</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/blog/" >Blog</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/about/" >About</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="http://blog.geekdaily.org/" class="site-logo" rel="home" title="geek!daily"><img src="http://blog.geekdaily.org/images/site-logo.png" width="200" height="200" alt="geek!daily logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="http://blog.geekdaily.org/">geek!daily</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">sporadic bursts of random thinking on life, leadership, and tech</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"></span>
+        
+          <h1 class="entry-title">RubyConf, Day 2: Essential Incompleteness in Program Modeling</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+          
+        
+          <img src="http://blog.geekdaily.org/images/" class="bio-photo" alt=" bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn"></span></span>
+        <span class="entry-date date published"><time datetime="2007-11-03T10:50:25-07:00"><i class="fa fa-calendar-o"></i> November 03, 2007</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p><em>Ahhhh … sleep makes all better. I came late today, caught the Rubinius part of the plenary and so didn’t have any comfortable way to live blog it … so I didn’t.</em></p>
+
+<p>Walking our way to Godel’s incompleteness, in a hand-wavy sort of way.</p>
+
+<p>This statement is false.</p>
+
+<p>This statement is true (but not provable as English has no axioms)</p>
+
+<p>Godel theorem requires completeness and consistency</p>
+
+<p>Completeness: all statements are true and provable</p>
+
+<p>Consistency: all statements relate/are built on other statements.</p>
+
+<p>Godel says: Any sufficiently complex system cannot be complete or consistent. No sane person sacrifices consistency, so all (useful) modeled systems will be incomplete.</p>
+
+<p>Godel’s <a href="http://en.wikipedia.org/wiki/Quine_%28computing%29">quine</a>: This statement is not provable.</p>
+
+<p>Godel’s theorem is general, not specific to mathematics.</p>
+
+<p>Barrow’s first law: Any Universe simple enough to be understood is too simple to produce a mind able to understand it.</p>
+
+<p>As folks were investigating set theory and real numbers, hoping these were a system which modeled reality completely and consistently. Bertrand Russell theorized “the set of all sets which do not contain themselves” which is paradoxical. This was disturbing, so they worked to define the system (Principia Mathematica) to eliminate the self-referential nature. Three volumes into this, Godel busted them with his theorem.</p>
+
+<p><strong>Applying this to Your Code</strong></p>
+
+<p>Don’t make inifinite stacks.</p>
+
+<p>Three parts: reality, your model of it, and your implementation of your model. You know your model will be incomplete *and you control in what ways it’s incomplete*. Exercise your power consciously.</p>
+
+<p>Applying Ramachandran energy modeling theory: Think of it as potential vs. kinetic energy. Predecision is potential: high energy state, etc.; post-decision starts you in motion, low energy and low tension, high movement. [me: he should have given a one sentence summation or Ramachandran theory at the top of this section; not doing so bogged him down].</p>
+
+<p>He made some observations re: high vs. low energy states, largely urging that you stay in high energy state as long as you can/need. [me: His observations seem to relate to some interpretations of Wilfred Bion’s work re: group psychology re: groups in working state being high tension]</p>
+
+<p>Decisions == energy deltas. Unmade decisions are high energy; made, low. Many unmade is expensive but flexible, most made is cheap but less flexible.</p>
+
+<p>Make decisions as late as possible – you’ll know more. And now we’ve derived agile programming as a good idea.</p>
+
+<p>Asymptotes: lines or curves which approach a line or curve arbitrarily closely without touching.</p>
+
+<p>“You can’t perfectly match reality but you can asymptotically approach it”</p>
+
+<p>Spending time on your model progressively increases the resolution of the model. Move the asymptote closer; don’t take “iteration” to mean “new approach” unless you can’t get closer with your current approach.</p>
+
+<p>Math hurts your brain in new and interesting ways, provides new ways to think about our problems, and is wicked fun. =]</p>
+
+<p><em>In 1979, Doug Hofstadter blew our minds with “ <a href="http://books.google.com/books?id=aFcsnUEewLkC&amp;dq=godel+escher+bach&amp;pg=PP1&amp;ots=FKVXdfdsxY&amp;sig=GmsoEtdgEeV9SHYSDDc0PeyfLkI&amp;prev=http://www.google.com/search%3Fq%3DGodel%2BEscher%2BBach%26ie%3Dutf-8%26oe%3Dutf-8%26aq%3Dt%26rls%3Dorg.mozilla:en-US:official%26client%3Dfirefox-a&amp;sa=X&amp;oi=print&amp;ct=title&amp;cad=one-book-with-thumbnail">Godel Escher Bach</a>” … over a quarter century later, the underlying ideas are still engaging a roomful of people. Excellent. Meanwhile, in 2__001, JP Lewis gave <a href="http://www.idiom.com/~zilla/Work/Softestim/kcsest.pdf">a similar talk</a> at SIGGRAPH which was poorly received (and horribly, boringly delivered, despite him being a fundamentally interesting person and having a pile of humorous anecdotes from production). Luke’s presented it in a better context and with richer, more interesting sources.</em></p>
+
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="http://blog.geekdaily.org/2007/11/rubyconf-day--2.html" class="btn" title="RubyConf, Day 1, 4p: Hurting Code for Fun & Profit">Previous</a>
+      
+      
+        <a href="http://blog.geekdaily.org/2007/11/rubyconf-day--3.html" class="btn" title="RubyConf, Day 2: Maximizing Productivity">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>&copy; 2015 Jim Meyer. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/so-simple/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	<a href="http://twitter.com/purp" title="Jim Meyer on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	<a href="http://linkedin.com/in/jimmeyer" title="Jim Meyer on LinkedIn" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a>
+	
+	<a href="http://instagram.com/purp" title="Jim Meyer on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	<a href="http://www.flickr.com/photos/purp" title="Jim Meyer on Flickr" target="_blank"><i class="fa fa-flickr fa-2x"></i></a>
+	<a href="http://github.com/purp" title="Jim Meyer on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	
+  <a href="http://blog.geekdaily.org/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'http://blog.geekdaily.org';
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://blog.geekdaily.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://blog.geekdaily.org/assets/js/scripts.min.js"></script>
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-225723-36']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+</body>
+</html>

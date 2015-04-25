@@ -4,7 +4,7 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://blog.geekdaily.org/feed.xml" />
 <link rel="alternate" type="text/html" href="http://blog.geekdaily.org" />
-<updated>2015-04-19T19:57:59-07:00</updated>
+<updated>2015-04-25T09:37:14-07:00</updated>
 <id>http://blog.geekdaily.org/</id>
 <author>
   <name>Jim Meyer</name>
@@ -88,41 +88,62 @@
   <title type="html"><![CDATA[Setting Up A Minecraft Server For Kids, Part 1: Preparation]]></title>
   <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2013/04/setting-up-a-minecraft-server-for-kids-part-1-preparation.html" />
   <id>http://blog.geekdaily.org/2013/04/setting-up-a-minecraft-server-for-kids-part-1-preparation</id>
-  <published>2013-04-12T00:00:00-07:00</published>
-  <updated>2013-04-12T00:00:00-07:00</updated>
+  <published>2013-04-12T09:00:00-07:00</published>
+  <updated>2013-04-12T09:00:00-07:00</updated>
   <author>
-    <name>Jim Meyer</name>
+    <name></name>
     <uri>http://blog.geekdaily.org</uri>
-    <email>jim@geekdaily.org</email>
+    
   </author>
   <content type="html">
-    &lt;p&gt;I&#39;ve got a little more time on my hands than usual at the moment, so I decided to set up a &lt;a href=&quot;https://minecraft.net/&quot; target=&quot;_blank&quot;&gt;Minecraft&lt;/a&gt; server for my son and his friends. I figured it would force me to play around with cloud APIs, some linux configuration that I haven&#39;t done for a long while, and other various bits of geekery that would just make me happy.&lt;/p&gt;
-&lt;p&gt;As I started to do some research on how to go about it, I found &lt;a href=&quot;https://www.google.com/search?q=how+to+setup+a+minecraft+server&quot; target=&quot;_blank&quot;&gt;about a gajillion posts on how to set up a server&lt;/a&gt; (including &lt;a href=&quot;http://warpedvisions.org/2012/02/howto-set-up-a-minecraft-server-in-10-minutes-using-amazon-ec2/&quot; target=&quot;_blank&quot;&gt;this slightly outdated gem&lt;/a&gt;), including a few from &lt;a href=&quot;http://www.ultrasaurus.com/sarahblog/2011/11/setting-up-ec2-minecraft-server/&quot; target=&quot;_blank&quot;&gt;smart friends&lt;/a&gt; &lt;a href=&quot;https://mobile.twitter.com/tom_enebo/status/300763304777891840&quot; target=&quot;_blank&quot;&gt;of mine&lt;/a&gt;. After a bit of reading, it became clear that this could be a much larger undertaking so I decided to chunk out the project into four steps: &lt;/p&gt;
+    &lt;p&gt;I’ve got a little more time on my hands than usual at the moment, so I decided to set up a &lt;a href=&quot;https://minecraft.net/&quot;&gt;Minecraft&lt;/a&gt; server for my son and his friends. I figured it would force me to play around with cloud APIs, some linux configuration that I haven’t done for a long while, and other various bits of geekery that would just make me happy.&lt;/p&gt;
+
+&lt;p&gt;As I started to do some research on how to go about it, I found &lt;a href=&quot;https://www.google.com/search?q=how+to+setup+a+minecraft+server&quot;&gt;about a gajillion posts on how to set up a server&lt;/a&gt; (including &lt;a href=&quot;http://warpedvisions.org/2012/02/howto-set-up-a-minecraft-server-in-10-minutes-using-amazon-ec2/&quot;&gt;this slightly outdated gem&lt;/a&gt;), including a few from &lt;a href=&quot;http://www.ultrasaurus.com/sarahblog/2011/11/setting-up-ec2-minecraft-server/&quot;&gt;smart friends&lt;/a&gt; &lt;a href=&quot;https://mobile.twitter.com/tom_enebo/status/300763304777891840&quot;&gt;of mine&lt;/a&gt;. After a bit of reading, it became clear that this could be a much larger undertaking so I decided to chunk out the project into four steps:&lt;/p&gt;
+
 &lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Preparation:&lt;/strong&gt; research and learning&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Installation:&lt;/strong&gt; set up the instance and server&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Configuration:&lt;/strong&gt; tweak the server config and add plugins to get what you&#39;re looking for&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Productionization:&lt;/strong&gt; make the installation reproducible and automatable; set up backups; etc. And yeah, that&#39;s not a real word. I&#39;m okay with that.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Preparation:&lt;/strong&gt; research and learning&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Installation:&lt;/strong&gt; set up the instance and server&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Configuration:&lt;/strong&gt; tweak the server config and add plugins to get what you’re looking for&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Productionization:&lt;/strong&gt; make the installation reproducible and automatable; set up backups; etc. And yeah, that’s not a real word. I’m okay with that.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;This post will focus on the preparation&lt;/strong&gt; required to get as many bits sorted out as you can before installing. I&#39;ll write about the rest in the next few posts.&lt;/p&gt;
-&lt;h2&gt;&lt;strong&gt;&lt;span style=&quot;font-size: large;&quot;&gt;So, Minecraft ...&lt;/span&gt;&lt;/strong&gt;&lt;/h2&gt;
-&lt;p&gt;If, like me, you came to this with little practical Minecraft experience, the first thing you should do is try playing a bit. There are a few free ways to do this — such as &lt;a href=&quot;https://minecraft.net/classic/&quot; target=&quot;_blank&quot;&gt;Minecraft Classic&lt;/a&gt; in your browser or &lt;a href=&quot;https://itunes.apple.com/us/app/minecraft-pocket-edition-lite/id479651754?mt=8&quot; target=&quot;_blank&quot;&gt;Minecraft Pocket Edition Lite&lt;/a&gt; on an iOS device — or you can just spend the ~$30  and jump in. I figured that to be an op I&#39;d want my own account, so I went for the full experience.&lt;/p&gt;
-&lt;p&gt;I died a lot. I crafted a bit. I created a bunch in single player. I joined a few multiplayer servers. I died some more. Through all of it, I got a sense of the game and what my son and his friends would be in for. This helped a lot as I started to figure out what it would take to start up and run a server, as it identified some key questions, like, &amp;quot;How can we have a creative world as well as a survival world?&amp;quot; and &amp;quot;What&#39;s the difference between &#39;easy&#39; and &#39;peaceful&#39;?&amp;quot;&lt;/p&gt;
-&lt;p&gt;These led me to &lt;a href=&quot;http://www.minecraftwiki.net/&quot; target=&quot;_blank&quot;&gt;the Minecraft Wiki.&lt;/a&gt; Frankly, had I read much of it before playing I would have died less and crafted more. However, it helped me get clear on a few things that matter when you&#39;re considering running a server for others. &lt;/p&gt;
-&lt;h3&gt;&lt;strong&gt;&lt;span style=&quot;font-size: medium;&quot;&gt;&lt;a href=&quot;http://www.minecraftwiki.net/wiki/Gameplay&quot; target=&quot;_blank&quot;&gt;Game Mode&lt;/a&gt;&lt;/span&gt;&lt;/strong&gt;&lt;/h3&gt;
-&lt;p&gt;The default is survival mode, which means that, in order to survive and craft things, you have to walk around and collect block types required by recipes while avoiding being killed by monsters (&amp;quot;mobs&amp;quot; in the old MUD parlance). There&#39;s also creative mode, where you gain the power of flight, you have access to every block type instantly, and you can make anything your heart desires. My son is currently constructing a flush toilet in the hotel he&#39;s making. His heart desires strange things.&lt;/p&gt;
-&lt;h3&gt;&lt;span style=&quot;font-size: medium;&quot;&gt;&lt;strong&gt;&lt;a href=&quot;http://www.minecraftwiki.net/wiki/Difficulty&quot; target=&quot;_blank&quot;&gt;Difficulty&lt;/a&gt;&lt;/strong&gt;&lt;/span&gt;&lt;/h3&gt;
-&lt;p&gt;This ranges from Peaceful, where any aggressive mobs are removed or don&#39;t spawn, through Easy and Normal, right into Hard. The wiki does an excellent job explaining.&lt;/p&gt;
-&lt;h3&gt;&lt;span style=&quot;font-size: medium;&quot;&gt;&lt;a href=&quot;http://www.minecraftwiki.net/wiki/World_types&quot; target=&quot;_blank&quot;&gt;World Types&lt;/a&gt;&lt;/span&gt;&lt;/h3&gt;
-&lt;p&gt;There are a few settings in there that weren&#39;t obvious on the face of it, such as what Large Biomes is or why Superflat would be interesting. It turns out that Superflat is a great canvas for Creative worlds, and Large Biomes is pretty much just like the default biome-based terrain generator but each biome takes up more real estate.&lt;/p&gt;
-&lt;p&gt;It was clear to me that we&#39;d want a Superflat Creative world and an Easy Default Survival world.&lt;/p&gt;
-&lt;h2&gt;Servers, Servers Everywhere&lt;/h2&gt;
-&lt;p&gt;There are &lt;a href=&quot;https://www.google.com/search?q=minecraft+server+implementations&quot; target=&quot;_blank&quot;&gt;a lot of available servers out there&lt;/a&gt;. I could tell you that I did an exhaustive search and evaluation, but the truth is that I trusted my smart friend, Sarah, and chose &lt;a href=&quot;https://github.com/Bukkit/CraftBukkit&quot; target=&quot;_blank&quot;&gt;Craftbukkit&lt;/a&gt; (CB) for many of the same reasons she did: we both know and trust &lt;a href=&quot;http://confreaks.net/videos/696-rubyconf2011-be-a-minecraft-modman-with-purugin&quot; target=&quot;_blank&quot; title=&quot;Confreaks RubyConf 2011: Be A Minecraft ModMan with Purugin&quot;&gt;Tom Enebo&#39;s opinion&lt;/a&gt;, it&#39;s &lt;a href=&quot;https://github.com/enebo/Purugin&quot; target=&quot;_blank&quot;&gt;easy to extend using JRuby&lt;/a&gt;, and it seems to be the leading server beyond vanilla Minecraft.&lt;/p&gt;
-&lt;p&gt;Another bit of validation comes from cheracc, who runs &lt;a href=&quot;http://www.sandlotminecraft.com/&quot; target=&quot;_blank&quot;&gt;Sandlot Minecraft server for kids and families&lt;/a&gt;, and who also uses CB with many plugins. More on that later, though you can read &lt;a href=&quot;http://www.reddit.com/r/admincraft/comments/17ri0h/help_advice_for_running_a_kidfriendly_server/&quot; target=&quot;_blank&quot;&gt;his excellent Reddit post on setting up a Minecraft server for kids&lt;/a&gt; now.&lt;/p&gt;
-&lt;p&gt;One other minor note: since CB is a third-party server, it takes them a bit of time to catch up when Mojang releases a new client version. This means you&#39;ll want to wait on client updates until there&#39;s a beta version of CB that handles the new client version. As of this writing, the current client requires a 1.5.x server which means craftbukkit-beta.jar&lt;/p&gt;
-&lt;h2&gt;Does Size Matter?&lt;/h2&gt;
-&lt;p&gt;Finally, I wanted to figure out how big an instance I&#39;d need to host a decent server. I flailed my way through several posts trying to figure this out until I discovered &lt;a href=&quot;http://canihostaminecraftserver.com/&quot; target=&quot;_blank&quot;&gt;Can I Host A Minecraft Server&lt;/a&gt;, which makes it easy to take your bandwidth (both up and down) and the available RAM and figure out about how many people you can host. Remember to use the bandwidth figures for the cloud provider you&#39;re planning to use. For me, it turns out I can handle ~12 players in a 1GB instance with the usual cloud host network speeds of &amp;gt;5Mbps, which is what I was hoping to cover.&lt;/p&gt;
-&lt;p&gt;So that&#39;s it for prep. Now it&#39;s time to instantiate and install.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;This post will focus on the preparation&lt;/strong&gt; required to get as many bits sorted out as you can before installing. I’ll write about the rest in the next few posts.&lt;/p&gt;
+
+&lt;h2 id=&quot;so-minecraft-&quot;&gt;&lt;strong&gt;So, Minecraft …&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;If, like me, you came to this with little practical Minecraft experience, the first thing you should do is try playing a bit. There are a few free ways to do this — such as &lt;a href=&quot;https://minecraft.net/classic/&quot;&gt;Minecraft Classic&lt;/a&gt; in your browser or &lt;a href=&quot;https://itunes.apple.com/us/app/minecraft-pocket-edition-lite/id479651754?mt=8&quot;&gt;Minecraft Pocket Edition Lite&lt;/a&gt; on an iOS device — or you can just spend the ~$30 and jump in. I figured that to be an op I’d want my own account, so I went for the full experience.&lt;/p&gt;
+
+&lt;p&gt;I died a lot. I crafted a bit. I created a bunch in single player. I joined a few multiplayer servers. I died some more. Through all of it, I got a sense of the game and what my son and his friends would be in for. This helped a lot as I started to figure out what it would take to start up and run a server, as it identified some key questions, like, “How can we have a creative world as well as a survival world?” and “What’s the difference between ‘easy’ and ‘peaceful’?”&lt;/p&gt;
+
+&lt;p&gt;These led me to &lt;a href=&quot;http://www.minecraftwiki.net/&quot;&gt;the Minecraft Wiki.&lt;/a&gt; Frankly, had I read much of it before playing I would have died less and crafted more. However, it helped me get clear on a few things that matter when you’re considering running a server for others.&lt;/p&gt;
+
+&lt;h3 id=&quot;game-modehttpwwwminecraftwikinetwikigameplay&quot;&gt;&lt;strong&gt;&lt;a href=&quot;http://www.minecraftwiki.net/wiki/Gameplay&quot;&gt;Game Mode&lt;/a&gt;&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;The default is survival mode, which means that, in order to survive and craft things, you have to walk around and collect block types required by recipes while avoiding being killed by monsters (“mobs” in the old MUD parlance). There’s also creative mode, where you gain the power of flight, you have access to every block type instantly, and you can make anything your heart desires. My son is currently constructing a flush toilet in the hotel he’s making. His heart desires strange things.&lt;/p&gt;
+
+&lt;h3 id=&quot;difficultyhttpwwwminecraftwikinetwikidifficulty&quot;&gt;&lt;strong&gt;&lt;a href=&quot;http://www.minecraftwiki.net/wiki/Difficulty&quot;&gt;Difficulty&lt;/a&gt;&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;This ranges from Peaceful, where any aggressive mobs are removed or don’t spawn, through Easy and Normal, right into Hard. The wiki does an excellent job explaining.&lt;/p&gt;
+
+&lt;h3 id=&quot;world-typeshttpwwwminecraftwikinetwikiworldtypes&quot;&gt;&lt;a href=&quot;http://www.minecraftwiki.net/wiki/World_types&quot;&gt;World Types&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;There are a few settings in there that weren’t obvious on the face of it, such as what Large Biomes is or why Superflat would be interesting. It turns out that Superflat is a great canvas for Creative worlds, and Large Biomes is pretty much just like the default biome-based terrain generator but each biome takes up more real estate.&lt;/p&gt;
+
+&lt;p&gt;It was clear to me that we’d want a Superflat Creative world and an Easy Default Survival world.&lt;/p&gt;
+
+&lt;h2 id=&quot;servers-servers-everywhere&quot;&gt;Servers, Servers Everywhere&lt;/h2&gt;
+
+&lt;p&gt;There are &lt;a href=&quot;https://www.google.com/search?q=minecraft+server+implementations&quot;&gt;a lot of available servers out there&lt;/a&gt;. I could tell you that I did an exhaustive search and evaluation, but the truth is that I trusted my smart friend, Sarah, and chose &lt;a href=&quot;https://github.com/Bukkit/CraftBukkit&quot;&gt;Craftbukkit&lt;/a&gt; (CB) for many of the same reasons she did: we both know and trust &lt;a href=&quot;http://confreaks.net/videos/696-rubyconf2011-be-a-minecraft-modman-with-purugin&quot; title=&quot;Confreaks RubyConf 2011: Be A Minecraft ModMan with Purugin&quot;&gt;Tom Enebo’s opinion&lt;/a&gt;, it’s &lt;a href=&quot;https://github.com/enebo/Purugin&quot;&gt;easy to extend using JRuby&lt;/a&gt;, and it seems to be the leading server beyond vanilla Minecraft.&lt;/p&gt;
+
+&lt;p&gt;Another bit of validation comes from cheracc, who runs &lt;a href=&quot;http://www.sandlotminecraft.com/&quot;&gt;Sandlot Minecraft server for kids and families&lt;/a&gt;, and who also uses CB with many plugins. More on that later, though you can read &lt;a href=&quot;http://www.reddit.com/r/admincraft/comments/17ri0h/help_advice_for_running_a_kidfriendly_server/&quot;&gt;his excellent Reddit post on setting up a Minecraft server for kids&lt;/a&gt; now.&lt;/p&gt;
+
+&lt;p&gt;One other minor note: since CB is a third-party server, it takes them a bit of time to catch up when Mojang releases a new client version. This means you’ll want to wait on client updates until there’s a beta version of CB that handles the new client version. As of this writing, the current client requires a 1.5.x server which means craftbukkit-beta.jar&lt;/p&gt;
+
+&lt;h2 id=&quot;does-size-matter&quot;&gt;Does Size Matter?&lt;/h2&gt;
+
+&lt;p&gt;Finally, I wanted to figure out how big an instance I’d need to host a decent server. I flailed my way through several posts trying to figure this out until I discovered &lt;a href=&quot;http://canihostaminecraftserver.com/&quot;&gt;Can I Host A Minecraft Server&lt;/a&gt;, which makes it easy to take your bandwidth (both up and down) and the available RAM and figure out about how many people you can host. Remember to use the bandwidth figures for the cloud provider you’re planning to use. For me, it turns out I can handle ~12 players in a 1GB instance with the usual cloud host network speeds of &amp;gt;5Mbps, which is what I was hoping to cover.&lt;/p&gt;
+
+&lt;p&gt;So that’s it for prep. Now it’s time to instantiate and install.&lt;/p&gt;
 
 
     &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2013/04/setting-up-a-minecraft-server-for-kids-part-1-preparation.html&quot;&gt;Setting Up A Minecraft Server For Kids, Part 1: Preparation&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on April 12, 2013.&lt;/p&gt;
@@ -136,16 +157,18 @@
   <title type="html"><![CDATA[Bashing tcsh]]></title>
   <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2012/03/bashing-tcsh.html" />
   <id>http://blog.geekdaily.org/2012/03/bashing-tcsh</id>
-  <published>2012-03-26T00:00:00-07:00</published>
-  <updated>2012-03-26T00:00:00-07:00</updated>
+  <published>2012-03-26T22:45:04-07:00</published>
+  <updated>2012-03-26T22:45:04-07:00</updated>
   <author>
-    <name>Jim Meyer</name>
+    <name></name>
     <uri>http://blog.geekdaily.org</uri>
-    <email>jim@geekdaily.org</email>
+    
   </author>
   <content type="html">
-    &lt;p&gt;After 15 years of non-stop tcsh action, I&#39;ve finally made the jump to bash. It was painful and I miss all my lovely variable expansion (^X $), wildcard expansion (^X*) and term completion (ESC-/), but there are so many tools like &lt;a href=&quot;https://github.com/sstephenson/rbenv&quot; target=&quot;_self&quot;&gt;rbenv&lt;/a&gt; that expect that you&#39;re using bash with no tcsh-friendly alternatives.&lt;/p&gt;
-&lt;p&gt;On the upside, I&#39;ve got functions now. I guess that&#39;s something.&lt;/p&gt;
+    &lt;p&gt;After 15 years of non-stop tcsh action, I’ve finally made the jump to bash. It was painful and I miss all my lovely variable expansion (^X $), wildcard expansion (^X*) and term completion (ESC-/), but there are so many tools like &lt;a href=&quot;https://github.com/sstephenson/rbenv&quot;&gt;rbenv&lt;/a&gt; that expect that you’re using bash with no tcsh-friendly alternatives.&lt;/p&gt;
+
+&lt;p&gt;On the upside, I’ve got functions now. I guess that’s something.&lt;/p&gt;
+
 &lt;p&gt;Oh, and hi again.&lt;/p&gt;
 
 
@@ -158,17 +181,17 @@
 
 <entry>
   <title type="html"><![CDATA[Advanced YAML: Tricking Out Your database.yml]]></title>
-  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2010/08/advanced-yaml-tricking-out-your-database-yml.html" />
-  <id>http://blog.geekdaily.org/2010/08/advanced-yaml-tricking-out-your-database-yml</id>
-  <published>2010-08-13T00:00:00-07:00</published>
-  <updated>2010-08-13T00:00:00-07:00</updated>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2010/08/advanced-yaml-tricking-out-your-databaseyml.html" />
+  <id>http://blog.geekdaily.org/2010/08/advanced-yaml-tricking-out-your-databaseyml</id>
+  <published>2010-08-13T16:03:33-07:00</published>
+  <updated>2010-08-13T16:03:33-07:00</updated>
   <author>
-    <name>Jim Meyer</name>
+    <name></name>
     <uri>http://blog.geekdaily.org</uri>
-    <email>jim@geekdaily.org</email>
+    
   </author>
   <content type="html">
-    &lt;p&gt;I&#39;ve been &lt;a href=&quot;http://en.wikipedia.org/wiki/Cargo_cult_programming&quot;&gt;cultishly&lt;/a&gt; carrying this snippet around for years:&lt;/p&gt;
+    &lt;p&gt;I’ve been &lt;a href=&quot;http://en.wikipedia.org/wiki/Cargo_cult_programming&quot;&gt;cultishly&lt;/a&gt; carrying this snippet around for years:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;login: &amp;amp;login
  adapter: mysql
@@ -198,11 +221,11 @@ development:
  &amp;lt;&amp;lt;: *common
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;This works swimmingly, but I was tired of ritually mimicking and extending the original snippet without actually understanding it. I decided to dig deeper into what was actually going on and found, unsurprisingly, that I stand on the shoulders of giants like &lt;a href=&quot;http://blog.lathi.net/&quot;&gt;Doug Alcorn&lt;/a&gt;, &lt;a href=&quot;http://blog.duncandavidson.com/&quot;&gt;James Duncan Davidson&lt;/a&gt;, and &lt;a href=&quot;http://blog.bleything.net/&quot;&gt;Ben Bleything&lt;/a&gt;. To render proper credit, &lt;a href=&quot;hhttp://blog.bleything.net/2006/6/27/dry-out-your-database-yml&quot;&gt;Ben’s post from June 2006&lt;/a&gt; builds on a missing post from James’s blog, both of which were preceded by &lt;a href=&quot;http://blog.lathi.net/articles/2006/03/02/config-database-yml-goodness-for-teams&quot;&gt;Doug’s observations in March 2006&lt;/a&gt;, and all of which draw on tricks originally found in the &lt;a href=&quot;http://github.com/fdv/typo/blob/master/config/database.yml.example&quot;&gt;Typo database config&lt;/a&gt;. None of them seems to have detailed what’s going on with the &amp;amp;login/*login construct, so I thought I’d dive into that a bit for posterity.&lt;/p&gt;
 
-&lt;p&gt;This works swimmingly, but I was tired of ritually mimicking and extending the original snippet without actually understanding it. I decided to dig deeper into what was actually going on and found, unsurprisingly, that I stand on the shoulders of giants like &lt;a href=&quot;http://blog.lathi.net/&quot;&gt;Doug Alcorn&lt;/a&gt;, &lt;a href=&quot;http://blog.duncandavidson.com/&quot;&gt;James Duncan Davidson&lt;/a&gt;, and &lt;a href=&quot;http://blog.bleything.net/&quot;&gt;Ben Bleything&lt;/a&gt;. To render proper credit, &lt;a href=&quot;hhttp://blog.bleything.net/2006/6/27/dry-out-your-database-yml&quot;&gt;Ben&#39;s post from June 2006&lt;/a&gt; builds on a missing post from James&#39;s blog, both of which were preceded by&lt;a href=&quot;http://blog.lathi.net/articles/2006/03/02/config-database-yml-goodness-for-teams&quot;&gt; Doug&#39;s observations in March 2006&lt;/a&gt;, and all of which draw on tricks originally found in the &lt;a href=&quot;http://github.com/fdv/typo/blob/master/config/database.yml.example&quot;&gt;Typo database config&lt;/a&gt;.&amp;#0160;None of them seems to have detailed what&#39;s going on with the &amp;amp;login/*login construct, so I thought I&#39;d dive into that a bit for posterity.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.yaml.org/&quot;&gt;YAML&lt;/a&gt; is nothing more than a human-readable way to serialize basic data structures like lists and associative arrays (aka hashes), which makes it ideal to represent the configuration values needed by Rails. It turns out that YAML provides anchors (&amp;amp;), references (*), and associative array merges («), all of which allow you to include by reference either by assignment or by merging a referenced array into another array. &lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://www.yaml.org/&quot;&gt;YAML&lt;/a&gt; is nothing more than a human-readable way to serialize basic data structures like lists and associative arrays (aka hashes), which makes it ideal to represent the configuration values needed by Rails. It turns out that YAML provides anchors (&amp;amp;), references (*), and associative array merges (&amp;lt;&amp;lt;), all of which allow you to include by reference either by assignment or by merging a referenced array into another array.&amp;#0160;&lt;/p&gt;&lt;p&gt;Here&#39;s an example of each:&lt;/p&gt;
+&lt;p&gt;Here’s an example of each:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;# Generate a reference
 mammal: &amp;amp;mammal_ref
@@ -223,22 +246,22 @@ platypus:
  lays_eggs: true
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;I found that the &lt;a href=&quot;http://en.wikipedia.org/wiki/YAML&quot;&gt;Wikipedia entry on YAML&lt;/a&gt; was a good, quick overview; the &lt;a href=&quot;http://www.yaml.org/spec/1.2/spec.html&quot;&gt;official YAML spec&lt;/a&gt; has all that and more, but it&#39;s not a quick read.&amp;#0160;Meanwhile, both Doug and Ben observed that bringing ERB into the mix let&#39;s you seriously customize things. I took a bit from both of them; here&#39;s my database.yml now:&lt;/p&gt;
+&lt;p&gt;I found that the &lt;a href=&quot;http://en.wikipedia.org/wiki/YAML&quot;&gt;Wikipedia entry on YAML&lt;/a&gt; was a good, quick overview; the &lt;a href=&quot;http://www.yaml.org/spec/1.2/spec.html&quot;&gt;official YAML spec&lt;/a&gt; has all that and more, but it’s not a quick read. Meanwhile, both Doug and Ben observed that bringing ERB into the mix let’s you seriously customize things. I took a bit from both of them; here’s my database.yml now:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;# Provide default local block
 local: &amp;amp;local
  username: myuser
  password: mypass
-&amp;lt;% if File.exist? &amp;quot;/opt/local/var/run/mysql5/mysqld.sock&amp;quot; %&amp;gt;
+&amp;lt;% if File.exist? &quot;/opt/local/var/run/mysql5/mysqld.sock&quot; %&amp;gt;
  socket: /opt/local/var/run/mysql5/mysqld.sock
-&amp;lt;% elsif File.exist? &amp;quot;/var/run/mysqld/mysqld.sock&amp;quot; %&amp;gt;
+&amp;lt;% elsif File.exist? &quot;/var/run/mysqld/mysqld.sock&quot; %&amp;gt;
  socket: /var/run/mysqld/mysqld.sock
-&amp;lt;% elsif File.exist? &amp;quot;/tmp/mysql.sock&amp;quot; %&amp;gt;
+&amp;lt;% elsif File.exist? &quot;/tmp/mysql.sock&quot; %&amp;gt;
  socket: /tmp/mysql.sock
 &amp;lt;% end %&amp;gt;
  
 # Allow for local DB configuration
-&amp;lt;%= File.read(File.join(File.dirname(__FILE__), &#39;dblocal.yml&#39;)) if File.exist?(File.join(File.dirname(__FILE__), &#39;dblocal.yml&#39;)) %&amp;gt;
+&amp;lt;%= File.read(File.join(File.dirname( __FILE__ ), &#39;dblocal.yml&#39;)) if File.exist?(File.join(File.dirname( __FILE__ ), &#39;dblocal.yml&#39;)) %&amp;gt;
 
 common: &amp;amp;common
  adapter: mysql
@@ -263,29 +286,7 @@ production:
 &lt;p&gt;Works a treat. Thanks, Doug, James, and Ben.&lt;/p&gt;
 
 
-    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2010/08/advanced-yaml-tricking-out-your-database-yml.html&quot;&gt;Advanced YAML: Tricking Out Your database.yml&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on August 13, 2010.&lt;/p&gt;
-  </content>
-</entry>
-
-
-  
-
-<entry>
-  <title type="html"><![CDATA[Live Blog: Web Aggregation, What Works and What Doesn't]]></title>
-  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/10/live-blog-web-aggregation-what-works-and-what-doesn-t.html" />
-  <id>http://blog.geekdaily.org/2009/10/live-blog-web-aggregation-what-works-and-what-doesn-t</id>
-  <published>2009-10-15T00:00:00-07:00</published>
-  <updated>2009-10-15T00:00:00-07:00</updated>
-  <author>
-    <name>Jim Meyer</name>
-    <uri>http://blog.geekdaily.org</uri>
-    <email>jim@geekdaily.org</email>
-  </author>
-  <content type="html">
-    &lt;p&gt;&lt;em&gt;[note: I originally scribbled this on paper thinking I could hand it off immediately, preventing the obligation of typing, posting, etc. Turns out I don&#39;t get off that lightly, so here&#39;s the spew in electrons.]&lt;/em&gt;&lt;/p&gt;&lt;p&gt;Scraping isn&#39;t a scalable model.&lt;/p&gt;There are biz issues around aggregating data: many businesses don&#39;t want you to get their data, though many are becoming more open.&lt;br /&gt;&lt;br /&gt;Doing aggregation right:&lt;br /&gt;* minimize latency&lt;br /&gt;* maximize engagement&lt;br /&gt;&lt;br /&gt;When latency is high, it causes confusion and takes you out of real-time&lt;br /&gt;&lt;br /&gt;Doing conditional gets can be somewhat useful.&lt;br /&gt;&lt;br /&gt;Plaxo had to shard their crawlers, which lands you in the shared state/sync problem of any stateful system you want to scale horizontally.&lt;br /&gt;&lt;br /&gt;Gnip integration has been good:&lt;br /&gt;* Offload the long-running processes&lt;br /&gt;* Gnip offers alerting or &amp;quot;fat ping&amp;quot; (ping includes update data)&lt;br /&gt;&lt;br /&gt;Plaxo likes using the alert to escalate the priority of the crawler which fetches the rich data related to the update. This approach allows you to use a consistent model for content ingestion vs. get info from fat ping, then augment later.&lt;br /&gt;&lt;br /&gt;Smarr: &amp;quot;Brad Fitzpatrick said, &#39;Make polling a special case of push.&#39;&amp;quot; &lt;span style=&quot;text-decoration: line-through;&quot;&gt;He attributed this to someone but I missed the attribution.&lt;/span&gt; &lt;br /&gt;&lt;br /&gt;(Don&#39;t try to keep up with Joseph Smarr on paper. He&#39;s thinks too many cogent thoughts too quickly to preserve legibility)&lt;br /&gt;&lt;br /&gt;Plaxo uses TripIt&#39;s RSS feed as alerting, grabs item ID, then uses their APIs to fetch rich data.&lt;br /&gt;&lt;br /&gt;There&#39;s a move to homogenize the info from sites, which may not be a good idea. It suppresses the distinctive look and feel/experience of the publishing site. Allowing for these differences means more labor spent on making one-off shims, which increases maintenance. Still, right choice in order to provide value to the user.&lt;br /&gt;&lt;br /&gt;Activity streams seek to provide more rich data in a somewhat normalized, extensible format.&lt;br /&gt;&lt;br /&gt;Many/most sites aren&#39;t yet perfectly architected for real-time&#39;s push, ping, etc.&lt;br /&gt;&lt;br /&gt;PubSubHubBub and Activity Streams are externally represented data shards&lt;br /&gt;&lt;br /&gt;Plaxo&#39;s Pulse started with known architecture issues (in order to ship) and hit the wall sooner than expected. Threw hardware/software optimizations at the problem to move the wall far enough to give time for rearchitecture, sharding, and working out how to propagate changes throughout the system properly.&lt;br /&gt;&lt;br /&gt;None of the NoSQL alternatives are quite ready for prime-time. Smarr: &amp;quot;It should be something that&#39;s just a primitive.&amp;quot;&lt;br /&gt;&lt;br /&gt;Conversation platforms are slightly different sorts of aggregation platforms. There are UI diffs (e.g. pause the stream when indicating interest). Handling the transition from slightly-latent/passive real-time to synchronous real-time/active not yet well-developed (think: when a comment inspires a conversation)&lt;br /&gt;&lt;br /&gt;90-99% of the value of the real-time web is realized in not-real-time [unreal-time? ;] This is a big deal for discovery. Twitter and FB make this harder by obscuring history.&lt;br /&gt;&lt;br /&gt;Ideal scalability/performance would be an index per user. This would be grossly inefficient due to the number of duplicate entries.&lt;br /&gt;&lt;br /&gt;No one has nailed reader-controlled aggregation (Show me Joe&#39;s tweets and blogs but not his photos) quite yet.&lt;br /&gt;&lt;br /&gt;Smarr: &amp;quot;If we&#39;re all kinda [sharing], we&#39;re all making each other smarter&amp;quot;&lt;br /&gt;&lt;br /&gt;The firehose of info is a hard model to scale to. Ben Metcalfe proposes the garden hose -- a firehose filtered at the source according to your interests, which helps aggregators by allowing them to request the superset of all filters from a given publisher.&lt;br /&gt;&lt;br /&gt;We really want to push contexts to the publishers and let them determine which content fits that context. Context shifts over time: Joe doesn&#39;t normally read my tweets (and why would he?) but when we&#39;re at a conference together, he&#39;s much more interested (thus the popularity of hashtags). This is a geographic and purpose-driven context (the conference) as well as Joe&#39;s context on me (Jim knows where the good bars are).&lt;br /&gt;&lt;br /&gt;Folks like Twitter are so overloaded with info that they might not recognize non-immediate contexts that are interesting to me.&lt;br /&gt;&lt;br /&gt;There&#39;s also the risk of exposing users to the amount of correlatable public data they have. Many don&#39;t want you to apply a transitive closure to identify them in all spaces even though doing so allows you to present a much more convenient UX around what they want you to aggregate.&lt;br /&gt;&lt;br /&gt;Someone likened the real-time aggregation problem to a bar conversation: you get snippets here and there and follow your own thread of interestingness.&lt;br /&gt;&lt;br /&gt;Three fundamental themes:&lt;br /&gt;* How to specify contexts to data provider/publisher&lt;br /&gt;* How to control access to private data (and carry ACLs with that data)&lt;br /&gt;* How to do all this efficiently&lt;br /&gt;&lt;br /&gt;Plaxo implemented polling-back-off (poll infrequently updated sources less frequently). Turns out this is a bad idea, as it introduces latency which makes it feel broken.&lt;br /&gt;&lt;br /&gt;There&#39;s also the issue of aggregating conversation about web objecs (like blog posts) and how not to divert the conversation from the publisher&#39;s site. However, sometimes you want a private discussion of a public object (cf. LinkedIn company groups discussing an article)&lt;br /&gt;&lt;br /&gt;Q: What&#39;s the state of open standards around this?&lt;br /&gt;A: PubSubHubBub and Activity Streams are very exciting. OAuth as access delegation. There&#39;s still a lot of ground to cover.
-
-
-    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/10/live-blog-web-aggregation-what-works-and-what-doesn-t.html&quot;&gt;Live Blog: Web Aggregation, What Works and What Doesn&#39;t&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on October 15, 2009.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2010/08/advanced-yaml-tricking-out-your-databaseyml.html&quot;&gt;Advanced YAML: Tricking Out Your database.yml&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on August 13, 2010.&lt;/p&gt;
   </content>
 </entry>
 
@@ -296,15 +297,100 @@ production:
   <title type="html"><![CDATA[Live Blog: Comet & Other Browser Stuff]]></title>
   <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/10/live-blog-comet-other-browser-stuff.html" />
   <id>http://blog.geekdaily.org/2009/10/live-blog-comet-other-browser-stuff</id>
-  <published>2009-10-15T00:00:00-07:00</published>
-  <updated>2009-10-15T00:00:00-07:00</updated>
+  <published>2009-10-15T13:27:25-07:00</published>
+  <updated>2009-10-15T13:27:25-07:00</updated>
   <author>
-    <name>Jim Meyer</name>
+    <name></name>
     <uri>http://blog.geekdaily.org</uri>
-    <email>jim@geekdaily.org</email>
+    
   </author>
   <content type="html">
-    It&#39;s a big component of what we call &amp;quot;real-time&amp;quot;&lt;br /&gt;&lt;br /&gt;This is the kind of stuff that puts up a banner on a Twitter search (&amp;quot;# New Tweets Found&amp;quot;) and makes things feel real time. &lt;br /&gt;&lt;br /&gt;List of what&#39;s being done to move notifications from server to browser:&lt;br /&gt;* Ajax polling: Anybody using the JS set-timeout function, then refetch. Used by GMail, Campfire, et al&lt;br /&gt;* Long polling (typically Comet): Used by FriendFeed, keeps an http connection open as long as possible (keep alive), reopen when timed-out. Keep a local thread pool.&lt;br /&gt;* Flash sockets: Same as long polling, but from Flash. Don&#39;t have the same-origin policy. No limitaions on number of connections. Does gzipping.&lt;br /&gt;* Reverse HTTP: hosting a little webserver inside a JS connection. Long pushing?&lt;br /&gt;* Silverlight (&amp;quot;MS&#39;s version of Flash&amp;quot;)&lt;br /&gt;* HTML5 websockets: part of spec, doesn&#39;t exist and not implemented. Expected to be like flash sockets.&lt;br /&gt;&lt;br /&gt;(things discarded as too old/obscure/painful/absurd):&lt;br /&gt;* Java applets (David Weekly is about to get himself kicked ;)&lt;br /&gt;* Big ugly JS kludges (iframe tricks, etc)&lt;br /&gt;* What&#39;s that Opera thing ... unite? ubiquity? Unite. Every browser is a webserver. Sounds like reverse HTTP.&lt;br /&gt;* Using XMPP format, arbitrary JSON structure, Atom.&lt;br /&gt;&lt;br /&gt;Libraries:&lt;br /&gt;* Orbited (?) tunnels TCP thru HTTP, treats each end like a socket. JS front-end, Python backend. Often paired with Twisted. Specifically meant to be Comet.&lt;br /&gt;* stropheJS: javascript, can use flash sockets&lt;br /&gt;* Tornado: python&lt;br /&gt;* Cometd: Java, made by Dojo to work with dojo&lt;br /&gt;* Dojo: javascript, can use flash sockets&lt;br /&gt;* APE project (?)&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;What formats are people using to send data:&lt;br /&gt;* JSON&lt;br /&gt;* XMPP&lt;br /&gt;&lt;br /&gt;Apps and their libs/methodologies:&lt;br /&gt;* Meebo: ??&lt;br /&gt;* Google Wave/GTalk: GWT RPC, long-polling, their own JS&lt;br /&gt;* FB Chat: ??&lt;br /&gt;* FriendFeed: Tornado server with long-polling, their own JS&lt;br /&gt;* Superfeedr: uses BOSH, stropheJS. BOSH is kinda long polling, bidirectional (two cs open all time). Very similar to comet, more friendly than strict proxies&lt;br /&gt;* Collecta: uses BOSH&lt;br /&gt;* Twingly: orbited&lt;br /&gt;* PBWorks: long polling on network dashboard to see updates come in live; wrote their own libraries, also use stropheJS&lt;br /&gt;* StatusNet - identi.ca and ??, orbited and cometd (you can do either)&lt;br /&gt;&lt;br /&gt;Flex and Air apps? The most interesting stuff is what used to be called Flash Media Server (been renamed). They&#39;ve got their own P2P protocol. All sorts of funky stuff you can do. OpenSource version of FMS is Red Five.&lt;br /&gt;&lt;br /&gt;In what situations are these libraries breaking down?&lt;br /&gt;* Transparent/Opaque proxies that give repeats/dupes/hangs. Keep buffer on server and check for these. Sometimes have to close connection to flush thru proxies.&lt;br /&gt;* &amp;quot;Everyone focuses on the newest hottest event-based framework, but the hardest part is that HTTP wasn&#39;t designed for long-polling.&amp;quot;&lt;br /&gt;&lt;br /&gt;Have to hold open request/response pairs. Connection setup and teardown is expensive&lt;br /&gt;&lt;br /&gt;Guy at UK telecom has only ~3K IP connections available in London area. Comet is going to force an upgrade of their hardware, which will be expensive. Real world constraints will always present.&lt;br /&gt;&lt;br /&gt;Real-time at UI can be distracting at best, horribly annoying at worst. Charts work great, but text moving too quickly becomes hard. UX is challenging. Would be nice to add items while autoscrolling relative to the focussed item&lt;br /&gt;&lt;br /&gt;When you want to add a pause button to your site, that&#39;s FAIL. But the hover-over-conversation to pause semantic is pretty good.&lt;br /&gt;&lt;br /&gt;Go to jschat.com to see a bad resize.&lt;br /&gt;&lt;br /&gt;FB pioneered notifications really well in UX. You get a &amp;quot;toaster popup&amp;quot; that doesn&#39;t disturb your screen and it fades after a few moments plus a bar at the bottom to persist the aggregated notifications/count. Really nice.&lt;br /&gt;&lt;br /&gt;Growl is also mentioned as a good model. Is there interest in a notification aggregator with contexts in the browser? Meebo wants to go that way as a notification aggregator. Adobe wants to do this on your desktop. BrowserPlus also hits Growl. Prowl == Pushed Growl.&lt;br /&gt;&lt;br /&gt;If everyone started using XMPP, it would increase the message load (&amp;quot;three bazillion individual messages&amp;quot;). No one is bundling XMPP updates; no reason you couldn&#39;t. ActivityStreams could also serve. &lt;br /&gt;&lt;br /&gt;Why are people using Atom/JSON for this? They&#39;re so extensible, but when you extend them so far they&#39;re just as verbose as XML. &amp;quot;But we just don&#39;t like XML.&amp;quot;&lt;br /&gt;&lt;br /&gt;Would be nice if you could select things to pull out of the stream and hold onto.&lt;br /&gt;&lt;br /&gt;Seems to be consensus that chat belongs at the bottom of the browser, append at end. Everything with a permalink (blogs, tweets, etc) gets added to the top (?). Seems to be related to height issues.&lt;br /&gt;&lt;br /&gt;Infinite scroll vs. &amp;quot;More&amp;quot; button&lt;br /&gt;&lt;br /&gt;Titlebar flash (Gmail and GTalk)&lt;br /&gt;&lt;br /&gt;Some sites make a tiny flash widget to play a sound&lt;br /&gt;&lt;br /&gt;Haptic: twitter dmesg to cellphone buzz&lt;br /&gt;&lt;br /&gt;Notifications can become another form of info overload/noise&lt;br /&gt;&lt;br /&gt;(We flailed at making a 1D/2D chart to represent frequency and value ... FAIL)&lt;br /&gt;&lt;br /&gt;Phonetop apps are like desktop apps. Leah feels strongly that they&#39;re headed down-and-to-the-right and browser-ish apps are taking supremacy due to interoperability.&lt;br /&gt;&lt;br /&gt;Apple&#39;s surprise: phonetop apps took off. (?) vs. John Gruber: &amp;quot;The most used app on my iPhone is Safari.&amp;quot;&lt;br /&gt;&lt;p&gt;You can find the whiteboard pics in &lt;a href=&quot;http://flickr.com/photos/purp&quot;&gt;my Flickr stream&lt;/a&gt;.&lt;/p&gt;
+    &lt;p&gt;It’s a big component of what we call “real-time”&lt;/p&gt;
+
+&lt;p&gt;This is the kind of stuff that puts up a banner on a Twitter search (“# New Tweets Found”) and makes things feel real time.&lt;/p&gt;
+
+&lt;p&gt;List of what’s being done to move notifications from server to browser:&lt;br /&gt;
+* Ajax polling: Anybody using the JS set-timeout function, then refetch. Used by GMail, Campfire, et al&lt;br /&gt;
+* Long polling (typically Comet): Used by FriendFeed, keeps an http connection open as long as possible (keep alive), reopen when timed-out. Keep a local thread pool.&lt;br /&gt;
+* Flash sockets: Same as long polling, but from Flash. Don’t have the same-origin policy. No limitaions on number of connections. Does gzipping.&lt;br /&gt;
+* Reverse HTTP: hosting a little webserver inside a JS connection. Long pushing?&lt;br /&gt;
+* Silverlight (“MS’s version of Flash”)&lt;br /&gt;
+* HTML5 websockets: part of spec, doesn’t exist and not implemented. Expected to be like flash sockets.&lt;/p&gt;
+
+&lt;p&gt;(things discarded as too old/obscure/painful/absurd):&lt;br /&gt;
+* Java applets (David Weekly is about to get himself kicked ;)&lt;br /&gt;
+* Big ugly JS kludges (iframe tricks, etc)&lt;br /&gt;
+* What’s that Opera thing … unite? ubiquity? Unite. Every browser is a webserver. Sounds like reverse HTTP.&lt;br /&gt;
+* Using XMPP format, arbitrary JSON structure, Atom.&lt;/p&gt;
+
+&lt;p&gt;Libraries:&lt;br /&gt;
+* Orbited (?) tunnels TCP thru HTTP, treats each end like a socket. JS front-end, Python backend. Often paired with Twisted. Specifically meant to be Comet.&lt;br /&gt;
+* stropheJS: javascript, can use flash sockets&lt;br /&gt;
+* Tornado: python&lt;br /&gt;
+* Cometd: Java, made by Dojo to work with dojo&lt;br /&gt;
+* Dojo: javascript, can use flash sockets&lt;br /&gt;
+* APE project (?)&lt;/p&gt;
+
+&lt;p&gt;What formats are people using to send data:&lt;br /&gt;
+* JSON&lt;br /&gt;
+* XMPP&lt;/p&gt;
+
+&lt;p&gt;Apps and their libs/methodologies:&lt;br /&gt;
+* Meebo: ??&lt;br /&gt;
+* Google Wave/GTalk: GWT RPC, long-polling, their own JS&lt;br /&gt;
+* FB Chat: ??&lt;br /&gt;
+* FriendFeed: Tornado server with long-polling, their own JS&lt;br /&gt;
+* Superfeedr: uses BOSH, stropheJS. BOSH is kinda long polling, bidirectional (two cs open all time). Very similar to comet, more friendly than strict proxies&lt;br /&gt;
+* Collecta: uses BOSH&lt;br /&gt;
+* Twingly: orbited&lt;br /&gt;
+* PBWorks: long polling on network dashboard to see updates come in live; wrote their own libraries, also use stropheJS&lt;br /&gt;
+* StatusNet - identi.ca and ??, orbited and cometd (you can do either)&lt;/p&gt;
+
+&lt;p&gt;Flex and Air apps? The most interesting stuff is what used to be called Flash Media Server (been renamed). They’ve got their own P2P protocol. All sorts of funky stuff you can do. OpenSource version of FMS is Red Five.&lt;/p&gt;
+
+&lt;p&gt;In what situations are these libraries breaking down?&lt;br /&gt;
+* Transparent/Opaque proxies that give repeats/dupes/hangs. Keep buffer on server and check for these. Sometimes have to close connection to flush thru proxies.&lt;br /&gt;
+* “Everyone focuses on the newest hottest event-based framework, but the hardest part is that HTTP wasn’t designed for long-polling.”&lt;/p&gt;
+
+&lt;p&gt;Have to hold open request/response pairs. Connection setup and teardown is expensive&lt;/p&gt;
+
+&lt;p&gt;Guy at UK telecom has only ~3K IP connections available in London area. Comet is going to force an upgrade of their hardware, which will be expensive. Real world constraints will always present.&lt;/p&gt;
+
+&lt;p&gt;Real-time at UI can be distracting at best, horribly annoying at worst. Charts work great, but text moving too quickly becomes hard. UX is challenging. Would be nice to add items while autoscrolling relative to the focussed item&lt;/p&gt;
+
+&lt;p&gt;When you want to add a pause button to your site, that’s FAIL. But the hover-over-conversation to pause semantic is pretty good.&lt;/p&gt;
+
+&lt;p&gt;Go to jschat.com to see a bad resize.&lt;/p&gt;
+
+&lt;p&gt;FB pioneered notifications really well in UX. You get a “toaster popup” that doesn’t disturb your screen and it fades after a few moments plus a bar at the bottom to persist the aggregated notifications/count. Really nice.&lt;/p&gt;
+
+&lt;p&gt;Growl is also mentioned as a good model. Is there interest in a notification aggregator with contexts in the browser? Meebo wants to go that way as a notification aggregator. Adobe wants to do this on your desktop. BrowserPlus also hits Growl. Prowl == Pushed Growl.&lt;/p&gt;
+
+&lt;p&gt;If everyone started using XMPP, it would increase the message load (“three bazillion individual messages”). No one is bundling XMPP updates; no reason you couldn’t. ActivityStreams could also serve.&lt;/p&gt;
+
+&lt;p&gt;Why are people using Atom/JSON for this? They’re so extensible, but when you extend them so far they’re just as verbose as XML. “But we just don’t like XML.”&lt;/p&gt;
+
+&lt;p&gt;Would be nice if you could select things to pull out of the stream and hold onto.&lt;/p&gt;
+
+&lt;p&gt;Seems to be consensus that chat belongs at the bottom of the browser, append at end. Everything with a permalink (blogs, tweets, etc) gets added to the top (?). Seems to be related to height issues.&lt;/p&gt;
+
+&lt;p&gt;Infinite scroll vs. “More” button&lt;/p&gt;
+
+&lt;p&gt;Titlebar flash (Gmail and GTalk)&lt;/p&gt;
+
+&lt;p&gt;Some sites make a tiny flash widget to play a sound&lt;/p&gt;
+
+&lt;p&gt;Haptic: twitter dmesg to cellphone buzz&lt;/p&gt;
+
+&lt;p&gt;Notifications can become another form of info overload/noise&lt;/p&gt;
+
+&lt;p&gt;(We flailed at making a 1D/2D chart to represent frequency and value … FAIL)&lt;/p&gt;
+
+&lt;p&gt;Phonetop apps are like desktop apps. Leah feels strongly that they’re headed down-and-to-the-right and browser-ish apps are taking supremacy due to interoperability.&lt;/p&gt;
+
+&lt;p&gt;Apple’s surprise: phonetop apps took off. (?) vs. John Gruber: “The most used app on my iPhone is Safari.”&lt;/p&gt;
+
+&lt;p&gt;You can find the whiteboard pics in &lt;a href=&quot;http://flickr.com/photos/purp&quot;&gt;my Flickr stream&lt;/a&gt;.&lt;/p&gt;
 
 
     &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/10/live-blog-comet-other-browser-stuff.html&quot;&gt;Live Blog: Comet &amp; Other Browser Stuff&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on October 15, 2009.&lt;/p&gt;
@@ -315,37 +401,128 @@ production:
   
 
 <entry>
+  <title type="html"><![CDATA[Live Blog: Web Aggregation, What Works and What Doesn't]]></title>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/10/live-blog-web-aggregation-what-works-and-what-doesnt.html" />
+  <id>http://blog.geekdaily.org/2009/10/live-blog-web-aggregation-what-works-and-what-doesnt</id>
+  <published>2009-10-15T12:17:59-07:00</published>
+  <updated>2009-10-15T12:17:59-07:00</updated>
+  <author>
+    <name></name>
+    <uri>http://blog.geekdaily.org</uri>
+    
+  </author>
+  <content type="html">
+    &lt;p&gt;&lt;em&gt;[note: I originally scribbled this on paper thinking I could hand it off immediately, preventing the obligation of typing, posting, etc. Turns out I don’t get off that lightly, so here’s the spew in electrons.]&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Scraping isn’t a scalable model.&lt;/p&gt;
+
+&lt;p&gt;There are biz issues around aggregating data: many businesses don’t want you to get their data, though many are becoming more open.&lt;/p&gt;
+
+&lt;p&gt;Doing aggregation right:&lt;br /&gt;
+* minimize latency&lt;br /&gt;
+* maximize engagement&lt;/p&gt;
+
+&lt;p&gt;When latency is high, it causes confusion and takes you out of real-time&lt;/p&gt;
+
+&lt;p&gt;Doing conditional gets can be somewhat useful.&lt;/p&gt;
+
+&lt;p&gt;Plaxo had to shard their crawlers, which lands you in the shared state/sync problem of any stateful system you want to scale horizontally.&lt;/p&gt;
+
+&lt;p&gt;Gnip integration has been good:&lt;br /&gt;
+* Offload the long-running processes&lt;br /&gt;
+* Gnip offers alerting or “fat ping” (ping includes update data)&lt;/p&gt;
+
+&lt;p&gt;Plaxo likes using the alert to escalate the priority of the crawler which fetches the rich data related to the update. This approach allows you to use a consistent model for content ingestion vs. get info from fat ping, then augment later.&lt;/p&gt;
+
+&lt;p&gt;Smarr: “Brad Fitzpatrick said, ‘Make polling a special case of push.’” He attributed this to someone but I missed the attribution.&lt;/p&gt;
+
+&lt;p&gt;(Don’t try to keep up with Joseph Smarr on paper. He’s thinks too many cogent thoughts too quickly to preserve legibility)&lt;/p&gt;
+
+&lt;p&gt;Plaxo uses TripIt’s RSS feed as alerting, grabs item ID, then uses their APIs to fetch rich data.&lt;/p&gt;
+
+&lt;p&gt;There’s a move to homogenize the info from sites, which may not be a good idea. It suppresses the distinctive look and feel/experience of the publishing site. Allowing for these differences means more labor spent on making one-off shims, which increases maintenance. Still, right choice in order to provide value to the user.&lt;/p&gt;
+
+&lt;p&gt;Activity streams seek to provide more rich data in a somewhat normalized, extensible format.&lt;/p&gt;
+
+&lt;p&gt;Many/most sites aren’t yet perfectly architected for real-time’s push, ping, etc.&lt;/p&gt;
+
+&lt;p&gt;PubSubHubBub and Activity Streams are externally represented data shards&lt;/p&gt;
+
+&lt;p&gt;Plaxo’s Pulse started with known architecture issues (in order to ship) and hit the wall sooner than expected. Threw hardware/software optimizations at the problem to move the wall far enough to give time for rearchitecture, sharding, and working out how to propagate changes throughout the system properly.&lt;/p&gt;
+
+&lt;p&gt;None of the NoSQL alternatives are quite ready for prime-time. Smarr: “It should be something that’s just a primitive.”&lt;/p&gt;
+
+&lt;p&gt;Conversation platforms are slightly different sorts of aggregation platforms. There are UI diffs (e.g. pause the stream when indicating interest). Handling the transition from slightly-latent/passive real-time to synchronous real-time/active not yet well-developed (think: when a comment inspires a conversation)&lt;/p&gt;
+
+&lt;p&gt;90-99% of the value of the real-time web is realized in not-real-time [unreal-time? ;] This is a big deal for discovery. Twitter and FB make this harder by obscuring history.&lt;/p&gt;
+
+&lt;p&gt;Ideal scalability/performance would be an index per user. This would be grossly inefficient due to the number of duplicate entries.&lt;/p&gt;
+
+&lt;p&gt;No one has nailed reader-controlled aggregation (Show me Joe’s tweets and blogs but not his photos) quite yet.&lt;/p&gt;
+
+&lt;p&gt;Smarr: “If we’re all kinda [sharing], we’re all making each other smarter”&lt;/p&gt;
+
+&lt;p&gt;The firehose of info is a hard model to scale to. Ben Metcalfe proposes the garden hose – a firehose filtered at the source according to your interests, which helps aggregators by allowing them to request the superset of all filters from a given publisher.&lt;/p&gt;
+
+&lt;p&gt;We really want to push contexts to the publishers and let them determine which content fits that context. Context shifts over time: Joe doesn’t normally read my tweets (and why would he?) but when we’re at a conference together, he’s much more interested (thus the popularity of hashtags). This is a geographic and purpose-driven context (the conference) as well as Joe’s context on me (Jim knows where the good bars are).&lt;/p&gt;
+
+&lt;p&gt;Folks like Twitter are so overloaded with info that they might not recognize non-immediate contexts that are interesting to me.&lt;/p&gt;
+
+&lt;p&gt;There’s also the risk of exposing users to the amount of correlatable public data they have. Many don’t want you to apply a transitive closure to identify them in all spaces even though doing so allows you to present a much more convenient UX around what they want you to aggregate.&lt;/p&gt;
+
+&lt;p&gt;Someone likened the real-time aggregation problem to a bar conversation: you get snippets here and there and follow your own thread of interestingness.&lt;/p&gt;
+
+&lt;p&gt;Three fundamental themes:&lt;br /&gt;
+* How to specify contexts to data provider/publisher&lt;br /&gt;
+* How to control access to private data (and carry ACLs with that data)&lt;br /&gt;
+* How to do all this efficiently&lt;/p&gt;
+
+&lt;p&gt;Plaxo implemented polling-back-off (poll infrequently updated sources less frequently). Turns out this is a bad idea, as it introduces latency which makes it feel broken.&lt;/p&gt;
+
+&lt;p&gt;There’s also the issue of aggregating conversation about web objecs (like blog posts) and how not to divert the conversation from the publisher’s site. However, sometimes you want a private discussion of a public object (cf. LinkedIn company groups discussing an article)&lt;/p&gt;
+
+&lt;p&gt;Q: What’s the state of open standards around this?&lt;br /&gt;
+A: PubSubHubBub and Activity Streams are very exciting. OAuth as access delegation. There’s still a lot of ground to cover.&lt;/p&gt;
+
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/10/live-blog-web-aggregation-what-works-and-what-doesnt.html&quot;&gt;Live Blog: Web Aggregation, What Works and What Doesn&#39;t&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on October 15, 2009.&lt;/p&gt;
+  </content>
+</entry>
+
+
+  
+
+<entry>
   <title type="html"><![CDATA[Stepping Into BDD with Cucumber and WebRAT: Structuring the Work]]></title>
   <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/09/stepping-into-bdd-with-cucumber-and-webrat-structuring-the-work.html" />
   <id>http://blog.geekdaily.org/2009/09/stepping-into-bdd-with-cucumber-and-webrat-structuring-the-work</id>
-  <published>2009-09-13T00:00:00-07:00</published>
-  <updated>2009-09-13T00:00:00-07:00</updated>
+  <published>2009-09-13T14:45:32-07:00</published>
+  <updated>2009-09-13T14:45:32-07:00</updated>
   <author>
-    <name>Jim Meyer</name>
+    <name></name>
     <uri>http://blog.geekdaily.org</uri>
-    <email>jim@geekdaily.org</email>
+    
   </author>
   <content type="html">
     &lt;p&gt;&lt;em&gt;This is the first of a series on my adventures in going BDD with Cucumber and WebRAT with a greenfield project. Watch for the next article coming soon.&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;I&#39;m working on a tiny project for the dads club at my son&#39;s school and using the opportunity to plunge fully into BDD with Cucumber. I&#39;ve been tinkering with it a bit here and there, but this time I&#39;m committing to fully specifying my acceptance criteria before I start writing specs for my implementation. I have to admit it feels a bit onerous right now, but I can see the value coming so I&#39;m sticking to it.&lt;/p&gt;
+&lt;p&gt;I’m working on a tiny project for the dads club at my son’s school and using the opportunity to plunge fully into BDD with Cucumber. I’ve been tinkering with it a bit here and there, but this time I’m committing to fully specifying my acceptance criteria before I start writing specs for my implementation. I have to admit it feels a bit onerous right now, but I can see the value coming so I’m sticking to it.&lt;/p&gt;
 
 &lt;p&gt;My usual working methodology is:&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Write a quick set of use cases&lt;/li&gt;
-&lt;li&gt;Infer features from the use cases&lt;/li&gt;
-&lt;li&gt;Divide the features into logical delivery phases&lt;/li&gt;
-&lt;li&gt;Start spec&#39;ing the implementation&lt;/li&gt;
-&lt;li&gt;Code to the specs&lt;/li&gt;
-&lt;li&gt;Profit!&lt;/li&gt;
+  &lt;li&gt;Write a quick set of use cases&lt;/li&gt;
+  &lt;li&gt;Infer features from the use cases&lt;/li&gt;
+  &lt;li&gt;Divide the features into logical delivery phases&lt;/li&gt;
+  &lt;li&gt;Start spec’ing the implementation&lt;/li&gt;
+  &lt;li&gt;Code to the specs&lt;/li&gt;
+  &lt;li&gt;Profit!&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;... so really I&#39;m just adding a &quot;Specify features using Cucumber&quot; step between 3 and 4. Sounds small (but it&#39;s not).&lt;/p&gt;
+
+&lt;p&gt;… so really I’m just adding a “Specify features using Cucumber” step between 3 and 4. Sounds small (but it’s not).&lt;/p&gt;
 
 &lt;p&gt;The use cases for this project are pretty easy:&lt;/p&gt;
 
-&lt;pre class=&quot;brush: plain; light: true;&quot;&gt;
-Use Cases:
+&lt;pre&gt;&lt;code&gt;Use Cases:
 
 NON-MEMBERS:
 * Join
@@ -362,16 +539,15 @@ PREZ FOR LIFE:
 * Write news postings
 * Post new events
 * Send news/reminders to various publishers (group mailing list, school newsletter editor, etc.)
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;(Yeah, we have a President For Life. He&#39;s awesome.)&lt;/p&gt;
+&lt;p&gt;(Yeah, we have a President For Life. He’s awesome.)&lt;/p&gt;
 
-&lt;p&gt;Time to break these into features. I try to scope each delivery to be a useful increase in features and something I can delivery quickly (I don&#39;t get much geek time these days ;). Some of this is old hat (it&#39;s mostly just a CMS), but some of it calls for me to learn about things I&#39;ve never played with (Google Maps APIs and Geolocation, for example). Additionally, it was important to get something up fast last week so the main URL could be included in some printed materials for back to school week.&lt;/p&gt;
+&lt;p&gt;Time to break these into features. I try to scope each delivery to be a useful increase in features and something I can delivery quickly (I don’t get much geek time these days ;). Some of this is old hat (it’s mostly just a CMS), but some of it calls for me to learn about things I’ve never played with (Google Maps APIs and Geolocation, for example). Additionally, it was important to get something up fast last week so the main URL could be included in some printed materials for back to school week.&lt;/p&gt;
 
-&lt;p&gt;Here&#39;s the feature rough divided into phases:&lt;/p&gt;
+&lt;p&gt;Here’s the feature rough divided into phases:&lt;/p&gt;
 
-&lt;pre class=&quot;brush: plain; light: true;&quot;&gt;
-Phase 0: Site
+&lt;pre&gt;&lt;code&gt;Phase 0: Site
 Non-Members can see front page
 
 Phase 1: Members
@@ -405,11 +581,11 @@ Members can browse directory info
 
 Phase 6: Maps
 Members can see people, events on map
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Phase 0 was &quot;get something up fast;&quot; we made it a simple redirect to the existing Google group. Phase 1 is the biggest chunk of features, but they&#39;re very straightforward. Each phase after that introduces enough new functionality to be interesting for the members, but in small enough chunks that I should be able to knock &#39;em out in a weekend, plus-or-minus.&lt;/p&gt;
+&lt;p&gt;Phase 0 was “get something up fast;” we made it a simple redirect to the existing Google group. Phase 1 is the biggest chunk of features, but they’re very straightforward. Each phase after that introduces enough new functionality to be interesting for the members, but in small enough chunks that I should be able to knock ‘em out in a weekend, plus-or-minus.&lt;/p&gt;
 
-&lt;p&gt;Okay, so now I&#39;m ready to generate the app and cucumber-ify it. I&#39;ll cover that in the next article.&lt;/p&gt;
+&lt;p&gt;Okay, so now I’m ready to generate the app and cucumber-ify it. I’ll cover that in the next article.&lt;/p&gt;
 
 
     &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/09/stepping-into-bdd-with-cucumber-and-webrat-structuring-the-work.html&quot;&gt;Stepping Into BDD with Cucumber and WebRAT: Structuring the Work&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on September 13, 2009.&lt;/p&gt;
@@ -423,18 +599,17 @@ Members can see people, events on map
   <title type="html"><![CDATA[Generate the regex for a TLD hostname from Perl]]></title>
   <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/08/generate-the-regex-for-a-tld-hostname-from-perl.html" />
   <id>http://blog.geekdaily.org/2009/08/generate-the-regex-for-a-tld-hostname-from-perl</id>
-  <published>2009-08-18T00:00:00-07:00</published>
-  <updated>2009-08-18T00:00:00-07:00</updated>
+  <published>2009-08-18T19:05:19-07:00</published>
+  <updated>2009-08-18T19:05:19-07:00</updated>
   <author>
-    <name>Jim Meyer</name>
+    <name></name>
     <uri>http://blog.geekdaily.org</uri>
-    <email>jim@geekdaily.org</email>
+    
   </author>
   <content type="html">
     &lt;p&gt;This was a quick, fun exercise to remind me that I can still write Perl. It fetches the list of TLDs from IANA, does a quick bit of munging, then renders a regex which should match any valid FQDN:&lt;/p&gt;
 
-&lt;pre class=&quot;brush: perl&quot;&gt;
-#!/usr/bin/env perl
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/env perl
 use strict;
 use warnings;
 
@@ -450,17 +625,17 @@ if (my $content = get(&#39;http://data.iana.org/TLD/tlds-alpha-by-domain.txt&#39
 
 my $regex = $fqdn_regex . &#39;(?:\s|\/|$)&#39;;
 print &quot;$regex\n&quot;;
-&lt;/pre&gt;&lt;p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
-Several caveats:&lt;/p&gt;
+&lt;p&gt;Several caveats:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;It doesn&#39;t match IPv4 dotted quad nor IPv6 ::-notation&lt;/li&gt;
-&lt;li&gt;It intentionally ignores Internationalized Domain Name in Applications (IDNA) domains&lt;/li&gt;
-&lt;li&gt;It borrows from my favorite reference for this, &lt;a href=&quot;http://www.regular-expressions.info/email.html&quot;&gt;regular-expressions.info&#39;s page on email address regexes&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;It doesn’t match IPv4 dotted quad nor IPv6 ::-notation&lt;/li&gt;
+  &lt;li&gt;It intentionally ignores Internationalized Domain Name in Applications (IDNA) domains&lt;/li&gt;
+  &lt;li&gt;It borrows from my favorite reference for this, &lt;a href=&quot;http://www.regular-expressions.info/email.html&quot;&gt;regular-expressions.info’s page on email address regexes&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;
-Maybe I&#39;ll extend it for completeness and/or rewrite it in Ruby someday. Until then, it&#39;ll always be &lt;tt&gt;~/bin/tld_regex&lt;/tt&gt; for me.&lt;/p&gt;
+
+&lt;p&gt;Maybe I’ll extend it for completeness and/or rewrite it in Ruby someday. Until then, it’ll always be &lt;tt&gt;~/bin/tld_regex&lt;/tt&gt; for me.&lt;/p&gt;
 
 
     &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/08/generate-the-regex-for-a-tld-hostname-from-perl.html&quot;&gt;Generate the regex for a TLD hostname from Perl&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on August 18, 2009.&lt;/p&gt;
@@ -472,20 +647,22 @@ Maybe I&#39;ll extend it for completeness and/or rewrite it in Ruby someday. Unt
 
 <entry>
   <title type="html"><![CDATA[Gmail no longer beta? True dat.]]></title>
-  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/07/gmail-no-longer-beta-true-dat-.html" />
-  <id>http://blog.geekdaily.org/2009/07/gmail-no-longer-beta-true-dat-</id>
-  <published>2009-07-07T00:00:00-07:00</published>
-  <updated>2009-07-07T00:00:00-07:00</updated>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/07/gmail-no-longer-beta-true-dat.html" />
+  <id>http://blog.geekdaily.org/2009/07/gmail-no-longer-beta-true-dat</id>
+  <published>2009-07-07T10:12:31-07:00</published>
+  <updated>2009-07-07T10:12:31-07:00</updated>
   <author>
-    <name>Jim Meyer</name>
+    <name></name>
     <uri>http://blog.geekdaily.org</uri>
-    <email>jim@geekdaily.org</email>
+    
   </author>
   <content type="html">
-    &lt;p&gt;I guess it&#39;s no longer &lt;a href=&quot;http://blog.geekdaily.org/2007/07/beta-is-the-web.html&quot;&gt;under construction&lt;/a&gt;, or so sayeth &lt;a href=&quot;http://gmailblog.blogspot.com/2009/07/gmail-leaves-beta-launches-back-to-beta.html&quot;&gt;the GMail blog&lt;/a&gt; which also shows those who can&#39;t live without that ubiquitous beta tag &lt;a href=&quot;http://mail.google.com/mail/?shva=1#settings/labs&quot;&gt;how to bring back their old friend&lt;/a&gt;:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;http://mail.google.com/mail/?shva=1#settings/labs&quot; onclick=&quot;window.open(this.href,&#39;_blank&#39;,&#39;scrollbars=no,resizable=yes,toolbar=no,directories=no,location=no,menubar=no,status=no,left=0,top=0&#39;); return false&quot; style=&quot;display: inline;&quot;&gt;&lt;img alt=&quot;Back2beta&quot; border=&quot;0&quot; class=&quot;at-xid-6a00d83452448969e2011570df13e4970c &quot; src=&quot;http://purp.typepad.com/.a/6a00d83452448969e2011570df13e4970c-pi&quot; style=&quot;width: 600px;&quot; title=&quot;Back2beta&quot; /&gt;&lt;/a&gt; &lt;/p&gt;
+    &lt;p&gt;I guess it’s no longer &lt;a href=&quot;http://blog.geekdaily.org/2007/07/beta-is-the-web.html&quot;&gt;under construction&lt;/a&gt;, or so sayeth &lt;a href=&quot;http://gmailblog.blogspot.com/2009/07/gmail-leaves-beta-launches-back-to-beta.html&quot;&gt;the GMail blog&lt;/a&gt; which also shows those who can’t live without that ubiquitous beta tag &lt;a href=&quot;http://mail.google.com/mail/?shva=1#settings/labs&quot;&gt;how to bring back their old friend&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://mail.google.com/mail/?shva=1#settings/labs&quot;&gt;&lt;img src=&quot;http://purp.typepad.com/.a/6a00d83452448969e2011570df13e4970c-pi&quot; alt=&quot;Back2beta&quot; title=&quot;Back2beta&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 
-    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/07/gmail-no-longer-beta-true-dat-.html&quot;&gt;Gmail no longer beta? True dat.&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on July 07, 2009.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/07/gmail-no-longer-beta-true-dat.html&quot;&gt;Gmail no longer beta? True dat.&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on July 07, 2009.&lt;/p&gt;
   </content>
 </entry>
 
@@ -494,799 +671,22 @@ Maybe I&#39;ll extend it for completeness and/or rewrite it in Ruby someday. Unt
 
 <entry>
   <title type="html"><![CDATA[Michael Jackson's Obit via Wordle]]></title>
-  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/michael-jackson-s-obit-via-wordle.html" />
-  <id>http://blog.geekdaily.org/2009/06/michael-jackson-s-obit-via-wordle</id>
-  <published>2009-06-25T00:00:00-07:00</published>
-  <updated>2009-06-25T00:00:00-07:00</updated>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/michael-jacksons-obit-via-wordle.html" />
+  <id>http://blog.geekdaily.org/2009/06/michael-jacksons-obit-via-wordle</id>
+  <published>2009-06-25T18:40:55-07:00</published>
+  <updated>2009-06-25T18:40:55-07:00</updated>
   <author>
-    <name>Jim Meyer</name>
+    <name></name>
     <uri>http://blog.geekdaily.org</uri>
-    <email>jim@geekdaily.org</email>
+    
   </author>
   <content type="html">
     &lt;p&gt;Story by &lt;a href=&quot;http://news.yahoo.com/s/ap/us_obit_michael_jackson&quot;&gt;Yahoo!&lt;/a&gt;, picture by &lt;a href=&quot;http://www.wordle.net/gallery/wrdl/970425/Michael_Jackson_Died&quot;&gt;Wordle.net&lt;/a&gt;:&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://www.wordle.net/gallery/wrdl/970425/Michael_Jackson_Died&quot; title=&quot;Wordle: Michael Jackson Died&quot;&gt;&lt;img  alt=&quot;MJ Obit Wordle&quot; class=&quot;at-xid-6a00d83452448969e20115715bf294970b image-full &quot; src=&quot;http://purp.typepad.com/.a/6a00d83452448969e20115715bf294970b-800wi&quot; title=&quot;MJ Obit Wordle&quot; border=&quot;0&quot;&gt;&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.wordle.net/gallery/wrdl/970425/Michael_Jackson_Died&quot; title=&quot;Wordle: Michael Jackson Died&quot;&gt;&lt;img src=&quot;http://purp.typepad.com/.a/6a00d83452448969e20115715bf294970b-800wi&quot; alt=&quot;MJ Obit Wordle&quot; title=&quot;MJ Obit Wordle&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 
-    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/michael-jackson-s-obit-via-wordle.html&quot;&gt;Michael Jackson&#39;s Obit via Wordle&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 25, 2009.&lt;/p&gt;
-  </content>
-</entry>
-
-
-  
-
-<entry>
-  <title type="html"><![CDATA[LiveBlog: The User and Business Impact of Server Delays, Additional Bytes, and HTTP Chunking in Web Search]]></title>
-  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-the-user-and-business-impact-of-server-delays-additional-bytes-and-http-chunking-in-web-search.html" />
-  <id>http://blog.geekdaily.org/2009/06/liveblog-the-user-and-business-impact-of-server-delays-additional-bytes-and-http-chunking-in-web-search</id>
-  <published>2009-06-23T00:00:00-07:00</published>
-  <updated>2009-06-23T00:00:00-07:00</updated>
-  <author>
-    <name>Jim Meyer</name>
-    <uri>http://blog.geekdaily.org</uri>
-    <email>jim@geekdaily.org</email>
-  </author>
-  <content type="html">
-    &lt;p&gt;Eric Schurman (Microsoft/bing), Jake Brutlag (Google)&lt;/p&gt;&lt;p&gt;
-
-
-Experiments
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;Server delays (MS and Google)&lt;/li&gt;
-		&lt;li&gt;Page weight variance&lt;/li&gt;
-		&lt;li&gt;Progressive rendering&lt;/li&gt;
-	&lt;/ul&gt;
-&lt;p&gt;
-
-
-They have platforms for experimentation which allow fractional experiments
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;Divide users into small buckets&lt;/li&gt;
-		&lt;li&gt;use good methodology (control group, experimental group(s))&lt;/li&gt;
-		&lt;li&gt;Way better than usability tests&lt;/li&gt;
-	&lt;/ul&gt;
-&lt;p&gt;
-
-
-Server Delays
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;Goal [missed all of this due to an IM. Lesson learned]&lt;/li&gt;
-	&lt;/ul&gt;
-&lt;p&gt;
-
-
-Results
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;No statistically significant change @ ~50ms delay&lt;/li&gt;
-		&lt;li&gt;Observable and fairly linear impact on delays 200/500/1000/2000ms.&lt;/li&gt;
-		&lt;li&gt;Time to first click took ~2x delay—theory: user has opportunity to get distracted&lt;/li&gt;
-	&lt;/ul&gt;
-&lt;p&gt;
-
-
-Google Search Delay Experiment
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;Varied type of delay, magnitude, and duration (number of weeks) per user group&lt;/li&gt;
-		&lt;li&gt;Pre-header delay: pause server processing upon receipt of req&lt;/li&gt;
-		&lt;li&gt;Post-header delay: pause after sending on header, but before sending results&lt;/li&gt;
-		&lt;li&gt;Post-ads delay: (ads are structurally first in page, can render before search result) put ads in separate http chunk, delay between ads and search results&lt;/li&gt;
-	&lt;/ul&gt;
-&lt;p&gt;
-
-
-Results:
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;Measure average daily searches per user&lt;/li&gt;
-		&lt;li&gt;50ms pre-header delays show no significant impact &lt;/li&gt;
-		&lt;li&gt;100ms pre-head, 200ms post-heads, 400ms post-head, 200ms post-ads (and others) showed linear progression in decreased avg daily searches&lt;/li&gt;
-		&lt;li&gt;Also saw increase in internally monitored “abandonment rate” &lt;/li&gt;
-		&lt;li&gt;Active users are more sensitive&lt;/li&gt;
-		&lt;li&gt;drop-off continued to trend down linearly beyond 4 weeks; effect becomes more pronounced over time, and additive—200ms and 400ms groups diverge more strongly&lt;/li&gt;
-		&lt;li&gt;Stopped injecting delays at week 7; recovery was significant immediately, but not fully realized at week 12—there was still a drop in activity for these groups&lt;/li&gt;
-	&lt;/ul&gt;
-&lt;p&gt;
-
-
-Page weight experiments
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;injected incompressible comments into various places of page&lt;/li&gt;
-		&lt;li&gt;varied size of comments from 5% of page to 500% (most of larger loads were below the fold)&lt;/li&gt;
-		&lt;li&gt;small payloads weren’t worrisome (tho stat’ly significant)&lt;/li&gt;
-		&lt;li&gt;perf suffered slightly, but was US only experiment; global exp planned, will likely show significantly larger drop in perf&lt;/li&gt;
-		&lt;li&gt;Click metrics were hurt more than query metrics&lt;/li&gt;
-	&lt;/ul&gt;
-&lt;p&gt;
-
-
-Progressive rendering experiment
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;Goal: determine impace sending visual header before results&lt;/li&gt;
-		&lt;li&gt;Build page in phases, send using &lt;span class=&quot;caps&quot;&gt;HTTP 1&lt;/span&gt;.1 chunked transfer encoding&lt;/li&gt;
-		&lt;li&gt;Results: Large improvement due to parallelization. Time to first click was ~9% faster, more likely to refine query, more clicks, more likely to page thru results&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-	&lt;p&gt;&lt;span class=&quot;caps&quot;&gt;HCI&lt;/span&gt; may state that 100-200ms isn’t perceptible; it still has effect.&lt;/p&gt;
-
-
-	&lt;p&gt;Getting something to your user quickly is more important than when they receive their last byte&lt;/p&gt;
-
-
-	&lt;p&gt;Experimentation platforms make all this research and hard numbers possible.&lt;/p&gt;
-
-
-    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-the-user-and-business-impact-of-server-delays-additional-bytes-and-http-chunking-in-web-search.html&quot;&gt;LiveBlog: The User and Business Impact of Server Delays, Additional Bytes, and HTTP Chunking in Web Search&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
-  </content>
-</entry>
-
-
-  
-
-<entry>
-  <title type="html"><![CDATA[LiveBlog: Surviving the 2008 Elections at DailyKos.com]]></title>
-  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-surviving-the-2008-elections-at-dailykos-com.html" />
-  <id>http://blog.geekdaily.org/2009/06/liveblog-surviving-the-2008-elections-at-dailykos-com</id>
-  <published>2009-06-23T00:00:00-07:00</published>
-  <updated>2009-06-23T00:00:00-07:00</updated>
-  <author>
-    <name>Jim Meyer</name>
-    <uri>http://blog.geekdaily.org</uri>
-    <email>jim@geekdaily.org</email>
-  </author>
-  <content type="html">
-    &lt;p&gt;More from Velocity 2009:&lt;/p&gt;&lt;p&gt;Jeremy Bingham, DailyKos.com&lt;/p&gt;&lt;p&gt;
-
-
-Before the flood
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;fell over a lot&lt;/li&gt;
-		&lt;li&gt;took a lot of admin time&lt;/li&gt;
-		&lt;li&gt;slow load times&lt;/li&gt;
-	&lt;/ul&gt;
-&lt;p&gt;
-
-
-MySQL issues
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;legacy tables from nearly-decade-old Slash with bad primary keys&lt;/li&gt;
-		&lt;li&gt;many MySQL 3.23isms—didn’t use any newer features&lt;/li&gt;
-		&lt;li&gt;had to stop believing “things are there for a reason” (e.g. fulltext index: 9GB data, 17GB index)&lt;/li&gt;
-		&lt;li&gt;keep all the old URLs working&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-	&lt;p&gt;IA Caucus first big night&lt;/p&gt;&lt;p&gt;
-
-
-Caching
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;Started with apache 1.3 as proxy, disk caching with push to disk&lt;/li&gt;
-		&lt;li&gt;Brought site to its knees as everything updated cache in sync&lt;/li&gt;
-		&lt;li&gt;switched to lighttpd using Vua, mod_magnet&lt;/li&gt;
-		&lt;li&gt;switched to mod_mcpage, cache pages only&lt;/li&gt;
-	&lt;/ul&gt;
-&lt;p&gt;
-
-
-Hardware
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;10 2x Xeons 2GB, 2 2x Opterons 8GB, image/memcached/combined search/SMTP server&lt;/li&gt;
-		&lt;li&gt;All independent, update separately&lt;/li&gt;
-		&lt;li&gt;updated to 6 4x Xeons 8GB, 2 8x Xeons 16GB, &lt;span class=&quot;caps&quot;&gt;RAID 10&lt;/span&gt; with well-tuned xfs for DB&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-	&lt;p&gt;Traffic more than doubled at election peak over normal monthly, almost 3x&lt;/p&gt;
-
-
-	&lt;p&gt;People liked to talk about Sarah Palin … a lot. How nice that she provided things to talk about.&lt;/p&gt;&lt;p&gt;
-
-
-Changes were in place by April 2008/Pennsylvania primary
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;perf was good&lt;/li&gt;
-		&lt;li&gt;flash electoral map was on 100Mb switch&lt;/li&gt;
-		&lt;li&gt;webhead loads ~0.5-1.8&lt;/li&gt;
-		&lt;li&gt;Ads and map added some slowdowns&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-surviving-the-2008-elections-at-dailykos-com.html&quot;&gt;LiveBlog: Surviving the 2008 Elections at DailyKos.com&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
-  </content>
-</entry>
-
-
-  
-
-<entry>
-  <title type="html"><![CDATA[LiveBlog: Q&A with Twitter's John Adams]]></title>
-  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-q-a-with-twitter-s-john-adams.html" />
-  <id>http://blog.geekdaily.org/2009/06/liveblog-q-a-with-twitter-s-john-adams</id>
-  <published>2009-06-23T00:00:00-07:00</published>
-  <updated>2009-06-23T00:00:00-07:00</updated>
-  <author>
-    <name>Jim Meyer</name>
-    <uri>http://blog.geekdaily.org</uri>
-    <email>jim@geekdaily.org</email>
-  </author>
-  <content type="html">
-    &lt;p&gt;A short pre-lunch session to absorb a few moment:
-
-&lt;/p&gt;&lt;p&gt;John Adams (Twitter) Q&amp;amp;A&lt;/p&gt;
-
-
-	&lt;p&gt;Q: How do you log all the info from your APIs? &lt;/p&gt;&lt;p&gt;A: syslog, looking at scribe, generally summarize and toss&lt;/p&gt;
-
-
-	&lt;p&gt;Q: How do you control abusive clients? &lt;/p&gt;&lt;p&gt;A: Rate limiting, apply feature limits to abusers, etc.&lt;/p&gt;
-
-
-	&lt;p&gt;Q: What would you do differently? &lt;/p&gt;&lt;p&gt;A: Implemented change controls much sooner. Process is much better now with more control, predictability&lt;/p&gt;
-
-
-	&lt;p&gt;Q: How does your on-call team work?
-&lt;br /&gt;A: More people reduces length in rotation. Nagios with alerts and aggregation of alerts. Make alerts actionable (db fails? see one page for db down, not 500 webservers). Also prevents burnout&lt;/p&gt;
-
-
-	&lt;p&gt;Q: Carry a real pager? &lt;/p&gt;&lt;p&gt;A: Some, mostly &lt;span class=&quot;caps&quot;&gt;SMS&lt;/span&gt;. There are escalations if you don’t answer. Always someone from Ops and Eng on the pager chain.&lt;/p&gt;
-
-
-    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-q-a-with-twitter-s-john-adams.html&quot;&gt;LiveBlog: Q&amp;A with Twitter&#39;s John Adams&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
-  </content>
-</entry>
-
-
-  
-
-<entry>
-  <title type="html"><![CDATA[LiveBlog: PageSpeed]]></title>
-  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-pagespeed.html" />
-  <id>http://blog.geekdaily.org/2009/06/liveblog-pagespeed</id>
-  <published>2009-06-23T00:00:00-07:00</published>
-  <updated>2009-06-23T00:00:00-07:00</updated>
-  <author>
-    <name>Jim Meyer</name>
-    <uri>http://blog.geekdaily.org</uri>
-    <email>jim@geekdaily.org</email>
-  </author>
-  <content type="html">
-    &lt;p&gt;Bryan McQuade (Google), Richard Rabbat (Google, Inc.)&lt;/p&gt;
-
-
-What&amp;#8217;s Page Speed
-	&lt;ul&gt;
-	&lt;li&gt;FF/Firebug addon&lt;/li&gt;
-		&lt;li&gt;http://code.google.com/p/page-speed&lt;/li&gt;
-		&lt;li&gt;Optimizes images, minifies JS, tells you what you should defer&lt;/li&gt;
-		&lt;li&gt;100K downloads in 10 days, 1000s of tweets, 100s of blog postings&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-How&amp;#8217;d it start
-	&lt;ul&gt;
-	&lt;li&gt;wanted to help stop relearning lessons in new apps&lt;/li&gt;
-		&lt;li&gt;keep you from unintended consequeces (e.g. vary header, squid won&amp;#8217;t cache anything with params, etc.) Google map tiles used to have ? in &lt;span class=&quot;caps&quot;&gt;URL&lt;/span&gt;; removing it gave huge boost in perf, huge reduction in requests&lt;/li&gt;
-		&lt;li&gt;Sourced from many smart people on the web&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-	&lt;p&gt;Prioritizes according to importance/savings, gives easy way to see detailed info about any given rule, what&amp;#8217;s violating it, docs on why and how of each rule&lt;/p&gt;
-
-
-Defer loading JS as much as possible
-	&lt;ul&gt;
-	&lt;li&gt;Rule looks to see what&amp;#8217;s not been invoked before OnLoad completes&lt;/li&gt;
-		&lt;li&gt;Not enabled by default, has perf hit&lt;/li&gt;
-		&lt;li&gt;Load multiple times in multiple scenarios; some JS is triggered in different&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-	&lt;p&gt;Inefficient &lt;span class=&quot;caps&quot;&gt;CSS&lt;/span&gt; Selectors: based on David Hyatt&amp;#8217;s post on inefficient selectors&lt;/p&gt;
-
-
-Activity Panel
-	&lt;ul&gt;
-	&lt;li&gt;Show where most time is spent, where you should focus optimization&lt;/li&gt;
-		&lt;li&gt;Shows &lt;span class=&quot;caps&quot;&gt;DNS&lt;/span&gt;, network, connection, latency, data available for use, JS parse/exec, cache hits&lt;/li&gt;
-		&lt;li&gt;Coming: paint events, screen snapshotting&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-	&lt;p&gt;&lt;span class=&quot;caps&quot;&gt;BBC&lt;/span&gt; &amp;#8220;has lots of room for optimization&amp;#8221; 
-gmail waterfall is hugely vertical!&lt;/p&gt;
-
-
-	&lt;p&gt;Just released &lt;span class=&quot;caps&quot;&gt;FF3&lt;/span&gt;.5 compatible version&lt;/p&gt;
-
-
-
-    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-pagespeed.html&quot;&gt;LiveBlog: PageSpeed&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
-  </content>
-</entry>
-
-
-  
-
-<entry>
-  <title type="html"><![CDATA[LiveBlog: Next Web Challenges: It's Still All About UX]]></title>
-  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-next-web-challenges-it-s-still-all-about-ux.html" />
-  <id>http://blog.geekdaily.org/2009/06/liveblog-next-web-challenges-it-s-still-all-about-ux</id>
-  <published>2009-06-23T00:00:00-07:00</published>
-  <updated>2009-06-23T00:00:00-07:00</updated>
-  <author>
-    <name>Jim Meyer</name>
-    <uri>http://blog.geekdaily.org</uri>
-    <email>jim@geekdaily.org</email>
-  </author>
-  <content type="html">
-    &lt;p&gt;Velocity 2009, the conference about performance, is very high-performance about getting people on and off stage (and high density around content)&lt;/p&gt;&lt;p&gt;Umang Gupta, Vik Chaudhary (Keynote)&lt;/p&gt;
-
-
-	&lt;p&gt;(omitted: Keynote history, 15 years of continuous improvement, etc.)&lt;/p&gt;&lt;p&gt;
-
-
-Debuting Transaction Perpective 9.0 (TXP9)
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;Embeds real IE browser for monitoring&lt;/li&gt;
-		&lt;li&gt;Adds “screen sensing” technology&lt;/li&gt;
-		&lt;li&gt;Esp. useful for “next web” apps: flash, video, voice, &lt;span class=&quot;caps&quot;&gt;SMS&lt;/span&gt;/mobile—composit transactions or flows&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-	&lt;p&gt;(demo: reservations site for The Broadmoor in Colorado Springs, very flash-integrated with lots of client-side action. “Challenge of screen sensing what’s going on on the screen is non-trivial”. Also http://espn.go.com/video/ and Mini-Cooper flash site)&lt;/p&gt;
-
-
-	&lt;p&gt;Using &lt;span class=&quot;caps&quot;&gt;KITE&lt;/span&gt; platform/desktop environment to record what you’re doing. You click around, type, etc. and it records a script.&lt;/p&gt;
-
-
-	&lt;p&gt;(This is somewhat like what they do at [DeviceAnywhere http://deviceanywhere.com/] for mobile device testing. They don’t focus on UX or perf; they’re more on QA testing side)&lt;/p&gt;
-
-
-	&lt;p&gt;Script runs and collects UX and Network times. UX time is net time + client-side execution + rendering. Also shows augmented waterfall inclusive of client-side computation, etc.&lt;/p&gt;
-
-
-    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-next-web-challenges-it-s-still-all-about-ux.html&quot;&gt;LiveBlog: Next Web Challenges: It&#39;s Still All About UX&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
-  </content>
-</entry>
-
-
-  
-
-<entry>
-  <title type="html"><![CDATA[LiveBlog: Fixing Twitter]]></title>
-  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-fixing-twitter.html" />
-  <id>http://blog.geekdaily.org/2009/06/liveblog-fixing-twitter</id>
-  <published>2009-06-23T00:00:00-07:00</published>
-  <updated>2009-06-23T00:00:00-07:00</updated>
-  <author>
-    <name>Jim Meyer</name>
-    <uri>http://blog.geekdaily.org</uri>
-    <email>jim@geekdaily.org</email>
-  </author>
-  <content type="html">
-    John Adams, Twitter Ops&lt;/p&gt;
-
-
-Ops
-	&lt;ul&gt;
-	&lt;li&gt;Small team&lt;/li&gt;
-		&lt;li&gt;SW perf&lt;/li&gt;
-		&lt;li&gt;availability is their primary focus&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-All on managed services with &lt;span class=&quot;caps&quot;&gt;NTT&lt;/span&gt;
-	&lt;ul&gt;
-	&lt;li&gt;No clouds&amp;#8212;too high latency&lt;/li&gt;
-		&lt;li&gt;&lt;span class=&quot;caps&quot;&gt;NTT&lt;/span&gt; runs the &lt;span class=&quot;caps&quot;&gt;NOC&lt;/span&gt;&lt;/li&gt;
-		&lt;li&gt;Frees them to deal with real thinking compsci probs&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-	&lt;p&gt;752% growth in 2008, trend happens ~11/2008 and keeps climbing&lt;/p&gt;
-
-
-	&lt;p&gt;Growth  Pain  Fear of what&amp;#8217;s gonna happen&lt;/p&gt;
-
-
-Mantra: 
-	&lt;ul&gt;
-	&lt;li&gt;Find the weekest point (metrics + logging + analysis)&lt;/li&gt;
-		&lt;li&gt;Take corrective action (process)&lt;/li&gt;
-		&lt;li&gt;Repeat&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-Find weak points
-	&lt;ul&gt;
-	&lt;li&gt;Collect metrics and graphs (individual metrics are irrelevant)&lt;/li&gt;
-		&lt;li&gt;Logs&lt;/li&gt;
-		&lt;li&gt;&lt;span class=&quot;caps&quot;&gt;SCIENCE&lt;/span&gt;!&lt;/li&gt;
-		&lt;li&gt;Instrument everything! More info is better&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-Monitoring
-	&lt;ul&gt;
-	&lt;li&gt;Keep critical metrics as close to realtime as possible&lt;/li&gt;
-		&lt;li&gt;Using &lt;span class=&quot;caps&quot;&gt;RRD&lt;/span&gt;, Ganglia + gMetrics, &lt;span class=&quot;caps&quot;&gt;MRTG&lt;/span&gt;&lt;/li&gt;
-		&lt;li&gt;Mostly on 10s interval, some 5s, some 60s&lt;/li&gt;
-		&lt;li&gt;Everyone in company has access to dashboard&lt;/li&gt;
-		&lt;li&gt;&amp;#8220;Criticals&amp;#8221; view&lt;/li&gt;
-		&lt;li&gt;Use google analytics for failwhale and other err pages&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-Analyze
-	&lt;ul&gt;
-	&lt;li&gt;Turn data into info&lt;/li&gt;
-		&lt;li&gt;Are things better/worse post-deploy&lt;/li&gt;
-		&lt;li&gt;Create env of capacity planning, not firefighting&amp;#8212;no more cowboys in the wild west&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-Deploys
-	&lt;ul&gt;
-	&lt;li&gt;Ganglia shows final deploy info for twitter, summize, and search&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-Whale-watcher
-	&lt;ul&gt;
-	&lt;li&gt;simple script with massive win&lt;/li&gt;
-		&lt;li&gt;503 is a whale, 500 is a robot&lt;/li&gt;
-		&lt;li&gt;Whales per second exceeds whale threshold then &amp;#8220;There&amp;#8217;s whales!&amp;#8221; &lt;/li&gt;
-		&lt;li&gt;Darkmode: selectively disable portions of site with automatic notification to product and eng teams to let them know&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-Config Mgmt
-	&lt;ul&gt;
-	&lt;li&gt;You need an automated cfg mgmt system &lt;span class=&quot;caps&quot;&gt;NOW&lt;/span&gt;. Else you won&amp;#8217;t scale&lt;/li&gt;
-		&lt;li&gt;It intros complexity, with multiple admins, unknown interactions&lt;/li&gt;
-		&lt;li&gt;Peer review solves most of this; they use reviewboard with svn precommit hook requiring &amp;#8220;reviewed by&amp;#8221; note in comment and postcommit hook sends note about what changed to people&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-High communication
-	&lt;ul&gt;
-	&lt;li&gt;They use chat (campfire) with docs, graphs, logs, etc.&lt;/li&gt;
-		&lt;li&gt;skitch into campfire is a frequent working methodology&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-Subsystems
-	&lt;ul&gt;
-	&lt;li&gt;Many limiting factors in request pipeline&lt;/li&gt;
-		&lt;li&gt;Oversubscribe mongrel 2:1 vs. cores&lt;/li&gt;
-		&lt;li&gt;Attack plan per ssytem (e.g. bandwidth? bottleneck: network, vector: http latency, solution: servers+&lt;ins&gt;; timeline? db, update delay, better algo; search? db, delays, dbs&lt;/ins&gt;+ and code; etc.)&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-CPUs:
-	&lt;ul&gt;
-	&lt;li&gt;switched to Xeon +30% gain&lt;/li&gt;
-		&lt;li&gt;replace 2x and 4x core with 8x core +40%&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-Rails:
-	&lt;ul&gt;
-	&lt;li&gt;Stop blaming rails&lt;/li&gt;
-		&lt;li&gt;Analysis: caching/cache invalidation, AR makes bad queries, queue latency, memcache/page corruption, rep lag&lt;/li&gt;
-		&lt;li&gt;Not so much about Rails&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-Disk is the new Tape
-	&lt;ul&gt;
-	&lt;li&gt;Social networks is very O(n^y) oriented&lt;/li&gt;
-		&lt;li&gt;Disk is too slow&lt;/li&gt;
-		&lt;li&gt;Need lots of &lt;span class=&quot;caps&quot;&gt;RAM&lt;/span&gt;&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-	&lt;p&gt;Lots of caching is possible. Moving libmemcached to native C gem was bigtime helpful.&lt;/p&gt;
-
-
-	&lt;p&gt;Nick&amp;#8217;s CacheMoney AR plugin: readthru/writethru caching with memcached!&lt;/p&gt;
-
-
-Caching everything not smart, either
-	&lt;ul&gt;
-	&lt;li&gt;Cache evictions&lt;/li&gt;
-		&lt;li&gt;Cold cache after host failure/new host spinup&lt;/li&gt;
-		&lt;li&gt;Cache smarter: get rid of cache busting behaviors, varnish with failover, etc.&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-&lt;span class=&quot;caps&quot;&gt;RDBMS&lt;/span&gt; vs message queues
-	&lt;ul&gt;
-	&lt;li&gt;Not everything needs &lt;span class=&quot;caps&quot;&gt;ACID&lt;/span&gt;&lt;/li&gt;
-		&lt;li&gt;message queues help&lt;/li&gt;
-		&lt;li&gt;Most MQs suck at high load&lt;/li&gt;
-		&lt;li&gt;They wrote Kestrel for this; looks like memcache&lt;/li&gt;
-		&lt;li&gt;Starling was earlier version&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-Asynch == Good
-	&lt;ul&gt;
-	&lt;li&gt;They lean on mongrel heavily (they know it well)&lt;/li&gt;
-		&lt;li&gt;Keep external service requests out of the pipeline via daemons which process message queues&lt;/li&gt;
-		&lt;li&gt;Size worker daemons appropriately, have them kill themselves off rather than long-run&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-DB replication
-	&lt;ul&gt;
-	&lt;li&gt;Multiple functional read/write masters&lt;/li&gt;
-		&lt;li&gt;never read from the master&amp;#8212;slows it down too much&lt;/li&gt;
-		&lt;li&gt;watch your slow queries&lt;/li&gt;
-		&lt;li&gt;use mkill to kill long-running queries before they kill you.&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-	&lt;p&gt;Put up a status blog on some other service&amp;#8212;transparency stops armchair engineering&lt;/p&gt;
-
-
-
-    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-fixing-twitter.html&quot;&gt;LiveBlog: Fixing Twitter&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
-  </content>
-</entry>
-
-
-  
-
-<entry>
-  <title type="html"><![CDATA[LiveBlog: After the Click]]></title>
-  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-after-the-click.html" />
-  <id>http://blog.geekdaily.org/2009/06/liveblog-after-the-click</id>
-  <published>2009-06-23T00:00:00-07:00</published>
-  <updated>2009-06-23T00:00:00-07:00</updated>
-  <author>
-    <name>Jim Meyer</name>
-    <uri>http://blog.geekdaily.org</uri>
-    <email>jim@geekdaily.org</email>
-  </author>
-  <content type="html">
-    More from Velocity 2009. Going really fast, sorry for all the sloppiness.
-
-&lt;p&gt;Jonathan Heiliger, VP Tech Ops FB&lt;/p&gt;
-
-
-	&lt;p&gt;FB Mission: give people the power to share and make the world more open and connected.&lt;/p&gt;
-
-
-	&lt;p&gt;2004: launch in MZ&amp;#8217;s dorm room
-2004-5: new apps launched (events, photos, mobile)
-2006: news feed and open reg
-2007: platform launch
-2008: crowdsourced translations; reached 30 langs quickly (spanish 2 wks, french ~24 hrs)&lt;/p&gt;
-
-
-	&lt;p&gt;[nice map viz for growth: colorize market penetration]&lt;/p&gt;
-
-
-	&lt;p&gt;Radio took ~150 yrs (?) to reach 150M
-TV: 13 yrs
-Computers 4 years
-FB: 3 yrs&lt;/p&gt;
-
-
-	&lt;p&gt;How FB deals&lt;/p&gt;
-
-
-Classic battle of Ops v. Eng
-	&lt;ul&gt;
-	&lt;li&gt;Ops wants no change&amp;#8212;stability&lt;/li&gt;
-		&lt;li&gt;Eng wants lots of change&amp;#8212;driven by users and site&lt;/li&gt;
-		&lt;li&gt;Do you really want to fight it out? Teamwork is required&lt;/li&gt;
-		&lt;li&gt;Enable individuals to reach goals, chase team success&lt;/li&gt;
-		&lt;li&gt;Make it transparent to users and safe for employees to fail&lt;/li&gt;
-		&lt;li&gt;Make it a point of pride: you don&amp;#8217;t want to be the one who took down the site (but there&amp;#8217;s some cache in that war story)&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-It&amp;#8217;s the people
-	&lt;ul&gt;
-	&lt;li&gt;Everyone hires the smartest people&lt;/li&gt;
-		&lt;li&gt;It&amp;#8217;s about organizing and leading&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-	&lt;p&gt;Tuning the Operating Pipeline (Eng -&amp;gt; QA -&amp;gt; Ops aka Dev -&amp;gt; Test -&amp;gt; Deploy)
-(this isn&amp;#8217;t how they did it)&lt;/p&gt;
-
-
-	&lt;p&gt;Engineering is responsible for the efficacy and reliability of their code, writing their own tests, and full lifecycle of code including pushing it live.&lt;/p&gt;
-
-
-	&lt;p&gt;Ops provides guard rails to keep eng safe from itself, prevent site downtime. Feature can go down, but rest of site is safe.&lt;/p&gt;
-
-
-	&lt;p&gt;Complaints back in the day:
-Ops: Eng is way too unstructured, lobbing crap over the wall.
-Eng: Ops is not nimble&lt;/p&gt;
-
-
-	&lt;p&gt;Make the problem joint; Eng owns the problem&lt;/p&gt;
-
-
-	&lt;p&gt;Continuous build, code review, peer review, perf testing has kept things moving fast while moving to 200+ eng org.&lt;/p&gt;
-
-
-Put engineers in operations
-	&lt;ul&gt;
-	&lt;li&gt;Site reliability team: stewards of the site&lt;/li&gt;
-		&lt;li&gt;Operations engineering: tooling and glue apps (workflow/pipeline)&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-Put ops in engineering (consulting engineers)
-	&lt;ul&gt;
-	&lt;li&gt;Partners with backend service groups to think about architecture, scaling, reliability&lt;/li&gt;
-		&lt;li&gt;Helps mentor into full &lt;span class=&quot;caps&quot;&gt;SDLC&lt;/span&gt; responsibility&amp;#8212;really understand complete &lt;span class=&quot;caps&quot;&gt;DEV&lt;/span&gt; to &lt;span class=&quot;caps&quot;&gt;PROD&lt;/span&gt; function of code&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-	&lt;p&gt;Software launch has warroom with PM, Eng, NetEng, &lt;span class=&quot;caps&quot;&gt;SRE&lt;/span&gt;, Perf Eng, Site Integrity staff around. Always the right person on hand, physically present.&lt;/p&gt;
-
-
-Getting it done
-	&lt;ul&gt;
-	&lt;li&gt;If you can&amp;#8217;t work as a team, you&amp;#8217;re done&lt;/li&gt;
-		&lt;li&gt;Design is awesome, but it needs execution to succeed&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-Three things they did live expecting to break the site
-	&lt;ul&gt;
-	&lt;li&gt;See how the team worked, who would step up, etc.&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-&lt;span class=&quot;caps&quot;&gt;CNN&lt;/span&gt; livefeed
-	&lt;ul&gt;
-	&lt;li&gt;Group of 20 some folks came together, marketing, eng, product, ops, etc.&lt;/li&gt;
-		&lt;li&gt;Added much capacity, made warroom&lt;/li&gt;
-		&lt;li&gt;Written from scratch in ~3 weeks&lt;/li&gt;
-		&lt;li&gt;Replicated (and improved) for Oscars, etc.&lt;/li&gt;
-		&lt;li&gt;Knew there would be point load much like DoS attack&lt;/li&gt;
-		&lt;li&gt;Added throttles to direct features, as well as throttling things like chat, number of thumbnails shown on site, etc.&lt;/li&gt;
-		&lt;li&gt;Friends had to be shown on the fly&lt;/li&gt;
-		&lt;li&gt;Common content was cached in &lt;span class=&quot;caps&quot;&gt;CDN&lt;/span&gt;; didn&amp;#8217;t anticipate delay/latency from &lt;span class=&quot;caps&quot;&gt;CDN&lt;/span&gt;&lt;/li&gt;
-		&lt;li&gt;Didn&amp;#8217;t expec users to maddly twiddle &amp;#8220;Everyone&amp;#8221; and &amp;#8220;Friends&amp;#8221; tabs (they did) &amp;#8211; learned &amp;#8220;cache everything&amp;#8221; &lt;/li&gt;
-		&lt;li&gt;During inauguraton 2M status updates, 8.5K spike at start&lt;/li&gt;
-		&lt;li&gt;Dark launched everything with users exercising the stack without any visible UI to users&lt;/li&gt;
-		&lt;li&gt;Also built perf framework to see what real user experience would be like&lt;/li&gt;
-		&lt;li&gt;Used data from both to appropriately size&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-Like
-	&lt;ul&gt;
-	&lt;li&gt;Simple &amp;#8220;I like this&amp;#8221; on wall/status&lt;/li&gt;
-		&lt;li&gt;Didn&amp;#8217;t expect it to get a lot of traffic at first; totally wrong
-	&lt;ul&gt;
-	&lt;li&gt;4.1m users liked 7.1 M times first day&lt;/li&gt;
-		&lt;li&gt;16.3/46.2 1st week&lt;/li&gt;
-		&lt;li&gt;39.6/226.8 1st month&lt;/li&gt;
-	&lt;/ul&gt;&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-Username allocations
-	&lt;ul&gt;
-	&lt;li&gt;Was initially to be auction (codename: hammer)&lt;/li&gt;
-		&lt;li&gt;Decided to go first come first served, kept codename&amp;#8212;it was going to hammer the site&lt;/li&gt;
-		&lt;li&gt;Had to have blocked list of trademarks; didn&amp;#8217;t block &amp;#8220;asp.net&amp;#8221; &lt;/li&gt;
-		&lt;li&gt;Dark launch, found issues, delayed initial launch&lt;/li&gt;
-		&lt;li&gt;Launched at 9p; huge cache hit within moments, no increase in idle latency (means they got it right, maybe a little overprovisioned)&lt;/li&gt;
-		&lt;li&gt;Made pages as light as possible&lt;/li&gt;
-		&lt;li&gt;Tiny blip in overall load&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-Datacenter infra/organization is hugely important
-	&lt;ul&gt;
-	&lt;li&gt;Untidiness reflects bad organization&lt;/li&gt;
-		&lt;li&gt;DC/infra is 2nd biggest exp after people&lt;/li&gt;
-		&lt;li&gt;Invest where appropriate&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-	&lt;p&gt;Distribute accountability
-Test with users
-&amp;#8220;The only place success comes before work is in the dictionary&amp;#8221; &amp;#8211; Vince lombardi&lt;/p&gt;
-
-
-	&lt;p&gt;Expects org to look different in a year&amp;#8212;evolution is the key.&lt;/p&gt;
-
-
-    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-after-the-click.html&quot;&gt;LiveBlog: After the Click&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
-  </content>
-</entry>
-
-
-  
-
-<entry>
-  <title type="html"><![CDATA[LiveBlog: 2 Years Later, Loving and Hating the Cloud]]></title>
-  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-2-years-later-loving-and-hating-the-cloud.html" />
-  <id>http://blog.geekdaily.org/2009/06/liveblog-2-years-later-loving-and-hating-the-cloud</id>
-  <published>2009-06-23T00:00:00-07:00</published>
-  <updated>2009-06-23T00:00:00-07:00</updated>
-  <author>
-    <name>Jim Meyer</name>
-    <uri>http://blog.geekdaily.org</uri>
-    <email>jim@geekdaily.org</email>
-  </author>
-  <content type="html">
-    More from Velocity 2009
-
-&lt;p&gt;Justin Huff, Picknik (online photo editor)&lt;/p&gt;
-
-
-	&lt;p&gt;Used &lt;span class=&quot;caps&quot;&gt;AWS&lt;/span&gt; for 2 years, 1.5 in production&lt;/p&gt;
-
-
-	&lt;p&gt;Hybrid app: small cage in Seattle + &lt;span class=&quot;caps&quot;&gt;EC2&lt;/span&gt;/S3 for some parts of infra&lt;/p&gt;
-
-
-	&lt;p&gt;Gives flexibility&lt;/p&gt;
-
-
-Picnik has a spiky profile based on usage; &lt;span class=&quot;caps&quot;&gt;EC2&lt;/span&gt; allows to cover that
-	&lt;ul&gt;
-	&lt;li&gt;They use a lot of&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-Capacity management (not planning)
-	&lt;ul&gt;
-	&lt;li&gt;easily repurpose between webserver and asynch jobs&lt;/li&gt;
-		&lt;li&gt;Can buy hardware in batches, grow logically, get better deals&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-	&lt;p&gt;At one point had nearly 1B objects in S3&lt;/p&gt;
-
-
-	&lt;p&gt;1. Move old files to S3
-2. Put some new files to S3
-3. Put a lot more out there  (had a knob to adjust, eventually reached S3)
-4. Profit? Not so much ..&lt;/p&gt;
-
-
-	&lt;p&gt;Most S3 objs short lived, needed fast deletion, and mostly didn&amp;#8217;t have it&lt;/p&gt;
-
-
-	&lt;p&gt;Mostly ignored this problem in favor of other more important problems (db sharding, scaling web frontends, expanding). Spend money on it.&lt;/p&gt;
-
-
-	&lt;p&gt;They have 1.5 ops people.&lt;/p&gt;
-
-
-	&lt;p&gt;&amp;#8220;At some point we started getting free airline tickets from FF mileage on &lt;span class=&quot;caps&quot;&gt;AWS CC&lt;/span&gt;&amp;#8221;&lt;/p&gt;
-
-
-	&lt;p&gt;Non-cloud apps have predictable, controllable latency, etc. Not so much in the cloud.&lt;/p&gt;
-
-
-Be ready for fail
-	&lt;ul&gt;
-	&lt;li&gt;What if &lt;span class=&quot;caps&quot;&gt;EC2&lt;/span&gt; goes down? Have a knob for how much to go offline/reduce services&lt;/li&gt;
-		&lt;li&gt;Be ready for hard debugging: lots of visibility/instrumentation&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-	&lt;p&gt;Mostly, though, clouds help you ignore problems &amp;#8230; until you can&amp;#8217;t.&lt;/p&gt;
-
-
-
-    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-2-years-later-loving-and-hating-the-cloud.html&quot;&gt;LiveBlog: 2 Years Later, Loving and Hating the Cloud&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/michael-jacksons-obit-via-wordle.html&quot;&gt;Michael Jackson&#39;s Obit via Wordle&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 25, 2009.&lt;/p&gt;
   </content>
 </entry>
 
@@ -1297,192 +697,915 @@ Be ready for fail
   <title type="html"><![CDATA[LiveBlog: 10+ Deploys A Day: Dev and Ops at Flickr]]></title>
   <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-10-deploys-a-day-dev-and-ops-at-flickr.html" />
   <id>http://blog.geekdaily.org/2009/06/liveblog-10-deploys-a-day-dev-and-ops-at-flickr</id>
-  <published>2009-06-23T00:00:00-07:00</published>
-  <updated>2009-06-23T00:00:00-07:00</updated>
+  <published>2009-06-23T13:47:46-07:00</published>
+  <updated>2009-06-23T13:47:46-07:00</updated>
   <author>
-    <name>Jim Meyer</name>
+    <name></name>
     <uri>http://blog.geekdaily.org</uri>
-    <email>jim@geekdaily.org</email>
+    
   </author>
   <content type="html">
-    &lt;p&gt;&lt;br /&gt;Update 1: &lt;a href=&quot;http://www.slideshare.net/jallspaw/10-deploys-per-day-dev-and-ops-cooperation-at-flickr&quot;&gt;Slides are now on SlideShare.&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Update 2: &lt;a href=&quot;http://velocityconference.blip.tv/file/2284377&quot;&gt;Video now available on blip.tv&lt;/a&gt;&lt;/p&gt;&lt;p&gt;John Allspaw (Ops) &amp;amp; Paul Hammond (Eng), Twitter&lt;/p&gt;
+    &lt;p&gt;Update 1: &lt;a href=&quot;http://www.slideshare.net/jallspaw/10-deploys-per-day-dev-and-ops-cooperation-at-flickr&quot;&gt;Slides are now on SlideShare.&lt;/a&gt;&lt;/p&gt;
 
+&lt;p&gt;Update 2: &lt;a href=&quot;http://velocityconference.blip.tv/file/2284377&quot;&gt;Video now available on blip.tv&lt;/a&gt;&lt;/p&gt;
 
-	&lt;p&gt;“Actually work together and aren’t huge assholes to each other.”&lt;/p&gt;
+&lt;p&gt;John Allspaw (Ops) &amp;amp; Paul Hammond (Eng), Twitter&lt;/p&gt;
 
+&lt;p&gt;“Actually work together and aren’t huge assholes to each other.”&lt;/p&gt;
 
-	&lt;p&gt;(omitted: photo stats … that’s a lot of kittens)&lt;/p&gt;&lt;p&gt;
+&lt;p&gt;(omitted: photo stats … that’s a lot of kittens)&lt;/p&gt;
 
+&lt;p&gt;Dev vs. Ops&lt;/p&gt;
 
-Dev vs. Ops
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;It’s not my {machines,code} it’s your {code,machines}&lt;/li&gt;
-	&lt;/ul&gt;
+&lt;ul&gt;
+  &lt;li&gt;It’s not my {machines,code} it’s your {code,machines}&lt;/li&gt;
+&lt;/ul&gt;
 
+&lt;p&gt;Spock v. Scottie analogy&lt;/p&gt;
 
-	&lt;p&gt;Spock v. Scottie analogy&lt;/p&gt;
+&lt;p&gt;Ops as grumpy old man, says no all the time, cycle of “no all the time because no one tells them anything because they say no all the time”&lt;/p&gt;
 
+&lt;p&gt;CW: dev job to add features, ops job to keep site stable and fast&lt;/p&gt;
 
-	&lt;p&gt;Ops as grumpy old man, says no all the time, cycle of “no all the time because no one tells them anything because they say no all the time”&lt;/p&gt;
+&lt;p&gt;Flickr: Ops job is to enable the business (Dev’s, too)&lt;/p&gt;
 
+&lt;p&gt;Business requires change, otherwise you’ll be overtaken by the new guy … but change is the root cause of most outages.&lt;/p&gt;
 
-	&lt;p&gt;CW: dev job to add features, ops job to keep site stable and fast&lt;/p&gt;
+&lt;p&gt;Discourage change vs. Allow it to happen as often as it needs to (via tools and culture)&lt;/p&gt;
 
+&lt;p&gt;Lowering the risk of change via tools and culture.&lt;/p&gt;
 
-	&lt;p&gt;Flickr: Ops job is to enable the business (Dev’s, too)&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Increase confidence in change goodness&lt;/li&gt;
+  &lt;li&gt;Increase ability to react to those changes&lt;/li&gt;
+&lt;/ul&gt;
 
+&lt;p&gt;You need {ops,devs} who think like {dev,ops}&lt;/p&gt;
 
-	&lt;p&gt;Business requires change, otherwise you’ll be overtaken by the new guy … but change is the root cause of most outages.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Role and Config Mgmt&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Shared Version Control: everyone looks in the same place for everything&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
 
+&lt;ul&gt;
+  &lt;li&gt;Code and config in same place&lt;/li&gt;
+  &lt;li&gt;Everyone has access—transparency&lt;/li&gt;
+  &lt;li&gt;Everyone knows how to use it&lt;/li&gt;
+&lt;/ul&gt;
 
-	&lt;p&gt;Discourage change vs. Allow it to happen as often as it needs to (via tools and culture)&lt;/p&gt;&lt;p&gt;
+&lt;p&gt;3a. One-step build&lt;/p&gt;
 
+&lt;ul&gt;
+  &lt;li&gt;Everything you need to do to convert svn co’d code into what goes to the site—one command&lt;/li&gt;
+  &lt;li&gt;They have “Perform Staging” button at bottom of a page with stats on latest commit&lt;/li&gt;
+&lt;/ul&gt;
 
-Lowering the risk of change via tools and culture.
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;Increase confidence in change goodness&lt;/li&gt;
-		&lt;li&gt;Increase ability to react to those changes&lt;/li&gt;
-	&lt;/ul&gt;
+&lt;p&gt;3b. One-step deploy&lt;/p&gt;
 
+&lt;ul&gt;
+  &lt;li&gt;Top of page is deploy log with notes: who, when, what (link to changes)&lt;/li&gt;
+  &lt;li&gt;Bottom has “I’m feeling lucky!” button to deploy&lt;/li&gt;
+  &lt;li&gt;Continuous deployment&lt;/li&gt;
+&lt;/ul&gt;
 
-	&lt;p&gt;You need {ops,devs} who think like {dev,ops}&lt;/p&gt;
+&lt;p&gt;You can’t pretend to deploy 10 times a day if you go down 10 times a day. That’s not being agile, that’s being retarded.&lt;/p&gt;
 
+&lt;p&gt;They use Hudson to generate packages which can be deployed by ops&lt;/p&gt;
 
-	&lt;p&gt;1. Role and Config Mgmt&lt;/p&gt;&lt;p&gt;
+&lt;p&gt;Small frequent changes make it easier to see what went wrong and recover when needed&lt;/p&gt;
 
+&lt;ol&gt;
+  &lt;li&gt;[missed that tag]&lt;/li&gt;
+&lt;/ol&gt;
 
-2. Shared Version Control: everyone looks in the same place for everything
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;Code and config in same place&lt;/li&gt;
-		&lt;li&gt;Everyone has access—transparency&lt;/li&gt;
-		&lt;li&gt;Everyone knows how to use it&lt;/li&gt;
-	&lt;/ul&gt;
-&lt;p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Branching is all about managing bugfixes&lt;/li&gt;
+  &lt;li&gt;Always ship trunk&lt;/li&gt;
+  &lt;li&gt;Branch in code instead: use conditionals to block out pre-release features and configure off/invis—provides an operational lever for adjustment&lt;/li&gt;
+  &lt;li&gt;Makes these open for private beta in production on production hdwe, etc.&lt;/li&gt;
+  &lt;li&gt;Allows dark launches, which allows you to size appropriately, fix major oversights, take the fear out of major new launches&lt;/li&gt;
+&lt;/ul&gt;
 
+&lt;p&gt;They have a couple hundred “free contingency switches” to turn things off/throttle things down. Gives broad operational control to minimize effects on the site.&lt;/p&gt;
 
-3a. One-step build
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;Everything you need to do to convert svn co’d code into what goes to the site—one command&lt;/li&gt;
-		&lt;li&gt;They have “Perform Staging” button at bottom of a page with stats on latest commit&lt;/li&gt;
-	&lt;/ul&gt;
-&lt;p&gt;
+&lt;p&gt;Tend to fail forward using these and fix the problem.&lt;/p&gt;
 
+&lt;ol&gt;
+  &lt;li&gt;Shared metrics&lt;/li&gt;
+&lt;/ol&gt;
 
-3b. One-step deploy
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;Top of page is deploy log with notes: who, when, what (link to changes)&lt;/li&gt;
-		&lt;li&gt;Bottom has “I’m feeling lucky!” button to deploy&lt;/li&gt;
-		&lt;li&gt;Continuous deployment&lt;/li&gt;
-	&lt;/ul&gt;
+&lt;ul&gt;
+  &lt;li&gt;You can see mine, I can see yours&lt;/li&gt;
+  &lt;li&gt;Use ganglia as console&lt;/li&gt;
+  &lt;li&gt;Devs know where dashboard is, and watch as obsessively as ops&lt;/li&gt;
+  &lt;li&gt;Includes app-level metrics (which exposes them to Ops)&lt;/li&gt;
+  &lt;li&gt;(helps drive accountability in both directions in the org—both can see and feel ownership)&lt;/li&gt;
+  &lt;li&gt;This begins to create opportunity to gracefully collaborate to back off an oversub’d resource/degrade/throttle as needed&lt;/li&gt;
+  &lt;li&gt;Show last site deploy info on every page/graph; you can corellate a change in the graph&lt;/li&gt;
+&lt;/ul&gt;
 
+&lt;ol&gt;
+  &lt;li&gt;IRC and IM bots&lt;/li&gt;
+&lt;/ol&gt;
 
-	&lt;p&gt;You can’t pretend to deploy 10 times a day if you go down 10 times a day. That’s not being agile, that’s being retarded.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Heavy IRC users for ongoing dialog between dev/ops, remote/local&lt;/li&gt;
+  &lt;li&gt;Last.fm wrote a tool to inject events into IRC (monitoring, events, deployments, builds)&lt;/li&gt;
+  &lt;li&gt;Log it all and put it in a search engine&lt;/li&gt;
+&lt;/ul&gt;
 
+&lt;p&gt;Culture&lt;/p&gt;
 
-	&lt;p&gt;They use Hudson to generate packages which can be deployed by ops&lt;/p&gt;
+&lt;p&gt;All the tools in the world won’t help if you have a contentious culture&lt;/p&gt;
 
+&lt;ol&gt;
+  &lt;li&gt;Respect&lt;/li&gt;
+&lt;/ol&gt;
 
-	&lt;p&gt;Small frequent changes make it easier to see what went wrong and recover when needed&lt;/p&gt;&lt;p&gt;
+&lt;ul&gt;
+  &lt;li&gt;No stereotypes: not all devs are lazy/cowboys, not all ops are obstructive&lt;/li&gt;
+  &lt;li&gt;respect their expertise and opinions &lt;strong&gt;and&lt;/strong&gt; responsibilities (they influence priorities)&lt;/li&gt;
+  &lt;li&gt;Don’t just say “no”—it’s like saying “I don’t care about your problem/perspective”&lt;/li&gt;
+  &lt;li&gt;Best solutions are collaborative. Memcache is an excellent example; written to solve the problem of DB overheat, which impacted both&lt;/li&gt;
+  &lt;li&gt;Don’t hide things: share your solution even if you think they’ll say no; you deny their expertise and input&lt;/li&gt;
+&lt;/ul&gt;
 
+&lt;p&gt;Talk about the impact of your code push&lt;/p&gt;
 
-4. [missed that tag]
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;Branching is all about managing bugfixes&lt;/li&gt;
-		&lt;li&gt;Always ship trunk&lt;/li&gt;
-		&lt;li&gt;Branch in code instead: use conditionals to block out pre-release features and configure off/invis—provides an operational lever for adjustment&lt;/li&gt;
-		&lt;li&gt;Makes these open for private beta in production on production hdwe, etc.&lt;/li&gt;
-		&lt;li&gt;Allows dark launches, which allows you to size appropriately, fix major oversights, take the fear out of major new launches&lt;/li&gt;
-	&lt;/ul&gt;
+&lt;ul&gt;
+  &lt;li&gt;What metrics change&lt;/li&gt;
+  &lt;li&gt;what are the risks&lt;/li&gt;
+  &lt;li&gt;what are the symptoms of somethign going wrong&lt;/li&gt;
+  &lt;li&gt;what are the contingencies (rollback)&lt;/li&gt;
+&lt;/ul&gt;
 
+&lt;ol&gt;
+  &lt;li&gt;Trust&lt;/li&gt;
+&lt;/ol&gt;
 
-	&lt;p&gt;They have a couple hundred “free contingency switches” to turn things off/throttle things down. Gives broad operational control to minimize effects on the site.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;When you walk up with all the above on hand, you demonstrate that you care enough about them and the business&lt;/li&gt;
+  &lt;li&gt;“I don’t want to tell X …” == you’re a cowboy, and “cowboys are losers”&lt;/li&gt;
+  &lt;li&gt;Have shared playbooks and contingency plans so all understand.&lt;/li&gt;
+  &lt;li&gt;Provide as many knobs and levers as you can so Ops can tweak to match the env&lt;/li&gt;
+  &lt;li&gt;Ops: be transparent, give devs insight and access to the systems. Playing telephone around shell commands is dumb.&lt;/li&gt;
+  &lt;li&gt;It’s hard to help if you can’t directly see&lt;/li&gt;
+&lt;/ul&gt;
 
+&lt;ol&gt;
+  &lt;li&gt;Have a healthy attitude around failure—it’s going to happen.&lt;/li&gt;
+&lt;/ol&gt;
 
-	&lt;p&gt;Tend to fail forward using these and fix the problem.&lt;/p&gt;&lt;p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Think about how you’ll respond more than you think about how you’ll prevent it&lt;/li&gt;
+  &lt;li&gt;Would you rather be treated by a GP who deals with heart attacks infrequently or an EMT who handles them weekly?&lt;/li&gt;
+  &lt;li&gt;Fire drills: when ops and sr engineers are fixing a problem, have others diagnose live in parallel (but make no changes!)&lt;/li&gt;
+&lt;/ul&gt;
 
+&lt;ol&gt;
+  &lt;li&gt;Avoiding blame&lt;/li&gt;
+&lt;/ol&gt;
 
-5. Shared metrics
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;You can see mine, I can see yours&lt;/li&gt;
-		&lt;li&gt;Use ganglia as console&lt;/li&gt;
-		&lt;li&gt;Devs know where dashboard is, and watch as obsessively as ops&lt;/li&gt;
-		&lt;li&gt;Includes app-level metrics (which exposes them to Ops)&lt;/li&gt;
-		&lt;li&gt;(helps drive accountability in both directions in the org—both can see and feel ownership)&lt;/li&gt;
-		&lt;li&gt;This begins to create opportunity to gracefully collaborate to back off an oversub’d resource/degrade/throttle as needed&lt;/li&gt;
-		&lt;li&gt;Show last site deploy info on every page/graph; you can corellate a change in the graph&lt;/li&gt;
-	&lt;/ul&gt;
-&lt;p&gt;
+&lt;ul&gt;
+  &lt;li&gt;they have a rule of no-finger-pointing; it doesn’t need enforcement, folks step up&lt;/li&gt;
+  &lt;li&gt;fixing blame wastes a ton of time, why not skip it? Feel guilty afterwards if you must.&lt;/li&gt;
+  &lt;li&gt;They’ve got a bit of a potlatch culture as people try to assert responsibility in order to fix things.&lt;/li&gt;
+  &lt;li&gt;Remember that when your code breaks, someone’s going to have to wake up to fix it. Own it and apologize, at least. Otherwise, you’re back to not respecting each other (“Screw you … aren’t you getting paid to do that?”)&lt;/li&gt;
+&lt;/ul&gt;
 
-
-6. &lt;span class=&quot;caps&quot;&gt;IRC&lt;/span&gt; and IM bots
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;Heavy &lt;span class=&quot;caps&quot;&gt;IRC&lt;/span&gt; users for ongoing dialog between dev/ops, remote/local&lt;/li&gt;
-		&lt;li&gt;Last.fm wrote a tool to inject events into &lt;span class=&quot;caps&quot;&gt;IRC&lt;/span&gt; (monitoring, events, deployments, builds)&lt;/li&gt;
-		&lt;li&gt;Log it all and put it in a search engine&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-	&lt;p&gt;Culture&lt;/p&gt;
-
-
-	&lt;p&gt;All the tools in the world won’t help if you have a contentious culture&lt;/p&gt;&lt;p&gt;
-
-
-1. Respect
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;No stereotypes: not all devs are lazy/cowboys, not all ops are obstructive&lt;/li&gt;
-		&lt;li&gt;respect their expertise and opinions &lt;strong&gt;and&lt;/strong&gt; responsibilities (they influence priorities)&lt;/li&gt;
-		&lt;li&gt;Don’t just say “no”—it’s like saying “I don’t care about your problem/perspective” &lt;/li&gt;
-		&lt;li&gt;Best solutions are collaborative. Memcache is an excellent example; written to solve the problem of DB overheat, which impacted both&lt;/li&gt;
-		&lt;li&gt;Don’t hide things: share your solution even if you think they’ll say no; you deny their expertise and input&lt;/li&gt;
-	&lt;/ul&gt;
-&lt;p&gt;
-
-
-Talk about the impact of your code push
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;What metrics change&lt;/li&gt;
-		&lt;li&gt;what are the risks&lt;/li&gt;
-		&lt;li&gt;what are the symptoms of somethign going wrong&lt;/li&gt;
-		&lt;li&gt;what are the contingencies (rollback)&lt;/li&gt;
-	&lt;/ul&gt;
-&lt;p&gt;
-
-
-2. Trust
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;When you walk up with all the above on hand, you demonstrate that you care enough about them and the business&lt;/li&gt;
-		&lt;li&gt;“I don’t want to tell X …” == you’re a cowboy, and “cowboys are losers” &lt;/li&gt;
-		&lt;li&gt;Have shared playbooks and contingency plans so all understand.&lt;/li&gt;
-		&lt;li&gt;Provide as many knobs and levers as you can so Ops can tweak to match the env&lt;/li&gt;
-		&lt;li&gt;Ops: be transparent, give devs insight and access to the systems. Playing telephone around shell commands is dumb.&lt;/li&gt;
-		&lt;li&gt;It’s hard to help if you can’t directly see&lt;/li&gt;
-	&lt;/ul&gt;
-&lt;p&gt;
-
-
-3. Have a healthy attitude around failure—it’s going to happen.
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;Think about how you’ll respond more than you think about how you’ll prevent it&lt;/li&gt;
-		&lt;li&gt;Would you rather be treated by a GP who deals with heart attacks infrequently or an &lt;span class=&quot;caps&quot;&gt;EMT&lt;/span&gt; who handles them weekly?&lt;/li&gt;
-		&lt;li&gt;Fire drills: when ops and sr engineers are fixing a problem, have others diagnose live in parallel (but make no changes!)&lt;/li&gt;
-	&lt;/ul&gt;
-&lt;p&gt;
-
-
-4. Avoiding blame
-	&lt;/p&gt;&lt;ul&gt;
-	&lt;li&gt;they have a rule of no-finger-pointing; it doesn’t need enforcement, folks step up&lt;/li&gt;
-		&lt;li&gt;fixing blame wastes a ton of time, why not skip it? Feel guilty afterwards if you must.&lt;/li&gt;
-		&lt;li&gt;They’ve got a bit of a potlatch culture as people try to assert responsibility in order to fix things.&lt;/li&gt;
-		&lt;li&gt;Remember that when your code breaks, someone’s going to have to wake up to fix it. Own it and apologize, at least. Otherwise, you’re back to not respecting each other (“Screw you … aren’t you getting paid to do that?”)&lt;/li&gt;
-	&lt;/ul&gt;
-
-
-	&lt;p&gt;Ops should provide constructive, continual feedback on how it’s going. Point out interesting things before they’re critical&lt;/p&gt;
+&lt;p&gt;Ops should provide constructive, continual feedback on how it’s going. Point out interesting things before they’re critical&lt;/p&gt;
 
 
     &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-10-deploys-a-day-dev-and-ops-at-flickr.html&quot;&gt;LiveBlog: 10+ Deploys A Day: Dev and Ops at Flickr&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
+  </content>
+</entry>
+
+
+  
+
+<entry>
+  <title type="html"><![CDATA[LiveBlog: Q&A with Twitter's John Adams]]></title>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-qa-with-twitters-john-adams.html" />
+  <id>http://blog.geekdaily.org/2009/06/liveblog-qa-with-twitters-john-adams</id>
+  <published>2009-06-23T13:28:57-07:00</published>
+  <updated>2009-06-23T13:28:57-07:00</updated>
+  <author>
+    <name></name>
+    <uri>http://blog.geekdaily.org</uri>
+    
+  </author>
+  <content type="html">
+    &lt;p&gt;A short pre-lunch session to absorb a few moment:&lt;/p&gt;
+
+&lt;p&gt;John Adams (Twitter) Q&amp;amp;A&lt;/p&gt;
+
+&lt;p&gt;Q: How do you log all the info from your APIs?&lt;/p&gt;
+
+&lt;p&gt;A: syslog, looking at scribe, generally summarize and toss&lt;/p&gt;
+
+&lt;p&gt;Q: How do you control abusive clients?&lt;/p&gt;
+
+&lt;p&gt;A: Rate limiting, apply feature limits to abusers, etc.&lt;/p&gt;
+
+&lt;p&gt;Q: What would you do differently?&lt;/p&gt;
+
+&lt;p&gt;A: Implemented change controls much sooner. Process is much better now with more control, predictability&lt;/p&gt;
+
+&lt;p&gt;Q: How does your on-call team work?&lt;/p&gt;
+
+&lt;p&gt;A: More people reduces length in rotation. Nagios with alerts and aggregation of alerts. Make alerts actionable (db fails? see one page for db down, not 500 webservers). Also prevents burnout&lt;/p&gt;
+
+&lt;p&gt;Q: Carry a real pager?&lt;/p&gt;
+
+&lt;p&gt;A: Some, mostly SMS. There are escalations if you don’t answer. Always someone from Ops and Eng on the pager chain.&lt;/p&gt;
+
+
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-qa-with-twitters-john-adams.html&quot;&gt;LiveBlog: Q&amp;A with Twitter&#39;s John Adams&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
+  </content>
+</entry>
+
+
+  
+
+<entry>
+  <title type="html"><![CDATA[LiveBlog: PageSpeed]]></title>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-pagespeed.html" />
+  <id>http://blog.geekdaily.org/2009/06/liveblog-pagespeed</id>
+  <published>2009-06-23T13:19:27-07:00</published>
+  <updated>2009-06-23T13:19:27-07:00</updated>
+  <author>
+    <name></name>
+    <uri>http://blog.geekdaily.org</uri>
+    
+  </author>
+  <content type="html">
+    &lt;p&gt;Bryan McQuade (Google), Richard Rabbat (Google, Inc.)&lt;/p&gt;
+
+&lt;p&gt;What’s Page Speed&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;FF/Firebug addon&lt;/li&gt;
+  &lt;li&gt;http://code.google.com/p/page-speed&lt;/li&gt;
+  &lt;li&gt;Optimizes images, minifies JS, tells you what you should defer&lt;/li&gt;
+  &lt;li&gt;100K downloads in 10 days, 1000s of tweets, 100s of blog postings&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;How’d it start&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;wanted to help stop relearning lessons in new apps&lt;/li&gt;
+  &lt;li&gt;keep you from unintended consequeces (e.g. vary header, squid won’t cache anything with params, etc.) Google map tiles used to have ? in URL; removing it gave huge boost in perf, huge reduction in requests&lt;/li&gt;
+  &lt;li&gt;Sourced from many smart people on the web&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Prioritizes according to importance/savings, gives easy way to see detailed info about any given rule, what’s violating it, docs on why and how of each rule&lt;/p&gt;
+
+&lt;p&gt;Defer loading JS as much as possible&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Rule looks to see what’s not been invoked before OnLoad completes&lt;/li&gt;
+  &lt;li&gt;Not enabled by default, has perf hit&lt;/li&gt;
+  &lt;li&gt;Load multiple times in multiple scenarios; some JS is triggered in different&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Inefficient CSS Selectors: based on David Hyatt’s post on inefficient selectors&lt;/p&gt;
+
+&lt;p&gt;Activity Panel&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Show where most time is spent, where you should focus optimization&lt;/li&gt;
+  &lt;li&gt;Shows DNS, network, connection, latency, data available for use, JS parse/exec, cache hits&lt;/li&gt;
+  &lt;li&gt;Coming: paint events, screen snapshotting&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;BBC “has lots of room for optimization” 
+ gmail waterfall is hugely vertical!&lt;/p&gt;
+
+&lt;p&gt;Just released FF3.5 compatible version&lt;/p&gt;
+
+
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-pagespeed.html&quot;&gt;LiveBlog: PageSpeed&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
+  </content>
+</entry>
+
+
+  
+
+<entry>
+  <title type="html"><![CDATA[LiveBlog: 2 Years Later, Loving and Hating the Cloud]]></title>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-2-years-later-loving-and-hating-the-cloud.html" />
+  <id>http://blog.geekdaily.org/2009/06/liveblog-2-years-later-loving-and-hating-the-cloud</id>
+  <published>2009-06-23T13:16:21-07:00</published>
+  <updated>2009-06-23T13:16:21-07:00</updated>
+  <author>
+    <name></name>
+    <uri>http://blog.geekdaily.org</uri>
+    
+  </author>
+  <content type="html">
+    &lt;p&gt;More from Velocity 2009&lt;/p&gt;
+
+&lt;p&gt;Justin Huff, Picknik (online photo editor)&lt;/p&gt;
+
+&lt;p&gt;Used AWS for 2 years, 1.5 in production&lt;/p&gt;
+
+&lt;p&gt;Hybrid app: small cage in Seattle + EC2/S3 for some parts of infra&lt;/p&gt;
+
+&lt;p&gt;Gives flexibility&lt;/p&gt;
+
+&lt;p&gt;Picnik has a spiky profile based on usage; EC2 allows to cover that&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;They use a lot of&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Capacity management (not planning)&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;easily repurpose between webserver and asynch jobs&lt;/li&gt;
+  &lt;li&gt;Can buy hardware in batches, grow logically, get better deals&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;At one point had nearly 1B objects in S3&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Move old files to S3&lt;/li&gt;
+  &lt;li&gt;Put some new files to S3&lt;/li&gt;
+  &lt;li&gt;Put a lot more out there (had a knob to adjust, eventually reached S3)&lt;/li&gt;
+  &lt;li&gt;Profit? Not so much ..&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Most S3 objs short lived, needed fast deletion, and mostly didn’t have it&lt;/p&gt;
+
+&lt;p&gt;Mostly ignored this problem in favor of other more important problems (db sharding, scaling web frontends, expanding). Spend money on it.&lt;/p&gt;
+
+&lt;p&gt;They have 1.5 ops people.&lt;/p&gt;
+
+&lt;p&gt;“At some point we started getting free airline tickets from FF mileage on AWS CC”&lt;/p&gt;
+
+&lt;p&gt;Non-cloud apps have predictable, controllable latency, etc. Not so much in the cloud.&lt;/p&gt;
+
+&lt;p&gt;Be ready for fail&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What if EC2 goes down? Have a knob for how much to go offline/reduce services&lt;/li&gt;
+  &lt;li&gt;Be ready for hard debugging: lots of visibility/instrumentation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Mostly, though, clouds help you ignore problems … until you can’t.&lt;/p&gt;
+
+
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-2-years-later-loving-and-hating-the-cloud.html&quot;&gt;LiveBlog: 2 Years Later, Loving and Hating the Cloud&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
+  </content>
+</entry>
+
+
+  
+
+<entry>
+  <title type="html"><![CDATA[LiveBlog: Fixing Twitter]]></title>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-fixing-twitter.html" />
+  <id>http://blog.geekdaily.org/2009/06/liveblog-fixing-twitter</id>
+  <published>2009-06-23T13:07:14-07:00</published>
+  <updated>2009-06-23T13:07:14-07:00</updated>
+  <author>
+    <name></name>
+    <uri>http://blog.geekdaily.org</uri>
+    
+  </author>
+  <content type="html">
+    &lt;p&gt;John Adams, Twitter Ops&lt;/p&gt;
+
+&lt;p&gt;Ops&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Small team&lt;/li&gt;
+  &lt;li&gt;SW perf&lt;/li&gt;
+  &lt;li&gt;availability is their primary focus&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;All on managed services with NTT
+- No clouds—too high latency
+- NTT runs the NOC
+- Frees them to deal with real thinking compsci probs&lt;/p&gt;
+
+&lt;p&gt;752% growth in 2008, trend happens ~11/2008 and keeps climbing&lt;/p&gt;
+
+&lt;p&gt;Growth Pain Fear of what’s gonna happen&lt;/p&gt;
+
+&lt;p&gt;Mantra:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Find the weekest point (metrics + logging + analysis)&lt;/li&gt;
+  &lt;li&gt;Take corrective action (process)&lt;/li&gt;
+  &lt;li&gt;Repeat&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Find weak points&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Collect metrics and graphs (individual metrics are irrelevant)&lt;/li&gt;
+  &lt;li&gt;Logs&lt;/li&gt;
+  &lt;li&gt;SCIENCE!&lt;/li&gt;
+  &lt;li&gt;Instrument everything! More info is better&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Monitoring&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Keep critical metrics as close to realtime as possible&lt;/li&gt;
+  &lt;li&gt;Using RRD, Ganglia + gMetrics, MRTG&lt;/li&gt;
+  &lt;li&gt;Mostly on 10s interval, some 5s, some 60s&lt;/li&gt;
+  &lt;li&gt;Everyone in company has access to dashboard&lt;/li&gt;
+  &lt;li&gt;“Criticals” view&lt;/li&gt;
+  &lt;li&gt;Use google analytics for failwhale and other err pages&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Analyze&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Turn data into info&lt;/li&gt;
+  &lt;li&gt;Are things better/worse post-deploy&lt;/li&gt;
+  &lt;li&gt;Create env of capacity planning, not firefighting—no more cowboys in the wild west&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Deploys&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Ganglia shows final deploy info for twitter, summize, and search&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Whale-watcher&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;simple script with massive win&lt;/li&gt;
+  &lt;li&gt;503 is a whale, 500 is a robot&lt;/li&gt;
+  &lt;li&gt;Whales per second exceeds whale threshold then “There’s whales!”&lt;/li&gt;
+  &lt;li&gt;Darkmode: selectively disable portions of site with automatic notification to product and eng teams to let them know&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Config Mgmt&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You need an automated cfg mgmt system NOW. Else you won’t scale&lt;/li&gt;
+  &lt;li&gt;It intros complexity, with multiple admins, unknown interactions&lt;/li&gt;
+  &lt;li&gt;Peer review solves most of this; they use reviewboard with svn precommit hook requiring “reviewed by” note in comment and postcommit hook sends note about what changed to people&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;High communication&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;They use chat (campfire) with docs, graphs, logs, etc.&lt;/li&gt;
+  &lt;li&gt;skitch into campfire is a frequent working methodology&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Subsystems&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Many limiting factors in request pipeline&lt;/li&gt;
+  &lt;li&gt;Oversubscribe mongrel 2:1 vs. cores&lt;/li&gt;
+  &lt;li&gt;Attack plan per ssytem (e.g. bandwidth? bottleneck: network, vector: http latency, solution: servers+&lt;ins&gt;; timeline? db, update delay, better algo; search? db, delays, dbs&lt;/ins&gt;+ and code; etc.)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;CPUs:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;switched to Xeon +30% gain&lt;/li&gt;
+  &lt;li&gt;replace 2x and 4x core with 8x core +40%&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Rails:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Stop blaming rails&lt;/li&gt;
+  &lt;li&gt;Analysis: caching/cache invalidation, AR makes bad queries, queue latency, memcache/page corruption, rep lag&lt;/li&gt;
+  &lt;li&gt;Not so much about Rails&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Disk is the new Tape&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Social networks is very O(n^y) oriented&lt;/li&gt;
+  &lt;li&gt;Disk is too slow&lt;/li&gt;
+  &lt;li&gt;Need lots of RAM&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Lots of caching is possible. Moving libmemcached to native C gem was bigtime helpful.&lt;/p&gt;
+
+&lt;p&gt;Nick’s CacheMoney AR plugin: readthru/writethru caching with memcached!&lt;/p&gt;
+
+&lt;p&gt;Caching everything not smart, either&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Cache evictions&lt;/li&gt;
+  &lt;li&gt;Cold cache after host failure/new host spinup&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Cache smarter: get rid of cache busting behaviors, varnish with failover, etc.
+RDBMS vs message queues&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Not everything needs ACID&lt;/li&gt;
+  &lt;li&gt;message queues help&lt;/li&gt;
+  &lt;li&gt;Most MQs suck at high load&lt;/li&gt;
+  &lt;li&gt;They wrote Kestrel for this; looks like memcache&lt;/li&gt;
+  &lt;li&gt;Starling was earlier version&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Asynch == Good&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;They lean on mongrel heavily (they know it well)&lt;/li&gt;
+  &lt;li&gt;Keep external service requests out of the pipeline via daemons which process message queues&lt;/li&gt;
+  &lt;li&gt;Size worker daemons appropriately, have them kill themselves off rather than long-run&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;DB replication&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Multiple functional read/write masters&lt;/li&gt;
+  &lt;li&gt;never read from the master—slows it down too much&lt;/li&gt;
+  &lt;li&gt;watch your slow queries&lt;/li&gt;
+  &lt;li&gt;use mkill to kill long-running queries before they kill you.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Put up a status blog on some other service—transparency stops armchair engineering&lt;/p&gt;
+
+
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-fixing-twitter.html&quot;&gt;LiveBlog: Fixing Twitter&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
+  </content>
+</entry>
+
+
+  
+
+<entry>
+  <title type="html"><![CDATA[LiveBlog: Next Web Challenges: It's Still All About UX]]></title>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-next-web-challenges-its-still-all-about-ux.html" />
+  <id>http://blog.geekdaily.org/2009/06/liveblog-next-web-challenges-its-still-all-about-ux</id>
+  <published>2009-06-23T12:59:01-07:00</published>
+  <updated>2009-06-23T12:59:01-07:00</updated>
+  <author>
+    <name></name>
+    <uri>http://blog.geekdaily.org</uri>
+    
+  </author>
+  <content type="html">
+    &lt;p&gt;Velocity 2009, the conference about performance, is very high-performance about getting people on and off stage (and high density around content)&lt;/p&gt;
+
+&lt;p&gt;Umang Gupta, Vik Chaudhary (Keynote)&lt;/p&gt;
+
+&lt;p&gt;(omitted: Keynote history, 15 years of continuous improvement, etc.)&lt;/p&gt;
+
+&lt;p&gt;Debuting Transaction Perpective 9.0 (TXP9)&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Embeds real IE browser for monitoring&lt;/li&gt;
+  &lt;li&gt;Adds “screen sensing” technology&lt;/li&gt;
+  &lt;li&gt;Esp. useful for “next web” apps: flash, video, voice, SMS/mobile—composit transactions or flows&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;(demo: reservations site for The Broadmoor in Colorado Springs, very flash-integrated with lots of client-side action. “Challenge of screen sensing what’s going on on the screen is non-trivial”. Also http://espn.go.com/video/ and Mini-Cooper flash site)&lt;/p&gt;
+
+&lt;p&gt;Using KITE platform/desktop environment to record what you’re doing. You click around, type, etc. and it records a script.&lt;/p&gt;
+
+&lt;p&gt;(This is somewhat like what they do at [DeviceAnywhere http://deviceanywhere.com/] for mobile device testing. They don’t focus on UX or perf; they’re more on QA testing side)&lt;/p&gt;
+
+&lt;p&gt;Script runs and collects UX and Network times. UX time is net time + client-side execution + rendering. Also shows augmented waterfall inclusive of client-side computation, etc.&lt;/p&gt;
+
+
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-next-web-challenges-its-still-all-about-ux.html&quot;&gt;LiveBlog: Next Web Challenges: It&#39;s Still All About UX&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
+  </content>
+</entry>
+
+
+  
+
+<entry>
+  <title type="html"><![CDATA[LiveBlog: The User and Business Impact of Server Delays, Additional Bytes, and HTTP Chunking in Web Search]]></title>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-the-user-and-business-impact-of-server-delays-additional-bytes-and-http-chunking-in-web-sea.html" />
+  <id>http://blog.geekdaily.org/2009/06/liveblog-the-user-and-business-impact-of-server-delays-additional-bytes-and-http-chunking-in-web-sea</id>
+  <published>2009-06-23T09:58:10-07:00</published>
+  <updated>2009-06-23T09:58:10-07:00</updated>
+  <author>
+    <name></name>
+    <uri>http://blog.geekdaily.org</uri>
+    
+  </author>
+  <content type="html">
+    &lt;p&gt;Eric Schurman (Microsoft/bing), Jake Brutlag (Google)&lt;/p&gt;
+
+&lt;p&gt;Experiments&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Server delays (MS and Google)&lt;/li&gt;
+  &lt;li&gt;Page weight variance&lt;/li&gt;
+  &lt;li&gt;Progressive rendering&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;They have platforms for experimentation which allow fractional experiments&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Divide users into small buckets&lt;/li&gt;
+  &lt;li&gt;use good methodology (control group, experimental group(s))&lt;/li&gt;
+  &lt;li&gt;Way better than usability tests&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Server Delays&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Goal [missed all of this due to an IM. Lesson learned]&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Results&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;No statistically significant change @ ~50ms delay&lt;/li&gt;
+  &lt;li&gt;Observable and fairly linear impact on delays 200/500/1000/2000ms.&lt;/li&gt;
+  &lt;li&gt;Time to first click took ~2x delay—theory: user has opportunity to get distracted&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Google Search Delay Experiment&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Varied type of delay, magnitude, and duration (number of weeks) per user group&lt;/li&gt;
+  &lt;li&gt;Pre-header delay: pause server processing upon receipt of req&lt;/li&gt;
+  &lt;li&gt;Post-header delay: pause after sending on header, but before sending results&lt;/li&gt;
+  &lt;li&gt;Post-ads delay: (ads are structurally first in page, can render before search result) put ads in separate http chunk, delay between ads and search results&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Results:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Measure average daily searches per user&lt;/li&gt;
+  &lt;li&gt;50ms pre-header delays show no significant impact&lt;/li&gt;
+  &lt;li&gt;100ms pre-head, 200ms post-heads, 400ms post-head, 200ms post-ads (and others) showed linear progression in decreased avg daily searches&lt;/li&gt;
+  &lt;li&gt;Also saw increase in internally monitored “abandonment rate”&lt;/li&gt;
+  &lt;li&gt;Active users are more sensitive&lt;/li&gt;
+  &lt;li&gt;drop-off continued to trend down linearly beyond 4 weeks; effect becomes more pronounced over time, and additive—200ms and 400ms groups diverge more strongly&lt;/li&gt;
+  &lt;li&gt;Stopped injecting delays at week 7; recovery was significant immediately, but not fully realized at week 12—there was still a drop in activity for these groups&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Page weight experiments&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;injected incompressible comments into various places of page&lt;/li&gt;
+  &lt;li&gt;varied size of comments from 5% of page to 500% (most of larger loads were below the fold)&lt;/li&gt;
+  &lt;li&gt;small payloads weren’t worrisome (tho stat’ly significant)&lt;/li&gt;
+  &lt;li&gt;perf suffered slightly, but was US only experiment; global exp planned, will likely show significantly larger drop in perf&lt;/li&gt;
+  &lt;li&gt;Click metrics were hurt more than query metrics&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Progressive rendering experiment&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Goal: determine impace sending visual header before results&lt;/li&gt;
+  &lt;li&gt;Build page in phases, send using HTTP 1.1 chunked transfer encoding&lt;/li&gt;
+  &lt;li&gt;Results: Large improvement due to parallelization. Time to first click was ~9% faster, more likely to refine query, more clicks, more likely to page thru results&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;HCI may state that 100-200ms isn’t perceptible; it still has effect.&lt;/p&gt;
+
+&lt;p&gt;Getting something to your user quickly is more important than when they receive their last byte&lt;/p&gt;
+
+&lt;p&gt;Experimentation platforms make all this research and hard numbers possible.&lt;/p&gt;
+
+
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-the-user-and-business-impact-of-server-delays-additional-bytes-and-http-chunking-in-web-sea.html&quot;&gt;LiveBlog: The User and Business Impact of Server Delays, Additional Bytes, and HTTP Chunking in Web Search&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
+  </content>
+</entry>
+
+
+  
+
+<entry>
+  <title type="html"><![CDATA[LiveBlog: After the Click]]></title>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-after-the-click.html" />
+  <id>http://blog.geekdaily.org/2009/06/liveblog-after-the-click</id>
+  <published>2009-06-23T09:35:53-07:00</published>
+  <updated>2009-06-23T09:35:53-07:00</updated>
+  <author>
+    <name></name>
+    <uri>http://blog.geekdaily.org</uri>
+    
+  </author>
+  <content type="html">
+    &lt;p&gt;More from Velocity 2009. Going really fast, sorry for all the sloppiness.&lt;/p&gt;
+
+&lt;p&gt;Jonathan Heiliger, VP Tech Ops FB&lt;/p&gt;
+
+&lt;p&gt;FB Mission: give people the power to share and make the world more open and connected.&lt;/p&gt;
+
+&lt;p&gt;2004: launch in MZ’s dorm room
+ 2004-5: new apps launched (events, photos, mobile)
+ 2006: news feed and open reg
+ 2007: platform launch
+ 2008: crowdsourced translations; reached 30 langs quickly (spanish 2 wks, french ~24 hrs)&lt;/p&gt;
+
+&lt;p&gt;[nice map viz for growth: colorize market penetration]&lt;/p&gt;
+
+&lt;p&gt;Radio took ~150 yrs (?) to reach 150M
+ TV: 13 yrs
+ Computers 4 years
+ FB: 3 yrs&lt;/p&gt;
+
+&lt;p&gt;How FB deals&lt;/p&gt;
+
+&lt;p&gt;Classic battle of Ops v. Eng&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Ops wants no change—stability&lt;/li&gt;
+  &lt;li&gt;Eng wants lots of change—driven by users and site&lt;/li&gt;
+  &lt;li&gt;Do you really want to fight it out? Teamwork is required&lt;/li&gt;
+  &lt;li&gt;Enable individuals to reach goals, chase team success&lt;/li&gt;
+  &lt;li&gt;Make it transparent to users and safe for employees to fail&lt;/li&gt;
+  &lt;li&gt;Make it a point of pride: you don’t want to be the one who took down the site (but there’s some cache in that war story)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It’s the people&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Everyone hires the smartest people&lt;/li&gt;
+  &lt;li&gt;It’s about organizing and leading&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Tuning the Operating Pipeline (Eng -&amp;gt; QA -&amp;gt; Ops aka Dev -&amp;gt; Test -&amp;gt; Deploy)
+ (this isn’t how they did it)&lt;/p&gt;
+
+&lt;p&gt;Engineering is responsible for the efficacy and reliability of their code, writing their own tests, and full lifecycle of code including pushing it live.&lt;/p&gt;
+
+&lt;p&gt;Ops provides guard rails to keep eng safe from itself, prevent site downtime. Feature can go down, but rest of site is safe.&lt;/p&gt;
+
+&lt;p&gt;Complaints back in the day:
+ Ops: Eng is way too unstructured, lobbing crap over the wall.
+ Eng: Ops is not nimble&lt;/p&gt;
+
+&lt;p&gt;Make the problem joint; Eng owns the problem&lt;/p&gt;
+
+&lt;p&gt;Continuous build, code review, peer review, perf testing has kept things moving fast while moving to 200+ eng org.&lt;/p&gt;
+
+&lt;p&gt;Put engineers in operations&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Site reliability team: stewards of the site&lt;/li&gt;
+  &lt;li&gt;Operations engineering: tooling and glue apps (workflow/pipeline)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Put ops in engineering (consulting engineers)&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Partners with backend service groups to think about architecture, scaling, reliability&lt;/li&gt;
+  &lt;li&gt;Helps mentor into full SDLC responsibility—really understand complete DEV to PROD function of code&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Software launch has warroom with PM, Eng, NetEng, SRE, Perf Eng, Site Integrity staff around. Always the right person on hand, physically present.&lt;/p&gt;
+
+&lt;p&gt;Getting it done&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;If you can’t work as a team, you’re done&lt;/li&gt;
+  &lt;li&gt;Design is awesome, but it needs execution to succeed&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Three things they did live expecting to break the site&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;See how the team worked, who would step up, etc.
+CNN livefeed&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Group of 20 some folks came together, marketing, eng, product, ops, etc.&lt;/li&gt;
+  &lt;li&gt;Added much capacity, made warroom&lt;/li&gt;
+  &lt;li&gt;Written from scratch in ~3 weeks&lt;/li&gt;
+  &lt;li&gt;Replicated (and improved) for Oscars, etc.&lt;/li&gt;
+  &lt;li&gt;Knew there would be point load much like DoS attack&lt;/li&gt;
+  &lt;li&gt;Added throttles to direct features, as well as throttling things like chat, number of thumbnails shown on site, etc.&lt;/li&gt;
+  &lt;li&gt;Friends had to be shown on the fly&lt;/li&gt;
+  &lt;li&gt;Common content was cached in CDN; didn’t anticipate delay/latency from CDN&lt;/li&gt;
+  &lt;li&gt;Didn’t expec users to maddly twiddle “Everyone” and “Friends” tabs (they did) – learned “cache everything”&lt;/li&gt;
+  &lt;li&gt;During inauguraton 2M status updates, 8.5K spike at start&lt;/li&gt;
+  &lt;li&gt;Dark launched everything with users exercising the stack without any visible UI to users&lt;/li&gt;
+  &lt;li&gt;Also built perf framework to see what real user experience would be like&lt;/li&gt;
+  &lt;li&gt;Used data from both to appropriately size&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Like&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Simple “I like this” on wall/status&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Didn’t expect it to get a lot of traffic at first; totally wrong&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;4.1m users liked 7.1 M times first day&lt;/li&gt;
+      &lt;li&gt;16.3/46.2 1st week&lt;/li&gt;
+      &lt;li&gt;39.6/226.8 1st month&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Username allocations&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Was initially to be auction (codename: hammer)&lt;/li&gt;
+  &lt;li&gt;Decided to go first come first served, kept codename—it was going to hammer the site&lt;/li&gt;
+  &lt;li&gt;Had to have blocked list of trademarks; didn’t block “asp.net”&lt;/li&gt;
+  &lt;li&gt;Dark launch, found issues, delayed initial launch&lt;/li&gt;
+  &lt;li&gt;Launched at 9p; huge cache hit within moments, no increase in idle latency (means they got it right, maybe a little overprovisioned)&lt;/li&gt;
+  &lt;li&gt;Made pages as light as possible&lt;/li&gt;
+  &lt;li&gt;Tiny blip in overall load&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Datacenter infra/organization is hugely important&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Untidiness reflects bad organization&lt;/li&gt;
+  &lt;li&gt;DC/infra is 2nd biggest exp after people&lt;/li&gt;
+  &lt;li&gt;Invest where appropriate&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Distribute accountability
+ Test with users
+ “The only place success comes before work is in the dictionary” – Vince lombardi&lt;/p&gt;
+
+&lt;p&gt;Expects org to look different in a year—evolution is the key.&lt;/p&gt;
+
+
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-after-the-click.html&quot;&gt;LiveBlog: After the Click&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
+  </content>
+</entry>
+
+
+  
+
+<entry>
+  <title type="html"><![CDATA[LiveBlog: Surviving the 2008 Elections at DailyKos.com]]></title>
+  <link rel="alternate" type="text/html" href="http://blog.geekdaily.org/2009/06/liveblog-surviving-the-2008-elections-at-dailykoscom.html" />
+  <id>http://blog.geekdaily.org/2009/06/liveblog-surviving-the-2008-elections-at-dailykoscom</id>
+  <published>2009-06-23T09:03:07-07:00</published>
+  <updated>2009-06-23T09:03:07-07:00</updated>
+  <author>
+    <name></name>
+    <uri>http://blog.geekdaily.org</uri>
+    
+  </author>
+  <content type="html">
+    &lt;p&gt;More from Velocity 2009:&lt;/p&gt;
+
+&lt;p&gt;Jeremy Bingham, DailyKos.com&lt;/p&gt;
+
+&lt;p&gt;Before the flood&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;fell over a lot&lt;/li&gt;
+  &lt;li&gt;took a lot of admin time&lt;/li&gt;
+  &lt;li&gt;slow load times&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;MySQL issues&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;legacy tables from nearly-decade-old Slash with bad primary keys&lt;/li&gt;
+  &lt;li&gt;many MySQL 3.23isms—didn’t use any newer features&lt;/li&gt;
+  &lt;li&gt;had to stop believing “things are there for a reason” (e.g. fulltext index: 9GB data, 17GB index)&lt;/li&gt;
+  &lt;li&gt;keep all the old URLs working&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;IA Caucus first big night&lt;/p&gt;
+
+&lt;p&gt;Caching&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Started with apache 1.3 as proxy, disk caching with push to disk&lt;/li&gt;
+  &lt;li&gt;Brought site to its knees as everything updated cache in sync&lt;/li&gt;
+  &lt;li&gt;switched to lighttpd using Vua, mod_magnet&lt;/li&gt;
+  &lt;li&gt;switched to mod_mcpage, cache pages only&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Hardware&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;10 2x Xeons 2GB, 2 2x Opterons 8GB, image/memcached/combined search/SMTP server&lt;/li&gt;
+  &lt;li&gt;All independent, update separately&lt;/li&gt;
+  &lt;li&gt;updated to 6 4x Xeons 8GB, 2 8x Xeons 16GB, RAID 10 with well-tuned xfs for DB&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Traffic more than doubled at election peak over normal monthly, almost 3x&lt;/p&gt;
+
+&lt;p&gt;People liked to talk about Sarah Palin … a lot. How nice that she provided things to talk about.&lt;/p&gt;
+
+&lt;p&gt;Changes were in place by April 2008/Pennsylvania primary&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;perf was good&lt;/li&gt;
+  &lt;li&gt;flash electoral map was on 100Mb switch&lt;/li&gt;
+  &lt;li&gt;webhead loads ~0.5-1.8&lt;/li&gt;
+  &lt;li&gt;Ads and map added some slowdowns&lt;/li&gt;
+&lt;/ul&gt;
+
+    &lt;p&gt;&lt;a href=&quot;http://blog.geekdaily.org/2009/06/liveblog-surviving-the-2008-elections-at-dailykoscom.html&quot;&gt;LiveBlog: Surviving the 2008 Elections at DailyKos.com&lt;/a&gt; was originally published by Jim Meyer at &lt;a href=&quot;http://blog.geekdaily.org&quot;&gt;geek!daily&lt;/a&gt; on June 23, 2009.&lt;/p&gt;
   </content>
 </entry>
 

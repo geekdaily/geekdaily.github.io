@@ -1,0 +1,304 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Live Blog: Graphing Social Patterns, Day 3, Opening the Social Graph &#8211; geek!daily</title>
+<meta name="description" content="I took a session off to catch up on some other bits. Back in now.
+
+">
+<meta name="keywords" content="">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Live Blog: Graphing Social Patterns, Day 3, Opening the Social Graph">
+<meta name="twitter:description" content="I took a session off to catch up on some other bits. Back in now.
+
+">
+<meta name="twitter:site" content="@purp">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.geekdaily.org/images/site-logo.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Live Blog: Graphing Social Patterns, Day 3, Opening the Social Graph">
+<meta property="og:description" content="I took a session off to catch up on some other bits. Back in now.
+
+">
+<meta property="og:url" content="http://blog.geekdaily.org/2007/10/live-blog-gra-7.html">
+<meta property="og:site_name" content="geek!daily">
+
+
+
+
+
+<link rel="canonical" href="http://blog.geekdaily.org/2007/10/live-blog-gra-7.html">
+<link href="http://blog.geekdaily.org/feed.xml" type="application/atom+xml" rel="alternate" title="geek!daily Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://blog.geekdaily.org/assets/css/main.css">
+<!-- Webfonts -->
+<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="http://blog.geekdaily.org/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="http://blog.geekdaily.org/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://blog.geekdaily.org/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://blog.geekdaily.org/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://blog.geekdaily.org/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://blog.geekdaily.org/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://blog.geekdaily.org/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://blog.geekdaily.org/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://blog.geekdaily.org/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/" >Home</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/articles/" >Articles</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/projects/" >Projects</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/blog/" >Blog</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/about/" >About</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="http://blog.geekdaily.org/" class="site-logo" rel="home" title="geek!daily"><img src="http://blog.geekdaily.org/images/site-logo.png" width="200" height="200" alt="geek!daily logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="http://blog.geekdaily.org/">geek!daily</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">sporadic bursts of random thinking on life, leadership, and tech</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"></span>
+        
+          <h1 class="entry-title">Live Blog: Graphing Social Patterns, Day 3, Opening the Social Graph</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+          
+        
+          <img src="http://blog.geekdaily.org/images/" class="bio-photo" alt=" bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn"></span></span>
+        <span class="entry-date date published"><time datetime="2007-10-09T15:24:59-07:00"><i class="fa fa-calendar-o"></i> October 09, 2007</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p><em>I took a session off to catch up on some other bits. Back in now.</em></p>
+
+<p><strong>OpenFaced panel: Opening Up the Social Graph</strong> - <a href="http://graphingsocial.com/speakers#tantek-celik">Tantek Celik</a> (moderator), <a href="http://graphingsocial.com/speaker#david-recordon-sixapart">David Recordon</a> SixApart, <a href="http://graphingsocial.com/speakers#chamath-palihapitiya-facebook">Chamath Palihapitiya</a> Facebook, <a href="http://graphingsocial.com/speakers@joseph-smarr-plaxo">Joseph Smarr</a> Plaxo, <a href="http://graphingsocial.com/speakers#ted-grubb-satisfaction">Ted Grubb</a> Satisfaction Unlimited</p>
+
+<p>Dave McClure “threw down the gauntlet” to Google and Yahoo: if you want to participate in open standards, show up.</p>
+
+<p>[I’ve followed Joseph a bit as he’s been talking about Pulse, a social network aggregator. While I don’t know Ted, I know several other folks at Satisfaction via Christina. &lt;/disclaimer&gt;]</p>
+
+<p>Joseph led with a Pulse demo. Maybe that’s what everyone will do, but I’m not diggin’ it. Damn that boy talks fast.</p>
+
+<p>David Recordin talks a bit about his role as kinda the gluemeister at 6A, standing among and between all the 6A products and looking at smart choices for them all. Also coming to this problem from the <a href="http://vox.com/">vox.com</a> perspective. He also lent the laptop folks are demoing from.</p>
+
+<p>Ted shows how Satisfaction is importing user profiles via microformats. MFs are supported all over the place. [me: we should add them to PS] [CW agrees]. Showed how to get the MF profile data from flickr. It also autosyncs, inheriting changes. [me: this lends an interesting model for connecting disparate graphs and makes the connections valuable]</p>
+
+<p>Chamath got pinged on where he thinks open social graph fits … and almost bit, but stepped back to present FBs take on social graphs. He asserts they believe the world has one social graph. FB has to make sure they make their version of social graph as open as possible (viz they had APIs for social graph data 6 months before FB platform). They intend to get more open over time. Urges to remember that they had to lay a foundation of privacy and respect before people would be comfortable sharing things like name, location, phone, AIM, etc. Scale of this effort is going to be in years, not months.</p>
+
+<p>6A: David Recordon<br />
+FB: Chamath Palihapitiya<br />
+PX: Joseph Smarr<br />
+SU: Ted Grubb</p>
+
+<p>6A: consider any obfuscated object (hashed email) same as the underlying object — if they don’t want to share email, don’t use hashed email as an identifier.</p>
+
+<p>FB: If you can combine a good privacy model with a graph that remains relevant as it grows, you’ll allow sites to remain relevant … unless users decide to choose a different site. In the end, we’re at their mercy. [me: as it should be]</p>
+
+<p>PX: Everybody does better when users are in control of their information. http://opensocialweb.org/ User Bill of Rights [me: shades of Ira Glass’s commentary about Ten Commandments] It’s not a tech problem; it’s more a social, political, privacy problem which is (hopefully) a better problem to have.</p>
+
+<p>MOD: What are the problems for the OSG?</p>
+
+<p>SU: Keeping it as simple and managable for the user<br />
+6A: Defining the problem is still the problem. We need to take a step back to see what consumers want. Dave Winer pointed out that they don’t know what OSG means … we need a consistent model, offline and online, which breaks it down in their terms (I have friends, etc.). Embody social conventions of the offline world: if you have the email address of someone in my contacts, you can have their phone number (you’d email me and ask, I’d say yes, etc.)</p>
+
+<p>MOD polls the room for who’s members of multiple nets, decreasing hands as he raises the number of nets.</p>
+
+<p>MOD: How much does this matter?</p>
+
+<p>[missed the answer. was short and felt unsubstantial]</p>
+
+<p>PX: For the people I know on FB (a subset of all) I can get some information. Just like in the real world people want to opt in or out</p>
+
+<p>SU: We want the conversations going inside Satisfaction, but we also want people [companies?] to be able to take those conversations to their own websites. We couldn’t do that as a FB app.</p>
+
+<p>FB: Info expires because we’re custodians of the information. We don’t own it.</p>
+
+<p>6A: 24 hour timeout of data you get via the API for more than 24 hours. [me: be sure to segment and age that data]</p>
+
+<p>FB: If they’re engaged and using you regularly you’ll always have that fresh info. [me: this sort of introduces aging memory to digital info]</p>
+
+<p>Q: What are you all thinking about OpenID?<br />
+A: Nearly all do or are getting it running. SU is using MF data but not publishing it?</p>
+
+<p>Q: What about the “Peace and Love” or “Platform Wars” Tim O’Reilly spoke of this morning?<br />
+6A: Ask again in a year.<br />
+FB: We intend to keep providing what it takes to empower developers to engage and please users.</p>
+
+<p>Q: What does “open” mean?<br />
+PX: You’re open when you free your data.<br />
+SU: Allowing users to own their data.<br />
+6A: Allow users to freely manipulate and remove their info.<br />
+FB: Enable users to decide how they interact with people.</p>
+
+<p>Q: FB’s API limits access to some data. That’s at odds with being open.<br />
+FB: Our API is evolutionary. We want to keep our users data protected and iterate carefully.<br />
+6A: We’re not yet sharing info via microformats as we don’t think we’ve yet set the stage for users to understand that the info could be regarded as their identity and how it could be shared/used.</p>
+
+<p>Q: Mark Zuckerberg said FB would deliver openID and microformats when users want it. Who wants it?<br />
+(lots of raised hands and pics)</p>
+
+<p>Q: FB wants one social graph … don’t you have to open it up?<br />
+FB: We think there’s one in the world, we’re trying to model it accurately and efficiently.</p>
+
+<p>Q: Bebo and others will likely release APIs which resemble FB. What do you think will be the open app model?<br />
+FB: Clearspring (?) already exists and embodies the model of build once publish many, which gets the details out of the way and allows companies to focus on engaging users.<br />
+PX: Less true of stitching the OSG across many sites. It’s not a theoretical argument at this point.</p>
+
+<p>MOD: What’s next in terms of supporting OSG?<br />
+PX: Looking to help you syndicate your friends list across many sites.<br />
+SU: Implementing OpenID and syncing hCard<br />
+6A: Build in tools to allow our users to control who they interact with via their content.<br />
+FB: We want as much info to flow across the graph and touch everyone in the world.</p>
+
+<p>_[Interesting thought: mark all information with a value of how personal it is to you (think: slider with 3-5 presets, a la “more of this/less of this”)]</p>
+
+<p>Chamath was, I think, the most thoughtful and well-spoken. Joseph obviously has a billion ideas screaming around in his head waiting to get out. No slight to David or Ted implied or intended. And now I’m out, heading to see <a href="http://www.joelonsoftware.com/">Joel Spolsky</a> in Emeryville._</p>
+
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="http://blog.geekdaily.org/2007/10/typepad-8-my-ho.html" class="btn" title="TypePad 8 my homewerks.">Previous</a>
+      
+      
+        <a href="http://blog.geekdaily.org/2007/10/an-api-on-an-ap.html" class="btn" title="An API on an API">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>&copy; 2015 Jim Meyer. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/so-simple/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	<a href="http://twitter.com/purp" title="Jim Meyer on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	<a href="http://linkedin.com/in/jimmeyer" title="Jim Meyer on LinkedIn" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a>
+	
+	<a href="http://instagram.com/purp" title="Jim Meyer on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	<a href="http://www.flickr.com/photos/purp" title="Jim Meyer on Flickr" target="_blank"><i class="fa fa-flickr fa-2x"></i></a>
+	<a href="http://github.com/purp" title="Jim Meyer on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	
+  <a href="http://blog.geekdaily.org/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'http://blog.geekdaily.org';
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://blog.geekdaily.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://blog.geekdaily.org/assets/js/scripts.min.js"></script>
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-225723-36']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+</body>
+</html>

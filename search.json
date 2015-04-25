@@ -1,0 +1,1937 @@
+[
+
+  
+    {
+      "title"			: "Moving Your Blog To Jekyll: The Translation",
+      "link"			: "http://blog.geekdaily.org/2015/04/moving-your-blog-to-jekyll-the-translation.html",
+      "excerpt"		: "<p><strong>tl;dr:</strong> If you’re planning to move or export a blog to Jekyll, first look at <a href="http://import.jekyllrb.com/">Jekyll Importer</a>. Hopefully, you’ll save a fair bit of time. If you’re moving from Typepad, it’s a bit complicated.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Goodbye, Typepad; Hello, Github Pages",
+      "link"			: "http://blog.geekdaily.org/2015/04/goodbye-typepad-hello-github-pages.html",
+      "excerpt"		: "<p>I’ve been using Typepad to blog for nearly ten years now. When I started, I was a geek with typographic and design skills but very little feel for how to employ them on the web; Typepad made it easy to focus on the content and plug in a reasonable design.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Setting Up A Minecraft Server For Kids, Part 1: Preparation",
+      "link"			: "http://blog.geekdaily.org/2013/04/setting-up-a-minecraft-server-for-kids-part-1-preparation.html",
+      "excerpt"		: "<p>I’ve got a little more time on my hands than usual at the moment, so I decided to set up a <a href="https://minecraft.net/">Minecraft</a> server for my son and his friends. I figured it would force me to play around with cloud APIs, some linux configuration that I haven’t done for a long while, and other various bits of geekery that would just make me happy.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Bashing tcsh",
+      "link"			: "http://blog.geekdaily.org/2012/03/bashing-tcsh.html",
+      "excerpt"		: "<p>After 15 years of non-stop tcsh action, I’ve finally made the jump to bash. It was painful and I miss all my lovely variable expansion (^X $), wildcard expansion (^X*) and term completion (ESC-/), but there are so many tools like <a href="https://github.com/sstephenson/rbenv">rbenv</a> that expect that you’re using bash with no tcsh-friendly alternatives.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Advanced YAML: Tricking Out Your database.yml",
+      "link"			: "http://blog.geekdaily.org/2010/08/advanced-yaml-tricking-out-your-databaseyml.html",
+      "excerpt"		: "<p>I’ve been <a href="http://en.wikipedia.org/wiki/Cargo_cult_programming">cultishly</a> carrying this snippet around for years:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Live Blog: Comet & Other Browser Stuff",
+      "link"			: "http://blog.geekdaily.org/2009/10/live-blog-comet-other-browser-stuff.html",
+      "excerpt"		: "<p>It’s a big component of what we call “real-time”</p>
+
+<p>This is the kind of stuff that puts up a banner on a Twitter search (“# New Tweets Found”) and makes things feel real time.</p>
+
+<p>List of what’s being done to move notifications from server to browser:<br />
+* Ajax polling: Anybody using the JS set-timeout function, then refetch. Used by GMail, Campfire, et al<br />
+* Long polling (typically Comet): Used by FriendFeed, keeps an http connection open as long as possible (keep alive), reopen when timed-out. Keep a local thread pool.<br />
+* Flash sockets: Same as long polling, but from Flash. Don’t have the same-origin policy. No limitaions on number of connections. Does gzipping.<br />
+* Reverse HTTP: hosting a little webserver inside a JS connection. Long pushing?<br />
+* Silverlight (“MS’s version of Flash”)<br />
+* HTML5 websockets: part of spec, doesn’t exist and not implemented. Expected to be like flash sockets.</p>
+
+<p>(things discarded as too old/obscure/painful/absurd):<br />
+* Java applets (David Weekly is about to get himself kicked ;)<br />
+* Big ugly JS kludges (iframe tricks, etc)<br />
+* What’s that Opera thing … unite? ubiquity? Unite. Every browser is a webserver. Sounds like reverse HTTP.<br />
+* Using XMPP format, arbitrary JSON structure, Atom.</p>
+
+<p>Libraries:<br />
+* Orbited (?) tunnels TCP thru HTTP, treats each end like a socket. JS front-end, Python backend. Often paired with Twisted. Specifically meant to be Comet.<br />
+* stropheJS: javascript, can use flash sockets<br />
+* Tornado: python<br />
+* Cometd: Java, made by Dojo to work with dojo<br />
+* Dojo: javascript, can use flash sockets<br />
+* APE project (?)</p>
+
+<p>What formats are people using to send data:<br />
+* JSON<br />
+* XMPP</p>
+
+<p>Apps and their libs/methodologies:<br />
+* Meebo: ??<br />
+* Google Wave/GTalk: GWT RPC, long-polling, their own JS<br />
+* FB Chat: ??<br />
+* FriendFeed: Tornado server with long-polling, their own JS<br />
+* Superfeedr: uses BOSH, stropheJS. BOSH is kinda long polling, bidirectional (two cs open all time). Very similar to comet, more friendly than strict proxies<br />
+* Collecta: uses BOSH<br />
+* Twingly: orbited<br />
+* PBWorks: long polling on network dashboard to see updates come in live; wrote their own libraries, also use stropheJS<br />
+* StatusNet - identi.ca and ??, orbited and cometd (you can do either)</p>
+
+<p>Flex and Air apps? The most interesting stuff is what used to be called Flash Media Server (been renamed). They’ve got their own P2P protocol. All sorts of funky stuff you can do. OpenSource version of FMS is Red Five.</p>
+
+<p>In what situations are these libraries breaking down?<br />
+* Transparent/Opaque proxies that give repeats/dupes/hangs. Keep buffer on server and check for these. Sometimes have to close connection to flush thru proxies.<br />
+* “Everyone focuses on the newest hottest event-based framework, but the hardest part is that HTTP wasn’t designed for long-polling.”</p>
+
+<p>Have to hold open request/response pairs. Connection setup and teardown is expensive</p>
+
+<p>Guy at UK telecom has only ~3K IP connections available in London area. Comet is going to force an upgrade of their hardware, which will be expensive. Real world constraints will always present.</p>
+
+<p>Real-time at UI can be distracting at best, horribly annoying at worst. Charts work great, but text moving too quickly becomes hard. UX is challenging. Would be nice to add items while autoscrolling relative to the focussed item</p>
+
+<p>When you want to add a pause button to your site, that’s FAIL. But the hover-over-conversation to pause semantic is pretty good.</p>
+
+<p>Go to jschat.com to see a bad resize.</p>
+
+<p>FB pioneered notifications really well in UX. You get a “toaster popup” that doesn’t disturb your screen and it fades after a few moments plus a bar at the bottom to persist the aggregated notifications/count. Really nice.</p>
+
+<p>Growl is also mentioned as a good model. Is there interest in a notification aggregator with contexts in the browser? Meebo wants to go that way as a notification aggregator. Adobe wants to do this on your desktop. BrowserPlus also hits Growl. Prowl == Pushed Growl.</p>
+
+<p>If everyone started using XMPP, it would increase the message load (“three bazillion individual messages”). No one is bundling XMPP updates; no reason you couldn’t. ActivityStreams could also serve.</p>
+
+<p>Why are people using Atom/JSON for this? They’re so extensible, but when you extend them so far they’re just as verbose as XML. “But we just don’t like XML.”</p>
+
+<p>Would be nice if you could select things to pull out of the stream and hold onto.</p>
+
+<p>Seems to be consensus that chat belongs at the bottom of the browser, append at end. Everything with a permalink (blogs, tweets, etc) gets added to the top (?). Seems to be related to height issues.</p>
+
+<p>Infinite scroll vs. “More” button</p>
+
+<p>Titlebar flash (Gmail and GTalk)</p>
+
+<p>Some sites make a tiny flash widget to play a sound</p>
+
+<p>Haptic: twitter dmesg to cellphone buzz</p>
+
+<p>Notifications can become another form of info overload/noise</p>
+
+<p>(We flailed at making a 1D/2D chart to represent frequency and value … FAIL)</p>
+
+<p>Phonetop apps are like desktop apps. Leah feels strongly that they’re headed down-and-to-the-right and browser-ish apps are taking supremacy due to interoperability.</p>
+
+<p>Apple’s surprise: phonetop apps took off. (?) vs. John Gruber: “The most used app on my iPhone is Safari.”</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Live Blog: Web Aggregation, What Works and What Doesn't",
+      "link"			: "http://blog.geekdaily.org/2009/10/live-blog-web-aggregation-what-works-and-what-doesnt.html",
+      "excerpt"		: "<p><em>[note: I originally scribbled this on paper thinking I could hand it off immediately, preventing the obligation of typing, posting, etc. Turns out I don’t get off that lightly, so here’s the spew in electrons.]</em></p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Stepping Into BDD with Cucumber and WebRAT: Structuring the Work",
+      "link"			: "http://blog.geekdaily.org/2009/09/stepping-into-bdd-with-cucumber-and-webrat-structuring-the-work.html",
+      "excerpt"		: "<p><em>This is the first of a series on my adventures in going BDD with Cucumber and WebRAT with a greenfield project. Watch for the next article coming soon.</em></p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Generate the regex for a TLD hostname from Perl",
+      "link"			: "http://blog.geekdaily.org/2009/08/generate-the-regex-for-a-tld-hostname-from-perl.html",
+      "excerpt"		: "<p>This was a quick, fun exercise to remind me that I can still write Perl. It fetches the list of TLDs from IANA, does a quick bit of munging, then renders a regex which should match any valid FQDN:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Gmail no longer beta? True dat.",
+      "link"			: "http://blog.geekdaily.org/2009/07/gmail-no-longer-beta-true-dat.html",
+      "excerpt"		: "<p>I guess it’s no longer <a href="http://blog.geekdaily.org/2007/07/beta-is-the-web.html">under construction</a>, or so sayeth <a href="http://gmailblog.blogspot.com/2009/07/gmail-leaves-beta-launches-back-to-beta.html">the GMail blog</a> which also shows those who can’t live without that ubiquitous beta tag <a href="http://mail.google.com/mail/?shva=1#settings/labs">how to bring back their old friend</a>:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Michael Jackson's Obit via Wordle",
+      "link"			: "http://blog.geekdaily.org/2009/06/michael-jacksons-obit-via-wordle.html",
+      "excerpt"		: "<p>Story by <a href="http://news.yahoo.com/s/ap/us_obit_michael_jackson">Yahoo!</a>, picture by <a href="http://www.wordle.net/gallery/wrdl/970425/Michael_Jackson_Died">Wordle.net</a>:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "LiveBlog: 10+ Deploys A Day: Dev and Ops at Flickr",
+      "link"			: "http://blog.geekdaily.org/2009/06/liveblog-10-deploys-a-day-dev-and-ops-at-flickr.html",
+      "excerpt"		: "<p>Update 1: <a href="http://www.slideshare.net/jallspaw/10-deploys-per-day-dev-and-ops-cooperation-at-flickr">Slides are now on SlideShare.</a></p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "LiveBlog: Q&A with Twitter's John Adams",
+      "link"			: "http://blog.geekdaily.org/2009/06/liveblog-qa-with-twitters-john-adams.html",
+      "excerpt"		: "<p>A short pre-lunch session to absorb a few moment:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "LiveBlog: PageSpeed",
+      "link"			: "http://blog.geekdaily.org/2009/06/liveblog-pagespeed.html",
+      "excerpt"		: "<p>Bryan McQuade (Google), Richard Rabbat (Google, Inc.)</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "LiveBlog: 2 Years Later, Loving and Hating the Cloud",
+      "link"			: "http://blog.geekdaily.org/2009/06/liveblog-2-years-later-loving-and-hating-the-cloud.html",
+      "excerpt"		: "<p>More from Velocity 2009</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "LiveBlog: Fixing Twitter",
+      "link"			: "http://blog.geekdaily.org/2009/06/liveblog-fixing-twitter.html",
+      "excerpt"		: "<p>John Adams, Twitter Ops</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "LiveBlog: Next Web Challenges: It's Still All About UX",
+      "link"			: "http://blog.geekdaily.org/2009/06/liveblog-next-web-challenges-its-still-all-about-ux.html",
+      "excerpt"		: "<p>Velocity 2009, the conference about performance, is very high-performance about getting people on and off stage (and high density around content)</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "LiveBlog: The User and Business Impact of Server Delays, Additional Bytes, and HTTP Chunking in Web Search",
+      "link"			: "http://blog.geekdaily.org/2009/06/liveblog-the-user-and-business-impact-of-server-delays-additional-bytes-and-http-chunking-in-web-sea.html",
+      "excerpt"		: "<p>Eric Schurman (Microsoft/bing), Jake Brutlag (Google)</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "LiveBlog: After the Click",
+      "link"			: "http://blog.geekdaily.org/2009/06/liveblog-after-the-click.html",
+      "excerpt"		: "<p>More from Velocity 2009. Going really fast, sorry for all the sloppiness.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "LiveBlog: Surviving the 2008 Elections at DailyKos.com",
+      "link"			: "http://blog.geekdaily.org/2009/06/liveblog-surviving-the-2008-elections-at-dailykoscom.html",
+      "excerpt"		: "<p>More from Velocity 2009:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "LiveBlog: Hadoop Operations",
+      "link"			: "http://blog.geekdaily.org/2009/06/liveblog-hadoop-operations.html",
+      "excerpt"		: "<p>I’m at Velocity 2009, sitting in on the “Hadoop Operations” talk.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "LiveBlog: Intro to Managed Infrastructure with Puppet",
+      "link"			: "http://blog.geekdaily.org/2009/06/liveblog-intro-to-managed-infrastructure-with-puppet.html",
+      "excerpt"		: "<p>I’m at Velocity 2009 and very happy to see Luke Kanies presenting around Puppet. If you’re not familiar, Luke’s a hard-core sysadmin type with the typical sysadmin bent for highly automated systems management solutions which require as little maintenance as possible. If you’re looking at things like cfengine, cft, etc. then you should be looking at Puppet as well.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "LiveBlog: Death of a Web Server",
+      "link"			: "http://blog.geekdaily.org/2009/06/liveblog-death-of-a-web-server.html",
+      "excerpt"		: "<p>The first Velocity 2009 session for me today. Semi-useful, but seemed very .NET focused. I didn’t take a lot of notes around it for that reason.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Got the \"can't activate\" Gem::Exception Blues? gem cleanup!",
+      "link"			: "http://blog.geekdaily.org/2009/06/got-the-cant-activate-gemexception-blues-gem-cleanup.html",
+      "excerpt"		: "<p>What to do when rubygems can’t activate a version of a gem because it’s already activated a different version of the same gem? My Google magic wasn’t good enough to find this one quickly, so I’ll happily point out <a href="http://jessehu.wordpress.com/2008/07/02/troubleshooting-already-activated-activerecord-202/">Jesse Hu’s nearly one-year-old post</a> about the same problem, descended from <a href="http://www.ruby-forum.com/topic/137509">a Ruby on Rails thread on ruby-forum.com</a> where, unsurprisingly, it’s <a href="http://www.jeremymcanally.com/">Jeremy McAnally</a> who knows that <tt><code>gem cleanup</code></tt> is the way to go.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Cucumber, Webrat ... Who Names These Things?",
+      "link"			: "http://blog.geekdaily.org/2009/06/cucumber-webrat-who-names-these-things.html",
+      "excerpt"		: "<p>I’m tinkering a bit with <a href="http://github.com/aslakhellesoy/cucumber/tree/master">Cucumber</a> and <a href="http://wiki.github.com/brynary/webrat">Webrat</a> for <a href="http://www.linkedin.com/in/jimmeyer">my day job</a> and am very excited by some of the prospects for our QA group’s automation efforts. Along the way I’m finding that I have to explain how all the moving parts relate to each other, so I made this diagram:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Generating with Ruby OFF Rails",
+      "link"			: "http://blog.geekdaily.org/2009/06/generating-with-ruby-off-rails.html",
+      "excerpt"		: "<p>I’m spending a fair amount of my time working on non-Rails Ruby projects lately and I’ve been missing the fine code generation toys in Rails. So tonight, for the fun of it and because I was hankering to play with cucumber, I hacked up the minimal set of bits that gets you script/generate in your non-Rails project.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Re-finding my rubyligion ...",
+      "link"			: "http://blog.geekdaily.org/2009/05/refinding-my-rubyligion-.html",
+      "excerpt"		: "<p>Life’s been busy. Good, but busy. <a href="http://www.linkedin.com/in/jimmeyer">My gig</a> at <a href="http://www.linkedin.com">LinkedIn</a>, two hours of commuting each day, plus our four person plus dog family certainly keeps me awash in things I should be doing. Thing is, ever since I stepped away from <a href="http://.zdnet.com/enterprisealley/?p=188">managing LinkedIn’s rubyists</a>, I haven’t had much to keep me practicing my Ruby skills or tied to the Ruby community. That’s made me a bit sad.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Seven Ways To Approach An Issue",
+      "link"			: "http://blog.geekdaily.org/2009/01/seven-ways-to-approach-an-issue.html",
+      "excerpt"		: "<p>I was chatting about this with someone yesterday and made a total hash of recounting it, so I thought I’d do a quick blog post to clarify my thoughts.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "The Values Driving My Value-Driven Life",
+      "link"			: "http://blog.geekdaily.org/2008/09/the-values-driv.html",
+      "excerpt"		: "<p>I had the great good fortune to attend <a href="http://www.franklincovey.com/">FranklinCovey’s</a> <a href="http://www.franklincovey.com/tc/solutions/time-management-solutions/focus-achieving-your-highest-priorities">FOCUS training</a> with several <a href="http://www.linkedin.com/in/jerryluk">members</a> <a href="http://www.linkedin.com/in/ikailan">of</a> <a href="http://www.linkedin.com/in/braitz">my</a> <a href="http://www.linkedin.com/in/christianniles">team</a> last week. One of the exercises they give you is to select 4-9 core values and write positive clarifying statements for each. I just finished up and, since one of my statements is “I openly share my values and invite discussion,” here they are:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Mozilla's TraceMonkey Avoids Trampling",
+      "link"			: "http://blog.geekdaily.org/2008/09/mozillas-tracem.html",
+      "excerpt"		: "<p><a href="https://wiki.mozilla.org/JavaScript:TraceMonkey">Mozilla’s TraceMonkey JIT Javascript compiler</a> climbed down from the trees last week only to be somewhat lost in the thundering herd of <a href="http://googleblog.blogspot.com/2008/09/fresh-take-on-browser.html">Google’s announcement</a> of <a href="http://www.google.com/chrome">the Chrome browser</a> and its accompanying <a href="http://code.google.com/apis/v8/intro.html">V8 Javascript Virtual Machine</a>.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Google Chrome: The Next Big Thing?",
+      "link"			: "http://blog.geekdaily.org/2008/09/google-chrome-t.html",
+      "excerpt"		: "<p><a href="http://www.linkedin.com/in/mariosundar">A friend at work</a> recommended I have a look at <a href="http://blogoscoped.com/google-chrome/">Google’s explanation of Google Chrome as illustrated by Scott McCloud</a> [via <a href="http://blogoscoped.com/archive/2008-09-01-n47.html">Google Blogoscoped</a> where they were kind enough to scan the comic they received] and I couldn’t wait. You see, <a href="http://scottmccloud.com/">Scott McCloud</a> is the author of two of my favorite books, “ <a href="www.amazon.com/exec/obidos/ASIN/006097625X/geekdaily-20">Understanding Comics</a>” and “ <a href="http://www.amazon.com/exec/obidos/ASIN/0060953500/geekdaily-20">Reinventing Comics</a>” … both must-reads if you’re interested in comic history, the vocabulary of comics, or even just in thinking about how we communicate and interact with things on pages.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Reflections on moderated blog comments",
+      "link"			: "http://blog.geekdaily.org/2008/08/reflections-on.html",
+      "excerpt"		: "<p>Ran into another blog today with misleading, subjective assertions about topical content and which moderates all comments. It’s made me realize that, if you intend to blog about current events with any integrity, you absolutely must unmoderate comments and be ready to fight the spam. Otherwise, you’ve risk starting a monolog, not a conversation, and <a href="http://www.google.com/search?q=blog+monolog+dialog">the web has enough monologs</a>.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Reports of the Business Card's Death Are Greatly Exaggerated, or why bzCards != biz cards",
+      "link"			: "http://blog.geekdaily.org/2008/08/reports-of-the.html",
+      "excerpt"		: "<p>Caught the article <a href="http://venturebeat.com/2008/08/19/rmbr-launches-a-mobile-app-to-get-rid-of-business-cards/">“rmbr launches mobile app to get rid of business cards”</a> on VentureBeat which covers the announcement <a href="http://rmbrme.com">rmbrME</a>, the new electronic connection tool from <a href="http://blog.chroniql.com/">rmbr</a>. (note: the <a href="http://rmbr.com/">rmbr.com</a> site, which <a href="http://www.readwriteweb.com/archives/rmbr_using_funware_to_organize_photos.php">launched as a photo organizing site</a>, currently redirects to <a href="http://rmbrme.com/">rmbrme.com</a>) The general idea is to trade vCards over email, IM, SMS, etc. and get rid of those pesky piles of pasteboard. If the ease of use isn’t incentive enough, they’re mixing in the <a href="http://blogs.electricsheepcompany.com/swords/2008/02/18/worlds-in-motion-funware-is-the-future-of-our-virtual-world/">funware</a> <a href="http://venturebeat.com/2008/05/09/funwares-threat-to-the-traditional-video-game-industry/">idea</a> via contests and leaderboards.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Cuzillion: 'cuz there's a zillion pages to check",
+      "link"			: "http://blog.geekdaily.org/2008/08/cuzillion-becau.html",
+      "excerpt"		: "<p>Once in a while I get lucky. Most recently, this means that I was asked to write <a href="http://blog.linkedin.com/blog/2008/08/tech-talk-steve.html">a blog post for LinkedIn</a>about the tech talk <a href="http://stevesouders.com/">Steve Souders</a> gave for us last week: Even Faster Web Sites. Unfortunately, in the interests of brevity, I couldn’t dive on something incidental to the talk which fascinated me: <a href="http://stevesouders.com/cuzillion/">Cuzillion</a>.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Stupidity In The Name Of Security",
+      "link"			: "http://blog.geekdaily.org/2008/08/stupidity-in-th.html",
+      "excerpt"		: "<p>Just created an account with WordPress.com and find it amusing that they show a password strength meter to encourage your to <a href="http://www.schneier.com/blog/archives/2007/01/choosing_secure.html">choose a cryptographically strong password</a> (which is good), then <strong>display your password in large type that’s clearly readable from 12-15 feet away on the unsecured activation page.</strong> Oh, and they email it to you, too.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Old & Rusty to Shiny & New, Part 1",
+      "link"			: "http://blog.geekdaily.org/2008/08/old-rusty-to-sh.html",
+      "excerpt"		: "<p>I’m feeling particularly masochistic today, so I’m going to tackle a project I’ve been putting off for a while: moving a Rails 1.2.6 app in our subversion repository into <a href="http://github.com/">github</a>, then updating it to Rails 2.1.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "BarCamp RDU: Fun and Done",
+      "link"			: "http://blog.geekdaily.org/2008/08/barcamp-rdu-fun.html",
+      "excerpt"		: "<p>Was a lot of fun. Did the Werewolf and Value-Driven Life sessions and got more interest in both than I expected. Also pitched in on <a href="http://blog.nicholasnapp.com/">Nick Napp’s</a> “10 Ways To Accelerate The Failure Of A Startup” which drew a big crowd and was good, but that was because Nick did all the work and his usual consummately excellent job presenting.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "BarCamp RDU in 8 hours!",
+      "link"			: "http://blog.geekdaily.org/2008/08/barcamp-rdu-in.html",
+      "excerpt"		: "<p>Was checking in to get the details on where and when to be there and, courtesy of a semi-random chat with <a href="http://evan.tiggerpalace.com/">my friend Evan</a>, decided to propose not one, but <strong>two</strong> non-technical sessions tomorrow:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Let Our Congress Tweet? Who's Stopping Them?",
+      "link"			: "http://blog.geekdaily.org/2008/07/let-our-congr-1.html",
+      "excerpt"		: "<p>A quick follow-up: When <a href="http://blog.sunlightfoundation.com/2008/07/10/let-our-congress-tweet">Ellen Miller posted</a> to further promote Sunlight Foundation’s Let Our Congress Tweet” petition, she made this statement:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Using mysqldump with subqueries",
+      "link"			: "http://blog.geekdaily.org/2008/07/using-mysqldump.html",
+      "excerpt"		: "<p>I needed to dump some very specific portions of a large MySQL database; some of the data were second-degree relations (aka a Rails has-many-through). mysqldump won’t allow a join in the –where clause, but it will allow a subquery, so I ended up with something that looked a bit like this:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Let Our Congress Tweet? You've been had.",
+      "link"			: "http://blog.geekdaily.org/2008/07/let-our-congres.html",
+      "excerpt"		: "<p>If you’re like me, some large number of the people you follow on Twitter have tweeted something like this today:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Long Time, No See",
+      "link"			: "http://blog.geekdaily.org/2008/03/long-time-no-se.html",
+      "excerpt"		: "<p>I’m on the plane to Salt Lake City for <a href="http://www.mtnwestrubyconf.org/">Mountain West Ruby Conference</a> and am fairly excited to get the chance to see several people I haven’t seen for months. In all fairness, the only reason I’m not “really excited” is not seeing my family for two hard travel days with very little sleep likely to happen; sorry, Carl, Cobie, and the rest of you, but Beth, Sam, and Cassie have my heart.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "LinkedIn Mobile is Live!",
+      "link"			: "http://blog.geekdaily.org/2008/02/linkedin-mobile.html",
+      "excerpt"		: "<p>It’s been a busy few months since <a href="http://blog.geekdaily.org/2007/11/me-linkedincom.html">I joined LinkedIn</a>, but some of that work is finally out there for the world to see: <a href="http://m.linkedin.com/">LinkedIn Mobile</a> is now in public beta. You can get more details from the <a href="http://blog.linkedin.com/blog/2008/02/linkedin-mobile.html">LinkedIn Blog</a>.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "If",
+      "link"			: "http://blog.geekdaily.org/if.html",
+      "excerpt"		: "<p><em>by Rudyard Kipling</em></p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Data Portability In A Nutshell: You Own Your Data",
+      "link"			: "http://blog.geekdaily.org/2008/01/data-portabilit.html",
+      "excerpt"		: "<p>I’ve already gotten pings (don’t you people have other things to do? ;) about <a href="http://blog.linkedin.com/blog/2008/01/linkedin-and-da.html">this morning’s post on the LinkedIn blog</a>, mostly around a more detailed explanation of the data portability goals with some privacy overtones, so I’ll give a terse summary here:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Textile, RedCloth, and MonkeyPatching",
+      "link"			: "http://blog.geekdaily.org/2007/12/textile-redclot.html",
+      "excerpt"		: "<p>Okay, I need to go through ~2700 articles, some large, some <em>very</em> large, and programmatically decide which of them use an interesting amount of <a href="http://textism.com/tools/textile/">Textile</a> formatting. Don’t ask why; it’s not polite to stare at the unfortunate. Just smile and nod and think about how you’d puzzle this one out.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "How Quickly We Forget",
+      "link"			: "http://blog.geekdaily.org/2007/12/how-quickly-we.html",
+      "excerpt"		: "<table>
+  <tbody>
+    <tr>
+      <td>I’m working to set up my MacBook Pro to properly allow email from the Terminal command line (e.g. “generate_big_text</td>
+      <td>Mail -s ‘Your Big Text Has Arrived’ joe@example.com”) and, in the process of running down what needed, found the following line in <a href="http://www.topology.org/">Alan Kennington</a>’s <a href="http://www.topology.org/linux/postfix.html#suse62">postfix config pages</a>:</td>
+    </tr>
+  </tbody>
+</table>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Wiimote Makes Your Screen A Canvas",
+      "link"			: "http://blog.geekdaily.org/2007/12/wiimote-makes-y.html",
+      "excerpt"		: "<p><a href="http://www.cs.cmu.edu/~johnny/">Johnny Chung Lee</a> of <a href="http://www.cmu.edu/index.shtml">Carnegie Mellon University</a> decided that <a href="http://www.cs.cmu.edu/~johnny/projects/wii/">the infrared camera inside the Wiimote could be put to interesting uses</a> … and he’s right. This is some of the coolest stuff I’ve seen for a while. If some company out there doesn’t build a $50 kit that converts your monitor to a poor man’s <a href="http://www.wacom.com/cintiq/">Cintiq</a> they’re missing a really good opportunity.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Ruby Benchmark Shootout, Round 2",
+      "link"			: "http://blog.geekdaily.org/2007/12/ruby-benchmark.html",
+      "excerpt"		: "<p>Back in February, Antonio Cangiano did <a href="http://antoniocangiano.com/2007/02/19/ruby-implementations-shootout-ruby-vs-yarv-vs-jruby-vs-gardens-point-ruby-net-vs-rubinius-vs-cardinal/">a fairly impressive run at benchmarking the various Ruby interpreter implementations</a> and comparing the results. <a href="http://antoniocangiano.com/2007/12/03/the-great-ruby-shootout/">He’s just done it again</a> and, just nine months later, the improvements are fairly dramatic.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Growl for Entourage (via Applescript)",
+      "link"			: "http://blog.geekdaily.org/2007/12/growl-for-entou.html",
+      "excerpt"		: "<p>So I went looking for a way to connect Microsoft Entourage (yeah, I’m in Exchange land now) with Growl for notifications. In theory, there are many ways, all of them Applescripts. In practice, I couldn’t find one that worked properly … so I grabbed the best one I could find and hacked it from there. I’ve put it in <a href="http://svn.geekdaily.org/public/applescript">my public subversion repo</a>, so if you need it either ctrl-click and download or use svn to nab it.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Make Terminal.app start with a default set of windows",
+      "link"			: "http://blog.geekdaily.org/2007/12/make-terminalap.html",
+      "excerpt"		: "<p>Due to <a href="http://blog.geekdaily.org/2007/11/me-linkedincom.html">recent circumstances</a>, I’ve moved from my old MacBook Pro with Leopard to a newer, faster MacBook Pro with Tiger … but not soon enough to avoid addiction to the Leopard Terminal.app’s Window Groups feature, which allows you to position, size, and color any number of windows, make them a group, then have that group be what appears every time you start Terminal.app (back in my old <a href="http://en.wikipedia.org/wiki/4Dwm">4Dwm</a> days we called this “session management” … glad MacOS is catching up. ;)</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Me @ LinkedIn.com",
+      "link"			: "http://blog.geekdaily.org/2007/11/me-linkedincom.html",
+      "excerpt"		: "<p>Today is my first day as the manager of light engineering development at LinkedIn and I’m incredibly excited about it. Why’s that, you might ask? Because LED is the group that’s bringing agile development and Ruby on Rails to LinkedIn.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "My New Toy: Pentax K100D Super",
+      "link"			: "http://blog.geekdaily.org/2007/11/my-new-toy-pent.html",
+      "excerpt"		: "<p>I’ve been staring at the specs for the Nikon <a href="http://www.dpreview.com/reviews/specs/Nikon/nikon_d40.asp">D40</a> (and <a href="http://www.dpreview.com/reviews/specs/Nikon/nikon_d40x.asp">D40x</a>), Canon Digital Rebel <a href="http://www.dpreview.com/reviews/specs/Canon/canon_eos350d.asp">XT/350D</a> (and <a href="http://www.dpreview.com/reviews/specs/Canon/canon_eos400d.asp">XTi/400D</a>), and the Pentax <a href="http://www.dpreview.com/reviews/specs/Pentax/pentax_k100d.asp">K100D</a> (and <a href="http://www.dpreview.com/reviews/specs/Pentax/pentax_k100dsuper.asp">K100D Super</a>) for over a year. 6 megapixels vs. 10, shake reduction in camera, dust removal, weight, lenses, reputation … I’ve been mulling this one pretty heavily, more than on our last car purchase (Toyota Sienna with all the geek family features like navigation and dvd … a no brainer ;)</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "OLPC: You Know, For Kids ... Theirs *and* Yours.",
+      "link"			: "http://blog.geekdaily.org/2007/11/olpc-you-know-f.html",
+      "excerpt"		: "<p>I just tripped over this video:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Cosco Busan, SF Bay, and Kurt Schwehr",
+      "link"			: "http://blog.geekdaily.org/2007/11/cosco-busan-sf.html",
+      "excerpt"		: "<p>Sometimes I’m dense. I’ve been reading <a href="http://schwehr.org/">Kurt Schwehr</a>’s excellent <a href="http://schwehr.org/blog/">electronic work log</a> (wlog? ;) for months and didn’t even think to share it in the wake of the Cosco Busan allision (a term I wouldn’t have known with Kurt’s help =). If you’re a geek, you should just read his whole blog as it’s rich in very cool stuff you don’t see every day … but if not, here’s his postings to date regarding the whole affair:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Post-Leopard Checklist",
+      "link"			: "http://blog.geekdaily.org/2007/11/post-leopard-ch.html",
+      "excerpt"		: "<p>I’m resettling into my laptop post-Leopard upgrade as a background task today and thought it might be useful (mostly to future-me) to note all the bits I’m twiddling:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "RubyConf 2007 Slide Roundup",
+      "link"			: "http://blog.geekdaily.org/2007/11/rubyconf-2007-s.html",
+      "excerpt"		: "<p>Haven’t been able to find a definitive source for the slides from RubyConf and, judging from my referrer logs, many others are also looking. Here’s my attempt to gather a reference to them in one place; I’ve just copied the schedule from the RubyConf site and am adding links as I find them. I’ll update this as I find more (and please tell me if you know where to find them =)</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Reading my referrer log ...",
+      "link"			: "http://blog.geekdaily.org/2007/11/reading-my-refe.html",
+      "excerpt"		: "<p>… and if I were a writer in search of material, I’d write about:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "A Mild Leopard Hangover",
+      "link"			: "http://blog.geekdaily.org/2007/11/a-mild-leopard-.html",
+      "excerpt"		: "<p>I installed Leopard last night and, after a few hours, left it doing its TimeMachine thing. It was an overall good experience. Here’s my quick notes:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Rails 101 by Peter Marklund",
+      "link"			: "http://blog.geekdaily.org/2007/11/rails-101-by-pe.html",
+      "excerpt"		: "<p>On the off-chance you’re not already reading either <a href="http://marklunds.com/">Peter Marklund’s blog</a> or <a href="http://www.rubyinside.com/">Peter Cooper’s excellent RubyInside blog</a>: <a href="http://www.rubyinside.com/ruby-on-rails-101-a-presentation-648.html">Peter the Latter points out</a> that <a href="http://marklunds.com/articles/one/374">Peter the Former has posted</a> his 341 slide (!) deck used to teach a week-long Ruby on Rails basics course. I’ve only skimmed but it looks pretty tasty.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "It's Official: I'm a Rails Contributor",
+      "link"			: "http://blog.geekdaily.org/2007/11/its-official-im.html",
+      "excerpt"		: "<p>Okay, <a href="http://groups.google.com/group/rubyonrails-core/browse_thread/thread/43d683ba018f5e7e">big deal</a>. Time to get back to work. (he said with a little grin)</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "RubyConf, Day 2: Maximizing Productivity",
+      "link"			: "http://blog.geekdaily.org/2007/11/rubyconf-day--3.html",
+      "excerpt"		: "<p>Don’t reinvent it if it doesn’t exist; extend what exists.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "RubyConf, Day 2: Essential Incompleteness in Program Modeling",
+      "link"			: "http://blog.geekdaily.org/2007/11/rubyconf-day-2-.html",
+      "excerpt"		: "<p><em>Ahhhh … sleep makes all better. I came late today, caught the Rubinius part of the plenary and so didn’t have any comfortable way to live blog it … so I didn’t.</em></p>
+
+<p>Walking our way to Godel’s incompleteness, in a hand-wavy sort of way.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "RubyConf, Day 1, 4p: Hurting Code for Fun & Profit",
+      "link"			: "http://blog.geekdaily.org/2007/11/rubyconf-day--2.html",
+      "excerpt"		: "<p>Ahhh, a nap makes all well. Last session of the day. Okay, you want to see these slides and the video once it’s posted by ConFreaks.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "RubyConf, Day 1, Plenary Part 2: Advanced Ruby Class Design",
+      "link"			: "http://blog.geekdaily.org/2007/11/rubyconf-day--1.html",
+      "excerpt"		: "<p><em>No coffee outside. How do they expect me to survive? However, the signs are out for the box lunches and they look to not suck.</em></p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "RubyConf, Day 1, Plenary Part 1: Welcome and Beautiful Code",
+      "link"			: "http://blog.geekdaily.org/2007/11/rubyconf-day-1-.html",
+      "excerpt"		: "<p><em>Apologies in advance for quality issues; our crack team of writer just stepped off a red-eye and into the conference. It’s 9:10a and they’re still working on the AV connex. Ah, here we go.</em></p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Do Not Watch This While Eating or Drinking",
+      "link"			: "http://blog.geekdaily.org/2007/11/do-not-watch-th.html",
+      "excerpt"		: "<p>Let my mistake be your forewarning. As I’m settling in to finish a last bit of serious work before heading to <a href="http://rubyconf.com">RubyConf</a> tonight, my eyes fell on <a href="http://www.escapistmagazine.com/articles/view/editorials/zeropunctuation/2541-Zero-Punctuation-The-Orange-Box">The Escapist’s Zero Punctuation Review</a> of <a href="http://orange.half-life2.com/">Valve’s Orange Box</a>.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "A Plethora of Rails Podcasts",
+      "link"			: "http://blog.geekdaily.org/2007/10/a-plethora-of-r.html",
+      "excerpt"		: "<p>The guys at <a href="http://railsenvy.com/">Rails Envy</a> (makers of fine Rails spoof commercials) started an audio-only <a href="http://railsenvy.com/podcast">podcast</a> at the beginning of this month. I really like their podcast; it’s short (&lt; 10m, mostly), a bit like a news-snippet fest, and the collective sense of humor that is Jason and Gregg is undiluted. It’s a touch stilted at times (and they call themselves on it) and is sponsored by <a href="http://pragmaticstudio.com/">Pragmatic Studio</a> (which is frequently mentioned in the podcast).</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "My First Rails Plugin: GenerallyUseful",
+      "link"			: "http://blog.geekdaily.org/2007/10/my-first-rails-.html",
+      "excerpt"		: "<p>I’m having a <a href="http://www.amazon.com/Fisher-Price-GeoTrax-System-Central-Station/dp/B000NWX2W8">Fisher-Price moment</a> today as I publish <a href="http://agilewebdevelopment.com/plugins/generally_useful">my first Rails plugin</a>. It’s nothing spectacular, just some rake tasks I like to have around in my apps plus a little module with functions to programmatically list the available Rails environments and provide some (shorter or useful) aliases for the usual suspects. It’ll grow as I think up and/or trip over more interesting rake tasks.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Cornplastic!",
+      "link"			: "http://blog.geekdaily.org/2007/10/cornplastic.html",
+      "excerpt"		: "<p><a href="http://blog.geekdaily.org/2006/03/biodegradable_d.html">A year and a half ago</a> I tripped over <a href="http://www.ecoproducts.com/">Ecoproducts’</a> line of <a href="http://www.ecoproducts.com/Business/food_services/food_containers/fs_containers_corn_food_pack.htm">biodegradable “plastic” disposable food containers</a> made out of corn. Today I’ve had my <a href="http://www.f-k.com/component/option,com_content2/Itemid,74/task,view/id,185/cat,34/">first such container</a> (made by <a href="http://www.f-k.com/">Fabri-Kal</a>, a competitor) handed to me at <a href="http://comfortscafe.com">Comforts</a>, a deli and cafe in downtown San Anselmo (a lovely, busy place, btw). Were it not labeled I wouldn’t have noticed the difference.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "A(nother) Blast From The Past",
+      "link"			: "http://blog.geekdaily.org/2007/10/another-blast-f.html",
+      "excerpt"		: "<p>A very smart friend of mine named <a href="http://sneeper.livejournal.com/">Andy</a> posted <a href="http://www.youtube.com/watch?v=-4CV05HyAbM">this video</a> on his <a href="http://www.facebook.com/">Facebook</a> profile:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "An API on an API",
+      "link"			: "http://blog.geekdaily.org/2007/10/an-api-on-an-ap.html",
+      "excerpt"		: "<p>Takin’ it to the next level: RockYou! offers an API to their Super Wall app, allowing your Facebook app to post content on someone’s Super Wall.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Live Blog: Graphing Social Patterns, Day 3, Opening the Social Graph",
+      "link"			: "http://blog.geekdaily.org/2007/10/live-blog-gra-7.html",
+      "excerpt"		: "<p><em>I took a session off to catch up on some other bits. Back in now.</em></p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "TypePad 8 my homewerks.",
+      "link"			: "http://blog.geekdaily.org/2007/10/typepad-8-my-ho.html",
+      "excerpt"		: "<p>I had a nice live blog going on Jeremiah Robinson’s talk and then I didn’t.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Live Blog: Graphing Social Patterns, Day 3, Facebook App Design: Elements of Style",
+      "link"			: "http://blog.geekdaily.org/2007/10/live-blog-gra-6.html",
+      "excerpt"		: "<p><em>Time for Jia Shen. He’s a good speaker with dense content delivered well. This should be fun.</em></p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Live Blog: Graphing Social Patterns, Day 3, FB Apps with ASP.NET, Silverlight, and Popfly",
+      "link"			: "http://blog.geekdaily.org/2007/10/live-blog-gra-5.html",
+      "excerpt"		: "<p><em>I’ll be really thin here, splitting attention between session and some code. Also, it’s more demo based, so this is largely my comments and inferences rather than Dan’s talk.</em></p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Live Blog: Graphing Social Patterns, Day 3, FB Platform, Apps, Metrics",
+      "link"			: "http://blog.geekdaily.org/2007/10/live-blog-gra-4.html",
+      "excerpt"		: "<p><em>We’re now 50 minutes behind schedule. Woot! Also, Dave McClure “dated himself” by mentioning back when he was programming VB was the rage. Made me chuckle.</em></p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Live Blog: Graphing Social Patterns, Day 3, Keynote",
+      "link"			: "http://blog.geekdaily.org/2007/10/live-blog-gra-3.html",
+      "excerpt"		: "<p><em>A late start, thankfully, as there was horrible traffic this morning.</em></p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "A Blast from the Past",
+      "link"			: "http://blog.geekdaily.org/2007/10/a-blast-from-th.html",
+      "excerpt"		: "<p>Tripped over this looking for some other things: <a href="http://www.webstart.com/atp/www-servers.html">A list of all the www.*.com hosts</a> from some indeterminate time long ago January 18, 1996. All 2227 of ‘em.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "One Social Graph To Rule Them All? Not Hardly.",
+      "link"			: "http://blog.geekdaily.org/2007/10/one-social-grap.html",
+      "excerpt"		: "<p>On the heels of my <a href="http://blog.geekdaily.org/2007/10/the-galaxy-of-i.html">corny-but-very-workable galactic identity metaphor</a>, I’ll risk another post on identity to follow up on <a href="http://blog.geekdaily.org/2007/10/live-blog-gra-2.html">something said by Reid Hoffman in his keynote today</a> at the <a href="http://graphingsocial.com/">Graphing Social Patterns</a> conference. It’s being picked up all over the blogosphere: <a href="http://www.google.com/search?q=%2B%22social+graph%22+%2B%22One+Graph+To+Rule+Them+All%22">One Social Graph To Rule Them All</a>?</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Graphing Social Patterns Geek Day Tomorrow!",
+      "link"			: "http://blog.geekdaily.org/2007/10/graphing-social.html",
+      "excerpt"		: "<p>Tomorrow’s the big payoff for me at <a href="http://graphingsocial.com/">Graphing Social Patterns</a> — it’s <a href="http://graphingsocial.com/schedule">“Apps and Developers Day,”</a> yay! The four talks on either side of lunch look golden (I’m becoming a big fan of <a href="http://www.facebook.com/profile.php?id=5405706">Jia Shen</a> of <a href="http://rockyou.com/">RockYou</a>). I got a quick demo of <a href="http://www.popfly.com/">Microsoft’s Popfly</a> today from <a href="http://blogs.msdn.com/danielfe/">Dan Fernandez</a>, so I’m looking forward to hearing him talk about it in more depth tomorrow.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "The Galaxy of Identity",
+      "link"			: "http://blog.geekdaily.org/2007/10/the-galaxy-of-i.html",
+      "excerpt"		: "<p>I’ve been learning about, thinking about, and talking about identity and reputation for some time now and only recently hit upon a comfortable metaphor whose analogy seems to extend far enough in all the needed directions. And it’s geeky, so you know I’m pleased.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Live Blog: Graphing Social Patterns, Day 2, Keynote",
+      "link"			: "http://blog.geekdaily.org/2007/10/live-blog-gra-2.html",
+      "excerpt"		: "<p>The Business of Facebook Apps<br />
+Reid Hoffman, Founder of LinkedIn</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Live Blog: Graphing Social Patterns, Day 1, Geek Track, Late Afternoon",
+      "link"			: "http://blog.geekdaily.org/2007/10/live-blog-gra-1.html",
+      "excerpt"		: "<p><em>Despite being individually wonderful, fresh-popped popcorn and hot coffee don’t go together at all. Bye bye, popcorn.</em></p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Live Blog: Graphing Social Patterns, Day 1, Geek Track, Post-Lunch",
+      "link"			: "http://blog.geekdaily.org/2007/10/live-blog-graph.html",
+      "excerpt"		: "<p><em>Ahhh, there’s nothing like a conference box lunch. Thankfully so.</em></p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Live Blog: Graphing Social Patterns, Day 1, Geek Track, Pre-Lunch",
+      "link"			: "http://blog.geekdaily.org/2007/10/live-blogging-g.html",
+      "excerpt"		: "<p>I’m at <a href="http://graphingsocial.com/">Graphing Social Patterns</a> for the next three days; it’s a conference revolving around the Facebook platform. I’ve watched <a href="http://gilesbowkett.blogspot.com/">Giles</a> live-blog and he always does it so well (and I always appreciate it when he does) so here goes:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Giles Channels RubyEast",
+      "link"			: "http://blog.geekdaily.org/2007/10/giles-channels-.html",
+      "excerpt"		: "<p>If you can’t tell, I’m catching up a bit after a long period of being buried in other things. Found Giles Bowkett’s notes from RubyEast waiting for me in my RSS reader. It’s his usual incredi-dense summary of a day in the life of a RubyEast attendee. Fun to read and inspires many questions.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "DSLs Are Our Future",
+      "link"			: "http://blog.geekdaily.org/2007/10/dsls-are-our-fu.html",
+      "excerpt"		: "<p>I have to admit that I’ve been puzzled about the rise of domain-specific languages (DSLs) of late. Not resistant, just curious whether or not it was a fad due to geekish interest or a trend motivated by some unseen force at work. <a href="http://www.joelonsoftware.com/items/2007/09/18.html">Joel Spolsky’s Strategy Letter VI</a> made it click by relating it to a pattern I’d lived through (and yes, I’m that old):</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Test Helper: assert_not_valid",
+      "link"			: "http://blog.geekdaily.org/2007/10/test-helper-a-1.html",
+      "excerpt"		: "<p>I was a little surprised that Rails offers <tt>assert_valid</tt> but not its implied converse, <tt>assert_not_valid</tt> … so I wrote it:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Test Helper: assert_equal_multiline_text",
+      "link"			: "http://blog.geekdaily.org/2007/10/test-helper-ass.html",
+      "excerpt"		: "<p>I got tired of poring over the crappy output when comparing two large text blobs for equality fails; the more subtle the difference, the harder it is to spot it by eye. So I wrote this:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Setting Constants While Testing",
+      "link"			: "http://blog.geekdaily.org/2007/09/setting-constan.html",
+      "excerpt"		: "<p>Let’s suppose you’ve got behavior in your app which is dependent on how <tt>RAILS_ENV</tt> is set and — of course — you want to test that it’s behaving properly. To do this, you need to change the value of <tt>RAILS_ENV</tt> just before you call that function (and change it back just after). This puzzled me for a while, but I finally figured it out:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Obakucinbidwardston for President",
+      "link"			: "http://blog.geekdaily.org/2007/09/obakucinbidward.html",
+      "excerpt"		: "<p>Tonight I finally, reluctantly, watched the Democratic Presidential Candidate Debate held a couple of days ago at Dartmouth College. I’m one of those undecided liberals who’s convinced that we’re doing ourselves harm by moving state primaries earlier, thus extending the presidential campaign. I’ve watched it now, and I’m still undecided, though I’ll say that Sen. Dodd, Gov. Richardson, and former Sen. Gravel are off my list. Dodd weaseled, Gravel was outright bizarre, and Richardson came off a bit too idealistic for even me.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "CDBaby.com goes back to PHP",
+      "link"			: "http://blog.geekdaily.org/2007/09/cdbabycom-goes-.html",
+      "excerpt"		: "<p>A bit over two days ago, <a href="http://dereksivers.com/">Derek Sivers</a> posted in the <a href="http://www.oreillynet.com/ruby/blog/">O’Reilly Ruby blog</a> on <a href="http://xrl.us/back2php">his experience rewriting CDBaby.com in Ruby on Rails and why he chose to go back to PHP</a>. Without going point-by-point, Derek said that after a hefty time investment, he abandoned reimplementing the website in Rails and took the lessons learned back to create a fresh, lighter-weight PHP and SQL implementation.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "RailsRumble: Post Mortem Ruminations",
+      "link"			: "http://blog.geekdaily.org/2007/09/railsrumble-pos.html",
+      "excerpt"		: "<p>I’ve been reflecting on the <a href="http://railsrumble.com">RailsRumble</a> and our <a href="http://artlog.railsrumble.com/">less-than-successful entry</a> and thought I’d share some observations while they’re fresh.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Economics & Fishing",
+      "link"			: "http://blog.geekdaily.org/2007/09/economics-fishi.html",
+      "excerpt"		: "<p>Anyone ever notice that nearly every reading in economics involves a fishing story?</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "RailsRumble: It's Over.",
+      "link"			: "http://blog.geekdaily.org/2007/09/railsrumble-its.html",
+      "excerpt"		: "<p><strong>The bad:</strong> we don’t have a complete app. It’s unfortunate, but true.</p>
+
+<p><strong>The good:</strong> I’ve learned an incredible amount in two days, and we’ve got a solid start on what it will be.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "RailsRumble: Halfway ...",
+      "link"			: "http://blog.geekdaily.org/2007/09/railsrumble-hal.html",
+      "excerpt"		: "<p>…and we’re chugging along. A slow start – we both decided that next time we’ll get together the day before to do all the brainstorming, model mapping, etc., but we’re well on our way and things will start being visible soon. =]</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "RailsRumble: Phase 1 Complete",
+      "link"			: "http://blog.geekdaily.org/2007/09/railsrumble-pha.html",
+      "excerpt"		: "<p><a href="http://artlog.railsrumble.com/">Nothing to see yet</a>, really; there are some sketched-in models and a basic controller underneath it all but no views (yet). If you’re looking for visuals, check the <a href="http://flickr.com/groups/railsrumble/pool/">RailsRumble Flickr pool</a>.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "RailsRumble.start!",
+      "link"			: "http://blog.geekdaily.org/2007/09/railsrumblestar.html",
+      "excerpt"		: "<p>Here we go:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "RailsRumble: Who's Rumbling?",
+      "link"			: "http://blog.geekdaily.org/2007/09/railsrumble-who.html",
+      "excerpt"		: "<p>I’ve found two teams blogging with the <a href="http://technorati.com/tag/railsrumble">RailsRumble</a> tag:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "RailsRumble: Choosing the OS for VPS",
+      "link"			: "http://blog.geekdaily.org/2007/09/railsrumble-cho.html",
+      "excerpt"		: "<p>The work begins before the contest: they’ve asked that we set up our VPS before the contest starts to avoid an enormous pileup at 12p EDT. Having watched <a href="http://smartic.us/2007/9/4/smarticast-4-rails-rumble-primer">the excellent smarticast re: setting up a Linode VPS</a>, it’s easy to see that Linode’s got things pretty sweetly automated to handle that part. However, I’ve never been a serious Debian user or admin, so as much as I’d love to just follow the instructions, I have to balance that against my ability to debug esoteric system issues like the ones you can encounter installing RMagick … so I started asking around for advice.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "RubyConf Registration is Open",
+      "link"			: "http://blog.geekdaily.org/2007/09/rubyconf-regist.html",
+      "excerpt"		: "<p><a href="http://chadfowler.com/">Chad’s</a> announced <a href="http://chadfowler.com/2007/9/6/rubyconf-registration-is-open">the opening of RubyConf registration</a> (at <a href="http://www.regonline.com/Checkin.asp?EventId=145820">regonline.com</a>), though <a href="http://rubyconf.org/">the official website</a> hasn’t yet been updated. Register soon as it’s likely to sell out (again). Meanwhile, the Omni Charlotte has a block of rooms available for RubyConf at $109/night. I’d book fast as that’s a stellar rate in the neighborhood and the Omni has zero availability otherwise.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "RailsRumble: Strategy, Phase 1",
+      "link"			: "http://blog.geekdaily.org/2007/09/railsrumble-str.html",
+      "excerpt"		: "<p>Our first steps:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Ready to Rumble!",
+      "link"			: "http://blog.geekdaily.org/2007/09/ready-to-rumble.html",
+      "excerpt"		: "<p>So, this weekend, <a href="http://blackphoebe.com/msjen/">Ms. Jen Hanen</a> and I are going to participate in the <a href="http://railsrumble.com/">RailsRumble</a>. In the space of 48 hours, starting at 9p PDT, we’re going to build, test – okay: test, build, deploy, and repeat on an app called ArtLog. And we’ll be blogging from now to the end (and beyond) about the experience.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "0-30% Test Coverage? That's Nothing.",
+      "link"			: "http://blog.geekdaily.org/2007/09/0-30-test-cover.html",
+      "excerpt"		: "<p>I’m finding with some amusement that most cases where rcov says something is 30% covered or less, this means all the function definitions (e.g. <tt>def foo(bar)</tt>) are covered … and nothing else.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "More cool tech from SIGGRAPH",
+      "link"			: "http://blog.geekdaily.org/2007/09/more-cool-tech-.html",
+      "excerpt"		: "<p>A full 360° display using synced projection onto a rapidly spinning mirror:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Thoughts on Software Testing and Rails (a little)",
+      "link"			: "http://blog.geekdaily.org/2007/08/thoughts-on-sof.html",
+      "excerpt"		: "<p>Three good reasons to make sure your code has full, solid test coverage:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Alice is Lost!",
+      "link"			: "http://blog.geekdaily.org/2007/08/alice-is-lost.html",
+      "excerpt"		: "<p><a href="http://www.aliceislost.com/">Have you seen her?</a></p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Ms. Teen South Carolina",
+      "link"			: "http://blog.geekdaily.org/2007/08/ms-teen-south-c.html",
+      "excerpt"		: "<p>I’d taken peripheral notice of the Ms.-Teen-South-Carolina-Answers-A-Question meme but hadn’t checked it out because, frankly, I knew what I’d find: we’d all be laughing at a teenage girl who, despite spending an inordinate amount of her young life seeking beauty, poise and grace, blew it when presented with one of the slow-pitched softball questions pageants gently lob to their beauty queens in waiting.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "The Topology of Social Networks",
+      "link"			: "http://blog.geekdaily.org/2007/08/the-topology-of.html",
+      "excerpt"		: "<p><a href="http://redcouch.typepad.com/">Shel Israel</a> <a href="http://redcouch.typepad.com/weblog/2007/08/friendwheel.html">makes some astute observations</a> about the nature of one’s social network. He’s far too social (read: non-geeky) to have discussed it in terms of <a href="http://en.wikipedia.org/wiki/Network_topology">star vs. mesh topology</a> but his observation made me consider that these are the two ends of the social network spectrum. More star-like and you’re either a focal point or a nexus; more mesh-like and you’re involved in one or more vibrant, potentially overlapping social communities. I’d also posit that full connection (all members are connected to all other members) is the most vibrant a community can possibly be.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "DIY Upper Atmosphere Photography",
+      "link"			: "http://blog.geekdaily.org/2007/08/diy-upper-atmos.html",
+      "excerpt"		: "<p>I can’t wait until Sam’s old enough to think this is cool so we can do it together.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "The Difficulty of Non-Technical Users",
+      "link"			: "http://blog.geekdaily.org/2007/08/the-difficulty-.html",
+      "excerpt"		: "<p>Two things struck me about <a href="http://schwehr.org/blog/archives/2007-08.html#e2007-08-28T11_10_46.txt">Kurt’s post</a>:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Live! Nude! Code!",
+      "link"			: "http://blog.geekdaily.org/2007/08/live-nude-code.html",
+      "excerpt"		: "<p>I love a good code review. Looking at real, honest-to-goodness deployed code is one of the best ways to learn the idiom of a language as well as what gets done through the exigencies of circumstance (a nice way to say, “things I done ‘cause I’m ignernt and inna hurry”). <em>Speaking of dumb and rushed, you should attribute any goofs to my misunderstanding or poor expression of what was actually said; <a href="http://forum.wordreference.com/showthread.php?t=231515">I am but an egg</a>.</em></p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Digging It Up with Dave Thomas",
+      "link"			: "http://blog.geekdaily.org/2007/08/digging-it-up-w.html",
+      "excerpt"		: "<p><em>mental note: I should liveblog like <a href="http://gilesbowkett.blogspot.com/2007/08/dave-thomas-rails-treasures-notes.html">Giles</a> did. His terse notes are incredibly readable. I don’t know that my additional pass does anything but delay getting it out there.</em></p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Context Aware Image Re-Sizing",
+      "link"			: "http://blog.geekdaily.org/2007/08/context-aware-i.html",
+      "excerpt"		: "<p>I was sorry to miss SIGGRAPH this year; now I’m doubly sorry as it seems there was a paper on how to resize and rescale images non-uniformly with the usual artifacts. This is amazingly cool and, as the video demonstrates, has some pretty exceptional uses.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Rails and TDD/BDD",
+      "link"			: "http://blog.geekdaily.org/2007/08/behavior-driven.html",
+      "excerpt"		: "<p><em>I’m going to limit this post to my notes on the excellent learnings from the day of many testing talks at Rails Edge Chicago and follow up with another post for my addle-pated musings thereupon.</em></p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "MIT's 'clutter detector' could cut confusion - MIT News Office",
+      "link"			: "http://blog.geekdaily.org/2007/08/mits-clutter-de.html",
+      "excerpt"		: "<p>This looks promising: some folks at MIT have developed metrics for visual clutter as well as a tool to measure it. Haven’t read <a href="http://www.journalofvision.org/7/2/17/article.aspx">the whole paper</a> yet, but</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Scripting News for 8/22/07 « Scripting News Annex",
+      "link"			: "http://blog.geekdaily.org/2007/08/scripting-news-.html",
+      "excerpt"		: "<p>From Dave Winer’s blog <a href="http://www.scripting.com/">Scripting News</a>, <em><a href="http://www.scripting.com/stories/2007/08/22/howThingsGetBetter.html">How Things Get Better</a></em>:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Consistency Pays",
+      "link"			: "http://blog.geekdaily.org/2007/08/consistency-pay.html",
+      "excerpt"		: "<p><em>A brief observation</em>: consider well the names you choose for models and their methods. Try very hard to make them intuitive, and not just to a programmer. They’ll haunt you for a long time, especially if you have to expose them via <a href="http://www.liquidmarkup.org/">Liquid</a>.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Rails, Oral Tradition, and Getting Started",
+      "link"			: "http://blog.geekdaily.org/2007/08/rails-oral-trad.html",
+      "excerpt"		: "<p>Just occurred to me in the aftermath of <a href="http://blog.geekdaily.org/2007/08/finding-rails-d.html">last night’s post</a> that capturing some thoughts about the process of getting started with Ruby on Rails. Just a quick sketch as I’m pressed for time, but here it is:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Beloit Mindset List for 2011 is out",
+      "link"			: "http://blog.geekdaily.org/2007/08/beloit-mindset-.html",
+      "excerpt"		: "<p>Every year for the last 10, Beloit College publishes their Mindset List. It originated as a way to help their faculty better understand the world view of their incoming freshman class. In the last decade, it’s release has become a national event, with nearly every media outlet sharing some form of the list with its audience.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Finding Rails {Docs,Plugins,Info,Stuff}",
+      "link"			: "http://blog.geekdaily.org/2007/08/finding-rails-d.html",
+      "excerpt"		: "<p>I’ve now taken to explaining Ruby on Rails as “the fastest way to get from idea to implementation in a form you can iterate on.” Alliterative, I know, but I’ll blame Mom* and we’ll move on.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Changing Feeds",
+      "link"			: "http://blog.geekdaily.org/2007/08/changing-feeds.html",
+      "excerpt"		: "<p>I’m twiddling my feeds, so if you’re subscribed to the old one, you’ll want to change over to:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "ThereWolf!",
+      "link"			: "http://blog.geekdaily.org/2007/08/therewolf.html",
+      "excerpt"		: "<p><a href="http://www.flickr.com/photos/purp/1088483927/" title="Photo Sharing"><img src="http://farm2.static.flickr.com/1132/1088483927_4cfa82bd61.jpg" alt="HPIM2307.JPG" /></a></p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Decadence is ...",
+      "link"			: "http://blog.geekdaily.org/2007/07/decadence-is.html",
+      "excerpt"		: "<p>… Ditch Plains restaurant at 2:30p on a sunny Tuesday, having walked from 2nd &amp; Houston. Half-bottle of El Coto Crianza. Enormous fruit salad. Gunfighter bench seat in the back corner complete with power, wifi, and a view of the folks wandering by. James at the helm of the place, takin’ fabulous care of yours truly.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Programmers == Stinky Bums",
+      "link"			: "http://blog.geekdaily.org/2007/07/programmers-sti.html",
+      "excerpt"		: "<p>From the latest “Python URL!”:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Profiling and Optimizing Rails",
+      "link"			: "http://blog.geekdaily.org/2007/07/profiling-and-o.html",
+      "excerpt"		: "<p>Picture me doing a happy dance. A very happy dance. I’ve only been playing with Rails since April and I’ve been looking for this since the beginning.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "CoRaid ATA-over-Ethernet",
+      "link"			: "http://blog.geekdaily.org/2007/07/coraid-ata-over.html",
+      "excerpt"		: "<p>Nice tight mini-SANs. This plus GFS is pretty sweet.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Sparky: The Alexa Toolbar for Firefox",
+      "link"			: "http://blog.geekdaily.org/2007/07/sparky-the-alex.html",
+      "excerpt"		: "<p>Invaluable tool for quick info about any website you visit.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "LOLCODE ... OMG!!1",
+      "link"			: "http://blog.geekdaily.org/2007/07/lolcode-omg1.html",
+      "excerpt"		: "<p>I can’t stop laughing. Particularly at <a href="http://lolcode.com/contributions/map-reduce">this example</a>. And <a href="http://lol.ianloic.com/feed/feeds.lolcode.com/lolcode">this feed</a>.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Three Observations on Reverse Engineering",
+      "link"			: "http://blog.geekdaily.org/2007/07/three-observati.html",
+      "excerpt"		: "<p>I’m working on the tech slides for our presentation deck today. The purpose is to demonstrate that not only do we have <a href="http://publicsquarehq.com/">something</a> (and we do =), but that it’s easier to buy us than to rebuild us. This got me thinking about what influences how easy or hard it is to reverse engineer a thing. Here’s what struck me as true.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "\"Beta\" is the Web 2.0 \"In Construction Guy\"",
+      "link"			: "http://blog.geekdaily.org/2007/07/beta-is-the-web.html",
+      "excerpt"		: "<p>I’m sitting in this year’s <a href="http://www.communitynext.com/">Community Next Viral Marketing Conference</a> where <a href="http://www.socializr.com/user/jonathan">Jonathan Abrams</a> (of <a href="http://www.socializr.com/">Socializr</a>) just noted that his web app “is gamma … which is just like beta, but sillier.” He’s right; the beta badge has become the “in construction” of Web 2.0.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "The Next Big Thing",
+      "link"			: "http://blog.geekdaily.org/2007/07/the-next-big-th.html",
+      "excerpt"		: "<p>If you’ve ever talked with <a href="http://redcouch.typepad.com/weblog/">Shel Israel</a> (co-author of <a href="http://www.amazon.com/Naked-Conversations-Changing-Businesses-Customers/dp/047174719X">Naked Conversations</a>), you’ve likely watched him strew the conversation with priceless observations pithily dressed so they’ll cling to your grey matter like Paris Hilton somehow clings to her celebrity. I don’t know that he’s read <a href="http://www.madetostick.com/">“Made To Stick</a>,” but he’s certainly tuned in to its message.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Models < Drops",
+      "link"			: "http://blog.geekdaily.org/2007/07/merge-your-liqu.html",
+      "excerpt"		: "<p>A member of the <a href="http://groups.google.com/group/liquid-templates?hl=en">Liquid Templates group</a> contributes an 18-line extension to <a href="http://www.liquidmarkup.org/">Liquid</a> that lets you specify which attributes, methods, and associations to expose to liquid templates, like so:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Confessions of a RambleGeek",
+      "link"			: "http://blog.geekdaily.org/2007/07/confessions-of-.html",
+      "excerpt"		: "<table>
+  <tbody>
+    <tr>
+    </tr>
+  </tbody>
+</table>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Not Living In A Cave ...",
+      "link"			: "http://blog.geekdaily.org/2007/07/not-living-in-a.html",
+      "excerpt"		: "<p>… just refuse to post about the tech of the moment.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Boobs, Injuries, & Dr. Pepper",
+      "link"			: "http://blog.geekdaily.org/2007/06/boobs-injuries-.html",
+      "excerpt"		: "<p>Okay, this is a geek blog. And a lame one as I so rarely link to someone else’s blog. Come to think of it, this is pretty much masturbation to techporn in prose for all that I care about readership. I’m no linkwhore.</p>
+
+<p>So you know it’s serious if I say, YOU MUST READ <a href="http://boobsinjuriesanddrpepper.blogspot.com/">THIS BLOG</a>. Particularly, <a href="http://boobsinjuriesanddrpepper.blogspot.com/2007/06/outdone.html">THIS ENTRY</a>.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "The Circle of (typographic) Life",
+      "link"			: "http://blog.geekdaily.org/2007/06/the-circle-of-t.html",
+      "excerpt"		: "<p>I find it amusing that, in the early-to-mid-eighties we put a lot of typesetters out of work as desktop publishing eliminated the need to memorize cryptic typographic encodings.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "SW Dev: Back to the Mac",
+      "link"			: "http://blog.geekdaily.org/2007/06/sw_dev_back_to_.html",
+      "excerpt"		: "<p>For the last decade, my software development has been a UNIXy thing, filled with xemacs, gcc, xxdiff, and gdb. In <a href="http://www.linkedin.com/in/jimmeyer">my new role</a>, I’m becoming MacOS-centric again and discovering amazing new tools with all the wonderful Macish <em>je ne sais quoi</em> as well as all the bits I miss from my former environment.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "More Tech, Less Smarts",
+      "link"			: "http://blog.geekdaily.org/2007/06/more_tech_less_.html",
+      "excerpt"		: "<p>A little over a year ago, we bought a new family car (minivan, really, but we’re still in denial =) which includes a navigation system. It’s pretty spiffy, but it’s led me to discover two things:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "A Change of Pace",
+      "link"			: "http://blog.geekdaily.org/2007/06/a_change_of_pac.html",
+      "excerpt"		: "<p>One or both of you who read this blog may already know this, but today was my first full-time day with Cucina Media, we the makers of Public Square.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Radio Open Source: David Weinberger",
+      "link"			: "http://blog.geekdaily.org/2007/05/radio_open_sour.html",
+      "excerpt"		: "<p>Sent to me by <a href="http://www.eleganthack.com/blog/">Christina,</a> and leapt upon because (a) I really enjoyed <a href="http://www.audible.com/adbl/site/products/ProductDetail.jsp?productID=FR_ADBL_041115&amp;BV_UseBVCookie=Yes">his Library of Congress lecture</a>, and (b) I’m feeling guilty for low blog entry count. From the summary of the April 26, 2007 edition of “ <a href="http://www.radioopensource.org/">Open Source with Christopher Lydon</a>”:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "The Tagline Graveyard",
+      "link"			: "http://blog.geekdaily.org/the_tagline_graveyard.html",
+      "excerpt"		: "<p>Sometimes, when I change my tagline, I like to keep the previous one. Simple as that.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Sir Tony Hoare The Elegant",
+      "link"			: "http://blog.geekdaily.org/2007/05/sir_tony_hoare_.html",
+      "excerpt"		: "<p>I’m in Portland for <a href="http://conferences.oreillynet.com/rails/">RailsConf</a> where I met Matt Smith with <a href="http://www.semantra.com/">Semantra.</a> Some of the things we talked about put me in mind of some papers <a href="http://research.microsoft.com/~thoare/">Prof. C.A.R. “Tony” Hoare</a> did a while back and, while attempting to find them online, I ran across his 1980 Turing Award acceptance speech, “The Emperor’s Old Clothes” [<a href="http://www.cs.ucsb.edu/~ravenben/papers/coreos/Hoa81.pdf">pdf</a>] in which he says,</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Moleskine USB Drive",
+      "link"			: "http://blog.geekdaily.org/2007/04/moleskine_usb_d.html",
+      "excerpt"		: "<p>If you’re a Moleskine fan, here’s a fun twist: a guy built a USB drive into one.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Running the Numbers",
+      "link"			: "http://blog.geekdaily.org/2007/04/running_the_num.html",
+      "excerpt"		: "<p><a href="http://www.chrisjordan.com/">Chris Jordan</a> is a photographer with an eye for visualizing real-world datasets. I suspect that he’s a fan of <a href="http://www.edwardtufte.com/">Edward Tufte</a> (and likely vice versa).</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "We Are What We Know",
+      "link"			: "http://blog.geekdaily.org/2007/04/we_are_what_we_.html",
+      "excerpt"		: "<p>In 1900, Ladies’ Home Journal compiled 29 predictions of life in the year 2000. It’s fascinating to note where they hit (prevalent autos, gyms in all schools, etc.) and where they missed (“Storekeepers who expose food to air breathed out by patrons or to the atmosphere of the busy streets will be arrested with those who sell stale or adulterated produce.”) More fun for me, though, are the underlying theme of electricity and the absolute absence of computing.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Exquisite Book Desecration",
+      "link"			: "http://blog.geekdaily.org/2007/04/exquisite_book_.html",
+      "excerpt"		: "<p>These are absolutely captivating.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Olde Skool Web Syte",
+      "link"			: "http://blog.geekdaily.org/2007/04/olde_skool_web_.html",
+      "excerpt"		: "<p>I can’t stop looking at this site.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "How To Get My Attention",
+      "link"			: "http://blog.geekdaily.org/2007/02/how_to_get_my_a.html",
+      "excerpt"		: "<p>Wrote this for work to explain and make easier the process of grabbing my focus when needed. Thought it’d be fun to preserve it here, too. All the contact info has been X’d out; you’ve got it if you need it. ;]</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Bobby McFerrin + 11",
+      "link"			: "http://blog.geekdaily.org/2007/01/bobby_mcferrin_.html",
+      "excerpt"		: "<p>Beth and I left Sam and Cassie with a friend and went to see <a href="http://www.calperfs.berkeley.edu/presents/season/2006/world_stage/bm.php">Bobby McFerrin and Voicestra</a> at Zellerbach last night. Was a great show; he’s as silly, reverent, and amazing and with 11 talented improvisational vocalists to work with, it was a decadently visceral experience.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Walgreens != Privacy",
+      "link"			: "http://blog.geekdaily.org/2007/01/walgreens_priva.html",
+      "excerpt"		: "<p>Was renewing a Walgreens prescription by phone the other day when suddenly it quoted my phone number to me and asked me to confirm or deny it. This with no authentication other than a prescription number.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Procrastination is ...",
+      "link"			: "http://blog.geekdaily.org/2007/01/procrastination.html",
+      "excerpt"		: "<p>If you <a href="http://www.arnoldkling.com/econ/contents.html">read up on economics</a>, you know that finding the value of <a href="http://www.arnoldkling.com/econ/markets/consumer.html">utility</a>is one of the core, elusive bits folks would like to be able to calculate; if they could, they’d be able to predict with fair accuracy how markets will react to a given phenomenon. Piers Steel, a professor from Univ. of Calgary, has factored in procrastination. Neat!</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Spöka-y!",
+      "link"			: "http://blog.geekdaily.org/2007/01/spkay.html",
+      "excerpt"		: "<p>When <a href="http://www.ambientdevices.com/">Ambient Devices</a> first came out with their <a href="http://www.ambientdevices.com/cat/orb/orborder.html">Ambient Orb</a>, a wireless softly glowing globe which you can buy for a silly price and pay a monthly fee to have it track something online, I knew I wanted one but not at that price point. Fortunately, many other geeks <a href="http://infosthetics.com/archives/2005/05/diy_ambient_orb.html">found</a> <a href="http://flat-earth.ece.cmu.edu/~agr/bt_orb/">this</a> <a href="http://todbot.com/blog/2006/10/23/diy-ambient-orb-with-arduino-update/">interesting,</a> <a href="http://www.hogsmack.com/infomate/">too,</a> and <a href="http://weblogs.java.net/blog/kohsuke/archive/2006/11/diyorb_my_own_e.html">chose</a> to <a href="http://devices.natetrue.com/wlcolor">hack</a> things to make it so. The folks at Ambient even make it easy by supplying <a href="http://www.ambientdevices.com/developer/DIYOrbNotes.html">DIY notes</a> and <a href="http://www.ambientdevices.com/developer/DIYOrbSuppliers.html">sources for parts</a>.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Track My Baggage Closely, Please!",
+      "link"			: "http://blog.geekdaily.org/2006/10/track_my_baggag.html",
+      "excerpt"		: "<p>Fun lifehack via <a href="http://www.schneier.com/">Bruce Schneier</a>: if you want your checked bags to be tracked very carefully (and never get lost), buy a starter pistol. They’re considered a weapon; once you place it in your bag (unloaded, of course) with your very valuable camera/computer equipment and disclose it, the TSA will keep a very close eye on it for you. Handy.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Weak security in our daily lives@Everything2.com",
+      "link"			: "http://blog.geekdaily.org/2006/10/weak_security_i.html",
+      "excerpt"		: "<p>Reading <a href="http://www.schneier.com/crypto-gram-0610.html#9">Bruce Schneier’s Crypto-Gram</a> today where he points out an <a href="http://everything2.com/">Everything2</a> entry which calculates the <a href="http://en.wikipedia.org/wiki/De_Bruijn_sequence">DeBruijn sequence</a> required to hack a car with the <a href="http://www.thefordsource.com/store/car_accessories/images/freestyle/thumbs/freestyle_keyless_th.gif">standard 5-button keyless entry pad</a>, which they believe would take ~20 minutes to key in.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Chaos Theory In Practice, Part 1",
+      "link"			: "http://blog.geekdaily.org/2006/09/chaos_theory_in.html",
+      "excerpt"		: "<p>For us, Labor Day weekend was all about bailing ourselves out of the disorganized, cluttery chaos we’d allowed to take root since the birth of our daughter, Cassie, in mid-April. We tried a number of times to stem the tide with limited success; usually we’d reclaim some section of the house only to lose another. Not a satisfying victory.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Meyer's Conjecture on Philosophy",
+      "link"			: "http://blog.geekdaily.org/2006/07/meyers_conjectu.html",
+      "excerpt"		: "<p>All fundamental tenets of a philosophical system must be able to fit in a single SMS. Anything longer isn’t basic enough.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "One Red Paperclip. One House. One Year.",
+      "link"			: "http://blog.geekdaily.org/2006/07/one_red_papercl.html",
+      "excerpt"		: "<p>You probably already know about the <a href="http://oneredpaperclip.blogspot.com/">One Red Paperclip</a> guy. He’s managed to <a href="http://oneredpaperclip.blogspot.com/2006/07/503-main-street.html">make his final trade</a>, which he’ll officially complete on July 12, <a href="http://oneredpaperclip.blogspot.com/2005/07/one-red-paperclip.html">one year after he started</a>. Pretty cool what you can do with the internet. (via <a href="http://www.boingboing.net/2006/07/08/guy_successfully_tra.html">BoingBoing</a>)</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Hey Apple, Let Me iWander!",
+      "link"			: "http://blog.geekdaily.org/2006/07/hey_apple_let_m.html",
+      "excerpt"		: "<p>[note: this is a repost from a long-neglected blog I started last summer while at SIGGRAPH]</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Cool Blog: Creating Passionate Users",
+      "link"			: "http://blog.geekdaily.org/2006/07/cool_blog_creat.html",
+      "excerpt"		: "<p>Wandering through some blogs and ran across Kathy Sierra’s “Creating Passionate Users” blog, about which I can’t say enough nice things. She hits a number of my favorite issues, such as:</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Cleaning up old mail",
+      "link"			: "http://blog.geekdaily.org/2006/06/cleaning_up_old.html",
+      "excerpt"		: "<p>Just a random thought as I start posting again: I want an easy way to clean up thousands of old emails quickly. Sure, I could leave them around, but frankly it just bugs me to know that I’m maintaining a heap of digital compost some of which I will never, not in a million years, find useful again.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Bring Your Own Laptop To Work?",
+      "link"			: "http://blog.geekdaily.org/2006/04/bring_your_own_.html",
+      "excerpt"		: "<p><a href="http://zgp.org/~dmarti/blosxom/">Don Marti</a> <a href="http://zgp.org/~dmarti/blosxom/business/byol.html">blogged an idea</a> that’s been floating around for a while: what if, instead of corporate IT supplying you a desktop which is largely underutilized, the company paid you a “laptop allowance” of some sort and you brought/brought your own? While it’s less feasible in the CG industry (those desktops are makin’ pixels, so we need ‘em around and all ;), it makes great sense in all sorts of other contexts – and was something I was begging for ca. 2000 when I was a “pre-sales technical consultant.”</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Slowly Crawling Towards Daylight",
+      "link"			: "http://blog.geekdaily.org/2006/04/slowly_crawling.html",
+      "excerpt"		: "<p>Expect a flurry of postings as I start to catch up post-baby (did I mention? We had our baby girl. She’s great. =) and rejoin the land of the living. I’m taking off work until early June, so lots of time to immerse myself in cool tech, maybe even to get some things done.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "SHDH9 This Weekend!",
+      "link"			: "http://blog.geekdaily.org/2006/04/shdh9_this_week.html",
+      "excerpt"		: "<p>Woohoo! I hope I can go, but with a new baby, that’s a lot of hoping. =]</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Panasonic's Vision of the Future: All Pixels, All The Time",
+      "link"			: "http://blog.geekdaily.org/2006/03/akihabara_news.html",
+      "excerpt"		: "<p>From <a href="http://www.akihabaranews.com/review-63-Panasonic%27s interactive TV wall%2C the demo.html" title="Akihabara News">Akihabara News</a>, deck the walls with screens of interaction. Two side-by-side 110” touch screens with user-manipulable windows of video and audio from any/many sources. This makes me shudder. I can’t believe it’d ever be interesting to monopolize so much space to artificially deal with the world – much less to facilitate the <a href="http://query.nytimes.com/gst/fullpage.html?sec=health&amp;res=9F07E5D71630F931A3575AC0A961958260">emerging</a> <a href="http://abcnews.healthology.com/focus_index.asp?b=abcnews&amp;f=adhd_comprehend">ADD</a> <a href="http://borntoexplore.org/journal.htm">trend</a>.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Ajaxy Homepages",
+      "link"			: "http://blog.geekdaily.org/2006/03/ajaxy_homepages.html",
+      "excerpt"		: "<p>A nifty find via <a href="http://http://www.techcrunch.com/2006/03/22/netvibes-to-announce-seed-financing-today/">TechCrunch</a>: <a href="http://www.netvibes.com">NetVibes</a> and <a href="http://www.protopage.com/">ProtoPage,</a> your personalizable ajaxy homepage. Toss in nearly any kind of content and neatly arrange or slop it around (respectively). Look for this on <a href="http://www.google.com/ig">Google’s personalized pages</a> sometime later this evening or early tomorrow. ;]</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Meshing an Airport Extreme and a Linksys WRT54G",
+      "link"			: "http://blog.geekdaily.org/2006/03/meshing_an_airp.html",
+      "excerpt"		: "<p>I’ve spent the day working on home tech projects; we’re paring down, getting rid of excess tech accumulation. Part of that is to eliminate one Airport Extreme by meshing the other one with a new Linksys WRT54G we’d bought a few weeks ago. According to <a href="http://rgbdream.com/?p=44">this post at rgbdream.com</a>, we should be able to just mesh them, no muss, no fuss. No dice, either. I spent hours sniffing networks and trying to understand why, but it just didn’t work out.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "LinkStations: NAS for the Hacking",
+      "link"			: "http://blog.geekdaily.org/2006/03/linkstationwiki.html",
+      "excerpt"		: "<p>Think network-attached storage (NAS) that talks to whatever flavor bx you’ve got. Windows? No problem. Mac? Sure thing. Linux? Happy to. Pull it out of the box and in a few minutes you’ve got hot-and-cold running fileservice.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "LiteBrite on your Fridge",
+      "link"			: "http://blog.geekdaily.org/2006/03/litebrite_on_yo.html",
+      "excerpt"		: "<p> </p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Biodegradable Food Containers",
+      "link"			: "http://blog.geekdaily.org/2006/03/biodegradable_d.html",
+      "excerpt"		: "<p>Most excellent: disposable “plastic” food containers made from corn resin. They biodegrade in ~45-60 days in your compost bin. You can buy them at <a href="http://www.ecoproducts.com/Business/food_services/food_containers/fs_containers_corn_food_pack.htm">Ecoproducts.</a></p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Tiny MP3 Streaming Server",
+      "link"			: "http://blog.geekdaily.org/2006/03/tiny_mp3_stream.html",
+      "excerpt"		: "<p>From hack a day: a <a href="http://mp3elf.net/">DIY MP3 streaming server</a> … BSD licensed so you can download the plans and source for it or buy the kit, assembled or not. Maybe when I’ve got a couple hundred to spare …</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Leaftag: Tag files and stuff in Linux",
+      "link"			: "http://blog.geekdaily.org/2006/03/leaftag_tag_fil.html",
+      "excerpt"		: "<p>Drew turned me on to <a href="http://www.chipx86.com/wiki/Leaftag" title="Leaftag - ChippyWiki">Leaftag</a> this morning. Looks wicked awesome for doing TagEverything (I need a a better name for that).</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Okay, Okay!",
+      "link"			: "http://blog.geekdaily.org/2006/03/okay_okay.html",
+      "excerpt"		: "<p>Yes, <a href="http://drewp.quickwitretort.com/2006/03/12/0">Drew</a>, I’ll extend <a href="http://semfile.bigasterisk.com/">semfile</a> to for my Tag Everything project!</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Libraries as Playlists",
+      "link"			: "http://blog.geekdaily.org/2006/03/libraries_as_pl.html",
+      "excerpt"		: "<p>I love reading <a href="http://www.hyperorg.com/blogger/">Dave Weinberger’s blog</a>; his excitement at the ways technology can augment the world mirrors my own. I love <a href="http://www.hyperorg.com/blogger/mtarchive/reading_and_libraries_two_note.html">this post</a> for the reduction of where Web 2.0 and ubiquitous metadata are heading us: “When all our works are digitized, a local library will be nothing but a playlist.”</p>
+
+<p>Think about that … mash up <a href="http://books.google.com">Google Books</a> with a <a href="http://www.apple.com/ipod/ipod.html">video iPod</a> and <strong>BAM</strong> – it’s a library in your pocket. Toss in <a href="http://www.audible.com/">Audible.com</a> and it’s even better.</p>
+
+<p>I’m with Dave … I can’t <em>wait!</em></p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "How To Tie Your Shoes",
+      "link"			: "http://blog.geekdaily.org/2006/03/how_to_tie_your.html",
+      "excerpt"		: "<p>Found <a href="http://www.fieggen.com/shoelace/knots.htm">this</a> on <a href="http://www.hyperorg.com/blogger/mtarchive/how_to_tie_your_shoelaces.html">Dave Weinberger’s blog</a>. I’ve been tying my shoes wrong for 40 (okay, 36; before that, Mom was doing it wrong) years. Who knew?</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "OLPC: You Know, For Kids!",
+      "link"			: "http://blog.geekdaily.org/2006/03/olpc_you_know_f.html",
+      "excerpt"		: "<p>A quick link to <a href="http://thinkdaily.org/jimmm/weblog/19.html">my initial thoughts on the One Laptop Per Child project</a> from <a href="http://thinkdaily.org/jimmm/weblog/">my other blog</a> where I think more about social implications (and which doesn’t accept trackbacks. I’ll have to figure out how to fix that …) The geek in me wants desparately to play with one of these. But then I want to make <a href="http://www.hackaday.com/entry/1234000990049411/">solar mobile wifi hot spots</a>, do cool things with <a href="http://www.sparkfun.com/commerce/product_info.php?products_id=569#">tiny lcd displays</a>, and play with <a href="http://www.hackaday.com/entry/1234000157040860/">stomp boxes</a>.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Good Engineering!",
+      "link"			: "http://blog.geekdaily.org/2006/03/good_engineerin.html",
+      "excerpt"		: "<p><a href="http://www.flickr.com/photos/purp/108240176/" title="photo sharing"><img src="http://static.flickr.com/52/108240176_5df5d17be4_m.jpg" alt="" /></a> <br />
+   <a href="http://www.flickr.com/photos/purp/108240176/">Good Engineering!</a>  <br />
+  Originally uploaded by <a href="http://www.flickr.com/people/purp/">jimmm</a>.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "TypePad == Geek Haven",
+      "link"			: "http://blog.geekdaily.org/2006/03/typepad_geek_ha.html",
+      "excerpt"		: "<p>I love that I can post to my blog from my mobile. Thanks, TypePad!</p>
+
+"
+    }
+  
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    ,{
+      "title"			: "About the Jekyll Theme",
+      "link"			: "http://blog.geekdaily.org/about/",
+      "excerpt"		: "So Simple is a responsive Jekyll theme for your words and images."
+    }
+  
+
+  
+    ,{
+      "title"			: "Theme Setup",
+      "link"			: "http://blog.geekdaily.org/theme-setup/",
+      "excerpt"		: "Instructions on how to install and customize the Jekyll theme So Simple."
+    }
+  
+
+  
+
+  
+
+  
+
+]

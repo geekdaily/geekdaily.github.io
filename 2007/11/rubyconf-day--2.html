@@ -1,0 +1,301 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>RubyConf, Day 1, 4p: Hurting Code for Fun & Profit &#8211; geek!daily</title>
+<meta name="description" content="Ahhh, a nap makes all well. Last session of the day. Okay, you want to see these slides and the video once it’s posted by ConFreaks.
+
+">
+<meta name="keywords" content="">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="RubyConf, Day 1, 4p: Hurting Code for Fun & Profit">
+<meta name="twitter:description" content="Ahhh, a nap makes all well. Last session of the day. Okay, you want to see these slides and the video once it’s posted by ConFreaks.
+
+">
+<meta name="twitter:site" content="@purp">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.geekdaily.org/images/site-logo.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RubyConf, Day 1, 4p: Hurting Code for Fun & Profit">
+<meta property="og:description" content="Ahhh, a nap makes all well. Last session of the day. Okay, you want to see these slides and the video once it’s posted by ConFreaks.
+
+">
+<meta property="og:url" content="http://blog.geekdaily.org/2007/11/rubyconf-day--2.html">
+<meta property="og:site_name" content="geek!daily">
+
+
+
+
+
+<link rel="canonical" href="http://blog.geekdaily.org/2007/11/rubyconf-day--2.html">
+<link href="http://blog.geekdaily.org/feed.xml" type="application/atom+xml" rel="alternate" title="geek!daily Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://blog.geekdaily.org/assets/css/main.css">
+<!-- Webfonts -->
+<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="http://blog.geekdaily.org/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="http://blog.geekdaily.org/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://blog.geekdaily.org/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://blog.geekdaily.org/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://blog.geekdaily.org/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://blog.geekdaily.org/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://blog.geekdaily.org/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://blog.geekdaily.org/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://blog.geekdaily.org/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/" >Home</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/articles/" >Articles</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/projects/" >Projects</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/blog/" >Blog</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/about/" >About</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="http://blog.geekdaily.org/" class="site-logo" rel="home" title="geek!daily"><img src="http://blog.geekdaily.org/images/site-logo.png" width="200" height="200" alt="geek!daily logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="http://blog.geekdaily.org/">geek!daily</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">sporadic bursts of random thinking on life, leadership, and tech</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"></span>
+        
+          <h1 class="entry-title">RubyConf, Day 1, 4p: Hurting Code for Fun & Profit</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+          
+        
+          <img src="http://blog.geekdaily.org/images/" class="bio-photo" alt=" bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn"></span></span>
+        <span class="entry-date date published"><time datetime="2007-11-02T13:48:55-07:00"><i class="fa fa-calendar-o"></i> November 02, 2007</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>Ahhh, a nap makes all well. Last session of the day. Okay, you want to see these slides and the video once it’s posted by ConFreaks.</p>
+
+<p>“Legacy code is any code you haven’t written.”</p>
+
+<p>“People will press charges if you hurt them. Code won’t.”</p>
+
+<p>“My name is Ryan and I like to hurt code. And I’m OK.”</p>
+
+<p>Ruby Sadism: deriving pleasure from inflicting pain on software, esp. bad software.</p>
+
+<p>Ruby Asceticism: cahracterized by or … [not fast enough, in the slides] … self-discipline</p>
+
+<p>unit test is self discipline, YAGNI is abstention</p>
+
+<p>“Technical debt: skipping design is like borrowing money, refactoring is like repaying principal, interest is paid as time dealing with complexity.” – Ward Cunningham, ComplexityAsDebt, c2.com</p>
+
+<p>Use the Pareto Principle (aka 80/20 rule) to focus efforts</p>
+
+<p>Increase the signal:noise ratio. Big alligators, little alligators, swamp.</p>
+
+<p>“A developer’s obligation is to make sure that the code as written makes the clearest possible statement as to how the solution was understood …” –Ward Cunningham, <a href="http://c2.com/cgi/wiki?TechnicalDebt">TechnicalDebt</a></p>
+
+<p>Introspection Oriented Design: Find the “I” … how did I miss that bug, where did I go wrong.</p>
+
+<p><em>[HE QUOTED COVEY’S FOUR QUADRANTS! I’M VERY EXCITED! COULD YOU TELL?]</em></p>
+
+<p>Expand your mind; more knowledge is better.</p>
+
+<p>Write a lot of code. Make a lot of mistakes. Learn.</p>
+
+<p>Push yourself, then push yourself more.</p>
+
+<p>Mentarbator vs. Code Cowboy … find your sweet spot in the middle.</p>
+
+<p><strong>Tools to Help</strong></p>
+
+<p>Continuous integration and Autotest (with the doom guy)</p>
+
+<p><a href="http://ruby.sadi.st/Flog.html">Flog:</a> complexity reporter based on ABC metrics; the higher the score, the harder to test.</p>
+
+<p>Coverage tools: good to spot gaps, but don’t tell you the quality of your tests. 100% coverage with bad tests means nothing</p>
+
+<p><a href="http://rubyforge.org/projects/seattlerb">Heckle</a>: test mutator; if your tests pass after heckle, your tests are bad.</p>
+
+<p>Be passionate. If you love your code, hate it, hurt it.</p>
+
+<p>Q: Doesn’t using emacs violate your complexity rules?<br />
+A: Hey, I need an operating system, don’t I?</p>
+
+<p>Q: When does [code-generation] violate complexity?<br />
+A: When it gives you a bad feeling.</p>
+
+<p>Q: How much does your Evergreen background influence your philosophy?<br />
+A: Probably inverted my philosophy influenced the school I was compatible with. Stalker.</p>
+
+<p>Q: You talked about design and about how you should always be thinking about it. Should you design the whole thing in advance or what (Chelimsky)<br />
+A: I design iteratively, TDD-based. If you try to solve the whole problem up front, you’re going to have issues that many have written about.</p>
+
+<p>Q: How do you work with people who write bad code?<br />
+Hoy: I’ve seen him make somebody cry.<br />
+ZS: Who did I make cry?<br />
+Hoy: It was in private and I’m not going to say. It wasn’t me.<br />
+A: I try not to. Sometimes I’ll throw down the gauntlet and write something competing. Other times I’ll take advantage of ruby’s dynamic nature to just include what I need … I call it duck-raping</p>
+
+<p>Q: WRT tech depth, how do you not revisit code flags?<br />
+A: I use a tag system (fix refactor hack doc and others). It lets me keep my brain on track and move on. [me: this is important]</p>
+
+<p>Q: Have you found a way to automate heckle into your build process?<br />
+A: I have one lib (the png lib) that’s fully heckle-proof. Last iteration I hooked heckle into autotest; when it went green, it’d invoke heckle. The problem is the geometric expansion of tests.</p>
+
+<p>Q: Given that only one of your libs passes heckle, do you just seek a better score?<br />
+A: Heckle shows you the diff of your test and what it changed without making the test fail (e.g. replace an assignment with a nil). A rats nest of code with tight dependencies where it breaks if you change anything will pass Heckle.</p>
+
+<p>Q; are there tools you need as an ascetic that don’t exist yet?<br />
+A: Yes. Can’t name one off the top of my head.</p>
+
+<p>Q: Pair programming … useful for you?<br />
+A: Ask Eric. (laughs) I find I get a 250% output increase.</p>
+
+<p>Q: What’s your test:code ratio?<br />
+A: I don’t measure it often … generally 1.5:1 -ish but with artificial inflation of individual tests per argument, method, etc.</p>
+
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="http://blog.geekdaily.org/2007/11/rubyconf-day--1.html" class="btn" title="RubyConf, Day 1, Plenary Part 2: Advanced Ruby Class Design">Previous</a>
+      
+      
+        <a href="http://blog.geekdaily.org/2007/11/rubyconf-day-2-.html" class="btn" title="RubyConf, Day 2: Essential Incompleteness in Program Modeling">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>&copy; 2015 Jim Meyer. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/so-simple/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	<a href="http://twitter.com/purp" title="Jim Meyer on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	<a href="http://linkedin.com/in/jimmeyer" title="Jim Meyer on LinkedIn" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a>
+	
+	<a href="http://instagram.com/purp" title="Jim Meyer on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	<a href="http://www.flickr.com/photos/purp" title="Jim Meyer on Flickr" target="_blank"><i class="fa fa-flickr fa-2x"></i></a>
+	<a href="http://github.com/purp" title="Jim Meyer on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	
+  <a href="http://blog.geekdaily.org/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'http://blog.geekdaily.org';
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://blog.geekdaily.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://blog.geekdaily.org/assets/js/scripts.min.js"></script>
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-225723-36']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+</body>
+</html>

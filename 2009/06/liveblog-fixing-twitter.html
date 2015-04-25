@@ -1,0 +1,374 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>LiveBlog: Fixing Twitter &#8211; geek!daily</title>
+<meta name="description" content="John Adams, Twitter Ops
+
+">
+<meta name="keywords" content="">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="LiveBlog: Fixing Twitter">
+<meta name="twitter:description" content="John Adams, Twitter Ops
+
+">
+<meta name="twitter:site" content="@purp">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.geekdaily.org/images/site-logo.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LiveBlog: Fixing Twitter">
+<meta property="og:description" content="John Adams, Twitter Ops
+
+">
+<meta property="og:url" content="http://blog.geekdaily.org/2009/06/liveblog-fixing-twitter.html">
+<meta property="og:site_name" content="geek!daily">
+
+
+
+
+
+<link rel="canonical" href="http://blog.geekdaily.org/2009/06/liveblog-fixing-twitter.html">
+<link href="http://blog.geekdaily.org/feed.xml" type="application/atom+xml" rel="alternate" title="geek!daily Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://blog.geekdaily.org/assets/css/main.css">
+<!-- Webfonts -->
+<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="http://blog.geekdaily.org/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="http://blog.geekdaily.org/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://blog.geekdaily.org/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://blog.geekdaily.org/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://blog.geekdaily.org/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://blog.geekdaily.org/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://blog.geekdaily.org/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://blog.geekdaily.org/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://blog.geekdaily.org/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/" >Home</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/articles/" >Articles</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/projects/" >Projects</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/blog/" >Blog</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/about/" >About</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="http://blog.geekdaily.org/" class="site-logo" rel="home" title="geek!daily"><img src="http://blog.geekdaily.org/images/site-logo.png" width="200" height="200" alt="geek!daily logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="http://blog.geekdaily.org/">geek!daily</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">sporadic bursts of random thinking on life, leadership, and tech</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"></span>
+        
+          <h1 class="entry-title">LiveBlog: Fixing Twitter</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+          
+        
+          <img src="http://blog.geekdaily.org/images/" class="bio-photo" alt=" bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn"></span></span>
+        <span class="entry-date date published"><time datetime="2009-06-23T13:07:14-07:00"><i class="fa fa-calendar-o"></i> June 23, 2009</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>John Adams, Twitter Ops</p>
+
+<p>Ops</p>
+
+<ul>
+  <li>Small team</li>
+  <li>SW perf</li>
+  <li>availability is their primary focus</li>
+</ul>
+
+<p>All on managed services with NTT
+- No clouds—too high latency
+- NTT runs the NOC
+- Frees them to deal with real thinking compsci probs</p>
+
+<p>752% growth in 2008, trend happens ~11/2008 and keeps climbing</p>
+
+<p>Growth Pain Fear of what’s gonna happen</p>
+
+<p>Mantra:</p>
+
+<ul>
+  <li>Find the weekest point (metrics + logging + analysis)</li>
+  <li>Take corrective action (process)</li>
+  <li>Repeat</li>
+</ul>
+
+<p>Find weak points</p>
+
+<ul>
+  <li>Collect metrics and graphs (individual metrics are irrelevant)</li>
+  <li>Logs</li>
+  <li>SCIENCE!</li>
+  <li>Instrument everything! More info is better</li>
+</ul>
+
+<p>Monitoring</p>
+
+<ul>
+  <li>Keep critical metrics as close to realtime as possible</li>
+  <li>Using RRD, Ganglia + gMetrics, MRTG</li>
+  <li>Mostly on 10s interval, some 5s, some 60s</li>
+  <li>Everyone in company has access to dashboard</li>
+  <li>“Criticals” view</li>
+  <li>Use google analytics for failwhale and other err pages</li>
+</ul>
+
+<p>Analyze</p>
+
+<ul>
+  <li>Turn data into info</li>
+  <li>Are things better/worse post-deploy</li>
+  <li>Create env of capacity planning, not firefighting—no more cowboys in the wild west</li>
+</ul>
+
+<p>Deploys</p>
+
+<ul>
+  <li>Ganglia shows final deploy info for twitter, summize, and search</li>
+</ul>
+
+<p>Whale-watcher</p>
+
+<ul>
+  <li>simple script with massive win</li>
+  <li>503 is a whale, 500 is a robot</li>
+  <li>Whales per second exceeds whale threshold then “There’s whales!”</li>
+  <li>Darkmode: selectively disable portions of site with automatic notification to product and eng teams to let them know</li>
+</ul>
+
+<p>Config Mgmt</p>
+
+<ul>
+  <li>You need an automated cfg mgmt system NOW. Else you won’t scale</li>
+  <li>It intros complexity, with multiple admins, unknown interactions</li>
+  <li>Peer review solves most of this; they use reviewboard with svn precommit hook requiring “reviewed by” note in comment and postcommit hook sends note about what changed to people</li>
+</ul>
+
+<p>High communication</p>
+
+<ul>
+  <li>They use chat (campfire) with docs, graphs, logs, etc.</li>
+  <li>skitch into campfire is a frequent working methodology</li>
+</ul>
+
+<p>Subsystems</p>
+
+<ul>
+  <li>Many limiting factors in request pipeline</li>
+  <li>Oversubscribe mongrel 2:1 vs. cores</li>
+  <li>Attack plan per ssytem (e.g. bandwidth? bottleneck: network, vector: http latency, solution: servers+<ins>; timeline? db, update delay, better algo; search? db, delays, dbs</ins>+ and code; etc.)</li>
+</ul>
+
+<p>CPUs:</p>
+
+<ul>
+  <li>switched to Xeon +30% gain</li>
+  <li>replace 2x and 4x core with 8x core +40%</li>
+</ul>
+
+<p>Rails:</p>
+
+<ul>
+  <li>Stop blaming rails</li>
+  <li>Analysis: caching/cache invalidation, AR makes bad queries, queue latency, memcache/page corruption, rep lag</li>
+  <li>Not so much about Rails</li>
+</ul>
+
+<p>Disk is the new Tape</p>
+
+<ul>
+  <li>Social networks is very O(n^y) oriented</li>
+  <li>Disk is too slow</li>
+  <li>Need lots of RAM</li>
+</ul>
+
+<p>Lots of caching is possible. Moving libmemcached to native C gem was bigtime helpful.</p>
+
+<p>Nick’s CacheMoney AR plugin: readthru/writethru caching with memcached!</p>
+
+<p>Caching everything not smart, either</p>
+
+<ul>
+  <li>Cache evictions</li>
+  <li>Cold cache after host failure/new host spinup</li>
+  <li>
+    <p>Cache smarter: get rid of cache busting behaviors, varnish with failover, etc.
+RDBMS vs message queues</p>
+  </li>
+  <li>Not everything needs ACID</li>
+  <li>message queues help</li>
+  <li>Most MQs suck at high load</li>
+  <li>They wrote Kestrel for this; looks like memcache</li>
+  <li>Starling was earlier version</li>
+</ul>
+
+<p>Asynch == Good</p>
+
+<ul>
+  <li>They lean on mongrel heavily (they know it well)</li>
+  <li>Keep external service requests out of the pipeline via daemons which process message queues</li>
+  <li>Size worker daemons appropriately, have them kill themselves off rather than long-run</li>
+</ul>
+
+<p>DB replication</p>
+
+<ul>
+  <li>Multiple functional read/write masters</li>
+  <li>never read from the master—slows it down too much</li>
+  <li>watch your slow queries</li>
+  <li>use mkill to kill long-running queries before they kill you.</li>
+</ul>
+
+<p>Put up a status blog on some other service—transparency stops armchair engineering</p>
+
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="http://blog.geekdaily.org/2009/06/liveblog-next-web-challenges-its-still-all-about-ux.html" class="btn" title="LiveBlog: Next Web Challenges: It's Still All About UX">Previous</a>
+      
+      
+        <a href="http://blog.geekdaily.org/2009/06/liveblog-2-years-later-loving-and-hating-the-cloud.html" class="btn" title="LiveBlog: 2 Years Later, Loving and Hating the Cloud">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>&copy; 2015 Jim Meyer. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/so-simple/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	<a href="http://twitter.com/purp" title="Jim Meyer on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	<a href="http://linkedin.com/in/jimmeyer" title="Jim Meyer on LinkedIn" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a>
+	
+	<a href="http://instagram.com/purp" title="Jim Meyer on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	<a href="http://www.flickr.com/photos/purp" title="Jim Meyer on Flickr" target="_blank"><i class="fa fa-flickr fa-2x"></i></a>
+	<a href="http://github.com/purp" title="Jim Meyer on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	
+  <a href="http://blog.geekdaily.org/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'http://blog.geekdaily.org';
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://blog.geekdaily.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://blog.geekdaily.org/assets/js/scripts.min.js"></script>
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-225723-36']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+</body>
+</html>

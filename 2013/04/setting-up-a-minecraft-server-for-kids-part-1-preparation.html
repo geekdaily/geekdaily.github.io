@@ -1,0 +1,268 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Setting Up A Minecraft Server For Kids, Part 1: Preparation &#8211; geek!daily</title>
+<meta name="description" content="I’ve got a little more time on my hands than usual at the moment, so I decided to set up a Minecraft server for my son and his friends. I figured it would force me to play around with cloud APIs, some linux configuration that I haven’t done for a long while, and other various bits of geekery that would just make me happy.
+
+">
+<meta name="keywords" content="">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Setting Up A Minecraft Server For Kids, Part 1: Preparation">
+<meta name="twitter:description" content="I’ve got a little more time on my hands than usual at the moment, so I decided to set up a Minecraft server for my son and his friends. I figured it would force me to play around with cloud APIs, some linux configuration that I haven’t done for a long while, and other various bits of geekery that would just make me happy.
+
+">
+<meta name="twitter:site" content="@purp">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.geekdaily.org/images/site-logo.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Setting Up A Minecraft Server For Kids, Part 1: Preparation">
+<meta property="og:description" content="I’ve got a little more time on my hands than usual at the moment, so I decided to set up a Minecraft server for my son and his friends. I figured it would force me to play around with cloud APIs, some linux configuration that I haven’t done for a long while, and other various bits of geekery that would just make me happy.
+
+">
+<meta property="og:url" content="http://blog.geekdaily.org/2013/04/setting-up-a-minecraft-server-for-kids-part-1-preparation.html">
+<meta property="og:site_name" content="geek!daily">
+
+
+
+
+
+<link rel="canonical" href="http://blog.geekdaily.org/2013/04/setting-up-a-minecraft-server-for-kids-part-1-preparation.html">
+<link href="http://blog.geekdaily.org/feed.xml" type="application/atom+xml" rel="alternate" title="geek!daily Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://blog.geekdaily.org/assets/css/main.css">
+<!-- Webfonts -->
+<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="http://blog.geekdaily.org/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="http://blog.geekdaily.org/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://blog.geekdaily.org/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://blog.geekdaily.org/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://blog.geekdaily.org/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://blog.geekdaily.org/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://blog.geekdaily.org/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://blog.geekdaily.org/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://blog.geekdaily.org/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/" >Home</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/articles/" >Articles</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/projects/" >Projects</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/blog/" >Blog</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://blog.geekdaily.org/about/" >About</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="http://blog.geekdaily.org/" class="site-logo" rel="home" title="geek!daily"><img src="http://blog.geekdaily.org/images/site-logo.png" width="200" height="200" alt="geek!daily logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="http://blog.geekdaily.org/">geek!daily</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">sporadic bursts of random thinking on life, leadership, and tech</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"></span>
+        
+          <h1 class="entry-title">Setting Up A Minecraft Server For Kids, Part 1: Preparation</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+          
+        
+          <img src="http://blog.geekdaily.org/images/" class="bio-photo" alt=" bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn"></span></span>
+        <span class="entry-date date published"><time datetime="2013-04-12T09:00:00-07:00"><i class="fa fa-calendar-o"></i> April 12, 2013</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>I’ve got a little more time on my hands than usual at the moment, so I decided to set up a <a href="https://minecraft.net/">Minecraft</a> server for my son and his friends. I figured it would force me to play around with cloud APIs, some linux configuration that I haven’t done for a long while, and other various bits of geekery that would just make me happy.</p>
+
+<p>As I started to do some research on how to go about it, I found <a href="https://www.google.com/search?q=how+to+setup+a+minecraft+server">about a gajillion posts on how to set up a server</a> (including <a href="http://warpedvisions.org/2012/02/howto-set-up-a-minecraft-server-in-10-minutes-using-amazon-ec2/">this slightly outdated gem</a>), including a few from <a href="http://www.ultrasaurus.com/sarahblog/2011/11/setting-up-ec2-minecraft-server/">smart friends</a> <a href="https://mobile.twitter.com/tom_enebo/status/300763304777891840">of mine</a>. After a bit of reading, it became clear that this could be a much larger undertaking so I decided to chunk out the project into four steps:</p>
+
+<ol>
+  <li><strong>Preparation:</strong> research and learning</li>
+  <li><strong>Installation:</strong> set up the instance and server</li>
+  <li><strong>Configuration:</strong> tweak the server config and add plugins to get what you’re looking for</li>
+  <li><strong>Productionization:</strong> make the installation reproducible and automatable; set up backups; etc. And yeah, that’s not a real word. I’m okay with that.</li>
+</ol>
+
+<p><strong>This post will focus on the preparation</strong> required to get as many bits sorted out as you can before installing. I’ll write about the rest in the next few posts.</p>
+
+<h2 id="so-minecraft-"><strong>So, Minecraft …</strong></h2>
+
+<p>If, like me, you came to this with little practical Minecraft experience, the first thing you should do is try playing a bit. There are a few free ways to do this — such as <a href="https://minecraft.net/classic/">Minecraft Classic</a> in your browser or <a href="https://itunes.apple.com/us/app/minecraft-pocket-edition-lite/id479651754?mt=8">Minecraft Pocket Edition Lite</a> on an iOS device — or you can just spend the ~$30 and jump in. I figured that to be an op I’d want my own account, so I went for the full experience.</p>
+
+<p>I died a lot. I crafted a bit. I created a bunch in single player. I joined a few multiplayer servers. I died some more. Through all of it, I got a sense of the game and what my son and his friends would be in for. This helped a lot as I started to figure out what it would take to start up and run a server, as it identified some key questions, like, “How can we have a creative world as well as a survival world?” and “What’s the difference between ‘easy’ and ‘peaceful’?”</p>
+
+<p>These led me to <a href="http://www.minecraftwiki.net/">the Minecraft Wiki.</a> Frankly, had I read much of it before playing I would have died less and crafted more. However, it helped me get clear on a few things that matter when you’re considering running a server for others.</p>
+
+<h3 id="game-modehttpwwwminecraftwikinetwikigameplay"><strong><a href="http://www.minecraftwiki.net/wiki/Gameplay">Game Mode</a></strong></h3>
+
+<p>The default is survival mode, which means that, in order to survive and craft things, you have to walk around and collect block types required by recipes while avoiding being killed by monsters (“mobs” in the old MUD parlance). There’s also creative mode, where you gain the power of flight, you have access to every block type instantly, and you can make anything your heart desires. My son is currently constructing a flush toilet in the hotel he’s making. His heart desires strange things.</p>
+
+<h3 id="difficultyhttpwwwminecraftwikinetwikidifficulty"><strong><a href="http://www.minecraftwiki.net/wiki/Difficulty">Difficulty</a></strong></h3>
+
+<p>This ranges from Peaceful, where any aggressive mobs are removed or don’t spawn, through Easy and Normal, right into Hard. The wiki does an excellent job explaining.</p>
+
+<h3 id="world-typeshttpwwwminecraftwikinetwikiworldtypes"><a href="http://www.minecraftwiki.net/wiki/World_types">World Types</a></h3>
+
+<p>There are a few settings in there that weren’t obvious on the face of it, such as what Large Biomes is or why Superflat would be interesting. It turns out that Superflat is a great canvas for Creative worlds, and Large Biomes is pretty much just like the default biome-based terrain generator but each biome takes up more real estate.</p>
+
+<p>It was clear to me that we’d want a Superflat Creative world and an Easy Default Survival world.</p>
+
+<h2 id="servers-servers-everywhere">Servers, Servers Everywhere</h2>
+
+<p>There are <a href="https://www.google.com/search?q=minecraft+server+implementations">a lot of available servers out there</a>. I could tell you that I did an exhaustive search and evaluation, but the truth is that I trusted my smart friend, Sarah, and chose <a href="https://github.com/Bukkit/CraftBukkit">Craftbukkit</a> (CB) for many of the same reasons she did: we both know and trust <a href="http://confreaks.net/videos/696-rubyconf2011-be-a-minecraft-modman-with-purugin" title="Confreaks RubyConf 2011: Be A Minecraft ModMan with Purugin">Tom Enebo’s opinion</a>, it’s <a href="https://github.com/enebo/Purugin">easy to extend using JRuby</a>, and it seems to be the leading server beyond vanilla Minecraft.</p>
+
+<p>Another bit of validation comes from cheracc, who runs <a href="http://www.sandlotminecraft.com/">Sandlot Minecraft server for kids and families</a>, and who also uses CB with many plugins. More on that later, though you can read <a href="http://www.reddit.com/r/admincraft/comments/17ri0h/help_advice_for_running_a_kidfriendly_server/">his excellent Reddit post on setting up a Minecraft server for kids</a> now.</p>
+
+<p>One other minor note: since CB is a third-party server, it takes them a bit of time to catch up when Mojang releases a new client version. This means you’ll want to wait on client updates until there’s a beta version of CB that handles the new client version. As of this writing, the current client requires a 1.5.x server which means craftbukkit-beta.jar</p>
+
+<h2 id="does-size-matter">Does Size Matter?</h2>
+
+<p>Finally, I wanted to figure out how big an instance I’d need to host a decent server. I flailed my way through several posts trying to figure this out until I discovered <a href="http://canihostaminecraftserver.com/">Can I Host A Minecraft Server</a>, which makes it easy to take your bandwidth (both up and down) and the available RAM and figure out about how many people you can host. Remember to use the bandwidth figures for the cloud provider you’re planning to use. For me, it turns out I can handle ~12 players in a 1GB instance with the usual cloud host network speeds of &gt;5Mbps, which is what I was hoping to cover.</p>
+
+<p>So that’s it for prep. Now it’s time to instantiate and install.</p>
+
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="http://blog.geekdaily.org/2012/03/bashing-tcsh.html" class="btn" title="Bashing tcsh">Previous</a>
+      
+      
+        <a href="http://blog.geekdaily.org/2015/04/goodbye-typepad-hello-github-pages.html" class="btn" title="Goodbye, Typepad; Hello, Github Pages">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>&copy; 2015 Jim Meyer. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/so-simple/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	<a href="http://twitter.com/purp" title="Jim Meyer on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	<a href="http://linkedin.com/in/jimmeyer" title="Jim Meyer on LinkedIn" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a>
+	
+	<a href="http://instagram.com/purp" title="Jim Meyer on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	<a href="http://www.flickr.com/photos/purp" title="Jim Meyer on Flickr" target="_blank"><i class="fa fa-flickr fa-2x"></i></a>
+	<a href="http://github.com/purp" title="Jim Meyer on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	
+  <a href="http://blog.geekdaily.org/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'http://blog.geekdaily.org';
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://blog.geekdaily.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://blog.geekdaily.org/assets/js/scripts.min.js"></script>
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-225723-36']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+</body>
+</html>
