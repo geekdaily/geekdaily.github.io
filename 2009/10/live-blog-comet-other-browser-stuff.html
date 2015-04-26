@@ -1,402 +1,167 @@
-<!doctype html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
-<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
-<head>
-<meta charset="utf-8">
-<title>Live Blog: Comet & Other Browser Stuff &#8211; geek!daily</title>
-<meta name="description" content="It’s a big component of what we call “real-time”
 
-This is the kind of stuff that puts up a banner on a Twitter search (“# New Tweets Found”) and makes things feel real time.
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        Live Blog: Comet & Other Browser Stuff - 
+      
+      geek!daily
+    </title>
+    
+    <meta name="author" content="Jim Meyer">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-List of what’s being done to move notifications from server to browser:
-* Ajax polling: Anybody using the JS set-timeout function, then refetch. Used by GMail, Campfire, et al
-* Long polling (typically Comet): Used by FriendFeed, keeps an http connection open as long as possible (keep alive), reopen when timed-out. Keep a local thread pool.
-* Flash sockets: Same as long polling, but from Flash. Don’t have the same-origin policy. No limitaions on number of connections. Does gzipping.
-* Reverse HTTP: hosting a little webserver inside a JS connection. Long pushing?
-* Silverlight (“MS’s version of Flash”)
-* HTML5 websockets: part of spec, doesn’t exist and not implemented. Expected to be like flash sockets.
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
 
-(things discarded as too old/obscure/painful/absurd):
-* Java applets (David Weekly is about to get himself kicked ;)
-* Big ugly JS kludges (iframe tricks, etc)
-* What’s that Opera thing … unite? ubiquity? Unite. Every browser is a webserver. Sounds like reverse HTTP.
-* Using XMPP format, arbitrary JSON structure, Atom.
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
 
-Libraries:
-* Orbited (?) tunnels TCP thru HTTP, treats each end like a socket. JS front-end, Python backend. Often paired with Twisted. Specifically meant to be Comet.
-* stropheJS: javascript, can use flash sockets
-* Tornado: python
-* Cometd: Java, made by Dojo to work with dojo
-* Dojo: javascript, can use flash sockets
-* APE project (?)
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
 
-What formats are people using to send data:
-* JSON
-* XMPP
+            <a class="brand" href="/">geek!daily</a>
 
-Apps and their libs/methodologies:
-* Meebo: ??
-* Google Wave/GTalk: GWT RPC, long-polling, their own JS
-* FB Chat: ??
-* FriendFeed: Tornado server with long-polling, their own JS
-* Superfeedr: uses BOSH, stropheJS. BOSH is kinda long polling, bidirectional (two cs open all time). Very similar to comet, more friendly than strict proxies
-* Collecta: uses BOSH
-* Twingly: orbited
-* PBWorks: long polling on network dashboard to see updates come in live; wrote their own libraries, also use stropheJS
-* StatusNet - identi.ca and ??, orbited and cometd (you can do either)
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
 
-Flex and Air apps? The most interesting stuff is what used to be called Flash Media Server (been renamed). They’ve got their own P2P protocol. All sorts of funky stuff you can do. OpenSource version of FMS is Red Five.
-
-In what situations are these libraries breaking down?
-* Transparent/Opaque proxies that give repeats/dupes/hangs. Keep buffer on server and check for these. Sometimes have to close connection to flush thru proxies.
-* “Everyone focuses on the newest hottest event-based framework, but the hardest part is that HTTP wasn’t designed for long-polling.”
-
-Have to hold open request/response pairs. Connection setup and teardown is expensive
-
-Guy at UK telecom has only ~3K IP connections available in London area. Comet is going to force an upgrade of their hardware, which will be expensive. Real world constraints will always present.
-
-Real-time at UI can be distracting at best, horribly annoying at worst. Charts work great, but text moving too quickly becomes hard. UX is challenging. Would be nice to add items while autoscrolling relative to the focussed item
-
-When you want to add a pause button to your site, that’s FAIL. But the hover-over-conversation to pause semantic is pretty good.
-
-Go to jschat.com to see a bad resize.
-
-FB pioneered notifications really well in UX. You get a “toaster popup” that doesn’t disturb your screen and it fades after a few moments plus a bar at the bottom to persist the aggregated notifications/count. Really nice.
-
-Growl is also mentioned as a good model. Is there interest in a notification aggregator with contexts in the browser? Meebo wants to go that way as a notification aggregator. Adobe wants to do this on your desktop. BrowserPlus also hits Growl. Prowl == Pushed Growl.
-
-If everyone started using XMPP, it would increase the message load (“three bazillion individual messages”). No one is bundling XMPP updates; no reason you couldn’t. ActivityStreams could also serve.
-
-Why are people using Atom/JSON for this? They’re so extensible, but when you extend them so far they’re just as verbose as XML. “But we just don’t like XML.”
-
-Would be nice if you could select things to pull out of the stream and hold onto.
-
-Seems to be consensus that chat belongs at the bottom of the browser, append at end. Everything with a permalink (blogs, tweets, etc) gets added to the top (?). Seems to be related to height issues.
-
-Infinite scroll vs. “More” button
-
-Titlebar flash (Gmail and GTalk)
-
-Some sites make a tiny flash widget to play a sound
-
-Haptic: twitter dmesg to cellphone buzz
-
-Notifications can become another form of info overload/noise
-
-(We flailed at making a 1D/2D chart to represent frequency and value … FAIL)
-
-Phonetop apps are like desktop apps. Leah feels strongly that they’re headed down-and-to-the-right and browser-ish apps are taking supremacy due to interoperability.
-
-Apple’s surprise: phonetop apps took off. (?) vs. John Gruber: “The most used app on my iPhone is Safari.”
-
-">
-<meta name="keywords" content="">
 
   
-
-<!-- Twitter Cards -->
-<meta name="twitter:title" content="Live Blog: Comet & Other Browser Stuff">
-<meta name="twitter:description" content="It’s a big component of what we call “real-time”
-
-This is the kind of stuff that puts up a banner on a Twitter search (“# New Tweets Found”) and makes things feel real time.
-
-List of what’s being done to move notifications from server to browser:
-* Ajax polling: Anybody using the JS set-timeout function, then refetch. Used by GMail, Campfire, et al
-* Long polling (typically Comet): Used by FriendFeed, keeps an http connection open as long as possible (keep alive), reopen when timed-out. Keep a local thread pool.
-* Flash sockets: Same as long polling, but from Flash. Don’t have the same-origin policy. No limitaions on number of connections. Does gzipping.
-* Reverse HTTP: hosting a little webserver inside a JS connection. Long pushing?
-* Silverlight (“MS’s version of Flash”)
-* HTML5 websockets: part of spec, doesn’t exist and not implemented. Expected to be like flash sockets.
-
-(things discarded as too old/obscure/painful/absurd):
-* Java applets (David Weekly is about to get himself kicked ;)
-* Big ugly JS kludges (iframe tricks, etc)
-* What’s that Opera thing … unite? ubiquity? Unite. Every browser is a webserver. Sounds like reverse HTTP.
-* Using XMPP format, arbitrary JSON structure, Atom.
-
-Libraries:
-* Orbited (?) tunnels TCP thru HTTP, treats each end like a socket. JS front-end, Python backend. Often paired with Twisted. Specifically meant to be Comet.
-* stropheJS: javascript, can use flash sockets
-* Tornado: python
-* Cometd: Java, made by Dojo to work with dojo
-* Dojo: javascript, can use flash sockets
-* APE project (?)
-
-What formats are people using to send data:
-* JSON
-* XMPP
-
-Apps and their libs/methodologies:
-* Meebo: ??
-* Google Wave/GTalk: GWT RPC, long-polling, their own JS
-* FB Chat: ??
-* FriendFeed: Tornado server with long-polling, their own JS
-* Superfeedr: uses BOSH, stropheJS. BOSH is kinda long polling, bidirectional (two cs open all time). Very similar to comet, more friendly than strict proxies
-* Collecta: uses BOSH
-* Twingly: orbited
-* PBWorks: long polling on network dashboard to see updates come in live; wrote their own libraries, also use stropheJS
-* StatusNet - identi.ca and ??, orbited and cometd (you can do either)
-
-Flex and Air apps? The most interesting stuff is what used to be called Flash Media Server (been renamed). They’ve got their own P2P protocol. All sorts of funky stuff you can do. OpenSource version of FMS is Red Five.
-
-In what situations are these libraries breaking down?
-* Transparent/Opaque proxies that give repeats/dupes/hangs. Keep buffer on server and check for these. Sometimes have to close connection to flush thru proxies.
-* “Everyone focuses on the newest hottest event-based framework, but the hardest part is that HTTP wasn’t designed for long-polling.”
-
-Have to hold open request/response pairs. Connection setup and teardown is expensive
-
-Guy at UK telecom has only ~3K IP connections available in London area. Comet is going to force an upgrade of their hardware, which will be expensive. Real world constraints will always present.
-
-Real-time at UI can be distracting at best, horribly annoying at worst. Charts work great, but text moving too quickly becomes hard. UX is challenging. Would be nice to add items while autoscrolling relative to the focussed item
-
-When you want to add a pause button to your site, that’s FAIL. But the hover-over-conversation to pause semantic is pretty good.
-
-Go to jschat.com to see a bad resize.
-
-FB pioneered notifications really well in UX. You get a “toaster popup” that doesn’t disturb your screen and it fades after a few moments plus a bar at the bottom to persist the aggregated notifications/count. Really nice.
-
-Growl is also mentioned as a good model. Is there interest in a notification aggregator with contexts in the browser? Meebo wants to go that way as a notification aggregator. Adobe wants to do this on your desktop. BrowserPlus also hits Growl. Prowl == Pushed Growl.
-
-If everyone started using XMPP, it would increase the message load (“three bazillion individual messages”). No one is bundling XMPP updates; no reason you couldn’t. ActivityStreams could also serve.
-
-Why are people using Atom/JSON for this? They’re so extensible, but when you extend them so far they’re just as verbose as XML. “But we just don’t like XML.”
-
-Would be nice if you could select things to pull out of the stream and hold onto.
-
-Seems to be consensus that chat belongs at the bottom of the browser, append at end. Everything with a permalink (blogs, tweets, etc) gets added to the top (?). Seems to be related to height issues.
-
-Infinite scroll vs. “More” button
-
-Titlebar flash (Gmail and GTalk)
-
-Some sites make a tiny flash widget to play a sound
-
-Haptic: twitter dmesg to cellphone buzz
-
-Notifications can become another form of info overload/noise
-
-(We flailed at making a 1D/2D chart to represent frequency and value … FAIL)
-
-Phonetop apps are like desktop apps. Leah feels strongly that they’re headed down-and-to-the-right and browser-ish apps are taking supremacy due to interoperability.
-
-Apple’s surprise: phonetop apps took off. (?) vs. John Gruber: “The most used app on my iPhone is Safari.”
-
-">
-<meta name="twitter:site" content="@purp">
-
-
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://blog.geekdaily.org/images/site-logo.png">
-
-<!-- Open Graph -->
-<meta property="og:locale" content="en_US">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Live Blog: Comet & Other Browser Stuff">
-<meta property="og:description" content="It’s a big component of what we call “real-time”
-
-This is the kind of stuff that puts up a banner on a Twitter search (“# New Tweets Found”) and makes things feel real time.
-
-List of what’s being done to move notifications from server to browser:
-* Ajax polling: Anybody using the JS set-timeout function, then refetch. Used by GMail, Campfire, et al
-* Long polling (typically Comet): Used by FriendFeed, keeps an http connection open as long as possible (keep alive), reopen when timed-out. Keep a local thread pool.
-* Flash sockets: Same as long polling, but from Flash. Don’t have the same-origin policy. No limitaions on number of connections. Does gzipping.
-* Reverse HTTP: hosting a little webserver inside a JS connection. Long pushing?
-* Silverlight (“MS’s version of Flash”)
-* HTML5 websockets: part of spec, doesn’t exist and not implemented. Expected to be like flash sockets.
-
-(things discarded as too old/obscure/painful/absurd):
-* Java applets (David Weekly is about to get himself kicked ;)
-* Big ugly JS kludges (iframe tricks, etc)
-* What’s that Opera thing … unite? ubiquity? Unite. Every browser is a webserver. Sounds like reverse HTTP.
-* Using XMPP format, arbitrary JSON structure, Atom.
-
-Libraries:
-* Orbited (?) tunnels TCP thru HTTP, treats each end like a socket. JS front-end, Python backend. Often paired with Twisted. Specifically meant to be Comet.
-* stropheJS: javascript, can use flash sockets
-* Tornado: python
-* Cometd: Java, made by Dojo to work with dojo
-* Dojo: javascript, can use flash sockets
-* APE project (?)
-
-What formats are people using to send data:
-* JSON
-* XMPP
-
-Apps and their libs/methodologies:
-* Meebo: ??
-* Google Wave/GTalk: GWT RPC, long-polling, their own JS
-* FB Chat: ??
-* FriendFeed: Tornado server with long-polling, their own JS
-* Superfeedr: uses BOSH, stropheJS. BOSH is kinda long polling, bidirectional (two cs open all time). Very similar to comet, more friendly than strict proxies
-* Collecta: uses BOSH
-* Twingly: orbited
-* PBWorks: long polling on network dashboard to see updates come in live; wrote their own libraries, also use stropheJS
-* StatusNet - identi.ca and ??, orbited and cometd (you can do either)
-
-Flex and Air apps? The most interesting stuff is what used to be called Flash Media Server (been renamed). They’ve got their own P2P protocol. All sorts of funky stuff you can do. OpenSource version of FMS is Red Five.
-
-In what situations are these libraries breaking down?
-* Transparent/Opaque proxies that give repeats/dupes/hangs. Keep buffer on server and check for these. Sometimes have to close connection to flush thru proxies.
-* “Everyone focuses on the newest hottest event-based framework, but the hardest part is that HTTP wasn’t designed for long-polling.”
-
-Have to hold open request/response pairs. Connection setup and teardown is expensive
-
-Guy at UK telecom has only ~3K IP connections available in London area. Comet is going to force an upgrade of their hardware, which will be expensive. Real world constraints will always present.
-
-Real-time at UI can be distracting at best, horribly annoying at worst. Charts work great, but text moving too quickly becomes hard. UX is challenging. Would be nice to add items while autoscrolling relative to the focussed item
-
-When you want to add a pause button to your site, that’s FAIL. But the hover-over-conversation to pause semantic is pretty good.
-
-Go to jschat.com to see a bad resize.
-
-FB pioneered notifications really well in UX. You get a “toaster popup” that doesn’t disturb your screen and it fades after a few moments plus a bar at the bottom to persist the aggregated notifications/count. Really nice.
-
-Growl is also mentioned as a good model. Is there interest in a notification aggregator with contexts in the browser? Meebo wants to go that way as a notification aggregator. Adobe wants to do this on your desktop. BrowserPlus also hits Growl. Prowl == Pushed Growl.
-
-If everyone started using XMPP, it would increase the message load (“three bazillion individual messages”). No one is bundling XMPP updates; no reason you couldn’t. ActivityStreams could also serve.
-
-Why are people using Atom/JSON for this? They’re so extensible, but when you extend them so far they’re just as verbose as XML. “But we just don’t like XML.”
-
-Would be nice if you could select things to pull out of the stream and hold onto.
-
-Seems to be consensus that chat belongs at the bottom of the browser, append at end. Everything with a permalink (blogs, tweets, etc) gets added to the top (?). Seems to be related to height issues.
-
-Infinite scroll vs. “More” button
-
-Titlebar flash (Gmail and GTalk)
-
-Some sites make a tiny flash widget to play a sound
-
-Haptic: twitter dmesg to cellphone buzz
-
-Notifications can become another form of info overload/noise
-
-(We flailed at making a 1D/2D chart to represent frequency and value … FAIL)
-
-Phonetop apps are like desktop apps. Leah feels strongly that they’re headed down-and-to-the-right and browser-ish apps are taking supremacy due to interoperability.
-
-Apple’s surprise: phonetop apps took off. (?) vs. John Gruber: “The most used app on my iPhone is Safari.”
-
-">
-<meta property="og:url" content="http://blog.geekdaily.org/2009/10/live-blog-comet-other-browser-stuff.html">
-<meta property="og:site_name" content="geek!daily">
-
-
-
-
-
-<link rel="canonical" href="http://blog.geekdaily.org/2009/10/live-blog-comet-other-browser-stuff.html">
-<link href="http://blog.geekdaily.org/feed.xml" type="application/atom+xml" rel="alternate" title="geek!daily Feed">
-
-<!-- http://t.co/dKP3o1e -->
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- For all browsers -->
-<link rel="stylesheet" href="http://blog.geekdaily.org/assets/css/main.css">
-<!-- Webfonts -->
-<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
-
-<meta http-equiv="cleartype" content="on">
-
-<!-- HTML5 Shiv and Media Query Support -->
-<!--[if lt IE 9]>
-  <script src="http://blog.geekdaily.org/assets/js/vendor/html5shiv.min.js"></script>
-  <script src="http://blog.geekdaily.org/assets/js/vendor/respond.min.js"></script>
-<![endif]-->
-
-<!-- Modernizr -->
-<script src="http://blog.geekdaily.org/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
-
-<!-- Icons -->
-<!-- 16x16 -->
-<link rel="shortcut icon" href="http://blog.geekdaily.org/favicon.ico">
-<!-- 32x32 -->
-<link rel="shortcut icon" href="http://blog.geekdaily.org/favicon.png">
-<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
-<link rel="apple-touch-icon-precomposed" href="http://blog.geekdaily.org/images/apple-touch-icon-precomposed.png">
-<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://blog.geekdaily.org/images/apple-touch-icon-72x72-precomposed.png">
-<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://blog.geekdaily.org/images/apple-touch-icon-114x114-precomposed.png">
-<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://blog.geekdaily.org/images/apple-touch-icon-144x144-precomposed.png">
-
-</head>
-
-<body id="post">
-
-<div class="navigation-wrapper">
-	<nav role="navigation" id="site-nav" class="animated drop">
-	    <ul>
-      
-		    
-		        
-		    
-		    <li><a href="http://blog.geekdaily.org/" >Home</a></li>
-		  
-		    
-		        
-		    
-		    <li><a href="http://blog.geekdaily.org/projects/" >Projects</a></li>
-		  
-		    
-		        
-		    
-		    <li><a href="http://blog.geekdaily.org/blog/" >Blog</a></li>
-		  
-		    
-		        
-		    
-		    <li><a href="http://blog.geekdaily.org/about/" >About</a></li>
-		  
-	    </ul>
-	</nav>
-</div><!-- /.navigation-wrapper -->
-
-<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
-
-<header class="masthead">
-	<div class="wrap">
-      
-  		<a href="http://blog.geekdaily.org/" class="site-logo" rel="home" title="geek!daily"><img src="http://blog.geekdaily.org/images/site-logo.png" width="200" height="200" alt="geek!daily logo" class="animated fadeInDown"></a>
-      
-      <h1 class="site-title animated fadeIn"><a href="http://blog.geekdaily.org/">geek!daily</a></h1>
-		<h2 class="site-description animated fadeIn" itemprop="description">sporadic bursts of random thinking on life, leadership, and tech</h2>
-	</div>
-</header><!-- /.masthead -->
-
-<div class="js-menu-screen menu-screen"></div>
-
-
-<div id="main" role="main">
-  <article class="hentry">
     
-    <div class="entry-wrapper">
-      <header class="entry-header">
-        <span class="entry-tags"></span>
-        
-          <h1 class="entry-title">Live Blog: Comet & Other Browser Stuff</h1>
-        
-      </header>
-      <footer class="entry-meta">
-        
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/purp" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                <li>
+                  <a href="https://twitter.com/purp" class="zocial twitter icon" target="_blank">
+                    <span class="hidden-desktop">Twitter</span>
+                  </a>
+                </li>
+                
+                
+                
+                <li>
+                  <a href="http://www.linkedin.com/in/jimmeyer" class="zocial linkedin icon" target="_blank">
+                    <span class="hidden-desktop">LinkedIn</span>
+                  </a>
+                </li>
+                
+                
+                <li>
+                  <a href="http://feeds.feedburner.com/geekdailyblog" class="zocial rss icon" target="_blank">
+                    <span class="hidden-desktop">FeedBurner</span>
+                  </a>
+                </li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
           
-        
-          <img src="http://blog.geekdaily.org/images/" class="bio-photo" alt=" bio photo"></a>
-        
-        <span class="author vcard">By <span class="fn"></span></span>
-        <span class="entry-date date published"><time datetime="2009-10-15T13:27:25-07:00"><i class="fa fa-calendar-o"></i> October 15, 2009</time></span>
-        
-        
-        
-        
-      </footer>
-      <div class="entry-content">
-        <p>It’s a big component of what we call “real-time”</p>
+<div class="page-header">
+  <h1>
+    Live Blog: Comet & Other Browser Stuff 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>It’s a big component of what we call “real-time”</p>
 
 <p>This is the kind of stuff that puts up a banner on a Twitter search (“# New Tweets Found”) and makes things feel real time.</p>
 
@@ -484,67 +249,96 @@ Apple’s surprise: phonetop apps took off. (?) vs. John Gruber: “The most use
 <p>You can find the whiteboard pics in <a href="http://flickr.com/photos/purp">my Flickr stream</a>.</p>
 
 
-        
-      </div><!-- /.entry-content -->
-    </div><!-- /.entry-wrapper -->
-    <nav class="pagination" role="navigation">
+    <hr>
+    <div class="pagination btn-group">
       
-        <a href="http://blog.geekdaily.org/2009/10/live-blog-web-aggregation-what-works-and-what-doesnt.html" class="btn" title="Live Blog: Web Aggregation, What Works and What Doesn't">Previous</a>
+        <a class="btn prev" href="/2009/10/live-blog-web-aggregation-what-works-and-what-doesnt.html" title="Live Blog: Web Aggregation, What Works and What Doesn't">&larr; Previous</a>
       
+        <a class="btn" href="/archive.html">Archive</a>
       
-        <a href="http://blog.geekdaily.org/2010/08/advanced-yaml-tricking-out-your-databaseyml.html" class="btn" title="Advanced YAML: Tricking Out Your database.yml">Next</a>
+        <a class="btn next" href="/2010/08/advanced-yaml-tricking-out-your-databaseyml.html" title="Advanced YAML: Tricking Out Your database.yml">Next &rarr;</a>
       
-    </nav><!-- /.pagination -->
-  </article>
-</div><!-- /#main -->
-
-<div class="footer-wrapper">
-  <footer role="contentinfo" class="entry-wrapper">
+    </div>
+    <hr>
     
 
-<span>&copy; 2015 Jim Meyer. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/so-simple/" rel="nofollow">So Simple Theme</a>.</span>
-<div class="social-icons">
-	<a href="http://twitter.com/purp" title="Jim Meyer on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
-	
-	
-	<a href="http://linkedin.com/in/jimmeyer" title="Jim Meyer on LinkedIn" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a>
-	
-	<a href="http://instagram.com/purp" title="Jim Meyer on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
-	<a href="http://www.flickr.com/photos/purp" title="Jim Meyer on Flickr" target="_blank"><i class="fa fa-flickr fa-2x"></i></a>
-	<a href="http://github.com/purp" title="Jim Meyer on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
-	
-	
-  <a href="http://blog.geekdaily.org/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
-</div><!-- /.social-icons -->
-  </footer>
-</div><!-- /.footer-wrapper -->
 
+  <div id="disqus_thread"></div>
 <script type="text/javascript">
-  var BASE_URL = 'http://blog.geekdaily.org';
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'geekdaily'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
 </script>
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="http://blog.geekdaily.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-<script src="http://blog.geekdaily.org/assets/js/scripts.min.js"></script>
-
-
-<!-- Asynchronous Google Analytics snippet -->
-<script>
-  var _gaq = _gaq || [];
-  var pluginUrl = 
- '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
-  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
-  _gaq.push(['_setAccount', 'UA-225723-36']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
 
-</body>
+
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>15 October 2009</span></div>
+      
+    </section>
+    
+      <section>
+        <h4>Categories</h4>
+        
+        <span class="category">
+          metadata
+        </span>
+        
+        <span class="category">
+          social networks
+        </span>
+        
+        <span class="category">
+          ui
+        </span>
+        
+        <span class="category">
+          web 2.0
+        </span>
+        
+      </section>
+         
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2015 Jim Meyer
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+  </body>
 </html>
+

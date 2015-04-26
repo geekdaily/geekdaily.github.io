@@ -1,365 +1,184 @@
-<!doctype html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
-<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
-<head>
-<meta charset="utf-8">
-<title>ruby/rails &#8211; geek!daily</title>
 
-
-
-
-
-<!-- Twitter Cards -->
-<meta name="twitter:title" content="ruby/rails">
-
-<meta name="twitter:site" content="@purp">
-<meta name="twitter:creator" content="@purp">
-
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://blog.geekdaily.org/images/site-logo.png">
-
-<!-- Open Graph -->
-<meta property="og:locale" content="en_US">
-<meta property="og:type" content="article">
-<meta property="og:title" content="ruby/rails">
-
-<meta property="og:url" content="http://blog.geekdaily.org/ruby-rails/">
-<meta property="og:site_name" content="geek!daily">
-
-
-
-
-
-<link rel="canonical" href="http://blog.geekdaily.org/ruby-rails/">
-<link href="http://blog.geekdaily.org/feed.xml" type="application/atom+xml" rel="alternate" title="geek!daily Feed">
-
-<!-- http://t.co/dKP3o1e -->
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- For all browsers -->
-<link rel="stylesheet" href="http://blog.geekdaily.org/assets/css/main.css">
-<!-- Webfonts -->
-<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
-
-<meta http-equiv="cleartype" content="on">
-
-<!-- HTML5 Shiv and Media Query Support -->
-<!--[if lt IE 9]>
-  <script src="http://blog.geekdaily.org/assets/js/vendor/html5shiv.min.js"></script>
-  <script src="http://blog.geekdaily.org/assets/js/vendor/respond.min.js"></script>
-<![endif]-->
-
-<!-- Modernizr -->
-<script src="http://blog.geekdaily.org/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
-
-<!-- Icons -->
-<!-- 16x16 -->
-<link rel="shortcut icon" href="http://blog.geekdaily.org/favicon.ico">
-<!-- 32x32 -->
-<link rel="shortcut icon" href="http://blog.geekdaily.org/favicon.png">
-<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
-<link rel="apple-touch-icon-precomposed" href="http://blog.geekdaily.org/images/apple-touch-icon-precomposed.png">
-<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://blog.geekdaily.org/images/apple-touch-icon-72x72-precomposed.png">
-<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://blog.geekdaily.org/images/apple-touch-icon-114x114-precomposed.png">
-<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://blog.geekdaily.org/images/apple-touch-icon-144x144-precomposed.png">
-
-</head>
-
-<body id="page">
-
-<div class="navigation-wrapper">
-	<nav role="navigation" id="site-nav" class="animated drop">
-	    <ul>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
       
-		    
-		        
-		    
-		    <li><a href="http://blog.geekdaily.org/" >Home</a></li>
-		  
-		    
-		        
-		    
-		    <li><a href="http://blog.geekdaily.org/projects/" >Projects</a></li>
-		  
-		    
-		        
-		    
-		    <li><a href="http://blog.geekdaily.org/blog/" >Blog</a></li>
-		  
-		    
-		        
-		    
-		    <li><a href="http://blog.geekdaily.org/about/" >About</a></li>
-		  
-	    </ul>
-	</nav>
-</div><!-- /.navigation-wrapper -->
-
-<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
-
-<header class="masthead">
-	<div class="wrap">
+        ruby/rails - 
       
-  		<a href="http://blog.geekdaily.org/" class="site-logo" rel="home" title="geek!daily"><img src="http://blog.geekdaily.org/images/site-logo.png" width="200" height="200" alt="geek!daily logo" class="animated fadeInDown"></a>
-      
-      <h1 class="site-title animated fadeIn"><a href="http://blog.geekdaily.org/">geek!daily</a></h1>
-		<h2 class="site-description animated fadeIn" itemprop="description">sporadic bursts of random thinking on life, leadership, and tech</h2>
-	</div>
-</header><!-- /.masthead -->
-
-<div class="js-menu-screen menu-screen"></div>
-
-
-<div id="main" role="main">
-  <article class="entry">
+      geek!daily
+    </title>
     
-    <div class="entry-wrapper">
-      <header class="entry-header">
-        <h1 class="entry-title">ruby/rails</h1>
-      </header>
-      <div class="entry-content">
-        <ul class="post-list">
-         
-          <li><article><a href="http://blog.geekdaily.org/2010/08/advanced-yaml-tricking-out-your-databaseyml.html">Advanced YAML: Tricking Out Your database.yml <span class="entry-date"><time datetime="2010-08-13T16:03:33-07:00">August 13, 2010</time></span> <span class="excerpt">I've been [cultishly](http://en.wikipedia.org/wiki/Cargo_cult_programming) carrying this snippet around for years:
+    <meta name="author" content="Jim Meyer">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2009/06/got-the-cant-activate-gemexception-blues-gem-cleanup.html">Got the "can't activate" Gem::Exception Blues? gem cleanup! <span class="entry-date"><time datetime="2009-06-14T17:52:03-07:00">June 14, 2009</time></span> <span class="excerpt">What to do when rubygems can't activate a version of a gem because it's already activated a different version of the same gem? My Google magic wasn't good enough to find this one quickly, so I'll happily point out [Jesse Hu's nearly one-year-old post](http://jessehu.wordpress.com/2008/07/02/troubleshooting-already-activated-activerecord-202/) about the same problem, descended from [a Ruby on Rails thread on ruby-forum.com](http://www.ruby-forum.com/topic/137509) where, unsurprisingly, it's [Jeremy McAnally](http://www.jeremymcanally.com/) who knows that <tt>`gem cleanup`</tt> is the way to go.
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
 
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2009/06/cucumber-webrat-who-names-these-things.html">Cucumber, Webrat ... Who Names These Things? <span class="entry-date"><time datetime="2009-06-10T20:20:24-07:00">June 10, 2009</time></span> <span class="excerpt">I'm tinkering a bit with [Cucumber](http://github.com/aslakhellesoy/cucumber/tree/master) and [Webrat](http://wiki.github.com/brynary/webrat) for [my day job](http://www.linkedin.com/in/jimmeyer) and am very excited by some of the prospects for our QA group's automation efforts. Along the way I'm finding that I have to explain how all the moving parts relate to each other, so I made this diagram:
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
 
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2009/06/generating-with-ruby-off-rails.html">Generating with Ruby OFF Rails <span class="entry-date"><time datetime="2009-06-03T22:49:50-07:00">June 03, 2009</time></span> <span class="excerpt">I'm spending a fair amount of my time working on non-Rails Ruby projects lately and I've been missing the fine code generation toys in Rails. So tonight, for the fun of it and because I was hankering to play with cucumber, I hacked up the minimal set of bits that gets you script/generate in your non-Rails project.
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
 
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2009/05/refinding-my-rubyligion-.html">Re-finding my rubyligion ... <span class="entry-date"><time datetime="2009-05-03T11:06:10-07:00">May 03, 2009</time></span> <span class="excerpt">Life's been busy. Good, but busy. [My gig](http://www.linkedin.com/in/jimmeyer) at [LinkedIn](http://www.linkedin.com), two hours of commuting each day, plus our four person plus dog family certainly keeps me awash in things I should be doing. Thing is, ever since I stepped away from [managing LinkedIn's rubyists](http://.zdnet.com/enterprisealley/?p=188), I haven't had much to keep me practicing my Ruby skills or tied to the Ruby community. That's made me a bit sad.
+            <a class="brand" href="/">geek!daily</a>
 
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2008/08/old-rusty-to-sh.html">Old & Rusty to Shiny & New, Part 1 <span class="entry-date"><time datetime="2008-08-07T09:52:17-07:00">August 07, 2008</time></span> <span class="excerpt">I'm feeling particularly masochistic today, so I'm going to tackle a project I've been putting off for a while: moving a Rails 1.2.6 app in our subversion repository into [github](http://github.com/), then updating it to Rails 2.1.
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
 
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2008/02/linkedin-mobile.html">LinkedIn Mobile is Live! <span class="entry-date"><time datetime="2008-02-25T00:12:19-08:00">February 25, 2008</time></span> <span class="excerpt">It's been a busy few months since [I joined LinkedIn](http://blog.geekdaily.org/2007/11/me-linkedincom.html), but some of that work is finally out there for the world to see: [LinkedIn Mobile](http://m.linkedin.com/) is now in public beta. You can get more details from the [LinkedIn Blog](http://blog.linkedin.com/blog/2008/02/linkedin-mobile.html).
 
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/12/textile-redclot.html">Textile, RedCloth, and MonkeyPatching <span class="entry-date"><time datetime="2007-12-19T00:36:09-08:00">December 19, 2007</time></span> <span class="excerpt">Okay, I need to go through ~2700 articles, some large, some _very_ large, and programmatically decide which of them use an interesting amount of [Textile](http://textism.com/tools/textile/) formatting. Don't ask why; it's not polite to stare at the unfortunate. Just smile and nod and think about how you'd puzzle this one out.
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/12/ruby-benchmark.html">Ruby Benchmark Shootout, Round 2 <span class="entry-date"><time datetime="2007-12-05T14:13:28-08:00">December 05, 2007</time></span> <span class="excerpt">Back in February, Antonio Cangiano did [a fairly impressive run at benchmarking the various Ruby interpreter implementations](http://antoniocangiano.com/2007/02/19/ruby-implementations-shootout-ruby-vs-yarv-vs-jruby-vs-gardens-point-ruby-net-vs-rubinius-vs-cardinal/) and comparing the results. [He's just done it again](http://antoniocangiano.com/2007/12/03/the-great-ruby-shootout/) and, just nine months later, the improvements are fairly dramatic.
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/11/me-linkedincom.html">Me @ LinkedIn.com <span class="entry-date"><time datetime="2007-11-26T09:10:15-08:00">November 26, 2007</time></span> <span class="excerpt">Today is my first day as the manager of light engineering development at LinkedIn and I'm incredibly excited about it. Why's that, you might ask? Because LED is the group that's bringing agile development and Ruby on Rails to LinkedIn.
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/11/post-leopard-ch.html">Post-Leopard Checklist <span class="entry-date"><time datetime="2007-11-12T13:35:44-08:00">November 12, 2007</time></span> <span class="excerpt">I'm resettling into my laptop post-Leopard upgrade as a background task today and thought it might be useful (mostly to future-me) to note all the bits I'm twiddling:
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/11/rails-101-by-pe.html">Rails 101 by Peter Marklund <span class="entry-date"><time datetime="2007-11-10T22:42:20-08:00">November 10, 2007</time></span> <span class="excerpt">On the off-chance you're not already reading either [Peter Marklund's blog](http://marklunds.com/) or [Peter Cooper's excellent RubyInside blog](http://www.rubyinside.com/): [Peter the Latter points out](http://www.rubyinside.com/ruby-on-rails-101-a-presentation-648.html) that [Peter the Former has posted](http://marklunds.com/articles/one/374) his 341 slide (!) deck used to teach a week-long Ruby on Rails basics course. I've only skimmed but it looks pretty tasty.
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/11/its-official-im.html">It's Official: I'm a Rails Contributor <span class="entry-date"><time datetime="2007-11-09T11:14:13-08:00">November 09, 2007</time></span> <span class="excerpt">Okay, [big deal](http://groups.google.com/group/rubyonrails-core/browse_thread/thread/43d683ba018f5e7e). Time to get back to work. (he said with a little grin)
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/11/rubyconf-day--3.html">RubyConf, Day 2: Maximizing Productivity <span class="entry-date"><time datetime="2007-11-03T12:51:59-07:00">November 03, 2007</time></span> <span class="excerpt">Don't reinvent it if it doesn't exist; extend what exists.
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/11/rubyconf-day-2-.html">RubyConf, Day 2: Essential Incompleteness in Program Modeling <span class="entry-date"><time datetime="2007-11-03T10:50:25-07:00">November 03, 2007</time></span> <span class="excerpt">_Ahhhh ... sleep makes all better. I came late today, caught the Rubinius part of the plenary and so didn't have any comfortable way to live blog it ... so I didn't._  
   
-Walking our way to Godel's incompleteness, in a hand-wavy sort of way.
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/11/rubyconf-day--2.html">RubyConf, Day 1, 4p: Hurting Code for Fun & Profit <span class="entry-date"><time datetime="2007-11-02T13:48:55-07:00">November 02, 2007</time></span> <span class="excerpt">Ahhh, a nap makes all well. Last session of the day. Okay, you want to see these slides and the video once it's posted by ConFreaks.
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/11/rubyconf-day--1.html">RubyConf, Day 1, Plenary Part 2: Advanced Ruby Class Design <span class="entry-date"><time datetime="2007-11-02T08:31:08-07:00">November 02, 2007</time></span> <span class="excerpt">_No coffee outside. How do they expect me to survive? However, the signs are out for the box lunches and they look to not suck._
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/11/rubyconf-day-1-.html">RubyConf, Day 1, Plenary Part 1: Welcome and Beautiful Code <span class="entry-date"><time datetime="2007-11-02T07:23:10-07:00">November 02, 2007</time></span> <span class="excerpt">_Apologies in advance for quality issues; our crack team of writer just stepped off a red-eye and into the conference. It's 9:10a and they're still working on the AV connex. Ah, here we go._
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/10/a-plethora-of-r.html">A Plethora of Rails Podcasts <span class="entry-date"><time datetime="2007-10-26T15:55:13-07:00">October 26, 2007</time></span> <span class="excerpt">The guys at [Rails Envy](http://railsenvy.com/) (makers of fine Rails spoof commercials) started an audio-only [podcast](http://railsenvy.com/podcast) at the beginning of this month. I really like their podcast; it's short (< 10m, mostly), a bit like a news-snippet fest, and the collective sense of humor that is Jason and Gregg is undiluted. It's a touch stilted at times (and they call themselves on it) and is sponsored by [Pragmatic Studio](http://pragmaticstudio.com/) (which is frequently mentioned in the podcast).
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/10/my-first-rails-.html">My First Rails Plugin: GenerallyUseful <span class="entry-date"><time datetime="2007-10-26T12:45:13-07:00">October 26, 2007</time></span> <span class="excerpt">I'm having a [Fisher-Price moment](http://www.amazon.com/Fisher-Price-GeoTrax-System-Central-Station/dp/B000NWX2W8) today as I publish [my first Rails plugin](http://agilewebdevelopment.com/plugins/generally_useful). It's nothing spectacular, just some rake tasks I like to have around in my apps plus a little module with functions to programmatically list the available Rails environments and provide some (shorter or useful) aliases for the usual suspects. It'll grow as I think up and/or trip over more interesting rake tasks.
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/10/giles-channels-.html">Giles Channels RubyEast <span class="entry-date"><time datetime="2007-10-03T14:53:26-07:00">October 03, 2007</time></span> <span class="excerpt">If you can't tell, I'm catching up a bit after a long period of being buried in other things. Found Giles Bowkett's notes from RubyEast waiting for me in my RSS reader. It's his usual incredi-dense summary of a day in the life of a RubyEast attendee. Fun to read and inspires many questions.
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/10/test-helper-a-1.html">Test Helper: assert_not_valid <span class="entry-date"><time datetime="2007-10-02T11:32:58-07:00">October 02, 2007</time></span> <span class="excerpt">I was a little surprised that Rails offers <tt>assert_valid</tt> but not its implied converse, <tt>assert_not_valid</tt> ... so I wrote it:
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/10/test-helper-ass.html">Test Helper: assert_equal_multiline_text <span class="entry-date"><time datetime="2007-10-02T11:26:21-07:00">October 02, 2007</time></span> <span class="excerpt">I got tired of poring over the crappy output when comparing two large text blobs for equality fails; the more subtle the difference, the harder it is to spot it by eye. So I wrote this:
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/09/setting-constan.html">Setting Constants While Testing <span class="entry-date"><time datetime="2007-09-30T20:59:05-07:00">September 30, 2007</time></span> <span class="excerpt">Let's suppose you've got behavior in your app which is dependent on how <tt>RAILS_ENV</tt> is set and — of course — you want to test that it's behaving properly. To do this, you need to change the value of <tt>RAILS_ENV</tt> just before you call that function (and change it back just after). This puzzled me for a while, but I finally figured it out:
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/09/cdbabycom-goes-.html">CDBaby.com goes back to PHP <span class="entry-date"><time datetime="2007-09-25T00:59:59-07:00">September 25, 2007</time></span> <span class="excerpt">A bit over two days ago, [Derek Sivers](http://dereksivers.com/) posted in the [O'Reilly Ruby blog](http://www.oreillynet.com/ruby/blog/) on [his experience rewriting CDBaby.com in Ruby on Rails and why he chose to go back to PHP](http://xrl.us/back2php). Without going point-by-point, Derek said that after a hefty time investment, he abandoned reimplementing the website in Rails and took the lessons learned back to create a fresh, lighter-weight PHP and SQL implementation.
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/09/railsrumble-pos.html">RailsRumble: Post Mortem Ruminations <span class="entry-date"><time datetime="2007-09-11T01:01:00-07:00">September 11, 2007</time></span> <span class="excerpt">I've been reflecting on the [RailsRumble](http://railsrumble.com) and our [less-than-successful entry](http://artlog.railsrumble.com/) and thought I'd share some observations while they're fresh.
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/09/railsrumble-its.html">RailsRumble: It's Over. <span class="entry-date"><time datetime="2007-09-09T21:14:06-07:00">September 09, 2007</time></span> <span class="excerpt"> **The bad:** we don't have a complete app. It's unfortunate, but true.  
+    
+      
+    
   
-**The good:** I've learned an incredible amount in two days, and we've got a solid start on what it will be.
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
 
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/09/railsrumble-hal.html">RailsRumble: Halfway ... <span class="entry-date"><time datetime="2007-09-08T20:57:23-07:00">September 08, 2007</time></span> <span class="excerpt">...and we're chugging along. A slow start -- we both decided that next time we'll get together the day before to do all the brainstorming, model mapping, etc., but we're well on our way and things will start being visible soon. =]
 
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/09/railsrumble-pha.html">RailsRumble: Phase 1 Complete <span class="entry-date"><time datetime="2007-09-08T02:38:23-07:00">September 08, 2007</time></span> <span class="excerpt">[Nothing to see yet](http://artlog.railsrumble.com/), really; there are some sketched-in models and a basic controller underneath it all but no views (yet). If you're looking for visuals, check the [RailsRumble Flickr pool](http://flickr.com/groups/railsrumble/pool/).
 
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/09/railsrumblestar.html">RailsRumble.start! <span class="entry-date"><time datetime="2007-09-07T21:00:00-07:00">September 07, 2007</time></span> <span class="excerpt">Here we go:
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/purp" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                <li>
+                  <a href="https://twitter.com/purp" class="zocial twitter icon" target="_blank">
+                    <span class="hidden-desktop">Twitter</span>
+                  </a>
+                </li>
+                
+                
+                
+                <li>
+                  <a href="http://www.linkedin.com/in/jimmeyer" class="zocial linkedin icon" target="_blank">
+                    <span class="hidden-desktop">LinkedIn</span>
+                  </a>
+                </li>
+                
+                
+                <li>
+                  <a href="http://feeds.feedburner.com/geekdailyblog" class="zocial rss icon" target="_blank">
+                    <span class="hidden-desktop">FeedBurner</span>
+                  </a>
+                </li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
 
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/09/railsrumble-who.html">RailsRumble: Who's Rumbling? <span class="entry-date"><time datetime="2007-09-07T15:45:47-07:00">September 07, 2007</time></span> <span class="excerpt">I've found two teams blogging with the [RailsRumble](http://technorati.com/tag/railsrumble) tag:
+      <div class="container">
+        <div class="content">
+          
 
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/09/railsrumble-cho.html">RailsRumble: Choosing the OS for VPS <span class="entry-date"><time datetime="2007-09-07T13:33:01-07:00">September 07, 2007</time></span> <span class="excerpt">The work begins before the contest: they've asked that we set up our VPS before the contest starts to avoid an enormous pileup at 12p EDT. Having watched [the excellent smarticast re: setting up a Linode VPS](http://smartic.us/2007/9/4/smarticast-4-rails-rumble-primer), it's easy to see that Linode's got things pretty sweetly automated to handle that part. However, I've never been a serious Debian user or admin, so as much as I'd love to just follow the instructions, I have to balance that against my ability to debug esoteric system issues like the ones you can encounter installing RMagick ... so I started asking around for advice.
+<h1>ruby/rails</h1>
 
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/09/rubyconf-regist.html">RubyConf Registration is Open <span class="entry-date"><time datetime="2007-09-07T10:59:40-07:00">September 07, 2007</time></span> <span class="excerpt">[Chad's](http://chadfowler.com/) announced [the opening of RubyConf registration](http://chadfowler.com/2007/9/6/rubyconf-registration-is-open) (at [regonline.com](http://www.regonline.com/Checkin.asp?EventId=145820)), though [the official website](http://rubyconf.org/) hasn't yet been updated. Register soon as it's likely to sell out (again). Meanwhile, the Omni Charlotte has a block of rooms available for RubyConf at $109/night. I'd book fast as that's a stellar rate in the neighborhood and the Omni has zero availability otherwise.
 
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/09/railsrumble-str.html">RailsRumble: Strategy, Phase 1 <span class="entry-date"><time datetime="2007-09-05T23:59:27-07:00">September 05, 2007</time></span> <span class="excerpt">Our first steps:
 
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/09/ready-to-rumble.html">Ready to Rumble! <span class="entry-date"><time datetime="2007-09-05T22:39:29-07:00">September 05, 2007</time></span> <span class="excerpt">So, this weekend, [Ms. Jen Hanen](http://blackphoebe.com/msjen/) and I are going to participate in the [RailsRumble](http://railsrumble.com/). In the space of 48 hours, starting at 9p PDT, we're going to build, test -- okay: test, build, deploy, and repeat on an app called ArtLog. And we'll be blogging from now to the end (and beyond) about the experience.
+        </div>
+      </div> <!-- /container -->
 
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/08/thoughts-on-sof.html">Thoughts on Software Testing and Rails (a little) <span class="entry-date"><time datetime="2007-08-31T15:51:05-07:00">August 31, 2007</time></span> <span class="excerpt">Three good reasons to make sure your code has full, solid test coverage:
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
 
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/08/live-nude-code.html">Live! Nude! Code! <span class="entry-date"><time datetime="2007-08-27T15:50:22-07:00">August 27, 2007</time></span> <span class="excerpt">I love a good code review. Looking at real, honest-to-goodness deployed code is one of the best ways to learn the idiom of a language as well as what gets done through the exigencies of circumstance (a nice way to say, "things I done 'cause I'm ignernt and inna hurry"). _Speaking of dumb and rushed, you should attribute any goofs to my misunderstanding or poor expression of what was actually said; [I am but an egg](http://forum.wordreference.com/showthread.php?t=231515)._
+    <footer>
+      <div class="container">
+        <p>&copy; 2015 Jim Meyer
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
 
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/08/digging-it-up-w.html">Digging It Up with Dave Thomas <span class="entry-date"><time datetime="2007-08-27T13:06:06-07:00">August 27, 2007</time></span> <span class="excerpt">_mental note: I should liveblog like [Giles](http://gilesbowkett.blogspot.com/2007/08/dave-thomas-rails-treasures-notes.html) did. His terse notes are incredibly readable. I don't know that my additional pass does anything but delay getting it out there._
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
 
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/08/behavior-driven.html">Rails and TDD/BDD <span class="entry-date"><time datetime="2007-08-24T21:48:44-07:00">August 24, 2007</time></span> <span class="excerpt">_I'm going to limit this post to my notes on the excellent learnings from the day of many testing talks at Rails Edge Chicago and follow up with another post for my addle-pated musings thereupon._
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/08/consistency-pay.html">Consistency Pays <span class="entry-date"><time datetime="2007-08-21T16:29:42-07:00">August 21, 2007</time></span> <span class="excerpt">_A brief observation_: consider well the names you choose for models and their methods. Try very hard to make them intuitive, and not just to a programmer. They'll haunt you for a long time, especially if you have to expose them via [Liquid](http://www.liquidmarkup.org/).
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/08/rails-oral-trad.html">Rails, Oral Tradition, and Getting Started <span class="entry-date"><time datetime="2007-08-21T15:45:20-07:00">August 21, 2007</time></span> <span class="excerpt">Just occurred to me in the aftermath of [last night's post](http://blog.geekdaily.org/2007/08/finding-rails-d.html) that capturing some thoughts about the process of getting started with Ruby on Rails. Just a quick sketch as I'm pressed for time, but here it is:
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/08/finding-rails-d.html">Finding Rails {Docs,Plugins,Info,Stuff} <span class="entry-date"><time datetime="2007-08-20T21:32:59-07:00">August 20, 2007</time></span> <span class="excerpt">I've now taken to explaining Ruby on Rails as "the fastest way to get from idea to implementation in a form you can iterate on." Alliterative, I know, but I'll blame Mom\* and we'll move on.
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/07/profiling-and-o.html">Profiling and Optimizing Rails <span class="entry-date"><time datetime="2007-07-28T16:12:43-07:00">July 28, 2007</time></span> <span class="excerpt">Picture me doing a happy dance. A very happy dance. I've only been playing with Rails since April and I've been looking for this since the beginning.
-
-</span></a></article></li>
-         
-          <li><article><a href="http://blog.geekdaily.org/2007/07/merge-your-liqu.html">Models < Drops <span class="entry-date"><time datetime="2007-07-06T14:51:51-07:00">July 06, 2007</time></span> <span class="excerpt">A member of the [Liquid Templates group](http://groups.google.com/group/liquid-templates?hl=en) contributes an 18-line extension to [Liquid](http://www.liquidmarkup.org/) that lets you specify which attributes, methods, and associations to expose to liquid templates, like so:
-
-</span></a></article></li>
-        
-        </ul>
-      </div><!-- /.entry-content -->
-    </div><!-- /.entry-wrapper -->
-  </article>
-</div><!-- /#main -->
-
-<div class="footer-wrapper">
-  <footer role="contentinfo" class="entry-wrapper">
     
 
-<span>&copy; 2015 Jim Meyer. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/so-simple/" rel="nofollow">So Simple Theme</a>.</span>
-<div class="social-icons">
-	<a href="http://twitter.com/purp" title="Jim Meyer on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
-	
-	
-	<a href="http://linkedin.com/in/jimmeyer" title="Jim Meyer on LinkedIn" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a>
-	
-	<a href="http://instagram.com/purp" title="Jim Meyer on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
-	<a href="http://www.flickr.com/photos/purp" title="Jim Meyer on Flickr" target="_blank"><i class="fa fa-flickr fa-2x"></i></a>
-	<a href="http://github.com/purp" title="Jim Meyer on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
-	
-	
-  <a href="http://blog.geekdaily.org/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
-</div><!-- /.social-icons -->
-  </footer>
-</div><!-- /.footer-wrapper -->
 
-<script type="text/javascript">
-  var BASE_URL = 'http://blog.geekdaily.org';
-</script>
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="http://blog.geekdaily.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-<script src="http://blog.geekdaily.org/assets/js/scripts.min.js"></script>
-
-
-<!-- Asynchronous Google Analytics snippet -->
-<script>
-  var _gaq = _gaq || [];
-  var pluginUrl = 
- '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
-  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
-  _gaq.push(['_setAccount', 'UA-225723-36']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-
-
-
-</body>
+  </body>
 </html>
+
