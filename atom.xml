@@ -4,13 +4,27 @@
  <title>geek!daily</title>
  <link href="http://blog.geekdaily.org/" rel="self"/>
  <link href="http://blog.geekdaily.org"/>
- <updated>2015-04-26T13:49:00-07:00</updated>
+ <updated>2015-04-26T15:57:45-07:00</updated>
  <id>http://blog.geekdaily.org</id>
  <author>
    <name>Jim Meyer</name>
    <email>jim@geekdaily.org</email>
  </author>
 
+ 
+ <entry>
+   <title>test post</title>
+   <link href="http://blog.geekdaily.org/2015/04/test-post.html"/>
+   <updated>2015-04-26T00:00:00-07:00</updated>
+   <id>http://blog.geekdaily.org/2015/04/test-post</id>
+   <content type="html">
+&lt;p&gt;provider: google&lt;/p&gt;
+
+&lt;p&gt;id: UA-225723-36&lt;/p&gt;
+
+&lt;p&gt;production&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Moving Your TypePad Blog To Jekyll: The Re-Translation</title>
