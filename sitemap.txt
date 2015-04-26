@@ -9,7 +9,6 @@ http://blog.geekdaily.org/rss.xml
 http://blog.geekdaily.org/sitemap.txt
 http://blog.geekdaily.org/tags.html
 
-http://blog.geekdaily.org/2015/04/test-post.html
 http://blog.geekdaily.org/2015/04/moving-your-typepad-blog-to-jekyll-the-retranslation.html
 http://blog.geekdaily.org/2015/04/announcing-the-mtif-gem.html
 http://blog.geekdaily.org/2015/04/moving-your-blog-to-jekyll-the-translation.html

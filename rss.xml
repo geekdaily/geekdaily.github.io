@@ -5,24 +5,10 @@
         <description>geek!daily - Jim Meyer</description>
         <link>http://blog.geekdaily.org</link>
         <link>http://blog.geekdaily.org</link>
-        <lastBuildDate>2015-04-26T15:57:45-07:00</lastBuildDate>
-        <pubDate>2015-04-26T15:57:45-07:00</pubDate>
+        <lastBuildDate>2015-04-26T16:06:12-07:00</lastBuildDate>
+        <pubDate>2015-04-26T16:06:12-07:00</pubDate>
         <ttl>1800</ttl>
 
-
-        <item>
-                <title>test post</title>
-                <description>
-&lt;p&gt;provider: google&lt;/p&gt;
-
-&lt;p&gt;id: UA-225723-36&lt;/p&gt;
-
-&lt;p&gt;production&lt;/p&gt;
-</description>
-                <link>http://blog.geekdaily.org/2015/04/test-post.html</link>
-                <guid>http://blog.geekdaily.org/2015/04/test-post</guid>
-                <pubDate>2015-04-26T00:00:00-07:00</pubDate>
-        </item>
 
         <item>
                 <title>Moving Your TypePad Blog To Jekyll: The Re-Translation</title>
