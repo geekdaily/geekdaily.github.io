@@ -1,10 +1,11 @@
 
 http://blog.geekdaily.org/about.html
-http://blog.geekdaily.org/archive.html
 http://blog.geekdaily.org/atom.xml
+http://blog.geekdaily.org/blog.html
 http://blog.geekdaily.org/categories.html
 http://blog.geekdaily.org/index.html
 http://blog.geekdaily.org/pages.html
+http://blog.geekdaily.org/projects.html
 http://blog.geekdaily.org/rss.xml
 http://blog.geekdaily.org/sitemap.txt
 http://blog.geekdaily.org/tags.html
