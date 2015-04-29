@@ -5,8 +5,8 @@
         <description>geek!daily - Jim Meyer</description>
         <link>http://blog.geekdaily.org</link>
         <link>http://blog.geekdaily.org</link>
-        <lastBuildDate>2015-04-26T19:53:18-07:00</lastBuildDate>
-        <pubDate>2015-04-26T19:53:18-07:00</pubDate>
+        <lastBuildDate>2015-04-29T11:25:39-07:00</lastBuildDate>
+        <pubDate>2015-04-29T11:25:39-07:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -268,7 +268,7 @@ production:
         </item>
 
         <item>
-                <title>Live Blog: Comet & Other Browser Stuff</title>
+                <title>Live Blog: Comet &amp; Other Browser Stuff</title>
                 <description>&lt;p&gt;It’s a big component of what we call “real-time”&lt;/p&gt;
 
 &lt;p&gt;This is the kind of stuff that puts up a banner on a Twitter search (“# New Tweets Found”) and makes things feel real time.&lt;/p&gt;
@@ -363,7 +363,7 @@ production:
         </item>
 
         <item>
-                <title>Live Blog: Web Aggregation, What Works and What Doesn't</title>
+                <title>Live Blog: Web Aggregation, What Works and What Doesn&#39;t</title>
                 <description>&lt;p&gt;&lt;em&gt;[note: I originally scribbled this on paper thinking I could hand it off immediately, preventing the obligation of typing, posting, etc. Turns out I don’t get off that lightly, so here’s the spew in electrons.]&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;Scraping isn’t a scalable model.&lt;/p&gt;
@@ -584,7 +584,7 @@ print &quot;$regex\n&quot;;
         </item>
 
         <item>
-                <title>Michael Jackson's Obit via Wordle</title>
+                <title>Michael Jackson&#39;s Obit via Wordle</title>
                 <description>&lt;p&gt;Story by &lt;a href=&quot;http://news.yahoo.com/s/ap/us_obit_michael_jackson&quot;&gt;Yahoo!&lt;/a&gt;, picture by &lt;a href=&quot;http://www.wordle.net/gallery/wrdl/970425/Michael_Jackson_Died&quot;&gt;Wordle.net&lt;/a&gt;:&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://www.wordle.net/gallery/wrdl/970425/Michael_Jackson_Died&quot; title=&quot;Wordle: Michael Jackson Died&quot;&gt;&lt;img src=&quot;http://purp.typepad.com/.a/6a00d83452448969e20115715bf294970b-800wi&quot; alt=&quot;MJ Obit Wordle&quot; title=&quot;MJ Obit Wordle&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
@@ -778,7 +778,7 @@ print &quot;$regex\n&quot;;
         </item>
 
         <item>
-                <title>LiveBlog: Q&A with Twitter's John Adams</title>
+                <title>LiveBlog: Q&amp;A with Twitter&#39;s John Adams</title>
                 <description>&lt;p&gt;A short pre-lunch session to absorb a few moment:&lt;/p&gt;
 
 &lt;p&gt;John Adams (Twitter) Q&amp;amp;A&lt;/p&gt;
@@ -1084,7 +1084,7 @@ RDBMS vs message queues&lt;/p&gt;
         </item>
 
         <item>
-                <title>LiveBlog: Next Web Challenges: It's Still All About UX</title>
+                <title>LiveBlog: Next Web Challenges: It&#39;s Still All About UX</title>
                 <description>&lt;p&gt;Velocity 2009, the conference about performance, is very high-performance about getting people on and off stage (and high density around content)&lt;/p&gt;
 
 &lt;p&gt;Umang Gupta, Vik Chaudhary (Keynote)&lt;/p&gt;
@@ -1855,7 +1855,7 @@ CNN livefeed&lt;/p&gt;
         </item>
 
         <item>
-                <title>Got the "can't activate" Gem::Exception Blues? gem cleanup!</title>
+                <title>Got the &quot;can&#39;t activate&quot; Gem::Exception Blues? gem cleanup!</title>
                 <description>&lt;p&gt;What to do when rubygems can’t activate a version of a gem because it’s already activated a different version of the same gem? My Google magic wasn’t good enough to find this one quickly, so I’ll happily point out &lt;a href=&quot;http://jessehu.wordpress.com/2008/07/02/troubleshooting-already-activated-activerecord-202/&quot;&gt;Jesse Hu’s nearly one-year-old post&lt;/a&gt; about the same problem, descended from &lt;a href=&quot;http://www.ruby-forum.com/topic/137509&quot;&gt;a Ruby on Rails thread on ruby-forum.com&lt;/a&gt; where, unsurprisingly, it’s &lt;a href=&quot;http://www.jeremymcanally.com/&quot;&gt;Jeremy McAnally&lt;/a&gt; who knows that &lt;tt&gt;&lt;code&gt;gem cleanup&lt;/code&gt;&lt;/tt&gt; is the way to go.&lt;/p&gt;
 
 &lt;p&gt;Took nearly 45 minutes. Freed untold amounts of disk. Much happiness.&lt;/p&gt;
@@ -2041,7 +2041,7 @@ For those things clearly in the center of your circle of responsibility, just do
         </item>
 
         <item>
-                <title>Mozilla's TraceMonkey Avoids Trampling</title>
+                <title>Mozilla&#39;s TraceMonkey Avoids Trampling</title>
                 <description>&lt;p&gt;&lt;a href=&quot;https://wiki.mozilla.org/JavaScript:TraceMonkey&quot;&gt;Mozilla’s TraceMonkey JIT Javascript compiler&lt;/a&gt; climbed down from the trees last week only to be somewhat lost in the thundering herd of &lt;a href=&quot;http://googleblog.blogspot.com/2008/09/fresh-take-on-browser.html&quot;&gt;Google’s announcement&lt;/a&gt; of &lt;a href=&quot;http://www.google.com/chrome&quot;&gt;the Chrome browser&lt;/a&gt; and its accompanying &lt;a href=&quot;http://code.google.com/apis/v8/intro.html&quot;&gt;V8 Javascript Virtual Machine&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Based on Andreas Gal’s 2006 &lt;a href=&quot;http://www.usenix.org/events/vee06/full_papers/p144-gal.pdf&quot;&gt;HotPathVM paper&lt;/a&gt; [PDF, 10pp] as well as &lt;a href=&quot;http://base.google.com/base_media?q=hand1017890191470242229&amp;amp;size=8&quot;&gt;his doctoral dissertation on bytecode compilation in VMs&lt;/a&gt; [zipped PDF, 138pp], &lt;a href=&quot;http://weblogs.mozillazine.org/roadmap/archives/2008/09/tracemonkey_update.html&quot;&gt;TraceMonkey is offering speedups to rival those of the V8 JsVM&lt;/a&gt;. This is very worthy of note as both sides are open source and so can borrow learning and code from each other. Competition is good; open competition is even gooder. ;]&lt;/p&gt;
@@ -2113,7 +2113,7 @@ For those things clearly in the center of your circle of responsibility, just do
         </item>
 
         <item>
-                <title>Reports of the Business Card's Death Are Greatly Exaggerated, or why bzCards != biz cards</title>
+                <title>Reports of the Business Card&#39;s Death Are Greatly Exaggerated, or why bzCards != biz cards</title>
                 <description>&lt;p&gt;Caught the article &lt;a href=&quot;http://venturebeat.com/2008/08/19/rmbr-launches-a-mobile-app-to-get-rid-of-business-cards/&quot;&gt;“rmbr launches mobile app to get rid of business cards”&lt;/a&gt; on VentureBeat which covers the announcement &lt;a href=&quot;http://rmbrme.com&quot;&gt;rmbrME&lt;/a&gt;, the new electronic connection tool from &lt;a href=&quot;http://blog.chroniql.com/&quot;&gt;rmbr&lt;/a&gt;. (note: the &lt;a href=&quot;http://rmbr.com/&quot;&gt;rmbr.com&lt;/a&gt; site, which &lt;a href=&quot;http://www.readwriteweb.com/archives/rmbr_using_funware_to_organize_photos.php&quot;&gt;launched as a photo organizing site&lt;/a&gt;, currently redirects to &lt;a href=&quot;http://rmbrme.com/&quot;&gt;rmbrme.com&lt;/a&gt;) The general idea is to trade vCards over email, IM, SMS, etc. and get rid of those pesky piles of pasteboard. If the ease of use isn’t incentive enough, they’re mixing in the &lt;a href=&quot;http://blogs.electricsheepcompany.com/swords/2008/02/18/worlds-in-motion-funware-is-the-future-of-our-virtual-world/&quot;&gt;funware&lt;/a&gt; &lt;a href=&quot;http://venturebeat.com/2008/05/09/funwares-threat-to-the-traditional-video-game-industry/&quot;&gt;idea&lt;/a&gt; via contests and leaderboards.&lt;/p&gt;
 
 &lt;p&gt;You may have guessed by now, but I think they’ve got the beginnings of a good idea and a poor implementation. I’m particularly amused by rmbr founder Gabe Zichermann’s assertion that the business card’s time has come and gone. Here’s why I think he’s wrong:&lt;/p&gt;
@@ -2138,7 +2138,7 @@ For those things clearly in the center of your circle of responsibility, just do
         </item>
 
         <item>
-                <title>Cuzillion: 'cuz there's a zillion pages to check</title>
+                <title>Cuzillion: &#39;cuz there&#39;s a zillion pages to check</title>
                 <description>&lt;p&gt;Once in a while I get lucky. Most recently, this means that I was asked to write &lt;a href=&quot;http://blog.linkedin.com/blog/2008/08/tech-talk-steve.html&quot;&gt;a blog post for LinkedIn&lt;/a&gt;about the tech talk &lt;a href=&quot;http://stevesouders.com/&quot;&gt;Steve Souders&lt;/a&gt; gave for us last week: Even Faster Web Sites. Unfortunately, in the interests of brevity, I couldn’t dive on something incidental to the talk which fascinated me: &lt;a href=&quot;http://stevesouders.com/cuzillion/&quot;&gt;Cuzillion&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://stevesouders.com/cuzillion/&quot;&gt;Cuzillion&lt;/a&gt; is one of those headslappers Steve seems to produce on a regular basis; it’s a tool to model web pages and experiment with load order and methodology in order to better understand performance bottlenecks and find your way to a solution. He uses it to illustrate examples in his talks of late (as he did in &lt;a href=&quot;http://stevesouders.com/docs/linkedin-2080805.ppt&quot;&gt;the slides for his talk at LinkedIn&lt;/a&gt;), which highlights another feature: the ability to share a precise example among the team seeking a solution. It fascinates me because it’s so straightforward and so obviously useful, yet you can twiddle it to great depth, willfully violating &lt;a href=&quot;http://developer.yahoo.com/performance/&quot;&gt;all the well-known best practices&lt;/a&gt;, and see clearly why that’s not a good idea. It’s like checkers: you get the basics instantly, and yet there’s so much more there.&lt;/p&gt;
@@ -2166,7 +2166,7 @@ For those things clearly in the center of your circle of responsibility, just do
         </item>
 
         <item>
-                <title>Old & Rusty to Shiny & New, Part 1</title>
+                <title>Old &amp; Rusty to Shiny &amp; New, Part 1</title>
                 <description>&lt;p&gt;I’m feeling particularly masochistic today, so I’m going to tackle a project I’ve been putting off for a while: moving a Rails 1.2.6 app in our subversion repository into &lt;a href=&quot;http://github.com/&quot;&gt;github&lt;/a&gt;, then updating it to Rails 2.1.&lt;/p&gt;
 
 &lt;p&gt;The first part, getting from svn to github, should be relatively painless according to github’s &lt;a href=&quot;http://github.com/guides/import-from-subversion&quot;&gt;“Importing From SVN” guide&lt;/a&gt;. It is, as long as you have already created your github repo (I hadn’t) and already have git-svn installed (I didn’t). So here’s the expanded tutorial&lt;/p&gt;
@@ -2232,7 +2232,7 @@ sudo port install git-core +svn&lt;/p&gt;
         </item>
 
         <item>
-                <title>Let Our Congress Tweet? Who's Stopping Them?</title>
+                <title>Let Our Congress Tweet? Who&#39;s Stopping Them?</title>
                 <description>&lt;p&gt;A quick follow-up: When &lt;a href=&quot;http://blog.sunlightfoundation.com/2008/07/10/let-our-congress-tweet&quot;&gt;Ellen Miller posted&lt;/a&gt; to further promote Sunlight Foundation’s Let Our Congress Tweet” petition, she made this statement:&lt;/p&gt;
 
 &lt;blockquote&gt;
@@ -2283,7 +2283,7 @@ sudo port install git-core +svn&lt;/p&gt;
         </item>
 
         <item>
-                <title>Let Our Congress Tweet? You've been had.</title>
+                <title>Let Our Congress Tweet? You&#39;ve been had.</title>
                 <description>&lt;p&gt;If you’re like me, some large number of the people you follow on Twitter have tweeted something like this today:&lt;/p&gt;
 
 &lt;blockquote&gt;
@@ -3038,7 +3038,7 @@ This is in the passwd file:&lt;/p&gt;
         </item>
 
         <item>
-                <title>It's Official: I'm a Rails Contributor</title>
+                <title>It&#39;s Official: I&#39;m a Rails Contributor</title>
                 <description>&lt;p&gt;Okay, &lt;a href=&quot;http://groups.google.com/group/rubyonrails-core/browse_thread/thread/43d683ba018f5e7e&quot;&gt;big deal&lt;/a&gt;. Time to get back to work. (he said with a little grin)&lt;/p&gt;
 
 </description>
@@ -3212,7 +3212,7 @@ A: Pair programming. Test-first. Seeing what other people do and challenging the
         </item>
 
         <item>
-                <title>RubyConf, Day 1, 4p: Hurting Code for Fun & Profit</title>
+                <title>RubyConf, Day 1, 4p: Hurting Code for Fun &amp; Profit</title>
                 <description>&lt;p&gt;Ahhh, a nap makes all well. Last session of the day. Okay, you want to see these slides and the video once it’s posted by ConFreaks.&lt;/p&gt;
 
 &lt;p&gt;“Legacy code is any code you haven’t written.”&lt;/p&gt;
@@ -4642,7 +4642,7 @@ end
         </item>
 
         <item>
-                <title>Economics & Fishing</title>
+                <title>Economics &amp; Fishing</title>
                 <description>&lt;p&gt;Anyone ever notice that nearly every reading in economics involves a fishing story?&lt;/p&gt;
 
 &lt;p&gt;I think it’s so economists can deduct fishing vacations as research.&lt;/p&gt;
@@ -4654,7 +4654,7 @@ end
         </item>
 
         <item>
-                <title>RailsRumble: It's Over.</title>
+                <title>RailsRumble: It&#39;s Over.</title>
                 <description>&lt;p&gt;&lt;strong&gt;The bad:&lt;/strong&gt; we don’t have a complete app. It’s unfortunate, but true.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;The good:&lt;/strong&gt; I’ve learned an incredible amount in two days, and we’ve got a solid start on what it will be.&lt;/p&gt;
@@ -4720,7 +4720,7 @@ end
         </item>
 
         <item>
-                <title>RailsRumble: Who's Rumbling?</title>
+                <title>RailsRumble: Who&#39;s Rumbling?</title>
                 <description>&lt;p&gt;I’ve found two teams blogging with the &lt;a href=&quot;http://technorati.com/tag/railsrumble&quot;&gt;RailsRumble&lt;/a&gt; tag:&lt;/p&gt;
 
 &lt;ul&gt;
@@ -4803,7 +4803,7 @@ end
         </item>
 
         <item>
-                <title>0-30% Test Coverage? That's Nothing.</title>
+                <title>0-30% Test Coverage? That&#39;s Nothing.</title>
                 <description>&lt;p&gt;I’m finding with some amusement that most cases where rcov says something is 30% covered or less, this means all the function definitions (e.g. &lt;tt&gt;def foo(bar)&lt;/tt&gt;) are covered … and nothing else.&lt;/p&gt;
 
 &lt;p&gt;Time to put all the excellent knowledge gained at Ruby Hoedown and RailsEdge to good use …&lt;/p&gt;
@@ -5146,7 +5146,7 @@ end
         </item>
 
         <item>
-                <title>MIT's 'clutter detector' could cut confusion - MIT News Office</title>
+                <title>MIT&#39;s &#39;clutter detector&#39; could cut confusion - MIT News Office</title>
                 <description>&lt;p&gt;This looks promising: some folks at MIT have developed metrics for visual clutter as well as a tool to measure it. Haven’t read &lt;a href=&quot;http://www.journalofvision.org/7/2/17/article.aspx&quot;&gt;the whole paper&lt;/a&gt; yet, but&lt;/p&gt;
 
 &lt;p&gt;Link: &lt;a href=&quot;http://web.mit.edu/newsoffice/2007/clutter-0821.html&quot; title=&quot;MIT&#39;s &#39;clutter detector&#39; could cut confusion - MIT News Office&quot;&gt;MIT’s ‘clutter detector’ could cut confusion - MIT News Office&lt;/a&gt; [via &lt;a href=&quot;http://lifehacker.com/software/notag/-292144.php&quot;&gt;Lifehacker&lt;/a&gt;].&lt;/p&gt;
@@ -5427,7 +5427,7 @@ welcome to the ranks ;-).” - Paul Rubin&lt;/p&gt;
         </item>
 
         <item>
-                <title>"Beta" is the Web 2.0 "In Construction Guy"</title>
+                <title>&quot;Beta&quot; is the Web 2.0 &quot;In Construction Guy&quot;</title>
                 <description>&lt;p&gt;I’m sitting in this year’s &lt;a href=&quot;http://www.communitynext.com/&quot;&gt;Community Next Viral Marketing Conference&lt;/a&gt; where &lt;a href=&quot;http://www.socializr.com/user/jonathan&quot;&gt;Jonathan Abrams&lt;/a&gt; (of &lt;a href=&quot;http://www.socializr.com/&quot;&gt;Socializr&lt;/a&gt;) just noted that his web app “is gamma … which is just like beta, but sillier.” He’s right; the beta badge has become the “in construction” of Web 2.0.&lt;/p&gt;
 
 </description>
@@ -5455,7 +5455,7 @@ welcome to the ranks ;-).” - Paul Rubin&lt;/p&gt;
         </item>
 
         <item>
-                <title>Models < Drops</title>
+                <title>Models &lt; Drops</title>
                 <description>&lt;p&gt;A member of the &lt;a href=&quot;http://groups.google.com/group/liquid-templates?hl=en&quot;&gt;Liquid Templates group&lt;/a&gt; contributes an 18-line extension to &lt;a href=&quot;http://www.liquidmarkup.org/&quot;&gt;Liquid&lt;/a&gt; that lets you specify which attributes, methods, and associations to expose to liquid templates, like so:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;class SomeClass     # could be an AR model   liquid_methods :attrA, :methB, :associationC, ...  ...end
@@ -5542,7 +5542,7 @@ welcome to the ranks ;-).” - Paul Rubin&lt;/p&gt;
         </item>
 
         <item>
-                <title>Boobs, Injuries, & Dr. Pepper</title>
+                <title>Boobs, Injuries, &amp; Dr. Pepper</title>
                 <description>&lt;p&gt;Okay, this is a geek blog. And a lame one as I so rarely link to someone else’s blog. Come to think of it, this is pretty much masturbation to techporn in prose for all that I care about readership. I’m no linkwhore.&lt;/p&gt;
 
 &lt;p&gt;So you know it’s serious if I say, YOU MUST READ &lt;a href=&quot;http://boobsinjuriesanddrpepper.blogspot.com/&quot;&gt;THIS BLOG&lt;/a&gt;. Particularly, &lt;a href=&quot;http://boobsinjuriesanddrpepper.blogspot.com/2007/06/outdone.html&quot;&gt;THIS ENTRY&lt;/a&gt;.&lt;/p&gt;
@@ -6038,7 +6038,7 @@ of what’s going on.&lt;/li&gt;
         </item>
 
         <item>
-                <title>Meyer's Conjecture on Philosophy</title>
+                <title>Meyer&#39;s Conjecture on Philosophy</title>
                 <description>&lt;p&gt;All fundamental tenets of a philosophical system must be able to fit in a single SMS. Anything longer isn’t basic enough.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Parallel:&lt;/em&gt; Brevity is the soul of wisdom.&lt;/p&gt;
@@ -6188,7 +6188,7 @@ Link: &lt;a href=&quot;http://headrush.typepad.com/creating_passionate_users/200
         </item>
 
         <item>
-                <title>Panasonic's Vision of the Future: All Pixels, All The Time</title>
+                <title>Panasonic&#39;s Vision of the Future: All Pixels, All The Time</title>
                 <description>&lt;p&gt;From &lt;a href=&quot;http://www.akihabaranews.com/review-63-Panasonic%27s interactive TV wall%2C the demo.html&quot; title=&quot;Akihabara News&quot;&gt;Akihabara News&lt;/a&gt;, deck the walls with screens of interaction. Two side-by-side 110” touch screens with user-manipulable windows of video and audio from any/many sources. This makes me shudder. I can’t believe it’d ever be interesting to monopolize so much space to artificially deal with the world – much less to facilitate the &lt;a href=&quot;http://query.nytimes.com/gst/fullpage.html?sec=health&amp;amp;res=9F07E5D71630F931A3575AC0A961958260&quot;&gt;emerging&lt;/a&gt; &lt;a href=&quot;http://abcnews.healthology.com/focus_index.asp?b=abcnews&amp;amp;f=adhd_comprehend&quot;&gt;ADD&lt;/a&gt; &lt;a href=&quot;http://borntoexplore.org/journal.htm&quot;&gt;trend&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;But then, I prefer my 1024x768 12” PowerBook to a WXVGA monster display.&lt;/p&gt;

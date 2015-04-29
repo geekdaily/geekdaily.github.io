@@ -4,7 +4,7 @@
  <title>geek!daily</title>
  <link href="http://blog.geekdaily.org/" rel="self"/>
  <link href="http://blog.geekdaily.org"/>
- <updated>2015-04-26T19:53:18-07:00</updated>
+ <updated>2015-04-29T11:25:39-07:00</updated>
  <id>http://blog.geekdaily.org</id>
  <author>
    <name>Jim Meyer</name>
@@ -270,7 +270,7 @@ production:
  </entry>
  
  <entry>
-   <title>Live Blog: Comet & Other Browser Stuff</title>
+   <title>Live Blog: Comet &amp; Other Browser Stuff</title>
    <link href="http://blog.geekdaily.org/2009/10/live-blog-comet-other-browser-stuff.html"/>
    <updated>2009-10-15T13:27:25-07:00</updated>
    <id>http://blog.geekdaily.org/2009/10/live-blog-comet-other-browser-stuff</id>
@@ -365,7 +365,7 @@ production:
  </entry>
  
  <entry>
-   <title>Live Blog: Web Aggregation, What Works and What Doesn't</title>
+   <title>Live Blog: Web Aggregation, What Works and What Doesn&#39;t</title>
    <link href="http://blog.geekdaily.org/2009/10/live-blog-web-aggregation-what-works-and-what-doesnt.html"/>
    <updated>2009-10-15T12:17:59-07:00</updated>
    <id>http://blog.geekdaily.org/2009/10/live-blog-web-aggregation-what-works-and-what-doesnt</id>
@@ -586,7 +586,7 @@ print &quot;$regex\n&quot;;
  </entry>
  
  <entry>
-   <title>Michael Jackson's Obit via Wordle</title>
+   <title>Michael Jackson&#39;s Obit via Wordle</title>
    <link href="http://blog.geekdaily.org/2009/06/michael-jacksons-obit-via-wordle.html"/>
    <updated>2009-06-25T18:40:55-07:00</updated>
    <id>http://blog.geekdaily.org/2009/06/michael-jacksons-obit-via-wordle</id>
@@ -780,7 +780,7 @@ print &quot;$regex\n&quot;;
  </entry>
  
  <entry>
-   <title>LiveBlog: Q&A with Twitter's John Adams</title>
+   <title>LiveBlog: Q&amp;A with Twitter&#39;s John Adams</title>
    <link href="http://blog.geekdaily.org/2009/06/liveblog-qa-with-twitters-john-adams.html"/>
    <updated>2009-06-23T13:28:57-07:00</updated>
    <id>http://blog.geekdaily.org/2009/06/liveblog-qa-with-twitters-john-adams</id>
@@ -1086,7 +1086,7 @@ RDBMS vs message queues&lt;/p&gt;
  </entry>
  
  <entry>
-   <title>LiveBlog: Next Web Challenges: It's Still All About UX</title>
+   <title>LiveBlog: Next Web Challenges: It&#39;s Still All About UX</title>
    <link href="http://blog.geekdaily.org/2009/06/liveblog-next-web-challenges-its-still-all-about-ux.html"/>
    <updated>2009-06-23T12:59:01-07:00</updated>
    <id>http://blog.geekdaily.org/2009/06/liveblog-next-web-challenges-its-still-all-about-ux</id>
@@ -1857,7 +1857,7 @@ CNN livefeed&lt;/p&gt;
  </entry>
  
  <entry>
-   <title>Got the "can't activate" Gem::Exception Blues? gem cleanup!</title>
+   <title>Got the &quot;can&#39;t activate&quot; Gem::Exception Blues? gem cleanup!</title>
    <link href="http://blog.geekdaily.org/2009/06/got-the-cant-activate-gemexception-blues-gem-cleanup.html"/>
    <updated>2009-06-14T17:52:03-07:00</updated>
    <id>http://blog.geekdaily.org/2009/06/got-the-cant-activate-gemexception-blues-gem-cleanup</id>
@@ -2043,7 +2043,7 @@ For those things clearly in the center of your circle of responsibility, just do
  </entry>
  
  <entry>
-   <title>Mozilla's TraceMonkey Avoids Trampling</title>
+   <title>Mozilla&#39;s TraceMonkey Avoids Trampling</title>
    <link href="http://blog.geekdaily.org/2008/09/mozillas-tracem.html"/>
    <updated>2008-09-03T10:16:41-07:00</updated>
    <id>http://blog.geekdaily.org/2008/09/mozillas-tracem</id>
@@ -2115,7 +2115,7 @@ For those things clearly in the center of your circle of responsibility, just do
  </entry>
  
  <entry>
-   <title>Reports of the Business Card's Death Are Greatly Exaggerated, or why bzCards != biz cards</title>
+   <title>Reports of the Business Card&#39;s Death Are Greatly Exaggerated, or why bzCards != biz cards</title>
    <link href="http://blog.geekdaily.org/2008/08/reports-of-the.html"/>
    <updated>2008-08-20T17:40:02-07:00</updated>
    <id>http://blog.geekdaily.org/2008/08/reports-of-the</id>
@@ -2140,7 +2140,7 @@ For those things clearly in the center of your circle of responsibility, just do
  </entry>
  
  <entry>
-   <title>Cuzillion: 'cuz there's a zillion pages to check</title>
+   <title>Cuzillion: &#39;cuz there&#39;s a zillion pages to check</title>
    <link href="http://blog.geekdaily.org/2008/08/cuzillion-becau.html"/>
    <updated>2008-08-12T23:26:40-07:00</updated>
    <id>http://blog.geekdaily.org/2008/08/cuzillion-becau</id>
@@ -2168,7 +2168,7 @@ For those things clearly in the center of your circle of responsibility, just do
  </entry>
  
  <entry>
-   <title>Old & Rusty to Shiny & New, Part 1</title>
+   <title>Old &amp; Rusty to Shiny &amp; New, Part 1</title>
    <link href="http://blog.geekdaily.org/2008/08/old-rusty-to-sh.html"/>
    <updated>2008-08-07T09:52:17-07:00</updated>
    <id>http://blog.geekdaily.org/2008/08/old-rusty-to-sh</id>
@@ -2234,7 +2234,7 @@ sudo port install git-core +svn&lt;/p&gt;
  </entry>
  
  <entry>
-   <title>Let Our Congress Tweet? Who's Stopping Them?</title>
+   <title>Let Our Congress Tweet? Who&#39;s Stopping Them?</title>
    <link href="http://blog.geekdaily.org/2008/07/let-our-congr-1.html"/>
    <updated>2008-07-14T22:19:35-07:00</updated>
    <id>http://blog.geekdaily.org/2008/07/let-our-congr-1</id>
@@ -2285,7 +2285,7 @@ sudo port install git-core +svn&lt;/p&gt;
  </entry>
  
  <entry>
-   <title>Let Our Congress Tweet? You've been had.</title>
+   <title>Let Our Congress Tweet? You&#39;ve been had.</title>
    <link href="http://blog.geekdaily.org/2008/07/let-our-congres.html"/>
    <updated>2008-07-09T23:54:08-07:00</updated>
    <id>http://blog.geekdaily.org/2008/07/let-our-congres</id>
@@ -3040,7 +3040,7 @@ This is in the passwd file:&lt;/p&gt;
  </entry>
  
  <entry>
-   <title>It's Official: I'm a Rails Contributor</title>
+   <title>It&#39;s Official: I&#39;m a Rails Contributor</title>
    <link href="http://blog.geekdaily.org/2007/11/its-official-im.html"/>
    <updated>2007-11-09T11:14:13-08:00</updated>
    <id>http://blog.geekdaily.org/2007/11/its-official-im</id>
@@ -3214,7 +3214,7 @@ A: Pair programming. Test-first. Seeing what other people do and challenging the
  </entry>
  
  <entry>
-   <title>RubyConf, Day 1, 4p: Hurting Code for Fun & Profit</title>
+   <title>RubyConf, Day 1, 4p: Hurting Code for Fun &amp; Profit</title>
    <link href="http://blog.geekdaily.org/2007/11/rubyconf-day--2.html"/>
    <updated>2007-11-02T13:48:55-07:00</updated>
    <id>http://blog.geekdaily.org/2007/11/rubyconf-day--2</id>
@@ -4644,7 +4644,7 @@ end
  </entry>
  
  <entry>
-   <title>Economics & Fishing</title>
+   <title>Economics &amp; Fishing</title>
    <link href="http://blog.geekdaily.org/2007/09/economics-fishi.html"/>
    <updated>2007-09-10T21:20:57-07:00</updated>
    <id>http://blog.geekdaily.org/2007/09/economics-fishi</id>
@@ -4656,7 +4656,7 @@ end
  </entry>
  
  <entry>
-   <title>RailsRumble: It's Over.</title>
+   <title>RailsRumble: It&#39;s Over.</title>
    <link href="http://blog.geekdaily.org/2007/09/railsrumble-its.html"/>
    <updated>2007-09-09T21:14:06-07:00</updated>
    <id>http://blog.geekdaily.org/2007/09/railsrumble-its</id>
@@ -4722,7 +4722,7 @@ end
  </entry>
  
  <entry>
-   <title>RailsRumble: Who's Rumbling?</title>
+   <title>RailsRumble: Who&#39;s Rumbling?</title>
    <link href="http://blog.geekdaily.org/2007/09/railsrumble-who.html"/>
    <updated>2007-09-07T15:45:47-07:00</updated>
    <id>http://blog.geekdaily.org/2007/09/railsrumble-who</id>
@@ -4805,7 +4805,7 @@ end
  </entry>
  
  <entry>
-   <title>0-30% Test Coverage? That's Nothing.</title>
+   <title>0-30% Test Coverage? That&#39;s Nothing.</title>
    <link href="http://blog.geekdaily.org/2007/09/0-30-test-cover.html"/>
    <updated>2007-09-04T00:47:31-07:00</updated>
    <id>http://blog.geekdaily.org/2007/09/0-30-test-cover</id>
@@ -5148,7 +5148,7 @@ end
  </entry>
  
  <entry>
-   <title>MIT's 'clutter detector' could cut confusion - MIT News Office</title>
+   <title>MIT&#39;s &#39;clutter detector&#39; could cut confusion - MIT News Office</title>
    <link href="http://blog.geekdaily.org/2007/08/mits-clutter-de.html"/>
    <updated>2007-08-22T14:37:32-07:00</updated>
    <id>http://blog.geekdaily.org/2007/08/mits-clutter-de</id>
@@ -5429,7 +5429,7 @@ welcome to the ranks ;-).” - Paul Rubin&lt;/p&gt;
  </entry>
  
  <entry>
-   <title>"Beta" is the Web 2.0 "In Construction Guy"</title>
+   <title>&quot;Beta&quot; is the Web 2.0 &quot;In Construction Guy&quot;</title>
    <link href="http://blog.geekdaily.org/2007/07/beta-is-the-web.html"/>
    <updated>2007-07-14T13:49:43-07:00</updated>
    <id>http://blog.geekdaily.org/2007/07/beta-is-the-web</id>
@@ -5457,7 +5457,7 @@ welcome to the ranks ;-).” - Paul Rubin&lt;/p&gt;
  </entry>
  
  <entry>
-   <title>Models < Drops</title>
+   <title>Models &lt; Drops</title>
    <link href="http://blog.geekdaily.org/2007/07/merge-your-liqu.html"/>
    <updated>2007-07-06T14:51:51-07:00</updated>
    <id>http://blog.geekdaily.org/2007/07/merge-your-liqu</id>
@@ -5544,7 +5544,7 @@ welcome to the ranks ;-).” - Paul Rubin&lt;/p&gt;
  </entry>
  
  <entry>
-   <title>Boobs, Injuries, & Dr. Pepper</title>
+   <title>Boobs, Injuries, &amp; Dr. Pepper</title>
    <link href="http://blog.geekdaily.org/2007/06/boobs-injuries-.html"/>
    <updated>2007-06-27T11:37:24-07:00</updated>
    <id>http://blog.geekdaily.org/2007/06/boobs-injuries-</id>
@@ -6040,7 +6040,7 @@ of what’s going on.&lt;/li&gt;
  </entry>
  
  <entry>
-   <title>Meyer's Conjecture on Philosophy</title>
+   <title>Meyer&#39;s Conjecture on Philosophy</title>
    <link href="http://blog.geekdaily.org/2006/07/meyers_conjectu.html"/>
    <updated>2006-07-15T15:33:13-07:00</updated>
    <id>http://blog.geekdaily.org/2006/07/meyers_conjectu</id>
@@ -6190,7 +6190,7 @@ Link: &lt;a href=&quot;http://headrush.typepad.com/creating_passionate_users/200
  </entry>
  
  <entry>
-   <title>Panasonic's Vision of the Future: All Pixels, All The Time</title>
+   <title>Panasonic&#39;s Vision of the Future: All Pixels, All The Time</title>
    <link href="http://blog.geekdaily.org/2006/03/akihabara_news.html"/>
    <updated>2006-03-29T12:43:20-08:00</updated>
    <id>http://blog.geekdaily.org/2006/03/akihabara_news</id>
