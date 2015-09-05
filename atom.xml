@@ -4,7 +4,7 @@
  <title>geek!daily</title>
  <link href="http://blog.geekdaily.org/" rel="self"/>
  <link href="http://blog.geekdaily.org"/>
- <updated>2015-09-05T15:21:43-07:00</updated>
+ <updated>2015-09-05T16:07:10-07:00</updated>
  <id>http://blog.geekdaily.org</id>
  <author>
    <name>Jim Meyer</name>
@@ -13,9 +13,48 @@
 
  
  <entry>
+   <title>Compiling Spigot Minecraft Server for CentOS 7</title>
+   <link href="http://blog.geekdaily.org/2015/09/compiling-spigot-minecraft-server-for-centos-7.html"/>
+   <updated>2015-09-05T09:00:00-07:00</updated>
+   <id>http://blog.geekdaily.org/2015/09/compiling-spigot-minecraft-server-for-centos-7</id>
+   <content type="html">
+&lt;p&gt;A quick cheat sheet for those who don’t want to read the &lt;a href=&quot;https://www.spigotmc.org/threads/bukkit-craftbukkit-spigot-1-8.36598/&quot;&gt;entire post with all the instructions&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p&gt;Make a CentOS 7 server, then execute these three commands in it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo yum -y install git java-1.7.0-openjdk-devel
+# TONS of output and dependent packages install
+
+$ wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
+--2015-09-05 18:42:24--  https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
+Resolving hub.spigotmc.org (hub.spigotmc.org)... 198.41.205.94, 198.41.204.94, 2400:cb00:2048:1::c629:cd5e, ...
+Connecting to hub.spigotmc.org (hub.spigotmc.org)|198.41.205.94|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3411286 (3.3M) [application/java-archive]
+Saving to: ‘BuildTools.jar’
+
+100%[======================================&amp;gt;] 3,411,286   2.65MB/s   in 1.2s
+
+Last-modified header invalid -- time-stamp ignored.
+2015-09-05 18:42:27 (2.65 MB/s) - ‘BuildTools.jar’ saved [3411286/3411286]
+
+$ java -jar BuildTools.jar
+# TONS of output
+Success! Everything compiled successfully. Copying final .jar files now.
+Copying craftbukkit-1.8.8-R0.1-SNAPSHOT.jar to /root/.
+  - Saved as craftbukkit-1.8.8.jar
+Copying spigot-1.8.8-R0.1-SNAPSHOT.jar to /root/.
+  - Saved as spigot-1.8.8.jar
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now you’ve got the latest jars for spigot and craftbukkit. Enjoy!&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>RIP Craftbukkit, Moving On</title>
    <link href="http://blog.geekdaily.org/2015/09/rip-craftbukkit-moving-on.html"/>
-   <updated>2015-09-05T00:00:00-07:00</updated>
+   <updated>2015-09-05T08:00:00-07:00</updated>
    <id>http://blog.geekdaily.org/2015/09/rip-craftbukkit-moving-on</id>
    <content type="html">
 &lt;h2 id=&quot;the-death-of-craftbukkit&quot;&gt;The Death of CraftBukkit&lt;/h2&gt;
