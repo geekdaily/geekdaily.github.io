@@ -4,13 +4,58 @@
  <title>geek!daily</title>
  <link href="http://blog.geekdaily.org/" rel="self"/>
  <link href="http://blog.geekdaily.org"/>
- <updated>2015-04-29T11:25:39-07:00</updated>
+ <updated>2015-09-05T15:21:43-07:00</updated>
  <id>http://blog.geekdaily.org</id>
  <author>
    <name>Jim Meyer</name>
    <email>jim@geekdaily.org</email>
  </author>
 
+ 
+ <entry>
+   <title>RIP Craftbukkit, Moving On</title>
+   <link href="http://blog.geekdaily.org/2015/09/rip-craftbukkit-moving-on.html"/>
+   <updated>2015-09-05T00:00:00-07:00</updated>
+   <id>http://blog.geekdaily.org/2015/09/rip-craftbukkit-moving-on</id>
+   <content type="html">
+&lt;h2 id=&quot;the-death-of-craftbukkit&quot;&gt;The Death of CraftBukkit&lt;/h2&gt;
+
+&lt;p&gt;Craftbukkit &lt;a href=&quot;https://github.com/Bukkit/CraftBukkit&quot;&gt;kinda died&lt;/a&gt; a year ago in a &lt;a href=&quot;https://www.reddit.com/r/Minecraft/comments/2fkz55/as_one_of_the_original_contributors_to_bukkit&quot;&gt;big&lt;/a&gt; &lt;a href=&quot;http://bukkit.org/threads/mojang-and-the-bukkit-project.309715/&quot;&gt;dramatic&lt;/a&gt; &lt;a href=&quot;http://bukkit.org/threads/an-independent-goodbye.310086/&quot;&gt;flare-up&lt;/a&gt;. That sucked. We were running a server based on it, and continued running the last public version, 1.7.9-R0.2 while hoping things might resolve well. They didn’t.&lt;/p&gt;
+
+&lt;p&gt;It’s time to call it: CraftBukkit, and the underlying &lt;a href=&quot;https://github.com/Bukkit/Bukkit/commits/master&quot;&gt;Bukkit server&lt;/a&gt;, are well and truly dead. It’s time to migrate the server. There are other pressures: I want to change hosting providers; make the server creation, backup, and monitoring more robust; and make it easier to admin.&lt;/p&gt;
+
+&lt;h2 id=&quot;moving-on-&quot;&gt;Moving On …&lt;/h2&gt;
+
+&lt;p&gt;In good news, it allows me to finish &lt;a href=&quot;/2013/04/setting-up-a-minecraft-server-for-kids-part-1-preparation.html&quot;&gt;the blog series I started back when&lt;/a&gt;, and update it for smarter things. I’m using some time this weekend to look into what’s best, so here’s what I’ve learned.&lt;/p&gt;
+
+&lt;h3 id=&quot;requirements&quot;&gt;Requirements&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Multiple worlds:&lt;/strong&gt; the kids have invested a lot of time in the three worlds we have, so that’s got to continue.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Permissions management:&lt;/strong&gt; I don’t want to op kids for the whole server, but I don’t mind letting them rule a world.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Different settings across worlds:&lt;/strong&gt; some of the worlds are creative, some are survival. Various rules apply in each of them. We need to keep that true.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Chat across worlds:&lt;/strong&gt; the kids frequently chat with each other while in different worlds, often calling for each other to come see and try stuff. That’s where the fun is.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Grief prevention and bad word management,&lt;/strong&gt; because kids.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Ideally, it would just support the CraftBukkit APIs so that CraftBukkit mods would continue to work. Least pain to migrate and all that.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-alternatives&quot;&gt;The Alternatives&lt;/h3&gt;
+
+&lt;p&gt;So of course I first started by searching for posts from folks who’ve made this journey in the past … and found nothing significant. I think my search-fu must be inadequate. So, I spent a couple of hours just reading forums to see what was possible.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://minecraft.net/download&quot;&gt;Vanilla Minecraft&lt;/a&gt; with &lt;a href=&quot;http://files.minecraftforge.net/&quot;&gt;Forge&lt;/a&gt;&lt;/strong&gt;: promising, especially since &lt;a href=&quot;http://shop.oreilly.com/product/0636920036562.do&quot;&gt;Arun Gupta and son authored a book&lt;/a&gt; about modding with Forge. Not API compatible with Bukkit, but has &lt;a href=&quot;http://www.minecraftforge.net/wiki/Minecraft_Forge&quot;&gt;reasonable docs&lt;/a&gt; and there are some efforts to &lt;a href=&quot;http://www.akliz.net/manage/knowledgebase/18/How-to-Install-CraftBukkit-Plugins-on-a-Modded-Minecraft-Server-Tekkit-Hexxit-Feed-the-Beast-etc.html&quot;&gt;add Bukkit APIs via plugin&lt;/a&gt; though very old; also, there’s a &lt;a href=&quot;http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1287664-forge-forgeessentials-bukkit-functionality-for&quot;&gt;plugin to add Bukkit &lt;em&gt;functionality&lt;/em&gt;&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://www.spongepowered.org/&quot;&gt;Sponge&lt;/a&gt;&lt;/strong&gt;: Promising, and there’s a short &lt;a href=&quot;https://docs.spongepowered.org/en/server/getting-started/migrating.html&quot;&gt;migration guide&lt;/a&gt; but no CraftBukkit API compatibility, so we’d need to find new plugins to handle the job and &lt;a href=&quot;https://ore-staging.spongepowered.org/&quot;&gt;Ore, the plugin directory for Sponge&lt;/a&gt; seems not to be ready for production.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;http://spigotmc.org/&quot;&gt;Spigot&lt;/a&gt;&lt;/strong&gt;: Spigot, an early fork of CraftBukkit, aims to be a more efficient version of Bukkit for modding Minecraft. That means API compatibility is a given, and explains why it’s the leading server according to &lt;a href=&quot;http://mcstats.org/&quot;&gt;MCstats.org&lt;/a&gt;*. Very promising, and &lt;a href=&quot;&quot;&gt;very active&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://www.spigotmc.org/threads/bukkit-craftbukkit-spigot-1-8.36598/&quot;&gt;Craftbukkit&lt;/a&gt;?!&lt;/strong&gt;: Yup, you read right. Since Spigot is an early fork, they still contain the forked CraftBukkit code and avoided the DMCA takedown issues. Building Spigot also builds CraftBukkit, so I &lt;em&gt;could&lt;/em&gt; just use that and move on, in theory. CraftBukkit is dead, long live CraftBukkit.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;*MCStats requires a plugin to send data, so Spigot is the leading server among folks who run the MCstats plugin when the MCstats servers are up to collect data, yada yada.&lt;/p&gt;
+
+&lt;p&gt;There are many others, but these are the serious contenders for us to migrate our server to. I’ll be exploring them and try to do a decent post on how we went from where we are to there.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Moving Your TypePad Blog To Jekyll: The Re-Translation</title>

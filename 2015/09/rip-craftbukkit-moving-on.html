@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <title>
       
-        Moving Your TypePad Blog To Jekyll: The Re-Translation - 
+        RIP Craftbukkit, Moving On - 
       
       geek!daily
     </title>
-    
+    <meta name="description" content="">
     <meta name="author" content="Jim Meyer">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- HTML5 shim, for IE6-8 support of HTML elements -->
@@ -154,7 +154,7 @@
           
 <div class="page-header">
   <h1>
-    Moving Your TypePad Blog To Jekyll: The Re-Translation 
+    RIP Craftbukkit, Moving On 
     
   </h1>
 </div>
@@ -162,32 +162,51 @@
 <div class="row">
   <div class="span8">
     
-<p>In my <a href="/2015/04/moving-your-blog-to-jekyll-the-translation.html">first post about moving from TypePad to Jekyll</a>, I discussed a few ways you can translate your TypePad.com blog into Jekyll, noting that the <a href="http://import.jekyllrb.com">Jekyll Importer</a> would be the best way to go but for its lack of an MTIF importer. As I got further into the post-install cleanup, there were enough little things like lost permalinks and the like that I decided to go the whole way and add MTIF as a Jekyll importer.</p>
+<h2 id="the-death-of-craftbukkit">The Death of CraftBukkit</h2>
 
-<p>Right now it’s just <a href="https://github.com/purp/jekyll-import">my fork</a> of the <a href="https://github.com/jekyll/jekyll-import">jekyll-import project</a> with a wholly untested MTIF converter implemented on <a href="https://github.com/purp/jekyll-import/tree/typepad_export">the typepad_converter branch</a>. As a bonus, it’ll convert your old posts to Markdown using <a href="https://github.com/xijo">Johannes Opper’s</a> <a href="https://github.com/xijo/reverse_markdown">reverse_markdown gem</a>.</p>
+<p>Craftbukkit <a href="https://github.com/Bukkit/CraftBukkit">kinda died</a> a year ago in a <a href="https://www.reddit.com/r/Minecraft/comments/2fkz55/as_one_of_the_original_contributors_to_bukkit">big</a> <a href="http://bukkit.org/threads/mojang-and-the-bukkit-project.309715/">dramatic</a> <a href="http://bukkit.org/threads/an-independent-goodbye.310086/">flare-up</a>. That sucked. We were running a server based on it, and continued running the last public version, 1.7.9-R0.2 while hoping things might resolve well. They didn’t.</p>
 
-<p>If you’re desperate to use it before I get it tested and merged into jekyll-import, you could do something like this:</p>
+<p>It’s time to call it: CraftBukkit, and the underlying <a href="https://github.com/Bukkit/Bukkit/commits/master">Bukkit server</a>, are well and truly dead. It’s time to migrate the server. There are other pressures: I want to change hosting providers; make the server creation, backup, and monitoring more robust; and make it easier to admin.</p>
 
-<pre><code>$ cd ~/work
-$ git clone git@github.com:purp/jekyll-import.git
-$ cd jekyll-import
-$ git checkout typepad_export
-$ RUBYLIB=~/work/jekyll-import/lib jekyll import mtif --source path/to/your/mtif
-</code></pre>
+<h2 id="moving-on-">Moving On …</h2>
 
-<p>Yes, I have shame for not TDD’g this. I’ll confess that I don’t TDD when I’m exploring something new as I’m usually learning so much that my test hypotheses are crap at the beginning.</p>
+<p>In good news, it allows me to finish <a href="/2013/04/setting-up-a-minecraft-server-for-kids-part-1-preparation.html">the blog series I started back when</a>, and update it for smarter things. I’m using some time this weekend to look into what’s best, so here’s what I’ve learned.</p>
 
-<p>Cue discussion of ends and means and justifications.</p>
+<h3 id="requirements">Requirements</h3>
 
+<ol>
+  <li><strong>Multiple worlds:</strong> the kids have invested a lot of time in the three worlds we have, so that’s got to continue.</li>
+  <li><strong>Permissions management:</strong> I don’t want to op kids for the whole server, but I don’t mind letting them rule a world.</li>
+  <li><strong>Different settings across worlds:</strong> some of the worlds are creative, some are survival. Various rules apply in each of them. We need to keep that true.</li>
+  <li><strong>Chat across worlds:</strong> the kids frequently chat with each other while in different worlds, often calling for each other to come see and try stuff. That’s where the fun is.</li>
+  <li><strong>Grief prevention and bad word management,</strong> because kids.</li>
+</ol>
+
+<p>Ideally, it would just support the CraftBukkit APIs so that CraftBukkit mods would continue to work. Least pain to migrate and all that.</p>
+
+<h3 id="the-alternatives">The Alternatives</h3>
+
+<p>So of course I first started by searching for posts from folks who’ve made this journey in the past … and found nothing significant. I think my search-fu must be inadequate. So, I spent a couple of hours just reading forums to see what was possible.</p>
+
+<ol>
+  <li><strong><a href="https://minecraft.net/download">Vanilla Minecraft</a> with <a href="http://files.minecraftforge.net/">Forge</a></strong>: promising, especially since <a href="http://shop.oreilly.com/product/0636920036562.do">Arun Gupta and son authored a book</a> about modding with Forge. Not API compatible with Bukkit, but has <a href="http://www.minecraftforge.net/wiki/Minecraft_Forge">reasonable docs</a> and there are some efforts to <a href="http://www.akliz.net/manage/knowledgebase/18/How-to-Install-CraftBukkit-Plugins-on-a-Modded-Minecraft-Server-Tekkit-Hexxit-Feed-the-Beast-etc.html">add Bukkit APIs via plugin</a> though very old; also, there’s a <a href="http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1287664-forge-forgeessentials-bukkit-functionality-for">plugin to add Bukkit <em>functionality</em></a>.</li>
+  <li><strong><a href="https://www.spongepowered.org/">Sponge</a></strong>: Promising, and there’s a short <a href="https://docs.spongepowered.org/en/server/getting-started/migrating.html">migration guide</a> but no CraftBukkit API compatibility, so we’d need to find new plugins to handle the job and <a href="https://ore-staging.spongepowered.org/">Ore, the plugin directory for Sponge</a> seems not to be ready for production.</li>
+  <li><strong><a href="http://spigotmc.org/">Spigot</a></strong>: Spigot, an early fork of CraftBukkit, aims to be a more efficient version of Bukkit for modding Minecraft. That means API compatibility is a given, and explains why it’s the leading server according to <a href="http://mcstats.org/">MCstats.org</a>*. Very promising, and <a href="">very active</a></li>
+  <li><strong><a href="https://www.spigotmc.org/threads/bukkit-craftbukkit-spigot-1-8.36598/">Craftbukkit</a>?!</strong>: Yup, you read right. Since Spigot is an early fork, they still contain the forked CraftBukkit code and avoided the DMCA takedown issues. Building Spigot also builds CraftBukkit, so I <em>could</em> just use that and move on, in theory. CraftBukkit is dead, long live CraftBukkit.</li>
+</ol>
+
+<p>*MCStats requires a plugin to send data, so Spigot is the leading server among folks who run the MCstats plugin when the MCstats servers are up to collect data, yada yada.</p>
+
+<p>There are many others, but these are the serious contenders for us to migrate our server to. I’ll be exploring them and try to do a decent post on how we went from where we are to there.</p>
 
     <hr>
     <div class="pagination btn-group">
       
-        <a class="btn prev" href="/2015/04/announcing-the-mtif-gem.html" title="Announcing the MTIF gem">&larr; Previous</a>
+        <a class="btn prev" href="/2015/04/moving-your-typepad-blog-to-jekyll-the-retranslation.html" title="Moving Your TypePad Blog To Jekyll: The Re-Translation">&larr; Previous</a>
       
         <a class="btn" href="/archive.html">Archive</a>
       
-        <a class="btn next" href="/2015/09/rip-craftbukkit-moving-on.html" title="RIP Craftbukkit, Moving On">Next &rarr;</a>
+        <a class="btn next disabled">Next &rarr;</a>
       
     </div>
     <hr>
@@ -218,7 +237,7 @@ $ RUBYLIB=~/work/jekyll-import/lib jekyll import mtif --source path/to/your/mtif
   <div class="span4">
     <section>
       <h4>Published</h4>
-      <div class="date"><span>26 April 2015</span></div>
+      <div class="date"><span>05 September 2015</span></div>
       
     </section>
     
@@ -226,11 +245,19 @@ $ RUBYLIB=~/work/jekyll-import/lib jekyll import mtif --source path/to/your/mtif
         <h4>Categories</h4>
         
         <span class="category">
+          fun!
+        </span>
+        
+        <span class="category">
+          games
+        </span>
+        
+        <span class="category">
           hacking
         </span>
         
         <span class="category">
-          writing
+          minecraft
         </span>
         
       </section>
