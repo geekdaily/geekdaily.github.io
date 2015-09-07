@@ -4,13 +4,195 @@
  <title>geek!daily</title>
  <link href="http://blog.geekdaily.org/" rel="self"/>
  <link href="http://blog.geekdaily.org"/>
- <updated>2015-09-05T16:07:10-07:00</updated>
+ <updated>2015-09-06T18:51:37-07:00</updated>
  <id>http://blog.geekdaily.org</id>
  <author>
    <name>Jim Meyer</name>
    <email>jim@geekdaily.org</email>
  </author>
 
+ 
+ <entry>
+   <title>How to get started with a Minecraft Server, Redux</title>
+   <link href="http://blog.geekdaily.org/2015/09/how-to-get-started-with-a-minecraft-server-redux.html"/>
+   <updated>2015-09-06T06:00:00-07:00</updated>
+   <id>http://blog.geekdaily.org/2015/09/how-to-get-started-with-a-minecraft-server-redux</id>
+   <content type="html">
+&lt;p&gt;Back when, I started a&lt;a href=&quot;/2013/04/setting-up-a-minecraft-server-for-kids-part-1-preparation.html&quot;&gt; series on setting up a Minecraft server for kids&lt;/a&gt; which I never quite finished. As I &lt;a href=&quot;/2015/09/rip-craftbukkit-moving-on.html&quot;&gt;mentioned in a post yesterday&lt;/a&gt;, it’s time to do a major update on our server, so I’ve got a chance to update and complete that series. And here we are.&lt;/p&gt;
+
+&lt;h2 id=&quot;choices-are-better-now&quot;&gt;Choices are better now&lt;/h2&gt;
+
+&lt;h3 id=&quot;paid-minecraft-hosting&quot;&gt;Paid Minecraft Hosting&lt;/h3&gt;
+
+&lt;p&gt;One &lt;a href=&quot;https://www.google.com/?q=minecraft%20server%20hosting&quot;&gt;Google search for Minecraft Hosting&lt;/a&gt; shows a lot more viable alternatives than existed two years ago. There were easily a few dozen hosting options available, each clearly targeting Minecraft server hosting. All of them seemed to be ~$12-25 for a 2GB RAM server, which is pretty close to the going rate for a 2GB VM in any of several public clouds.&lt;/p&gt;
+
+&lt;h3 id=&quot;containers&quot;&gt;Containers!&lt;/h3&gt;
+
+&lt;p&gt;Another excellent alternative is some solid &lt;a href=&quot;https://hub.docker.com/search/?q=minecraft&amp;amp;isAutomated=1&quot;&gt;Minecraft Docker images&lt;/a&gt; for running Minecraft. Very configurable, and gives you good control over what’s going on without needing to go deep into the dependencies of Java, etc.&lt;/p&gt;
+
+&lt;h3 id=&quot;self-hosting-playbooks-and-recipes-and-shell-scripts-oh-my&quot;&gt;Self-Hosting: Playbooks and Recipes and Shell Scripts, Oh My!&lt;/h3&gt;
+
+&lt;p&gt;As was true two years ago, there are a host of ways to set up your own server Chef, Puppet, Ansible, and shell scripts. However, several have emerged as more popular and have thus matured a bit since then.&lt;/p&gt;
+
+&lt;h2 id=&quot;its-always-build-vs-buy&quot;&gt;It’s Always Build vs. Buy&lt;/h2&gt;
+
+&lt;p&gt;In the end, I’m making a tradeoff in how much we want to be able to customize the server; how much time I need to spend setting it up; how much time I need to spend administering it; and net dollar costs to set up and run. A fast sketch of this looks like:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Option&lt;/th&gt;
+      &lt;th&gt;Customization?&lt;/th&gt;
+      &lt;th&gt;Setup Time?&lt;/th&gt;
+      &lt;th&gt;Admin Time?&lt;/th&gt;
+      &lt;th&gt;Dollar Cost?&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Paid Hosting&lt;/td&gt;
+      &lt;td&gt;Low-High&lt;/td&gt;
+      &lt;td&gt;Low-Med&lt;/td&gt;
+      &lt;td&gt;Low&lt;/td&gt;
+      &lt;td&gt;~$6-20/month + ~$15 setup fees&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Containers&lt;/td&gt;
+      &lt;td&gt;Med-High&lt;/td&gt;
+      &lt;td&gt;Med-High&lt;/td&gt;
+      &lt;td&gt;Med&lt;/td&gt;
+      &lt;td&gt;$10-20/month for container hosting&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Self Hosting&lt;/td&gt;
+      &lt;td&gt;High&lt;/td&gt;
+      &lt;td&gt;High&lt;/td&gt;
+      &lt;td&gt;Low-Med&lt;/td&gt;
+      &lt;td&gt;$10-20/month for instance hosting&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;The dollar costs of hosting are so close in all cases as to be a negligible motivator, so it really comes down to how much time I want to put in. Two years ago, I wanted to do this myself to learn how a server works and experiment with modding; now it’s much more about having a stable server with the right functionality (usually via plugins) and modding is something Sam and I do on laptops and an occasional cloud VM or container. &lt;strong&gt;So this time around, we’re going to look at paid Minecraft hosting first, then containers, then self-hosting.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;what-we-need&quot;&gt;What we need&lt;/h2&gt;
+
+&lt;p&gt;I mentioned in &lt;a href=&quot;/2015/09/rip-craftbukkit-moving-on.html&quot;&gt;my previous post&lt;/a&gt; the bare minimums; we’ll add a few more at the end as we’re looking at migrating to paid hosting:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Multiple worlds:&lt;/strong&gt; the kids have invested a lot of time in the three worlds we have, so that’s got to continue. We’re currently using the Multiverse Bukkit Plugins.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Permissions management:&lt;/strong&gt; I don’t want to op kids for the whole server, but I don’t mind letting them rule a world. We’re currently using the PermissionsBukkit plugin.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Different settings across worlds:&lt;/strong&gt; some of the worlds are creative, some are survival. Various rules apply in each of them. We need to keep that true. This is inherent in the Multiverse&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Chat across worlds:&lt;/strong&gt; the kids frequently chat with each other while in different worlds, often calling for each other to come see and try stuff. That’s where the fun is.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Grief prevention and bad word management,&lt;/strong&gt; because kids. We use the GriefPrevention() and BadWords() plugins at the recommendation of cheracc(http://www.sandlotminecraft.com/index.php?pages/about/#owner), who runs Sandlot Minecraft server for kids and families(http://www.sandlotminecraft.com/). He puts a lot into running Sandlot(http://www.sandlotminecraft.com/index.php?pages/about/) and it’s an excellent place if you just want a family-friendly server to let your kids play on.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Since we’re migrating, we’ll add:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Ability to import existing worlds:&lt;/strong&gt; We have existing worlds that the kids have put a lot of time into.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Ability to back-up on a daily basis:&lt;/strong&gt; It helps for moments where one of the worlds that’s not under GriefPrevention has accidental damage. Also, we need to be able to pull a daily backup from outside the service in case the service gets hosed.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Good tools for server administration:&lt;/strong&gt; We like to divide up permissions so we can make kids into minor ops, and we often need user logs to see who was online when something happened to address behavior issues, etc., because kids.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cost:&lt;/strong&gt; way down at the bottom because, as I said, it’s not the most important factor.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;hosting-options&quot;&gt;Hosting Options&lt;/h2&gt;
+
+&lt;p&gt;I’m going to look at three main options here:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://minecraft.net/realms&quot;&gt;Minecraft Realms&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mcprohosting.com/&quot;&gt;MCProHosting&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ggservers.net/&quot;&gt;GG Servers&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.creeperhost.net/&quot;&gt;Creeperhost.net&lt;/a&gt;, &lt;a href=&quot;https://www.beastnode.com/&quot;&gt;BeastNode&lt;/a&gt;, and &lt;a href=&quot;https://www.bisecthosting.com/&quot;&gt;BisectHosting&lt;/a&gt; all seem like reasonable alternatives, but landed in my second choice list for various reasons. Creeperhost is UK-based, though with US locations, and didn’t seem as oriented to opinionated Minecraft/Spigot hosting; neither did BisectHosting. BeastNode looks promising, and I wanted to limit the field to evaluate.&lt;/p&gt;
+
+&lt;p&gt;So with that in mind, I set out to set up worlds with each of the top three. I used the 2GB RAM server as a basis for comparison as that’s about what runs well for long periods with the crowd on our server.&lt;/p&gt;
+
+&lt;p&gt;Here’s what I found.&lt;/p&gt;
+
+&lt;h3 id=&quot;minecraft-realms&quot;&gt;Minecraft Realms&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Multiple Worlds:&lt;/strong&gt; &lt;em&gt;yes&lt;/em&gt;, limited to three worlds, but only running one at a time.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Permissions Management:&lt;/strong&gt; &lt;em&gt;no&lt;/em&gt;, only op or normal player.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Different World Settings:&lt;/strong&gt; &lt;em&gt;yes&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Chat Across Worlds:&lt;/strong&gt; &lt;em&gt;no&lt;/em&gt;, only one world running at a time.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Grief Prevention:&lt;/strong&gt; &lt;em&gt;no&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Foul Language Management:&lt;/strong&gt; &lt;em&gt;no&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Import Worlds:&lt;/strong&gt; &lt;em&gt;no&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Daily backups:&lt;/strong&gt; &lt;em&gt;yes&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Automatically copy backups externally:&lt;/strong&gt; &lt;em&gt;no&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Good server admin tools:&lt;/strong&gt; &lt;em&gt;5/10&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cost:&lt;/strong&gt; &lt;em&gt;$13/month&lt;/em&gt;, discounted if you either enable auto-renewal or buy 3 or 6 months in advance.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Best if you want to run “vanilla” Minecraft and always have the latest improvements. It’s pretty easy to get started; you pay on Mojang() then set up your new Realm through your Minecraft app. Maybe I’ll write a post with a quick step-by-step, but in the meantime &lt;a href=&quot;http://www.wikihow.com/Get-Minecraft-Realms#Creating_Your_Own_Minecraft_Realms_Server_sub&quot;&gt;Wikihow has a pretty good one&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I was pleasantly surprised to see you could have three worlds (plus a selections of “mini-games”); however, switching worlds seems to require a restart of the server for your Realm so you really only get access to your worlds one at a time. Interesting a bit, but that’s a deal breaker for the server we run.&lt;/p&gt;
+
+&lt;p&gt;The server admin tools are okay, but not great. You can invite players, choose whether or not to op them, and see when they’ve been online (but not if they’re online now). You get automatic backups and can “download” them manually, which makes them one of your single-player worlds on your local machine.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Not the right long-term choice for us.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;mc-pro-hosting&quot;&gt;MC Pro Hosting&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Multiple Worlds:&lt;/strong&gt; &lt;em&gt;yes&lt;/em&gt;, with Multiverse plugin.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Permissions Management:&lt;/strong&gt; &lt;em&gt;yes&lt;/em&gt;, with PermissionsBukkit plugin&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Different World Settings:&lt;/strong&gt; &lt;em&gt;yes&lt;/em&gt;, with Multiverse plugin.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Chat Across Worlds:&lt;/strong&gt; &lt;em&gt;yes&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Grief Prevention:&lt;/strong&gt; &lt;em&gt;yes&lt;/em&gt;, many plugins available&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Foul Language Management:&lt;/strong&gt; &lt;em&gt;yes&lt;/em&gt;, many plugins available&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Import Worlds:&lt;/strong&gt; &lt;em&gt;yes&lt;/em&gt;, via FTP&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Daily backups:&lt;/strong&gt; &lt;em&gt;yes&lt;/em&gt;, set up as a repeating task. 1 GB quota for backup storage; 10 GB quota for $2/month&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Automatically copy backups externally:&lt;/strong&gt; &lt;em&gt;yes&lt;/em&gt;, backup via FTP as often as you like.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Good server admin tools:&lt;/strong&gt; &lt;em&gt;8/10&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cost:&lt;/strong&gt; &lt;em&gt;$20/month, $15 plugin setup fee if you need help&lt;/em&gt;, discounted if you either enable auto-renewal or buy 3 or 6 months in advance.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;MC Pro’s signup experience is top-notch. They walk you through eight steps to get a sense of what you’re looking for; helping you size your server; locate it where you want it in the world (they’ve got a fair number of choices, too); choose the add-on services you want, including mod packs, premium support, etc.; and even getting the name, hostname, IP and/or port set just right.&lt;/p&gt;
+
+&lt;p&gt;They use Multicraft control panel, which they’ve integrated very well into their system, right down to authentication and styling. Multicraft includes an FTP server, so you can easily download backups and copy up configuration, etc. They also have good docs to help you get started if you’re importing worlds or installing custom plugins.&lt;/p&gt;
+
+&lt;p&gt;It took me a short while to merge config data from our server with the defaults at MC Pro, but fairly quickly I had a mostly working server, lacking only the core worlds. I filed a support ticket to help me solve that, then figured it out myself about 6 hours later and closed the ticket, which had gotten no response.&lt;/p&gt;
+
+&lt;p&gt;The only complaints I have would be that they don’t take American Express (which is the card I use for online transactions) and don’t specifically say so; I had to figure it out when their CC entry field couldn’t handle the 4-digit CVV code. Also, the discount code from their Facebook page didn’t work, despite being roughly three weeks old. Minor bummer.&lt;/p&gt;
+
+&lt;h3 id=&quot;ggserversnet&quot;&gt;ggservers.net&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Multiple Worlds:&lt;/strong&gt; &lt;em&gt;yes&lt;/em&gt;, with Multiverse plugin.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Permissions Management:&lt;/strong&gt; &lt;em&gt;yes&lt;/em&gt;, with PermissionsBukkit plugin&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Different World Settings:&lt;/strong&gt; &lt;em&gt;yes&lt;/em&gt;, with Multiverse plugin.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Chat Across Worlds:&lt;/strong&gt; &lt;em&gt;yes&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Grief Prevention:&lt;/strong&gt; &lt;em&gt;yes&lt;/em&gt;, many plugins available&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Foul Language Management:&lt;/strong&gt; &lt;em&gt;yes&lt;/em&gt;, many plugins available&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Import Worlds:&lt;/strong&gt; &lt;em&gt;yes&lt;/em&gt;, via FTP&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Daily backups:&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Automatically copy backups externally:&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Good server admin tools:&lt;/strong&gt; &lt;em&gt;7/10&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cost:&lt;/strong&gt; &lt;em&gt;$12/month, $15 plugin setup fee if you need help&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Right off, I was inclined to like GG Servers as they handle Amex properly and the discount code from their Facebook page worked. The signup was fairly easy for someone who’s experienced and knows how to size their own server; it was much less of a concierge experience when compared to MC Pro Hosting.&lt;/p&gt;
+
+&lt;p&gt;GG Servers also use the Multicraft control panel, but it’s not as well integrated into their client control panel so there are bumpy bits. This turns out to be the source of several issues as I was looking to get set up. They’d sent me an email with a separate password for the Multicraft CP; that, of course, ended up in the spam folder so I was blissfully unaware of it.&lt;/p&gt;
+
+&lt;p&gt;For one, I wasn’t able to use FTP service right away, so I put in a support ticket. That was relatively straightforward and within a couple of hours I had a response. From there, it was a fairly typical support interaction, by which I mean the very busy support person is working through tickets as fast as they can and thus asks me to do something I’ve already done (and partly, poorly described doing in fairly specific terms). We iterated along those lines a couple of times before the support tech realized what I’d said and pointed out I needed the password from the email they’d sent.&lt;/p&gt;
+
+&lt;p&gt;To be clear, their support was very responsive — most replies came within 10 minutes once they picked up the ticket, and on a holiday weekend, even. They were never rude. They ended up solving my problem. Yet it was frustrating to re-explain what I’d explained at the beginning, and twice, to get to the right answer.&lt;/p&gt;
+
+&lt;h2 id=&quot;decision-mc-pro-by-a-smidge&quot;&gt;Decision: MC Pro by a smidge&lt;/h2&gt;
+
+&lt;p&gt;I have no doubt our server would run fairly equally well on either MC Pro or GG Servers. In the end, I’d already resolved all of my issues and had a working, identical server running on MC Pro by the time we reached the end of the GG Servers support ticket, and that was the deciding factor. As I mentioned above, this is more about how I save my time than anything else.&lt;/p&gt;
+
+&lt;p&gt;GG Servers is high on my list should I need to re-examine Minecraft hosting providers again, but for now we’re happily up and running on MC Pro.&lt;/p&gt;
+
+&lt;p&gt;Happy crafting!&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Compiling Spigot Minecraft Server for CentOS 7</title>

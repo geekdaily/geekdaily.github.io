@@ -10,6 +10,7 @@ http://blog.geekdaily.org/rss.xml
 http://blog.geekdaily.org/sitemap.txt
 http://blog.geekdaily.org/tags.html
 
+http://blog.geekdaily.org/2015/09/how-to-get-started-with-a-minecraft-server-redux.html
 http://blog.geekdaily.org/2015/09/compiling-spigot-minecraft-server-for-centos-7.html
 http://blog.geekdaily.org/2015/09/rip-craftbukkit-moving-on.html
 http://blog.geekdaily.org/2015/04/moving-your-typepad-blog-to-jekyll-the-retranslation.html
