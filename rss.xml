@@ -5,10 +5,37 @@
         <description>geek!daily - Jim Meyer</description>
         <link>http://blog.geekdaily.org</link>
         <link>http://blog.geekdaily.org</link>
-        <lastBuildDate>2015-09-06T18:51:37-07:00</lastBuildDate>
-        <pubDate>2015-09-06T18:51:37-07:00</pubDate>
+        <lastBuildDate>2016-11-23T15:03:10-08:00</lastBuildDate>
+        <pubDate>2016-11-23T15:03:10-08:00</pubDate>
         <ttl>1800</ttl>
 
+
+        <item>
+                <title>Setting up a Minecraft server status page and monitoring</title>
+                <description>
+</description>
+                <link>http://blog.geekdaily.org/2015/09/setting-up-a-minecraft-server-status-page-and-monitoring.html</link>
+                <guid>http://blog.geekdaily.org/2015/09/setting-up-a-minecraft-server-status-page-and-monitoring</guid>
+                <pubDate>2015-09-12T00:00:00-07:00</pubDate>
+        </item>
+
+        <item>
+                <title>Making DNS SRV records for Minecraft</title>
+                <description>
+</description>
+                <link>http://blog.geekdaily.org/2015/09/making-dns-srv-records-for-minecraft.html</link>
+                <guid>http://blog.geekdaily.org/2015/09/making-dns-srv-records-for-minecraft</guid>
+                <pubDate>2015-09-12T00:00:00-07:00</pubDate>
+        </item>
+
+        <item>
+                <title>Instiki as a subdirectory</title>
+                <description>
+</description>
+                <link>http://blog.geekdaily.org/2015/09/instiki-as-a-subdirectory.html</link>
+                <guid>http://blog.geekdaily.org/2015/09/instiki-as-a-subdirectory</guid>
+                <pubDate>2015-09-12T00:00:00-07:00</pubDate>
+        </item>
 
         <item>
                 <title>How to get started with a Minecraft Server, Redux</title>
@@ -76,10 +103,10 @@
 
 &lt;ol&gt;
   &lt;li&gt;&lt;strong&gt;Multiple worlds:&lt;/strong&gt; the kids have invested a lot of time in the three worlds we have, so that’s got to continue. We’re currently using the Multiverse Bukkit Plugins.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Permissions management:&lt;/strong&gt; I don’t want to op kids for the whole server, but I don’t mind letting them rule a world. We’re currently using the PermissionsBukkit plugin.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Permissions management:&lt;/strong&gt; I don’t want to op kids for the whole server, but I don’t mind letting them rule a world. We’re currently using the &lt;a href=&quot;http://dev.bukkit.org/bukkit-plugins/permbukkit/&quot;&gt;PermissionsBukkit plugin&lt;/a&gt;.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Different settings across worlds:&lt;/strong&gt; some of the worlds are creative, some are survival. Various rules apply in each of them. We need to keep that true. This is inherent in the Multiverse&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Chat across worlds:&lt;/strong&gt; the kids frequently chat with each other while in different worlds, often calling for each other to come see and try stuff. That’s where the fun is.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Grief prevention and bad word management,&lt;/strong&gt; because kids. We use the GriefPrevention() and BadWords() plugins at the recommendation of cheracc(http://www.sandlotminecraft.com/index.php?pages/about/#owner), who runs Sandlot Minecraft server for kids and families(http://www.sandlotminecraft.com/). He puts a lot into running Sandlot(http://www.sandlotminecraft.com/index.php?pages/about/) and it’s an excellent place if you just want a family-friendly server to let your kids play on.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Grief prevention and bad word management,&lt;/strong&gt; because kids. We use the &lt;a href=&quot;http://dev.bukkit.org/bukkit-plugins/grief-prevention/files/214-12-2/&quot;&gt;GriefPrevention&lt;/a&gt; and &lt;a href=&quot;http://dev.bukkit.org/bukkit-plugins/badwords/&quot;&gt;BadWords&lt;/a&gt; plugins at the recommendation of cheracc(http://www.sandlotminecraft.com/index.php?pages/about/#owner), who runs Sandlot Minecraft server for kids and families(http://www.sandlotminecraft.com/). He puts a lot into running Sandlot(http://www.sandlotminecraft.com/index.php?pages/about/) and it’s an excellent place if you just want a family-friendly server to let your kids play on.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;Since we’re migrating, we’ll add:&lt;/p&gt;
@@ -273,6 +300,89 @@ Copying spigot-1.8.8-R0.1-SNAPSHOT.jar to /root/.
 </description>
                 <link>http://blog.geekdaily.org/2015/09/rip-craftbukkit-moving-on.html</link>
                 <guid>http://blog.geekdaily.org/2015/09/rip-craftbukkit-moving-on</guid>
+                <pubDate>2015-09-05T08:00:00-07:00</pubDate>
+        </item>
+
+        <item>
+                <title>Installing Linux Mint on Lenovo G50-45</title>
+                <description>
+&lt;p&gt;I’m dual-booting just to make it easy to revert to Windows if and when.&lt;/p&gt;
+
+&lt;p&gt;Learned that the SD card system is PCI-Express based, so no booting from that. Pooh. Trip to Radio Shack to buy writable DVD material. Felt like 1999 again.&lt;/p&gt;
+
+&lt;p&gt;Debian
+* Set up your Lenovo
+* Shrink the disk partition
+  * http://www.everydaylinuxuser.com/2015/11/how-to-shrink-windows-10-to-make-space.html
+* Decide local or network install. I chose network.
+* Get the right install image to boot from https://www.debian.org/CD/netinst/
+  * I chose amd64
+* Make a bootable SD card
+  * Mac: https://www.youtube.com/watch?v=CLVI0Q5hlz0 (verbose, but if you’re not a sysadmin)
+  * Or textually:&lt;/p&gt;
+
+&lt;p&gt;Linux Mint&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Set up Windows&lt;/li&gt;
+  &lt;li&gt;Shrink the disk partition
+    &lt;ul&gt;
+      &lt;li&gt;http://www.everydaylinuxuser.com/2015/11/how-to-shrink-windows-10-to-make-space.html&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Get the right install image to boot from http://linuxmint.com/download.php
+    &lt;ul&gt;
+      &lt;li&gt;I chose Cinnamon since it’s based on Gnome 3.x&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Make a DVD&lt;/li&gt;
+  &lt;li&gt;Boot the DVD and wait … and wait … while it auto logs in&lt;/li&gt;
+  &lt;li&gt;Make your own partitions: http://winaero.com/blog/how-to-partition-your-hard-drive-to-install-linux-mint/
+    &lt;ul&gt;
+      &lt;li&gt;1 MB reserved for bios (grub) /sda8&lt;/li&gt;
+      &lt;li&gt;300 MB /boot /dev/sda9&lt;/li&gt;
+      &lt;li&gt;20480 MB / /dev/sda10&lt;/li&gt;
+      &lt;li&gt;20480 MB /altroot /dev/sda11&lt;/li&gt;
+      &lt;li&gt;32 MB swap &lt;em&gt;at end of space&lt;/em&gt; /dev/sda12&lt;/li&gt;
+      &lt;li&gt;all the rest /home /dev/sda13&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Install&lt;/li&gt;
+  &lt;li&gt;Update kernel
+    &lt;ul&gt;
+      &lt;li&gt;https://mintguide.org/system/561-install-linux-kernel-4-4-lts-on-linux-mint.html&lt;/li&gt;
+      &lt;li&gt;Get kernel from http://kernel.ubuntu.com/~kernel-ppa/mainline/ (instrux: https://wiki.ubuntu.com/Kernel/MainlineBuilds)&lt;/li&gt;
+      &lt;li&gt;dpkg -i *deb &amp;amp;&amp;amp; update-grub &amp;amp;&amp;amp; reboot&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Update wireless drivers
+    &lt;ul&gt;
+      &lt;li&gt;Relevant bug is https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1436940&lt;/li&gt;
+      &lt;li&gt;Related, different rev: https://bugs.launchpad.net/ubuntu/+source/linux-firmware/+bug/1520343&lt;/li&gt;
+      &lt;li&gt;Forum post: https://forums.linuxmint.com/viewtopic.php?t=196363&lt;/li&gt;
+      &lt;li&gt;https://wireless.wiki.kernel.org/en/users/drivers/ath10k&lt;/li&gt;
+      &lt;li&gt;Directory you need is QCA6174; added in 3.20 kernel&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;apt-get update &amp;amp;&amp;amp; apt-get dist-upgrade -y
+    &lt;ul&gt;
+      &lt;li&gt;Fixes system time issue, though you can also do …&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Two-finger scrolling off by default
+    &lt;ul&gt;
+      &lt;li&gt;https://www.maketecheasier.com/enable-two-finger-scrolling-in-linux-mint/&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;System time
+  * hwclock –set –utc –date=”YYYY-mm-dd HH:MM:SS”
+  * change /etc/default/rcS setting: “UTC=yes”&lt;/p&gt;
+
+</description>
+                <link>http://blog.geekdaily.org/2015/09/installing-debian-on-lenovo-g50-45.html</link>
+                <guid>http://blog.geekdaily.org/2015/09/installing-debian-on-lenovo-g50-45</guid>
                 <pubDate>2015-09-05T08:00:00-07:00</pubDate>
         </item>
 
