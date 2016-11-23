@@ -5,10 +5,49 @@
         <description>geek!daily - Jim Meyer</description>
         <link>http://blog.geekdaily.org</link>
         <link>http://blog.geekdaily.org</link>
-        <lastBuildDate>2016-11-23T15:10:47-08:00</lastBuildDate>
-        <pubDate>2016-11-23T15:10:47-08:00</pubDate>
+        <lastBuildDate>2016-11-23T15:42:25-08:00</lastBuildDate>
+        <pubDate>2016-11-23T15:42:25-08:00</pubDate>
         <ttl>1800</ttl>
 
+
+        <item>
+                <title>MacOS Sierra, Homebrew, and rbenv</title>
+                <description>
+&lt;p&gt;I recently updated to MacOS Sierra, aka 10.12, and got to relearn my dev environment when I wanted to do a little work in Ruby and ran face first into&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; irb
+Bond Error: Completion file &#39;/usr/local/var/rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/bond-0.5.1/lib/bond/completion.rb&#39; failed to load with:
+dlopen(/usr/local/var/rbenv/versions/2.2.5/lib/ruby/2.2.0/x86_64-darwin15/readline.bundle, 9): Library not loaded: /usr/local/opt/readline/lib/libreadline.6.dylib
+  Referenced from: /usr/local/var/rbenv/versions/2.2.5/lib/ruby/2.2.0/x86_64-darwin15/readline.bundle	
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;How rude! It took me a couple of minutes to even remember that I’d updated to Sierra (it’s been a week; I’ve slept since then). Once that synapse fired, I knew it meant that all the versions of Ruby I’d installed with rbenv were built against the older readline, so it was time to rebuild and reinstall them all, as well as all of their gems with native extensions. Ugh.&lt;/p&gt;
+
+&lt;p&gt;Luckily, that’s not so horribly hard once you sort things out, so here’s the short course on how to deal with this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; xcode-select --install
+[... popup dialog launches and you do the install dance ...]
+&amp;gt; brew update &amp;amp;&amp;amp; brew upgrade
+[... many package defs update and upgrade ... ]
+&amp;gt; rbenv versions
+  2.1.5
+  2.2.0
+  2.2.1
+  2.2.3
+  2.2.5
+* 2.3.1 (set by /usr/local/var/rbenv/version)
+&amp;gt; rbenv install -f 2.3.1 &amp;amp;&amp;amp; RBENV_VERSION=2.3.1 gem pristine --all
+[... much building of ruby and gem native extensions ...]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;From there, it’s repeat for every version of Ruby that you care about. It’s also a good time to remove any you don’t need anymore.&lt;/p&gt;
+
+&lt;p&gt;If this was useful, an upvote on &lt;a href=&quot;http://stackoverflow.com/questions/40051133/rails-5-console-needs-readline-6-on-macos-sierra/40775204#40775204&quot;&gt;my StackOverflow answer&lt;/a&gt; for this would be a kindness.&lt;/p&gt;
+</description>
+                <link>http://blog.geekdaily.org/2016/11/macos-sierra-homebrew-and-rbenv.html</link>
+                <guid>http://blog.geekdaily.org/2016/11/macos-sierra-homebrew-and-rbenv</guid>
+                <pubDate>2016-11-23T07:20:00-08:00</pubDate>
+        </item>
 
         <item>
                 <title>How to get started with a Minecraft Server, Redux</title>
