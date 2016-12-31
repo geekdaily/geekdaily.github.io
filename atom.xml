@@ -4,13 +4,73 @@
  <title>geek!daily</title>
  <link href="http://blog.geekdaily.org/" rel="self"/>
  <link href="http://blog.geekdaily.org"/>
- <updated>2016-11-23T15:49:35-08:00</updated>
+ <updated>2016-12-31T14:41:53-08:00</updated>
  <id>http://blog.geekdaily.org</id>
  <author>
    <name>Jim Meyer</name>
    <email>jim@geekdaily.org</email>
  </author>
 
+ 
+ <entry>
+   <title>EXPERIMENT: Spec&#39;g My Projects</title>
+   <link href="http://blog.geekdaily.org/2016/12/experiment-specg-my-projects.html"/>
+   <updated>2016-12-31T00:00:00-08:00</updated>
+   <id>http://blog.geekdaily.org/2016/12/experiment-specg-my-projects</id>
+   <content type="html">
+&lt;p&gt;If you’re at all like me, you’ve got upward of a few gazillion ideas for projects bouncing around in your notebooks, task management tools, and/or head, and you never get enough time to bring them all to a successful conclusion. I hope you’re &lt;em&gt;not&lt;/em&gt; like me in the sense of having many of them half-started and silently nagging you to finish every time you wander into your garage, office, or ~/work directory.&lt;/p&gt;
+
+&lt;p&gt;For me, I’ve noticed that a lot of this ultimately goes down to losing track of what I came do. It usually goes something like:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;“I’ve got a day free. It’s time to add that feature to the Foo project.”&lt;/li&gt;
+  &lt;li&gt;Run the specs and get 971 failures, clustered around 12 core error messages for 3 different gems.&lt;/li&gt;
+  &lt;li&gt;“Oh, right, I upgraded [something] … well, let’s get everything working again. It’s the right thing to do.”&lt;/li&gt;
+  &lt;li&gt;Three days of sweaty debugging, learning, and relearning pass. This includes learning how to tune my shell prompt, tweak Rakefiles (like the one for my blog to make a new post), and do a lot of other non-essential things.&lt;/li&gt;
+  &lt;li&gt;“Well, the specs run clean again and I learned a lot. Guess I’ll add that feature next month.”&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Don’t get me wrong; I like the learning, and all the things I end up doing improve some aspect of my life, but I don’t like the unpredictability, the time that I sync into recovery (and not my family, or other projects like BBQ … mmm, BBQ …) and inevitable letdown of not getting the one thing done that I came to do.&lt;/p&gt;
+
+&lt;p&gt;I’m going to try a different approach. I’m going to try writing a very short, very lightweight spec for projects that I intend to do, now or sometime in the future. The format will be something like:&lt;/p&gt;
+
+&lt;pre&gt;
+	PROJECT NAME
+
+	Goal: A single sentence describing the intent.
+
+
+	How I&#39;ll do it:
+
+	- A short list of high-level steps
+	- Each something I can measure the end of
+	- And each of which can provide me focus to finish it
+
+
+	I&#39;ll know it&#39;s done when:
+
+	- A short list of acceptance criteria
+	- Each being something I can demonstate, preferably automatically
+	- And bonus points if I can automate the acceptance tests quickly
+
+
+	I&#39;ll need to verify:
+
+	- Things I believe to be true
+	- That I need to have working before I can get started
+	- So I don&#39;t waste time hoping that it all works out
+
+
+	I&#39;ll need to learn or relearn:
+
+	- Tech I don&#39;t already know
+	- Tech I&#39;ve used before but has changed a fair bit since last I dived in
+	- Other skills I&#39;ll need.
+&lt;/pre&gt;
+
+&lt;p&gt;I’ll publish some here, under the SPECS nav above. We’ll see how it goes.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>MacOS Sierra, Homebrew, and rbenv</title>
