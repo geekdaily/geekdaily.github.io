@@ -1,0 +1,321 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        EXPERIMENT: Spec'g My Projects - 
+      
+      geek!daily
+    </title>
+    <meta name="description" content="">
+    <meta name="author" content="Jim Meyer">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">geek!daily</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/about.html">About</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog.html">Blog</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/projects.html">Projects</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/specs.html">Specs</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/purp" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                <li>
+                  <a href="https://twitter.com/purp" class="zocial twitter icon" target="_blank">
+                    <span class="hidden-desktop">Twitter</span>
+                  </a>
+                </li>
+                
+                
+                
+                <li>
+                  <a href="http://www.linkedin.com/in/jimmeyer" class="zocial linkedin icon" target="_blank">
+                    <span class="hidden-desktop">LinkedIn</span>
+                  </a>
+                </li>
+                
+                
+                <li>
+                  <a href="http://feeds.feedburner.com/geekdailyblog" class="zocial rss icon" target="_blank">
+                    <span class="hidden-desktop">FeedBurner</span>
+                  </a>
+                </li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+<div class="page-header">
+  <h1>
+    EXPERIMENT: Spec'g My Projects 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    
+<p>If you’re at all like me, you’ve got upward of a few gazillion ideas for projects bouncing around in your notebooks, task management tools, and/or head, and you never get enough time to bring them all to a successful conclusion. I hope you’re <em>not</em> like me in the sense of having many of them half-started and silently nagging you to finish every time you wander into your garage, office, or ~/work directory.</p>
+
+<p>For me, I’ve noticed that a lot of this ultimately goes down to losing track of what I came do. It usually goes something like:</p>
+
+<ol>
+  <li>“I’ve got a day free. It’s time to add that feature to the Foo project.”</li>
+  <li>Run the specs and get 971 failures, clustered around 12 core error messages for 3 different gems.</li>
+  <li>“Oh, right, I upgraded [something] … well, let’s get everything working again. It’s the right thing to do.”</li>
+  <li>Three days of sweaty debugging, learning, and relearning pass. This includes learning how to tune my shell prompt, tweak Rakefiles (like the one for my blog to make a new post), and do a lot of other non-essential things.</li>
+  <li>“Well, the specs run clean again and I learned a lot. Guess I’ll add that feature next month.”</li>
+</ol>
+
+<p>Don’t get me wrong; I like the learning, and all the things I end up doing improve some aspect of my life, but I don’t like the unpredictability, the time that I sync into recovery (and not my family, or other projects like BBQ … mmm, BBQ …) and inevitable letdown of not getting the one thing done that I came to do.</p>
+
+<p>I’m going to try a different approach. I’m going to try writing a very short, very lightweight spec for projects that I intend to do, now or sometime in the future. The format will be something like:</p>
+
+<pre>
+	PROJECT NAME
+
+	Goal: A single sentence describing the intent.
+
+
+	How I'll do it:
+
+	- A short list of high-level steps
+	- Each something I can measure the end of
+	- And each of which can provide me focus to finish it
+
+
+	I'll know it's done when:
+
+	- A short list of acceptance criteria
+	- Each being something I can demonstate, preferably automatically
+	- And bonus points if I can automate the acceptance tests quickly
+
+
+	I'll need to verify:
+
+	- Things I believe to be true
+	- That I need to have working before I can get started
+	- So I don't waste time hoping that it all works out
+
+
+	I'll need to learn or relearn:
+
+	- Tech I don't already know
+	- Tech I've used before but has changed a fair bit since last I dived in
+	- Other skills I'll need.
+</pre>
+
+<p>I’ll publish some here, under the SPECS nav above. We’ll see how it goes.</p>
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/2016/11/macos-sierra-homebrew-and-rbenv.html" title="MacOS Sierra, Homebrew, and rbenv">&larr; Previous</a>
+      
+        <a class="btn" href="/archive.html">Archive</a>
+      
+        <a class="btn next disabled">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+
+    var disqus_shortname = 'geekdaily'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>31 December 2016</span></div>
+      
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          hacking
+        </span>
+        
+      </section>
+         
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2016 Jim Meyer
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-225723-36']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+</html>
+
