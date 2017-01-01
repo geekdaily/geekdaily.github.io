@@ -11,6 +11,7 @@ http://blog.geekdaily.org/sitemap.txt
 http://blog.geekdaily.org/specs.html
 http://blog.geekdaily.org/tags.html
 
+http://blog.geekdaily.org/2017/01/app-autostaging.html
 http://blog.geekdaily.org/2016/12/experiment-specg-my-projects.html
 http://blog.geekdaily.org/2016/11/macos-sierra-homebrew-and-rbenv.html
 http://blog.geekdaily.org/2015/09/how-to-get-started-with-a-minecraft-server-redux.html

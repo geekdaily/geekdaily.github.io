@@ -5,10 +5,64 @@
         <description>geek!daily - Jim Meyer</description>
         <link>http://blog.geekdaily.org</link>
         <link>http://blog.geekdaily.org</link>
-        <lastBuildDate>2016-12-31T14:41:53-08:00</lastBuildDate>
-        <pubDate>2016-12-31T14:41:53-08:00</pubDate>
+        <lastBuildDate>2017-01-01T07:16:25-08:00</lastBuildDate>
+        <pubDate>2017-01-01T07:16:25-08:00</pubDate>
         <ttl>1800</ttl>
 
+
+        <item>
+                <title>SPEC: Rails App Autostaging</title>
+                <description>
+&lt;h1 id=&quot;spec-rails-app-autostaging&quot;&gt;SPEC: Rails App Autostaging&lt;/h1&gt;
+
+&lt;h2 id=&quot;goal&quot;&gt;Goal&lt;/h2&gt;
+
+&lt;p&gt;Be able to push-button deploy an app to a cloud-based staging environment that may or may not already exist in a predictable fashion.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-ill-do-it&quot;&gt;How I’ll do it&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Set up a cloud-based staging environment and take notes on what I have to change beyond the basic provisioned OS (OpenSUSE Leap 42.1)&lt;/li&gt;
+  &lt;li&gt;Make cap tasks to deploy the app to the existing staging environment&lt;/li&gt;
+  &lt;li&gt;Make cap tasks to verify the status of the staging environment (not running, running but needs cold deploy, warm deploy)&lt;/li&gt;
+  &lt;li&gt;Automate staging setup in a cloud-init script&lt;/li&gt;
+  &lt;li&gt;Make cap tasks to create a new staging environment&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;ill-know-its-done-when&quot;&gt;I’ll know it’s done when&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;I can type &lt;code&gt;cap staging deploy&lt;/code&gt; with no staging environment and see the staging environment be created and the app be deployed&lt;/li&gt;
+  &lt;li&gt;I can type &lt;code&gt;cap staging deploy&lt;/code&gt; again and see a warm deploy to the existing environment&lt;/li&gt;
+  &lt;li&gt;I can destroy the staging environment, then type &lt;code&gt;cap staging create_environment&lt;/code&gt; and see the new environment be created&lt;/li&gt;
+  &lt;li&gt;I can type &lt;code&gt;cap staging deploy&lt;/code&gt; and deploy to the fresh environment&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;ill-need-to-verify&quot;&gt;I’ll need to verify&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Dev environment is up to date&lt;/li&gt;
+  &lt;li&gt;App is healthy
+    &lt;ul&gt;
+      &lt;li&gt;All specs run clean&lt;/li&gt;
+      &lt;li&gt;All automated tests run successfully&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Cloud account is healthy and can allocate resources via API/CLI&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;ill-need-to-learn-or-relearn&quot;&gt;I’ll need to learn or relearn&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://capistranorb.com/&quot;&gt;Capistrano 3&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://cloudinit.readthedocs.io/en/latest/index.html&quot;&gt;cloud-init&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://doc.opensuse.org/&quot;&gt;OpenSUSE Leap&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+                <link>http://blog.geekdaily.org/2017/01/app-autostaging.html</link>
+                <guid>http://blog.geekdaily.org/2017/01/app-autostaging</guid>
+                <pubDate>2017-01-01T00:00:00-08:00</pubDate>
+        </item>
 
         <item>
                 <title>EXPERIMENT: Spec&#39;g My Projects</title>
